@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Rival.png-4758d26db032e4a54bb8763033be5cb6.stex"
+path="res://.import/Window.png-20716b1f09346c4fe12e22e36cadbe2c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rival.png"
-dest_files=[ "res://.import/Rival.png-4758d26db032e4a54bb8763033be5cb6.stex" ]
+source_file="res://Sprites/Window.png"
+dest_files=[ "res://.import/Window.png-20716b1f09346c4fe12e22e36cadbe2c.stex" ]
 
 [params]
 

@@ -18,6 +18,7 @@ _global_script_class_icons={
 config/name="Metaheadron Prototypes"
 run/main_scene="res://Window.tscn"
 config/icon="res://icon.png"
+config/windows_native_icon="res://Sprites/icon.ico"
 
 [importer_defaults]
 
