@@ -2,8 +2,8 @@ extends Resource
 class_name Map
 
 # map size in tiles
-var size : Vector2
-var cell_size : Vector2
+export var size : Vector2
+export var cell_size : Vector2
 
 var _half_cell_size = cell_size / 2
 
