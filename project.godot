@@ -8,15 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Characters/Character.gd"
+}, {
+"base": "Resource",
+"class": "Map",
+"language": "GDScript",
+"path": "res://Maps/Map.gd"
+} ]
 _global_script_class_icons={
-
+"Character": "",
+"Map": ""
 }
 
 [application]
 
 config/name="Metaheadron Prototypes"
-run/main_scene="res://Window.tscn"
+run/main_scene="res://Maps/TestMap.tscn"
 config/icon="res://icon.png"
 config/windows_native_icon="res://Sprites/icon.ico"
 
