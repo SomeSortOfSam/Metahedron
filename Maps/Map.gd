@@ -5,10 +5,8 @@ class_name Map
 export var size : Vector2
 export var cell_size : Vector2
 
-var _half_cell_size = cell_size / 2
-
 func map_to_world_space(map_point : Vector2) -> Vector2 :
-	return map_point * cell_size + _half_cell_size
+	return map_point * cell_size + (cell_size/2)
 
 func world_to_map_space(world_point : Vector2) -> Vector2 :
 	return (world_point / cell_size).floor()

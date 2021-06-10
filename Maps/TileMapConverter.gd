@@ -6,9 +6,9 @@ onready var _tile_map : TileMap = $TileMap
 onready var _character : Character = $Character
 
 func _ready():
-	map.size = _tile_map.get_used_rect().size / _tile_map.cell_size
-	map.cell_size = _tile_map.cell_size
+	map.cell_size = _tile_map.cell_size * _tile_map.scale
+	map.size = _tile_map.get_used_rect().size
 	var array : PoolVector2Array = []
 	for cell in _tile_map.get_used_cells():
-		array.append(map.world_to_map_space(cell))
+		array.append(cell)
 	_character.walk_along(array)

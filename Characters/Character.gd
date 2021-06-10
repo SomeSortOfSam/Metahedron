@@ -57,6 +57,7 @@ func _process(delta) -> void:
 		emit_signal("walk_finished")
 
 func walk_along(path: PoolVector2Array) -> void:
+	print(path)
 	if path.empty():
 		return
 	
