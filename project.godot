@@ -23,11 +23,23 @@ _global_script_classes=[ {
 "class": "Map",
 "language": "GDScript",
 "path": "res://Maps/Map.gd"
+}, {
+"base": "Reference",
+"class": "Pathfinder",
+"language": "GDScript",
+"path": "res://Pathfider.gd"
+}, {
+"base": "TileMap",
+"class": "Unit_Path",
+"language": "GDScript",
+"path": "res://UnitPath.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
 "Cursor": "",
-"Map": ""
+"Map": "",
+"Pathfinder": "",
+"Unit_Path": ""
 }
 
 [application]
