@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Coursor.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Window_2.png" type="Texture" id=2]
+
+[node name="Cursor" type="Node2D"]
+self_modulate = Color( 0, 1, 0.321569, 1 )
+script = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.498039 )
+texture = ExtResource( 2 )

@@ -8,7 +8,3 @@ onready var _character : Character = $Character
 func _ready():
 	map.cell_size = _tile_map.cell_size * _tile_map.scale
 	map.size = _tile_map.get_used_rect().size
-	var array : PoolVector2Array = []
-	for cell in _tile_map.get_used_cells():
-		array.append(cell)
-	_character.walk_along(array)
