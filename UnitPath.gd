@@ -1,5 +1,5 @@
 extends TileMap
-class_name Unit_Path
+class_name UnitPath
 
 export var map : Resource
 
