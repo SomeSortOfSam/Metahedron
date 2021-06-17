@@ -8,8 +8,16 @@ self_modulate = Color( 0, 1, 0.321569, 1 )
 script = ExtResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
 one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.498039 )
 texture = ExtResource( 2 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -22,10 +22,8 @@ func is_occupied(cell: Vector2) -> bool:
 	return true if _units.has(cell) else false
 
 func resize_map():
-	var size := _tile_map.get_used_rect().size
+	map.map_rect = _tile_map.get_used_rect()
 	map.cell_size = _tile_map.cell_size * _tile_map.scale
-	size -= Vector2.ONE
-	map.size = size
 
 func _reinitialize():
 	_units.clear()

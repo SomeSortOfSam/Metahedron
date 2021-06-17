@@ -2,22 +2,24 @@ extends Resource
 class_name Map
 
 # map size in tiles
-export var size : Vector2
+export var map_rect : Rect2
 export var cell_size : Vector2
 
 func map_to_world_space(map_point : Vector2) -> Vector2 :
-	return map_point * cell_size + (cell_size/2)
+	return (map_point + map_rect.position) * cell_size + (cell_size/2) 
 
 func world_to_map_space(world_point : Vector2) -> Vector2 :
-	return (world_point / cell_size).floor()
+	return (world_point / cell_size).floor() - map_rect.position
 
 func is_within_bounds(map_point : Vector2) -> bool :
-	return map_point.x >= 0 && map_point.x <= size.x && map_point.y >= 0 && map_point.y <= size.y
+	var bounded_x : bool = map_point.x >= 0 && map_point.x <= map_rect.size.x
+	var bounded_y : bool = map_point.y >= 0 && map_point.y <= map_rect.size.y
+	return bounded_x && bounded_y 
 
 func clamp(map_point : Vector2) -> Vector2:
-	map_point.x = clamp(map_point.x,0,size.x)
-	map_point.y = clamp(map_point.y,0,size.y)
+	map_point.x = clamp(map_point.x,0,map_rect.size.x)
+	map_point.y = clamp(map_point.y,0,map_rect.size.y)
 	return map_point
 
 func map_to_map_index(map_point : Vector2) -> int :
-	return int(map_point.x + size.x * map_point.y)
+	return int(map_point.x + map_rect.size.x * map_point.y)

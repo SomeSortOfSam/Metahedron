@@ -11,6 +11,7 @@ export var ui_cooldown := 0.1
 var cell := Vector2.ZERO setget set_cell
 
 onready var _timer: Timer = $Timer
+onready var _text : RichTextLabel = $RichTextLabel
 
 func set_cell(new_cell : Vector2):
 	var new_cell_clamped : Vector2 = map.clamp(new_cell)
@@ -20,6 +21,7 @@ func set_cell(new_cell : Vector2):
 		position = map.map_to_world_space(cell)
 		emit_signal("moved",cell)
 		_timer.start()
+		_text.text = str(cell)
 
 func _ready():
 	_timer.wait_time = ui_cooldown

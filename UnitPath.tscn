@@ -5,8 +5,9 @@
 [ext_resource path="res://Maps/TestMap.tres" type="Resource" id=3]
 
 [node name="UnitPath" type="TileMap"]
+scale = Vector2( 4, 4 )
 tile_set = ExtResource( 1 )
-cell_size = Vector2( 80, 80 )
+cell_size = Vector2( 16, 16 )
 format = 1
 script = ExtResource( 2 )
 map = ExtResource( 3 )
