@@ -12,7 +12,7 @@ func world_to_map_space(world_point : Vector2) -> Vector2 :
 	return (world_point / cell_size).floor()
 
 func is_within_bounds(map_point : Vector2) -> bool :
-	return map_point.x >= 0 && map_point.x < size.x && map_point.y >= 0 && map_point.y < size.y
+	return map_point.x >= 0 && map_point.x <= size.x && map_point.y >= 0 && map_point.y <= size.y
 
 func clamp(map_point : Vector2) -> Vector2:
 	map_point.x = clamp(map_point.x,0,size.x)

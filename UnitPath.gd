@@ -21,18 +21,3 @@ func draw(cell_start: Vector2, cell_end: Vector2):
 func stop():
 	_pathfinder = null
 	clear()
-
-#temp
-func _ready():
-	var rect_start := Vector2(4,4)
-	var rect_end := Vector2(10,8)
-	
-	var points := []
-	
-	for x in rect_end.x - rect_start.x + 1:
-		for y in rect_end.y - rect_start.y + 1:
-			points.append(rect_start + Vector2(x, y))
-	
-	# We can use the points to generate our PathFinder and draw a path.
-	initialize(points)
-	draw(rect_start, Vector2(8, 7))
