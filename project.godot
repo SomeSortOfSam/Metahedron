@@ -56,7 +56,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Metaheadron Prototypes"
+config/name="Metahedron"
 run/main_scene="res://Maps/TestMap.tscn"
 config/icon="res://icon.png"
 config/windows_native_icon="res://Sprites/icon.ico"
