@@ -16,6 +16,7 @@ var is_walking := false setget set_is_walking
 onready var _sprite: Sprite = $PathFollow2D/Sprite
 onready var _animation_player: AnimationPlayer = $PathFollow2D/Sprite/AnimationPlayer
 onready var _path_follower: PathFollow2D = $PathFollow2D
+onready var _text  : RichTextLabel = $PathFollow2D/RichTextLabel
 
 func set_skin(new_skin : Texture):
 	skin = new_skin
@@ -25,6 +26,7 @@ func set_skin(new_skin : Texture):
 
 func set_cell(new_cell : Vector2):
 	cell = map.clamp(new_cell)
+	_text.text = str(cell)
 
 func set_is_selected(new_is_selected : bool):
 	is_selected = new_is_selected
@@ -40,8 +42,7 @@ func set_is_walking(new_is_walking : bool):
 func _ready() -> void:
 	set_process(false) #Make sure we are not following the path
 	
-	self.cell = map.world_to_map_space(position)
-	position = map.map_to_world_space(cell)
+	map.connect("map_rect_changed", self, "on_map_rect_changed", [], CONNECT_ONESHOT)
 	
 	if not Engine.editor_hint:
 		curve = Curve2D.new()
@@ -66,5 +67,7 @@ func walk_along(path: PoolVector2Array) -> void:
 	
 	cell = path[-1]
 	self.is_walking = true
-	
 
+func on_map_rect_changed():
+	self.cell = map.world_to_map_space(position)
+	position = map.map_to_world_space(cell)

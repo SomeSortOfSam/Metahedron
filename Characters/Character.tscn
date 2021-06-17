@@ -51,3 +51,10 @@ scale = Vector2( 0.5, 0.5 )
 autoplay = "test-idel"
 anims/test-idel = SubResource( 1 )
 anims/test-selected = SubResource( 2 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PathFollow2D"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

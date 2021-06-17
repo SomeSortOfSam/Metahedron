@@ -16,8 +16,10 @@ modulate = Color( 1, 1, 1, 0.498039 )
 texture = ExtResource( 2 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_top = -1.0
+margin_right = 39.0
+margin_bottom = 38.0
+scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }

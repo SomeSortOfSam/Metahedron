@@ -18,10 +18,11 @@ func set_cell(new_cell : Vector2):
 	if not new_cell_clamped.is_equal_approx(cell):
 		cell = new_cell_clamped
 		
+		
 		position = map.map_to_world_space(cell)
 		emit_signal("moved",cell)
 		_timer.start()
-		_text.text = str(cell)
+		_text.text = str(cell) 
 
 func _ready():
 	_timer.wait_time = ui_cooldown

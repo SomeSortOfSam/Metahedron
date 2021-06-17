@@ -1,9 +1,15 @@
 extends Resource
 class_name Map
 
+signal map_rect_changed
+
 # map size in tiles
-export var map_rect : Rect2
+export var map_rect : Rect2 setget set_map_rect
 export var cell_size : Vector2
+
+func set_map_rect(new_map_rect : Rect2):
+	map_rect = new_map_rect
+	emit_signal("map_rect_changed")
 
 func map_to_world_space(map_point : Vector2) -> Vector2 :
 	return (map_point + map_rect.position) * cell_size + (cell_size/2) 
