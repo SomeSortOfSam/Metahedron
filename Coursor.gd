@@ -1,4 +1,3 @@
-tool
 extends Node2D
 class_name Cursor
 
@@ -51,6 +50,3 @@ func _unhandled_input(event):
 		self.cell += Vector2.LEFT
 	elif event.is_action("ui_down"):
 		self.cell += Vector2.DOWN
-
-func _draw():
-	draw_rect(Rect2(-map.cell_size / 2, map.cell_size),self_modulate,false,2.0)

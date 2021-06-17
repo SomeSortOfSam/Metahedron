@@ -14,7 +14,7 @@ func draw(cell_start: Vector2, cell_end: Vector2):
 	current_path = _pathfinder.calculate_point_path(cell_start, cell_end)
 	
 	for cell in current_path:
-		set_cellv(cell, 0)
+		set_cellv(cell + map.map_rect.position, 0)
 	
 	update_bitmask_region() #enable autotile
 

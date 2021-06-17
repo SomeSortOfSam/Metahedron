@@ -29,6 +29,7 @@ func _reinitialize():
 	_units.clear()
 	
 	for child in _y_sort.get_children():
+		child.map = map
 		var unit := child as Character
 		if not unit:
 			continue
@@ -58,7 +59,7 @@ func _flood_fill(cell : Vector2, max_distance : int) -> Array:
 		
 		for direction in DIRECTIONS:
 			var coordinates: Vector2 = current + direction
-			if is_occupied(coordinates) or coordinates in out or _tile_map.get_cellv(coordinates) == -1 :
+			if is_occupied(coordinates) or coordinates in out or _tile_map.get_cellv(coordinates + map.map_rect.position) == -1 :
 				continue
 			
 			stack.append(coordinates)
