@@ -35,7 +35,6 @@ func _reinitialize():
 			continue
 		
 		_units[unit.cell] = unit
-		print(unit.cell)
 
 func get_walkable_cells(unit : Character) -> Array:
 	return _flood_fill(unit.cell, unit.map_speed)
