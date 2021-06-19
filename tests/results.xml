@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<testsuites failures="0" name="TestXML" tests="1" time="0">
+	<testsuite name="Map" failures="0"  tests="6" time="0">
+		<testcase name="Unscaled, untransformed convertions" time="0"></testcase>
+		<testcase name="New empty Map" time="0"></testcase>
+		<testcase name="New (3, 3) Map" time="0"></testcase>
+		<testcase name="Scaled x3, transformed (3,3) convertions" time="0"></testcase>
+		<testcase name="Scaled x3, untransformed convertions" time="0"></testcase>
+		<testcase name="Unscaled, transformed (3,3) convertions" time="0"></testcase>
+	</testsuite>
+
+</testsuites>
