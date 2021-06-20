@@ -13,3 +13,6 @@ func world_to_map(world_point : Vector2) -> Vector2:
 
 func map_to_world(map_point : Vector2) -> Vector2:
 	return ((map_point + rect.position)*(tile_map.cell_size * tile_map.scale)) + tile_map.position + tile_map.cell_size/2
+
+func map_to_index(map_point : Vector2) -> int:
+	return int(map_point.y * rect.size.x + map_point.x)
