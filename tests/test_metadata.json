@@ -1,9 +1,30 @@
 {
-	"res://tests/map.test.gd": {
-		"path": "res://tests/map.test.gd",
+	"res://tests/Character/Character.test.gd": {
+		"path": "res://tests/Character/Character.test.gd",
 		"tags": [
 
 		],
 		"passing": true
+	},
+	"res://tests/Map/conversions.gd": {
+		"path": "res://tests/Map/conversions.gd",
+		"tags": [
+
+		],
+		"passing": true
+	},
+	"res://tests/Map/initalization.test.gd": {
+		"path": "res://tests/Map/initalization.test.gd",
+		"tags": [
+
+		],
+		"passing": true
+	},
+	"res://tests/Map/pathfinding.test.gd": {
+		"path": "res://tests/Map/pathfinding.test.gd",
+		"tags": [
+
+		],
+		"passing": false
 	}
 }

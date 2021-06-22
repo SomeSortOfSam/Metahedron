@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Character/Character.gd"
+}, {
 "base": "Reference",
 "class": "Map",
 "language": "GDScript",
 "path": "res://Map/Map.gd"
+}, {
+"base": "Reference",
+"class": "Pathfinder",
+"language": "GDScript",
+"path": "res://Map/Pathfinder.gd"
 }, {
 "base": "Reference",
 "class": "WAT",
@@ -23,11 +33,19 @@ _global_script_classes=[ {
 "class": "WATTest",
 "language": "GDScript",
 "path": "res://addons/WAT/core/test/test.gd"
+}, {
+"base": "",
+"class": "tests_map",
+"language": "GDScript",
+"path": "res://tests/Map/initalization.test.gd"
 } ]
 _global_script_class_icons={
+"Character": "",
 "Map": "",
+"Pathfinder": "",
 "WAT": "",
-"WATTest": ""
+"WATTest": "",
+"tests_map": ""
 }
 
 [WAT]
