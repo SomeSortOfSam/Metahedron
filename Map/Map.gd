@@ -19,4 +19,10 @@ func is_occupied(map_point : Vector2) -> bool:
 	return units.has(map_point)
 
 func is_walkable(map_point : Vector2) -> bool:
-	return tile_map.get_cellv(map_point + rect.position) != -1
+	var tile_type = tile_map.get_cellv(map_point + rect.position)
+	return tile_type != -1 && is_tile_type_walkable(tile_type)
+
+func is_tile_type_walkable(tile_type : int) -> bool:
+	if tile_map.tile_set != null && tile_map.tile_set.get_tiles_ids().find(tile_type) != -1:
+		return tile_map.tile_set.tile_get_shape_count(tile_type) <= 0
+	return true

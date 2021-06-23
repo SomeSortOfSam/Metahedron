@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Window/WindowTheme.tres" type="Theme" id=1]
+
+[node name="Window" type="WindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.49829
+margin_top = -1.49829
+margin_right = -1.49829
+margin_bottom = -1.49829
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.345098, 0.345098, 0.345098, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -25,6 +25,20 @@
 		"tags": [
 
 		],
+		"passing": true
+	},
+	"res://tests/Window/level.test.gd": {
+		"path": "res://tests/Window/level.test.gd",
+		"tags": [
+
+		],
+		"passing": false
+	},
+	"res://tests/Window/window.test.gd": {
+		"path": "res://tests/Window/window.test.gd",
+		"tags": [
+
+		],
 		"passing": false
 	}
 }

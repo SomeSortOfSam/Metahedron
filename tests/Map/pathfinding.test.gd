@@ -30,9 +30,20 @@ func add_unit(map : Map, map_point : Vector2):
 	map.units[map_point] = Character.new()
 
 func test_get_walkable_tiles():
-	var map := tests_map.initialize_full_tilemap(Vector2(5,1))
-	map.tile_map.set_cellv(Vector2.ZERO,-1)
+	var map = setup_walkable_map()
 	var tiles := Pathfinder.get_walkable_tiles_in_range(map,Vector2.RIGHT,3)
 	asserts.is_equal(tiles.find(Vector2.ZERO),-1,"Unwalkable tiles not included " + str(Vector2.ZERO))
 	asserts.is_not_equal(tiles.find(Vector2.RIGHT),-1, "Starting tile included " + str(Vector2.RIGHT))
 	asserts.is_equal(tiles.find((Vector2(5,0))),-1, "Out of range tile not included " + str(Vector2(4,0)))
+	asserts.is_equal(tiles.find(Vector2.DOWN),-1, "Tiles with collision not included " + str(Vector2(Vector2.DOWN)))
+
+func setup_walkable_map() -> Map:
+	var map := tests_map.initialize_full_tilemap(Vector2(5,2))
+	map.tile_map.set_cellv(Vector2.ZERO,-1)
+	var tile_set = TileSet.new()
+	tile_set.create_tile(1)
+	tile_set.tile_set_shape(1,0,RectangleShape2D.new())
+	map.tile_map.tile_set = tile_set
+	for i in 5:
+		map.tile_map.set_cell(i,1,1)
+	return map
