@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DD Tileset.png-a98476546f4340f56755d6c10a1906e9.stex"
+path="res://.import/DD Tileset.png-e226b312ae4f959d7b25f79b235a6a28.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Window/DD Tileset.png"
-dest_files=[ "res://.import/DD Tileset.png-a98476546f4340f56755d6c10a1906e9.stex" ]
+source_file="res://Window/MapWindow/DD Tileset.png"
+dest_files=[ "res://.import/DD Tileset.png-e226b312ae4f959d7b25f79b235a6a28.stex" ]
 
 [params]
 

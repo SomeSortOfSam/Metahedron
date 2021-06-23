@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Map/Map.gd"
 }, {
+"base": "WindowDialog",
+"class": "MovementWindow",
+"language": "GDScript",
+"path": "res://Window/MapWindow/Movement Window.gd"
+}, {
 "base": "Reference",
 "class": "Pathfinder",
 "language": "GDScript",
@@ -42,6 +47,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Character": "",
 "Map": "",
+"MovementWindow": "",
 "Pathfinder": "",
 "WAT": "",
 "WATTest": "",
@@ -65,7 +71,7 @@ Display=8
 [application]
 
 config/name="Metaheadron- Prototypes"
-run/main_scene="res://Window/LevelWindow.tscn"
+run/main_scene="res://Window/MapWindow/LevelWindow.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]

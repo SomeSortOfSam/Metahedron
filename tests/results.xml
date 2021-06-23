@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<testsuites failures="0" name="TestXML" tests="6" time="0">
+<testsuites failures="1" name="TestXML" tests="7" time="0">
 	<testsuite name="" failures="0"  tests="1" time="0">
 		<testcase name=" character initialization" time="0"></testcase>
 	</testsuite>
@@ -13,19 +13,23 @@
 	</testsuite>
 
 	<testsuite name="" failures="0"  tests="2" time="0">
-		<testcase name="New (3, 3) Map" time="0"></testcase>
 		<testcase name="New empty Map" time="0"></testcase>
+		<testcase name="New (3, 3) Map" time="0"></testcase>
 	</testsuite>
 
 	<testsuite name="" failures="0"  tests="4" time="0">
-		<testcase name=" index generation" time="0"></testcase>
 		<testcase name="is_occupied" time="0"></testcase>
+		<testcase name=" index generation" time="0"></testcase>
 		<testcase name=" get walkable tiles" time="0"></testcase>
 		<testcase name=" is walkable" time="0"></testcase>
 	</testsuite>
 
 	<testsuite name="" failures="0"  tests="1" time="0">
 		<testcase name=" initializaton" time="0"></testcase>
+	</testsuite>
+
+	<testsuite name="" failures="0"  tests="0" time="0">
+		<testcase name="Not Found" time="0"><failure message="No Tests Found On Suite res://tests/Window/map.test.gd"></failure></testcase>
 	</testsuite>
 
 	<testsuite name="" failures="0"  tests="1" time="0">

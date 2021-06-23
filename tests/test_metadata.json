@@ -34,11 +34,18 @@
 		],
 		"passing": false
 	},
+	"res://tests/Window/map.test.gd": {
+		"path": "res://tests/Window/map.test.gd",
+		"tags": [
+
+		],
+		"passing": false
+	},
 	"res://tests/Window/window.test.gd": {
 		"path": "res://tests/Window/window.test.gd",
 		"tags": [
 
 		],
-		"passing": false
+		"passing": true
 	}
 }

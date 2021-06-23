@@ -1,6 +1,7 @@
 [gd_resource type="TileSet" load_steps=2 format=2]
 
-[ext_resource path="res://Window/DD Tileset.png" type="Texture" id=2]
+[ext_resource path="res://Window/MapWindow/DD Tileset.png" type="Texture" id=2]
+
 
 [resource]
 0/name = "DD Tileset"

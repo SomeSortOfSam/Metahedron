@@ -1,0 +1,2 @@
+extends WindowDialog
+class_name MovementWindow
