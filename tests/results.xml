@@ -1,10 +1,11 @@
 <?xml version="1.0" ?>
-<testsuites failures="1" name="TestXML" tests="7" time="0">
-	<testsuite name="" failures="0"  tests="1" time="0">
+<testsuites failures="0" name="TestXML" tests="5" time="0">
+	<testsuite name="Character" failures="0"  tests="1" time="0">
 		<testcase name=" character initialization" time="0"></testcase>
 	</testsuite>
 
-	<testsuite name="" failures="0"  tests="5" time="0">
+	<testsuite name="Conversions" failures="0"  tests="6" time="0">
+		<testcase name="Clamp" time="0"></testcase>
 		<testcase name="Conversions on a (3, 3) map" time="0"></testcase>
 		<testcase name="Conversions on a (3, 3) map with cell_size" time="0"></testcase>
 		<testcase name="Conversions on a (3, 3) map with cell_transform" time="0"></testcase>
@@ -12,28 +13,22 @@
 		<testcase name="Conversions on a (3, 3) map with object_transform" time="0"></testcase>
 	</testsuite>
 
-	<testsuite name="" failures="0"  tests="2" time="0">
+	<testsuite name="Initalization" failures="0"  tests="2" time="0">
 		<testcase name="New empty Map" time="0"></testcase>
 		<testcase name="New (3, 3) Map" time="0"></testcase>
 	</testsuite>
 
-	<testsuite name="" failures="0"  tests="4" time="0">
+	<testsuite name="Pathfinding" failures="0"  tests="4" time="0">
+		<testcase name=" is walkable" time="0"></testcase>
+		<testcase name=" get walkable tiles" time="0"></testcase>
 		<testcase name="is_occupied" time="0"></testcase>
 		<testcase name=" index generation" time="0"></testcase>
-		<testcase name=" get walkable tiles" time="0"></testcase>
-		<testcase name=" is walkable" time="0"></testcase>
 	</testsuite>
 
-	<testsuite name="" failures="0"  tests="1" time="0">
-		<testcase name=" initializaton" time="0"></testcase>
-	</testsuite>
-
-	<testsuite name="" failures="0"  tests="0" time="0">
-		<testcase name="Not Found" time="0"><failure message="No Tests Found On Suite res://tests/Window/map.test.gd"></failure></testcase>
-	</testsuite>
-
-	<testsuite name="" failures="0"  tests="1" time="0">
-		<testcase name=" placeholder" time="0"></testcase>
+	<testsuite name="Cursor" failures="0"  tests="3" time="0">
+		<testcase name=" mouse movement" time="0"></testcase>
+		<testcase name=" keyboard movement" time="0"></testcase>
+		<testcase name="Set cell" time="0"></testcase>
 	</testsuite>
 
 </testsuites>

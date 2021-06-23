@@ -26,3 +26,8 @@ func is_tile_type_walkable(tile_type : int) -> bool:
 	if tile_map.tile_set != null && tile_map.tile_set.get_tiles_ids().find(tile_type) != -1:
 		return tile_map.tile_set.tile_get_shape_count(tile_type) <= 0
 	return true
+
+func clamp(map_point : Vector2) -> Vector2:
+	map_point.x = clamp(map_point.x, 0, rect.size.x - 1 )
+	map_point.y = clamp(map_point.y, 0, rect.size.y - 1)
+	return map_point

@@ -6,8 +6,8 @@
 		],
 		"passing": true
 	},
-	"res://tests/Map/conversions.gd": {
-		"path": "res://tests/Map/conversions.gd",
+	"res://tests/Map/conversions.test.gd": {
+		"path": "res://tests/Map/conversions.test.gd",
 		"tags": [
 
 		],
@@ -27,22 +27,8 @@
 		],
 		"passing": true
 	},
-	"res://tests/Window/level.test.gd": {
-		"path": "res://tests/Window/level.test.gd",
-		"tags": [
-
-		],
-		"passing": false
-	},
-	"res://tests/Window/map.test.gd": {
-		"path": "res://tests/Window/map.test.gd",
-		"tags": [
-
-		],
-		"passing": false
-	},
-	"res://tests/Window/window.test.gd": {
-		"path": "res://tests/Window/window.test.gd",
+	"res://tests/Window/Cursor/cursor.test.gd": {
+		"path": "res://tests/Window/Cursor/cursor.test.gd",
 		"tags": [
 
 		],

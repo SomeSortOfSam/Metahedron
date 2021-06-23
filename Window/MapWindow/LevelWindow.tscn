@@ -4,5 +4,5 @@
 [ext_resource path="res://Window/MapWindow/LevelWindow.gd" type="Script" id=2]
 
 [node name="Window" instance=ExtResource( 1 )]
-visible = true
+visible = false
 script = ExtResource( 2 )
