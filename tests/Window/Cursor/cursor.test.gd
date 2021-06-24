@@ -29,14 +29,40 @@ func test_mouse_movement():
 	var event := InputEventMouseMotion.new()
 	var new_pos := map.map_to_world(Vector2.ONE)
 	event.position = new_pos
-	cursor._unhandled_input(event)
+	cursor._input(event)
 	asserts.is_equal(cursor.position, new_pos, "Mouse movement sets cell")
+	
+	event.position = map.map_to_world(Vector2.UP)
+	cursor._input(event)
+	asserts.is_equal(cursor.modulate,Color(1,1,1,0), "Out of bounds mouse hides cursor")
+	
+	event.position = map.map_to_world(Vector2.ZERO)
+	cursor._input(event)
+	asserts.is_equal(cursor.modulate,Color.white, "In bounds mouse reveals cursor")
 
 func test_keyboard_movement():
 	var event := FakeInput.new(true, ["ui_down"], false)
 	var old_pos := cursor.position
-	cursor._unhandled_input(event)
+	cursor._input(event)
 	asserts.is_not_equal(old_pos, cursor.position, "Keyboard movement sets cell")
+	
+	cursor.cell = Vector2.ZERO
+	event = FakeInput.new(true, ["ui_up"], false)
+	cursor._input(event)
+	asserts.is_equal(cursor.cell, Vector2.ZERO, "Keyboard movement is clamped")
+	
+	var extended_tile_map := TileMap.new()
+	for x in 3:
+		for y in 3:
+			extended_tile_map.set_cell(x,y,0)
+	extended_tile_map.set_cell(0,2,0)
+	var extended_map := Map.new(extended_tile_map)
+	var extended_cursor := Cursor.new(extended_map)
+	extended_cursor.cell = Vector2(1,2)
+	event = FakeInput.new(true, ["ui_down"], false)
+	extended_cursor._input(event)
+	asserts.is_equal(extended_cursor.cell, Vector2(1,2), "Keyboard does not move off walkable tiles")
+	
 
 class FakeInput extends Reference:
 	var is_pressed : bool

@@ -27,7 +27,7 @@ func generate_conversion_description(params : Array, default : Array) -> String:
 func generate_conversion_map(cell_size : Vector2 = Vector2.ONE, cell_transform : Vector2 = Vector2.ZERO, \
 object_size: Vector2 = Vector2.ONE, object_transform: Vector2 = Vector2.ZERO) -> Map:
 	var map := tests_map.initialize_full_tilemap(tests_map.SIZE, cell_transform, cell_size)
-	map.tile_map.position = object_transform
+	map.tile_map.global_position = object_transform
 	map.tile_map.scale = object_size
 	map.tile_map.cell_tile_origin = TileMap.TILE_ORIGIN_CENTER
 	return map
@@ -38,8 +38,8 @@ func run_conversion_tests(map : Map):
 			run_conversion_test(map, Vector2(x,y))
 
 func run_conversion_test(map : Map, map_point : Vector2):
-	var world_point := map.tile_map.map_to_world(map_point + map.rect.position) * map.tile_map.scale + map.tile_map.position 
-	world_point += map.tile_map.cell_size/2
+	var world_point := map.tile_map.map_to_world(map_point + map.rect.position) * map.tile_map.scale + map.tile_map.global_position 
+	world_point += (map.tile_map.cell_size * map.tile_map.scale)/2
 	asserts.is_equal(map.world_to_map(world_point),map_point,"World to Map convertion at " + str(map_point))
 	asserts.is_equal(map.map_to_world(map_point),world_point,"Map to World convertion at " + str(map_point))
 
