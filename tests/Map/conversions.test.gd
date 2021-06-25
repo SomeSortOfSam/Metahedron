@@ -26,7 +26,7 @@ func generate_conversion_description(params : Array, default : Array) -> String:
 
 func generate_conversion_map(cell_size : Vector2 = Vector2.ONE, cell_transform : Vector2 = Vector2.ZERO, \
 object_size: Vector2 = Vector2.ONE, object_transform: Vector2 = Vector2.ZERO) -> Map:
-	var map := tests_map.initialize_full_tilemap(tests_map.SIZE, cell_transform, cell_size)
+	var map := tests_map.initalize_full_map(tests_map.SIZE, cell_transform, cell_size)
 	map.tile_map.global_position = object_transform
 	map.tile_map.scale = object_size
 	map.tile_map.cell_tile_origin = TileMap.TILE_ORIGIN_CENTER

@@ -41,14 +41,12 @@ func test_mouse_movement():
 	asserts.is_equal(cursor.modulate,Color.white, "In bounds mouse reveals cursor")
 
 func test_keyboard_movement():
-	var event := FakeInput.new(true, ["ui_down"], false)
 	var old_pos := cursor.position
-	cursor._input(event)
+	cursor._input(FakeInput.new(["ui_down"]))
 	asserts.is_not_equal(old_pos, cursor.position, "Keyboard movement sets cell")
 	
 	cursor.cell = Vector2.ZERO
-	event = FakeInput.new(true, ["ui_up"], false)
-	cursor._input(event)
+	cursor._input(FakeInput.new(["ui_up"]))
 	asserts.is_equal(cursor.cell, Vector2.ZERO, "Keyboard movement is clamped")
 	
 	var extended_tile_map := TileMap.new()
@@ -59,26 +57,32 @@ func test_keyboard_movement():
 	var extended_map := Map.new(extended_tile_map)
 	var extended_cursor := Cursor.new(extended_map)
 	extended_cursor.cell = Vector2(1,2)
-	event = FakeInput.new(true, ["ui_down"], false)
-	extended_cursor._input(event)
+	extended_cursor._input(FakeInput.new(["ui_down"]))
 	asserts.is_equal(extended_cursor.cell, Vector2(1,2), "Keyboard does not move off walkable tiles")
-	
+
+func test_mouse_click():
+	cursor.connect("accept_pressed", self, "mouse_click_return")
+	cursor._input(FakeInput.new(["ui_accept"]))
+
+func mouse_click_return(cell):
+	asserts.is_equal(cell, Vector2.ZERO, "Click accpeted")
 
 class FakeInput extends Reference:
-	var is_pressed : bool
 	var is_echo : bool
 	var true_actions := []
 	
-	func _init(new_is_pressed : bool, new_true_actions : Array, new_is_echo : bool):
-		is_pressed = new_is_pressed
+	func _init(new_true_actions : Array, new_is_echo : bool = false):
 		true_actions = new_true_actions
 		is_echo = new_is_echo
 	
 	func is_pressed() -> bool:
-		return is_pressed
+		return true_actions.size() > 0
 	
 	func is_action(fake_action : String) -> bool:
 		return true_actions.find(fake_action) != -1
+	
+	func is_action_pressed(fake_action : String) -> bool:
+		return is_action(fake_action)
 	
 	func is_echo():
 		return is_echo

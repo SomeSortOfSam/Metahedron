@@ -1,11 +1,4 @@
 {
-	"res://tests/Character/Character.test.gd": {
-		"path": "res://tests/Character/Character.test.gd",
-		"tags": [
-
-		],
-		"passing": true
-	},
 	"res://tests/Map/conversions.test.gd": {
 		"path": "res://tests/Map/conversions.test.gd",
 		"tags": [
@@ -25,7 +18,7 @@
 		"tags": [
 
 		],
-		"passing": true
+		"passing": false
 	},
 	"res://tests/Window/Cursor/cursor.test.gd": {
 		"path": "res://tests/Window/Cursor/cursor.test.gd",
@@ -33,5 +26,19 @@
 
 		],
 		"passing": true
+	},
+	"res://tests/Character/Character.test.gd": {
+		"path": "res://tests/Character/Character.test.gd",
+		"tags": [
+
+		],
+		"passing": true
+	},
+	"res://tests/Window/initialization.test.gd": {
+		"path": "res://tests/Window/initialization.test.gd",
+		"tags": [
+
+		],
+		"passing": false
 	}
 }

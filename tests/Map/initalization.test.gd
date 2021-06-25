@@ -16,7 +16,7 @@ func test_empty_map_tests():
 
 func test_populated_map_tests():
 	describe("New " + str(SIZE) + " Map")
-	var map := initialize_full_tilemap()
+	var map := initalize_full_map()
 	
 	asserts.is_not_null(map,"Map is created")
 	asserts.is_not_null(map.rect, "Map has rect")
@@ -24,12 +24,15 @@ func test_populated_map_tests():
 	asserts.is_equal(map.rect.size,SIZE,"map size is " + str(SIZE))
 	asserts.is_empty(map.units, "Map's units is empty")
 
-static func initialize_full_tilemap(size : Vector2 = SIZE , offset : Vector2 = Vector2.ZERO, tile_scale : Vector2 = Vector2.ONE) -> Map:
+static func initalize_full_tilemap(size : Vector2 = SIZE , offset : Vector2 = Vector2.ZERO, tile_scale : Vector2 = Vector2.ONE) -> TileMap:
 	var tilemap := TileMap.new()
 	tilemap.cell_size = tile_scale
 	for x in size.x:
 		for y in size.y:
 			tilemap.set_cell(x + offset.x,y + offset.y,0)
-	return Map.new(tilemap)
+	return tilemap
 
+static func initalize_full_map(size : Vector2 = SIZE , offset : Vector2 = Vector2.ZERO, tile_scale : Vector2 = Vector2.ONE) -> Map:
+	var tilemap := initalize_full_tilemap(size, offset,tile_scale)
+	return Map.new(tilemap)
 

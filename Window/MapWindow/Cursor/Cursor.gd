@@ -1,6 +1,8 @@
 extends Sprite
 class_name Cursor
 
+signal accept_pressed(cell)
+
 onready var _timer : Timer = $Timer
 
 export(float) var ui_cooldown = .1
@@ -20,6 +22,8 @@ func set_cell(new_cell : Vector2):
 func _input(event):
 	if event is InputEventMouseMotion:
 		handle_mouse_event(event)
+	elif event.is_action_pressed("ui_accept"):
+		emit_signal("accept_pressed", cell)
 	handle_keyboard_event(event)
 
 func handle_mouse_event(event : InputEventMouseMotion):
