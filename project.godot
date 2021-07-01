@@ -94,7 +94,7 @@ config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "WAT" )
+enabled=PoolStringArray( "WAT", "gut" )
 
 [importer_defaults]
 
