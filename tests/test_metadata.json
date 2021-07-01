@@ -1,4 +1,11 @@
 {
+	"res://tests/Character/Character.test.gd": {
+		"path": "res://tests/Character/Character.test.gd",
+		"tags": [
+
+		],
+		"passing": true
+	},
 	"res://tests/Map/conversions.test.gd": {
 		"path": "res://tests/Map/conversions.test.gd",
 		"tags": [
@@ -18,17 +25,10 @@
 		"tags": [
 
 		],
-		"passing": false
-	},
-	"res://tests/Window/Cursor/cursor.test.gd": {
-		"path": "res://tests/Window/Cursor/cursor.test.gd",
-		"tags": [
-
-		],
 		"passing": true
 	},
-	"res://tests/Character/Character.test.gd": {
-		"path": "res://tests/Character/Character.test.gd",
+	"res://tests/Map/RefrenceMap/conversions.test.gd": {
+		"path": "res://tests/Map/RefrenceMap/conversions.test.gd",
 		"tags": [
 
 		],
@@ -40,5 +40,12 @@
 
 		],
 		"passing": false
+	},
+	"res://tests/Window/Cursor/cursor.test.gd": {
+		"path": "res://tests/Window/Cursor/cursor.test.gd",
+		"tags": [
+
+		],
+		"passing": true
 	}
 }

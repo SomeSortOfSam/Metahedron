@@ -32,7 +32,7 @@ func test_mouse_movement():
 	cursor._input(event)
 	asserts.is_equal(cursor.position, new_pos, "Mouse movement sets cell")
 	
-	event.position = map.map_to_world(Vector2.UP)
+	event.position = map.map_to_world(Vector2(0,-1))
 	cursor._input(event)
 	asserts.is_equal(cursor.modulate,Color(1,1,1,0), "Out of bounds mouse hides cursor")
 	

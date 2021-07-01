@@ -9,6 +9,7 @@ export(float) var ui_cooldown = .1
 
 var map : Map
 var cell : Vector2 setget set_cell
+var out_of_bounds : bool = false
 
 func _init(new_map : Map = Map.new()):
 	map = new_map
@@ -25,11 +26,12 @@ func _input(event):
 	elif event.is_action_pressed("ui_accept"):
 		emit_signal("accept_pressed", cell)
 	handle_keyboard_event(event)
+	set_cursor_color()
 
 func handle_mouse_event(event : InputEventMouseMotion):
 	var new_cell = map.world_to_map(event.position)
 	self.cell = new_cell
-	modulate = Color.white if map.is_walkable(new_cell) else Color(1,1,1,0)
+	out_of_bounds = !cell.is_equal_approx(new_cell)
 
 func handle_keyboard_event(event):
 	var should_move : bool = event.is_pressed()
@@ -37,8 +39,8 @@ func handle_keyboard_event(event):
 		should_move = should_move and _timer.is_stopped()
 	
 	if should_move:
-		modulate = Color.white
 		keystroke_to_cell_transform(event)
+		out_of_bounds = false
 
 func keystroke_to_cell_transform(event):
 	if event.is_action("ui_right"):
@@ -49,3 +51,6 @@ func keystroke_to_cell_transform(event):
 		self.cell += Vector2.LEFT
 	elif event.is_action("ui_down"):
 		self.cell += Vector2.DOWN
+
+func set_cursor_color():
+	modulate = Color.white if !out_of_bounds && map.is_walkable(cell) else Color(1,1,1,0)
