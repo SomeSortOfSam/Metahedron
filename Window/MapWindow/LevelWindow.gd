@@ -9,6 +9,8 @@ var map : Map
 func initalize(tilemap : TileMap, cursor : Cursor):
 	map = Map.new(tilemap)
 	cursor.map = map
+	for child in get_children():
+		var unit := child as Character
 
 func _init(tilemap : TileMap = $TileMap as TileMap , cursor : Cursor = $Cursor as Cursor):
 	initalize(tilemap,cursor)

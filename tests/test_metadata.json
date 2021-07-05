@@ -34,8 +34,8 @@
 		],
 		"passing": true
 	},
-	"res://tests/Window/initialization.test.gd": {
-		"path": "res://tests/Window/initialization.test.gd",
+	"res://tests/Window/movement_window.test.gd": {
+		"path": "res://tests/Window/movement_window.test.gd",
 		"tags": [
 
 		],
