@@ -1,6 +1,5 @@
 class_name Pathfinder
 
-
 static func get_walkable_tiles(map : Map) -> Array:
 	var out := []
 	for x in map.rect.size.x:
