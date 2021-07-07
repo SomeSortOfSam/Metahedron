@@ -5,10 +5,12 @@ var map : Map
 var cursor : Cursor
 
 func before_all():
+	add_child(tile_map)
 	for x in 3:
 		for y in 3:
 			tile_map.set_cell(x,y,0)
-	map = Map.new(tile_map)
+	map = Map.new()
+	map.tile_map = tile_map
 	cursor = Cursor.new(map)
 
 func before_each():
@@ -52,11 +54,14 @@ func test_keyboard_movement():
 		for y in 3:
 			extended_tile_map.set_cell(x,y,0)
 	extended_tile_map.set_cell(0,2,0)
-	var extended_map := Map.new(extended_tile_map)
+	var extended_map := Map.new()
+	extended_map.tile_map = extended_tile_map
 	var extended_cursor := Cursor.new(extended_map)
 	extended_cursor.cell = Vector2(1,2)
 	extended_cursor._input(FakeInput.new(["ui_down"]))
 	assert_eq(extended_cursor.cell, Vector2(1,2), "Keyboard does not move off walkable tiles")
+	extended_cursor.free()
+	extended_map.tile_map.free()
 
 func test_mouse_click():
 	cursor.connect("accept_pressed", self, "mouse_click_return")
@@ -84,3 +89,7 @@ class FakeInput extends Reference:
 	
 	func is_echo():
 		return is_echo
+
+func after_all():
+	cursor.free()
+	map.tile_map.free()

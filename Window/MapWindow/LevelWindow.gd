@@ -7,7 +7,8 @@ onready var tilemap : TileMap = $TileMap
 var map : Map
 
 func initalize(tilemap : TileMap, cursor : Cursor):
-	map = Map.new(tilemap)
+	map = Map.new()
+	map.tile_map = tilemap
 	cursor.map = map
 	for child in get_children():
 		var unit := child as Character

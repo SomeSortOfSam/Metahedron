@@ -2,8 +2,9 @@ class_name Pathfinder
 
 static func get_walkable_tiles(map : Map) -> Array:
 	var out := []
-	for x in map.rect.size.x:
-		for y in map.rect.size.y:
+	var used_rect := map.get_used_rect()
+	for x in used_rect.size.x:
+		for y in used_rect.size.y:
 			var tile := Vector2(x,y)
 			if map.is_walkable(tile):
 				out.append(tile)
@@ -19,4 +20,4 @@ static func get_walkable_tiles_in_range(map : Map , map_point : Vector2, tile_ra
 	return out
 
 static func map_to_index(map : Map, map_point : Vector2) -> int:
-	return int(map_point.y * map.rect.size.x + map_point.x)
+	return int(map_point.y * map.get_used_rect().size.x + map_point.x)

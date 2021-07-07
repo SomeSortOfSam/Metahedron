@@ -5,6 +5,7 @@ func test_conversions(params = use_parameters(generate_conversion_paramaters()))
 	var refrence_rect := Rect2(params.x,params.y,0,0)
 	var refrence_map := RefrenceMap.new(map,refrence_rect)
 	run_conversion_tests(refrence_map, params)
+	map.tile_map.free()
 
 func generate_conversion_paramaters() -> Dictionary:
 	var out := []

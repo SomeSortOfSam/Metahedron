@@ -10,6 +10,8 @@ func test_index_generation():
 			has_duplicate = has_duplicate or checked.find(index) != -1
 			checked.append(index)
 	assert_false(has_duplicate, "Does not create duplicates")
+	
+	map.tile_map.free()
 
 func test_is_occupied():
 	var map = tests_map.initalize_full_map()
@@ -17,13 +19,18 @@ func test_is_occupied():
 	assert_false(map.is_occupied(Vector2.ZERO), "false when not occupied")
 	add_unit(map, tests_map.SIZE - Vector2.ONE)
 	assert_true(map.is_occupied(tests_map.SIZE - Vector2.ONE), "true when occupied")
+	
+	map.tile_map.free()
 
 func test_is_walkable():
 	var map := tests_map.initalize_full_map(Vector2(3,1))
-	map.tile_map.set_cellv(Vector2.ZERO,-1)
+	map.tile_map.set_cellv(Vector2.UP,-1)
+	add_unit(map, Vector2(2,0))
+	gut.p(map.get_used_rect())
 	assert_true(map.is_walkable(Vector2.RIGHT), "true when full")
-	assert_false(map.is_walkable(Vector2.ZERO), "false when empty")
+	assert_false(map.is_walkable(Vector2.UP), "false when empty")
 	assert_true(map.is_walkable(Vector2(2,0)), "true when occupied")
+	map.tile_map.free()
 
 func add_unit(map : Map, map_point : Vector2):
 	map.units[map_point] = Character.new()
@@ -46,3 +53,4 @@ func test_get_walkable_tiles():
 	assert_ne(tiles.find(Vector2.RIGHT),-1, "Starting tile included " + str(Vector2.RIGHT))
 	assert_eq(tiles.find((Vector2(5,0))),-1, "Out of range tile not included " + str(Vector2(4,0)))
 	assert_eq(tiles.find(Vector2.DOWN),-1, "Tiles with collision not included " + str(Vector2(Vector2.DOWN)))
+	map.tile_map.free()
