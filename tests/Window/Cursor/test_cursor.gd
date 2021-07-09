@@ -64,6 +64,7 @@ func test_keyboard_movement():
 	extended_map.tile_map.free()
 
 func test_mouse_click():
+# warning-ignore:return_value_discarded
 	cursor.connect("accept_pressed", self, "mouse_click_return")
 	cursor._input(FakeInput.new(["ui_accept"]))
 
@@ -87,6 +88,7 @@ class FakeInput extends Reference:
 	func is_action_pressed(fake_action : String) -> bool:
 		return is_action(fake_action)
 	
+# warning-ignore:function_conflicts_variable
 	func is_echo():
 		return is_echo
 

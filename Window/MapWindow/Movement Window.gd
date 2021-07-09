@@ -1,14 +1,9 @@
-extends WindowDialog
+extends MapWindow
 class_name MovementWindow
 
 onready var tilemap : TileMap = $TileMap
 
-var map : RefrenceMap
-
-func _init(max_range := 3, map_to_refrence := Map.new()):
-	tilemap = TileMap.new()
-	map = RefrenceMap.new(map_to_refrence)
-	popup_centered(range_to_size(max_range, tilemap))
+var map : ReferenceMap
 
 func populate_tilemap(tile_range : int, cell : Vector2):
 	var internal_map_tiles := Pathfinder.get_walkable_tiles_in_range(map,cell,tile_range)
@@ -22,4 +17,8 @@ static func get_popup_position(cell : Vector2) -> Vector2:
 	return cell
 
 static func get_window(cell : Vector2, map : Map, window_range : int) -> MovementWindow:
-	return load("res://Window/MapWindow/Movement Window.gd").new(window_range, map)
+	var packed_window := load("res://Window/MapWindow/Movement Window.tscn")
+	var window := packed_window.instace() as MovementWindow
+	window.map = ReferenceMap.new(map,cell,window_range)
+	window.populate_tilemap(window_range,cell)
+	return window

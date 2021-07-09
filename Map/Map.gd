@@ -29,6 +29,8 @@ func is_walkable(map_point : Vector2) -> bool:
 	if tile_map:
 		var tile_map_point := map_point + get_used_rect().position
 		var tile_type = tile_map.get_cellv(tile_map_point)
+# warning-ignore:narrowing_conversion
+# warning-ignore:narrowing_conversion
 		return tile_type != -1 && is_tile_type_walkable(tile_type, tile_map.get_cell_autotile_coord(tile_map_point.x,tile_map_point.y))
 	return false
 

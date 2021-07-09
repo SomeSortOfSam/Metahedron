@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Window/MapWindow/Tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Map/Levels/LevelData.gd" type="Script" id=2]
+[ext_resource path="res://Character/Unit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Character/Jean/Jean.tres" type="Resource" id=4]
+
+[node name="LevelData" type="TileMap"]
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 5, 1, 0, 5, 2, 0, 5, 3, 0, 0, 4, 0, 65538, 65536, 0, 5, 65537, 0, 5, 65538, 0, 65537, 65539, 0, 1, 65540, 0, 5, 131072, 0, 5, 131073, 0, 0, 131074, 0, 1, 131075, 0, 5, 131076, 0, 5, 131077, 0, 65540, 131078, 0, 65540, 131079, 0, 65540, 196608, 0, 3, 196609, 0, 4, 196610, 0, 3, 196611, 0, 3, 196612, 0, 3, 196613, 0, 65540, 196614, 0, 65540, 196615, 0, 65540, 262144, 0, 65539, 262145, 0, 65539, 262146, 0, 65539, 262147, 0, 65539, 262148, 0, 65539, 262149, 0, 65540, 262150, 0, 65540, 262151, 0, 65540, 327680, 0, 65540, 327681, 0, 65540, 327682, 0, 65540, 327683, 0, 65540, 327684, 0, 65540, 327685, 0, 65540, 327686, 0, 65540, 327687, 0, 65540, 2424832, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="Unit" parent="." instance=ExtResource( 3 )]
+position = Vector2( 24, 24 )
+friendly = true
+character = ExtResource( 4 )
+
+[node name="Unit2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 56, 24 )
+character = ExtResource( 4 )

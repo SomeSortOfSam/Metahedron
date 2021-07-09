@@ -22,9 +22,9 @@ _global_script_classes=[ {
 "base": "TileMap",
 "class": "LevelData",
 "language": "GDScript",
-"path": "res://Map/LevelData.gd"
+"path": "res://Map/Levels/LevelData.gd"
 }, {
-"base": "WindowDialog",
+"base": "MapWindow",
 "class": "LevelWindow",
 "language": "GDScript",
 "path": "res://Window/MapWindow/LevelWindow.gd"
@@ -35,6 +35,11 @@ _global_script_classes=[ {
 "path": "res://Map/Map.gd"
 }, {
 "base": "WindowDialog",
+"class": "MapWindow",
+"language": "GDScript",
+"path": "res://Window/MapWindow/MapWindow.gd"
+}, {
+"base": "MapWindow",
 "class": "MovementWindow",
 "language": "GDScript",
 "path": "res://Window/MapWindow/Movement Window.gd"
@@ -45,7 +50,7 @@ _global_script_classes=[ {
 "path": "res://Map/Pathfinder.gd"
 }, {
 "base": "Map",
-"class": "RefrenceMap",
+"class": "ReferenceMap",
 "language": "GDScript",
 "path": "res://Map/RefrenceMap.gd"
 }, {
@@ -65,9 +70,10 @@ _global_script_class_icons={
 "LevelData": "",
 "LevelWindow": "",
 "Map": "",
+"MapWindow": "",
 "MovementWindow": "",
 "Pathfinder": "",
-"RefrenceMap": "",
+"ReferenceMap": "",
 "Unit": "",
 "tests_map": ""
 }
