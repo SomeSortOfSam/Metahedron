@@ -8,8 +8,8 @@ var map : Map
 func initalize(level_data : LevelData):
 	tilemap_container.add_child(level_data)
 	map = level_data.to_map()
-	cursor.map = map
-	move_child(cursor,get_child_count())
+	cursor = Cursor.new(map)
+	add_child(cursor)
 
 func _ready():
 	initalize(level_data.instance() as LevelData)

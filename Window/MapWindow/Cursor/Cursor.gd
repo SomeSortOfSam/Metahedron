@@ -3,7 +3,11 @@ class_name Cursor
 
 signal accept_pressed(cell)
 
-onready var _timer : Timer = $Timer
+const SPRITE_PATH := "res://Window/MapWindow/Cursor/TileGlow.png"
+
+var sprite : Texture = preload(SPRITE_PATH)
+
+var timer : Timer
 
 export(float) var ui_cooldown = .1
 
@@ -13,6 +17,12 @@ var out_of_bounds : bool = false
 
 func _init(new_map : Map = Map.new()):
 	map = new_map
+	timer = Timer.new()
+	add_child(timer)
+	texture = sprite
+	scale = map.tile_map.scale
+	scale *= map.tile_map.cell_size / sprite.get_size()
+	show_behind_parent = true
 
 func set_cell(new_cell : Vector2):
 	var clamped_cell = map.clamp(new_cell)
@@ -36,7 +46,7 @@ func handle_mouse_event(event : InputEventMouseMotion):
 func handle_keyboard_event(event):
 	var should_move : bool = event.is_pressed()
 	if event.is_echo():
-		should_move = should_move and _timer.is_stopped()
+		should_move = should_move and timer.is_stopped()
 	
 	if should_move:
 		keystroke_to_cell_transform(event)
