@@ -4,7 +4,7 @@ class_name ReferenceMap
 var refrence_map : Map
 var refrence_rect : Rect2
 
-func _init(new_map : Map, center_cell : Vector2, tile_range : int):
+func _init(new_tile_map : TileMap, new_map : Map, center_cell : Vector2, tile_range : int).(new_tile_map):
 	refrence_map = new_map
 	refrence_rect = range_to_refrence_rect(center_cell,tile_range)
 

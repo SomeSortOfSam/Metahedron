@@ -15,7 +15,7 @@ var map : Map
 var cell : Vector2 setget set_cell
 var out_of_bounds : bool = false
 
-func _init(new_map : Map = Map.new()):
+func _init(new_map : Map):
 	map = new_map
 	timer = Timer.new()
 	add_child(timer)

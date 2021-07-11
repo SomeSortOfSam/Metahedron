@@ -2,7 +2,7 @@ extends "res://addons/gut/test.gd"
 
 func test_conversions(params = use_parameters(generate_conversion_paramaters())):
 	var map := tests_map.initalize_full_map(tests_map.SIZE)
-	var refrence_map := ReferenceMap.new(map,Vector2(params.x,params.y),2)
+	var refrence_map := ReferenceMap.new(map.tile_map,map,Vector2(params.x,params.y),2)
 	run_conversion_tests(refrence_map, params)
 	map.tile_map.free()
 

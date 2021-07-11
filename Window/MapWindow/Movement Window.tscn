@@ -5,3 +5,6 @@
 
 [node name="Window" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="TileMap" type="TileMap" parent="Path2D/PathFollow2D/TilemapContainer" index="0"]
+format = 1

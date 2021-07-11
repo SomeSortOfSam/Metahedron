@@ -9,8 +9,7 @@ func before_all():
 	for x in 3:
 		for y in 3:
 			tile_map.set_cell(x,y,0)
-	map = Map.new()
-	map.tile_map = tile_map
+	map = Map.new(tile_map)
 	cursor = Cursor.new(map)
 
 func before_each():
@@ -54,8 +53,7 @@ func test_keyboard_movement():
 		for y in 3:
 			extended_tile_map.set_cell(x,y,0)
 	extended_tile_map.set_cell(0,2,0)
-	var extended_map := Map.new()
-	extended_map.tile_map = extended_tile_map
+	var extended_map := Map.new(extended_tile_map)
 	var extended_cursor := Cursor.new(extended_map)
 	extended_cursor.cell = Vector2(1,2)
 	extended_cursor._input(FakeInput.new(["ui_down"]))

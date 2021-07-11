@@ -4,10 +4,11 @@ class_name Map
 var tile_map : TileMap
 var units := {}
 
+func _init(new_tilemap : TileMap):
+	tile_map = new_tilemap
+
 func get_used_rect() -> Rect2:
-	if tile_map:
-		return tile_map.get_used_rect()
-	return Rect2(Vector2.ZERO,Vector2.ZERO)
+	return tile_map.get_used_rect()
 
 func world_to_map(world_point : Vector2) -> Vector2:
 	var tile_world_point = (world_point - tile_map.global_position) / tile_map.scale
@@ -26,16 +27,15 @@ func is_occupied(map_point : Vector2) -> bool:
 	return units.has(map_point)
 
 func is_walkable(map_point : Vector2) -> bool:
-	if tile_map:
-		var tile_map_point := map_point + get_used_rect().position
-		var tile_type = tile_map.get_cellv(tile_map_point)
+	var tile_map_point := map_point + get_used_rect().position
+	var tile_type = tile_map.get_cellv(tile_map_point)
 # warning-ignore:narrowing_conversion
 # warning-ignore:narrowing_conversion
-		return tile_type != -1 && is_tile_type_walkable(tile_type, tile_map.get_cell_autotile_coord(tile_map_point.x,tile_map_point.y))
-	return false
+	return tile_type != -1 && is_tile_type_walkable(tile_type, tile_map.get_cell_autotile_coord(tile_map_point.x,tile_map_point.y))
+
 
 func is_tile_type_walkable(tile_type : int, autotile_coords : Vector2 = Vector2.ZERO) -> bool:
-	if tile_map && tile_map.tile_set != null && tile_map.tile_set.get_tiles_ids().find(tile_type) != -1:
+	if tile_map.tile_set != null && tile_map.tile_set.get_tiles_ids().find(tile_type) != -1:
 		var tile_set := tile_map.tile_set
 		var tile_mode := tile_set.tile_get_tile_mode(tile_type)
 		if tile_mode == TileSet.SINGLE_TILE:

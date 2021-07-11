@@ -3,13 +3,9 @@ class_name LevelWindow
 
 export(PackedScene) var level_data
 
-var map : Map
-
 func initalize(level_data : LevelData):
 	tilemap_container.add_child(level_data)
-	map = level_data.to_map()
-	cursor = Cursor.new(map)
-	add_child(cursor)
+	self.map = level_data.to_map()
 
 func _ready():
 	initalize(level_data.instance() as LevelData)

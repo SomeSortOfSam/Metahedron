@@ -4,12 +4,14 @@ class_name tests_map
 const SIZE := Vector2.ONE * 3
 
 func test_empty_map_tests():
-	var map := Map.new()
+	var map := Map.new(TileMap.new())
 	
 	assert_not_null(map,"Map is created")
 	assert_not_null(map.units, "Map has units dictonary")
 	assert_eq(map.get_used_rect().size,Vector2.ZERO,"map size is zero")
 	assert_lt(map.units.size(), 1, "Map's units is empty")
+	
+	map.tile_map.free()
 
 func test_populated_map_tests():
 	var map := initalize_full_map()
@@ -31,7 +33,5 @@ static func initalize_full_tilemap(size : Vector2 = SIZE , offset : Vector2 = Ve
 	return tilemap
 
 static func initalize_full_map(size : Vector2 = SIZE , offset : Vector2 = Vector2.ZERO, tile_scale : Vector2 = Vector2.ONE) -> Map:
-	var tilemap := initalize_full_tilemap(size, offset,tile_scale)
-	var map := Map.new()
-	map.tile_map = tilemap
+	var map := Map.new(initalize_full_tilemap(size, offset,tile_scale))
 	return map
