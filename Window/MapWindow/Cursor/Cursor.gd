@@ -28,7 +28,7 @@ func set_cell(new_cell : Vector2):
 	var clamped_cell = map.clamp(new_cell)
 	if map.is_walkable(clamped_cell):
 		cell = clamped_cell
-	position = map.map_to_world(cell)
+	global_position = map.map_to_world(cell)
 
 func _input(event):
 	if event is InputEventMouseMotion:

@@ -11,6 +11,3 @@ level_data = ExtResource( 3 )
 
 [node name="ColorRect" parent="." index="1"]
 mouse_filter = 0
-
-[node name="Path2D" parent="." index="2"]
-show_behind_parent = true

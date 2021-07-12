@@ -15,6 +15,7 @@ func _ready():
 
 func resize_window():
 	popup(get_viewport_rect())
+	center_tilemap()
 
 func get_window(cell : Vector2) -> MovementWindow:
 	return MovementWindow.new() if map.is_occupied(cell) else null

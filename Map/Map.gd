@@ -19,7 +19,7 @@ func world_to_map(world_point : Vector2) -> Vector2:
 func map_to_world(map_point : Vector2) -> Vector2:
 	var tile_map_point = map_point + get_used_rect().position
 	var tile_world_point = tile_map.map_to_world(tile_map_point)
-	var world_point = (tile_world_point * tile_map.scale) + tile_map.position
+	var world_point = (tile_world_point * tile_map.scale) + tile_map.global_position
 	var half_offset = tile_map.cell_size * tile_map.scale / 2
 	return world_point + half_offset
 
@@ -33,19 +33,25 @@ func is_walkable(map_point : Vector2) -> bool:
 # warning-ignore:narrowing_conversion
 	return tile_type != -1 && is_tile_type_walkable(tile_type, tile_map.get_cell_autotile_coord(tile_map_point.x,tile_map_point.y))
 
-
 func is_tile_type_walkable(tile_type : int, autotile_coords : Vector2 = Vector2.ZERO) -> bool:
-	if tile_map.tile_set != null && tile_map.tile_set.get_tiles_ids().find(tile_type) != -1:
-		var tile_set := tile_map.tile_set
-		var tile_mode := tile_set.tile_get_tile_mode(tile_type)
-		if tile_mode == TileSet.SINGLE_TILE:
-			return tile_set.tile_get_shape_count(tile_type) <= 0
+	if tile_map.tile_set && tile_map.tile_set.get_tiles_ids().find(tile_type) != -1:
+		if tile_map.tile_set.tile_get_tile_mode(tile_type) == TileSet.SINGLE_TILE:
+			return is_single_tile_type_walkable(tile_type)
 		else:
-			var shapes := tile_set.tile_get_shapes(tile_type)
-			for dic in shapes:
-				if dic["autotile_coord"] == autotile_coords:
-					return false
-			return true
+			return is_autotile_type_walkable(tile_type,autotile_coords)
+	return true
+
+func is_single_tile_type_walkable(tile_type : int) -> bool:
+	if tile_map.tile_set:
+		return tile_map.tile_set.tile_get_shape_count(tile_type) <= 0
+	return true
+
+func is_autotile_type_walkable(tile_type : int, autotile_coords : Vector2) -> bool:
+	if tile_map.tile_set:
+		for dic in tile_map.tile_set.tile_get_shapes(tile_type):
+			if dic["autotile_coord"] == autotile_coords:
+				return false
+		return true
 	return true
 
 func clamp(map_point : Vector2) -> Vector2:

@@ -1,15 +1,15 @@
 extends "res://addons/gut/test.gd"
 
 func test_conversions(params = use_parameters(generate_conversion_paramaters())):
-	var map := tests_map.initalize_full_map(tests_map.SIZE)
+	var map := MapTestUtilites.initalize_full_map(MapTestUtilites.SIZE)
 	var refrence_map := ReferenceMap.new(map.tile_map,map,Vector2(params.x,params.y),2)
 	run_conversion_tests(refrence_map, params)
 	map.tile_map.free()
 
 func generate_conversion_paramaters() -> Dictionary:
 	var out := []
-	for x in tests_map.SIZE.x:
-		for y in tests_map.SIZE.y:
+	for x in MapTestUtilites.SIZE.x:
+		for y in MapTestUtilites.SIZE.y:
 			out.append([x,y])
 	return ParameterFactory.named_parameters(["x","y"],out)
 
@@ -17,8 +17,8 @@ func generate_conversion_paramater_description(params) -> String:
 	return "with a start tile of " + str(Vector2(params.x,params.y))
 
 func run_conversion_tests(refrence_map : ReferenceMap, params):
-	for x in tests_map.SIZE.x:
-		for y in tests_map.SIZE.y:
+	for x in MapTestUtilites.SIZE.x:
+		for y in MapTestUtilites.SIZE.y:
 			run_conversion_test(Vector2(x,y), refrence_map, params)
 
 func run_conversion_test(cell : Vector2, refrence_map : ReferenceMap , params):

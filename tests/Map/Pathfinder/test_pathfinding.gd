@@ -1,11 +1,11 @@
 extends "res://addons/gut/test.gd"
 
 func test_index_generation():
-	var map := tests_map.initalize_full_map()
+	var map := MapTestUtilites.initalize_full_map()
 	var has_duplicate := false
 	var checked := []
-	for x in tests_map.SIZE.x:
-		for y in tests_map.SIZE.y:
+	for x in MapTestUtilites.SIZE.x:
+		for y in MapTestUtilites.SIZE.y:
 			var index := Pathfinder.map_to_index(map,Vector2(x,y))
 			has_duplicate = has_duplicate or checked.find(index) != -1
 			checked.append(index)
@@ -14,16 +14,16 @@ func test_index_generation():
 	map.tile_map.free()
 
 func test_is_occupied():
-	var map = tests_map.initalize_full_map()
+	var map = MapTestUtilites.initalize_full_map()
 	
 	assert_false(map.is_occupied(Vector2.ZERO), "false when not occupied")
-	add_unit(map, tests_map.SIZE - Vector2.ONE)
-	assert_true(map.is_occupied(tests_map.SIZE - Vector2.ONE), "true when occupied")
+	add_unit(map, MapTestUtilites.SIZE - Vector2.ONE)
+	assert_true(map.is_occupied(MapTestUtilites.SIZE - Vector2.ONE), "true when occupied")
 	
 	map.tile_map.free()
 
 func test_is_walkable():
-	var map := tests_map.initalize_full_map(Vector2(3,1))
+	var map := MapTestUtilites.initalize_full_map(Vector2(3,1))
 	map.tile_map.set_cellv(Vector2.UP,-1)
 	map.tile_map.tile_set = TileSet.new()
 	map.tile_map.tile_set.create_tile(0)
@@ -46,7 +46,7 @@ func add_unit(map : Map, map_point : Vector2):
 	map.units[map_point] = Character.new()
 
 func setup_walkable_map() -> Map:
-	var map := tests_map.initalize_full_map(Vector2(5,2))
+	var map := MapTestUtilites.initalize_full_map(Vector2(5,2))
 	map.tile_map.set_cellv(Vector2.ZERO,-1)
 	var tile_set = TileSet.new()
 	tile_set.create_tile(1)

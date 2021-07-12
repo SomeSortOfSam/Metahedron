@@ -4,9 +4,7 @@ class_name MapWindow
 var map : Map setget set_map
 
 onready var cursor : Cursor
-onready var path : Path2D = $Path2D
-onready var follower : PathFollow2D = $Path2D/PathFollow2D
-onready var tilemap_container : Node2D = $Path2D/PathFollow2D/TilemapContainer
+onready var tilemap_container : Node2D = $TilemapContainer
 
 func set_map(new_map : Map):
 	map = new_map
@@ -19,7 +17,11 @@ func reinitalize_cursor():
 	add_child(cursor)
 
 func center_tilemap():
-	assert(false, "center_tilemap not implemented")
+	tilemap_container.position = get_centered_position()
 
-func center_tilemap_immedite():
-	assert(false, "center_tilemap_immedite not implemented")
+func get_centered_position() -> Vector2:
+	if map:
+		var used_rect := map.get_used_rect()
+		var cell_size := map.tile_map.cell_size
+		return rect_size/2 - (used_rect.size *  cell_size/ 2) - used_rect.position * cell_size
+	return rect_size/2
