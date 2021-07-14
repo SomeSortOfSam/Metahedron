@@ -15,10 +15,13 @@ script = ExtResource( 2 )
 
 [node name="Unit" parent="." instance=ExtResource( 3 )]
 position = Vector2( 24, 24 )
+z_index = 1
 friendly = true
 character = ExtResource( 4 )
+in_level_map = true
 
 [node name="Unit2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 56, 24 )
-friendly = false
+z_index = 1
 character = ExtResource( 4 )
+in_level_map = true

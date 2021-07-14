@@ -6,5 +6,5 @@
 [node name="MapWindow" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="TilemapContainer" type="Node2D" parent="." index="2"]
+[node name="TilemapContainer" type="YSort" parent="." index="2"]
 show_behind_parent = true

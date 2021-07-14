@@ -58,6 +58,7 @@ func test_keyboard_movement():
 		for y in 3:
 			extended_tile_map.set_cell(x,y,0)
 	extended_tile_map.set_cell(0,2,0)
+	add_child_autofree(extended_tile_map)
 	var extended_map := Map.new(extended_tile_map)
 	var extended_cursor := Cursor.new(extended_map)
 	extended_cursor.cell = Vector2(1,2)

@@ -4,7 +4,7 @@ class_name MapWindow
 var map : Map setget set_map
 
 onready var cursor : Cursor
-onready var tilemap_container : Node2D = $TilemapContainer
+onready var tilemap_container : YSort = $TilemapContainer
 
 func set_map(new_map : Map):
 	map = new_map
@@ -14,7 +14,7 @@ func reinitalize_cursor():
 	if cursor:
 		cursor.free()
 	cursor = Cursor.new(map)
-	add_child(cursor)
+	tilemap_container.add_child(cursor)
 
 func center_tilemap():
 	tilemap_container.position = get_centered_position()

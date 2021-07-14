@@ -5,7 +5,6 @@
 [ext_resource path="res://Map/Levels/TestLevel.tscn" type="PackedScene" id=3]
 
 [node name="Window" instance=ExtResource( 1 )]
-visible = true
 mouse_filter = 0
 script = ExtResource( 2 )
 level_data = ExtResource( 3 )

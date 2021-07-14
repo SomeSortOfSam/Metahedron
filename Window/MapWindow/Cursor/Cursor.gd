@@ -24,6 +24,7 @@ func _init(new_map : Map):
 	scale = map.tile_map.scale
 	scale *= map.tile_map.cell_size / sprite.get_size()
 	show_behind_parent = true
+	z_index = 1
 
 func set_cell(new_cell : Vector2):
 	var clamped_cell = map.clamp(new_cell)

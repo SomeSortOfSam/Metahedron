@@ -18,7 +18,7 @@ func pre_map_initalzation_tests():
 	assert_null(map_window.map)
 
 func add_map(map : Map):
-	map_window.tilemap_container.add_child(map.tile_map)
+	autofree(map.tile_map)
 	map_window.map = map
 
 func post_map_initalization_tests():
