@@ -20,6 +20,7 @@ func _init(new_map : Map):
 	timer = Timer.new()
 	add_child(timer)
 	texture = sprite
+	modulate = Color(1,1,1,0)
 	scale = map.tile_map.scale
 	scale *= map.tile_map.cell_size / sprite.get_size()
 	show_behind_parent = true

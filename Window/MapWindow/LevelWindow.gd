@@ -18,4 +18,5 @@ func resize_window():
 	center_tilemap()
 
 func get_window(cell : Vector2) -> MovementWindow:
+	print("Get window at " + str(cell))
 	return MovementWindow.new() if map.is_occupied(cell) else null

@@ -15,6 +15,11 @@ func before_all():
 func before_each():
 	cursor.cell = Vector2.ZERO
 
+func test_initialization():
+	cursor.free()
+	cursor = Cursor.new(map)
+	assert_eq(cursor.modulate, Color(1,1,1,0), "Cursor starts clear")
+
 func test_set_cell():
 	cursor.cell = Vector2.ONE
 	assert_eq(cursor.cell, Vector2.ONE, "Cursor cell can be set")
