@@ -14,8 +14,8 @@ static func get_popup_position(cell : Vector2) -> Vector2:
 
 static func get_window(cell : Vector2, map : Map, window_range : int) -> MovementWindow:
 	var packed_window := load("res://Window/MapWindow/Movement Window.tscn")
-	var window := packed_window.instace() as MovementWindow
-	var tilemap := window.get_node("Path2D/PathFollow2D/TilemapContainer/TileMap") as TileMap
+	var window := packed_window.instance() as MovementWindow
+	var tilemap := window.get_node("TilemapContainer/TileMap") as TileMap
 	window.map = ReferenceMap.new(tilemap,map,cell,window_range)
 	window.populate_tilemap(window_range,cell)
 	return window

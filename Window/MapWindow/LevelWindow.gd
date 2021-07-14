@@ -15,8 +15,12 @@ func _ready():
 
 func resize_window():
 	popup(get_viewport_rect())
+	yield(get_tree(),"idle_frame")
 	center_tilemap()
 
-func get_window(cell : Vector2) -> MovementWindow:
-	print("Get window at " + str(cell))
-	return MovementWindow.new() if map.is_occupied(cell) else null
+func get_window(cell : Vector2):
+	if map.is_occupied(cell):
+		print("Get window at " + str(cell))
+		var movement_window = MovementWindow.get_window(cell, map, 3)
+		get_tree().current_scene.add_child(movement_window)
+		movement_window.popup()

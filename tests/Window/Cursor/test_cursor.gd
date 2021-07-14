@@ -96,6 +96,12 @@ class FakeInput extends Reference:
 	func is_echo():
 		return is_echo
 
+func test_z_index():
+	var packed_unit = load("res://Character/Unit.tscn")
+	var unit := packed_unit.instance() as Unit
+	add_child_autofree(unit)
+	assert_gt(unit.z_index,cursor.z_index)
+
 func after_all():
 	cursor.free()
 	map.tile_map.free()

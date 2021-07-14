@@ -13,6 +13,9 @@ onready var _sprite : AnimatedSprite = $PathFollow2D/AnimatedSprite
 
 var map
 
+func _ready():
+	z_index = 2
+
 func set_character(new_characeter : Character):
 	grab_onreadys()
 	assert(new_characeter is Character || new_characeter == null, "New character in not of type Character")
@@ -45,5 +48,4 @@ func _draw(is_editor := Engine.editor_hint):
 		var color := Color.green if friendly else Color.red
 		color.a = TOOL_ALPHA
 		position = tilemap.map_to_world(tilemap.world_to_map(position)) + tilemap.cell_size/2
-		z_index = 2
 		draw_rect(Rect2(-tilemap.cell_size/2,tilemap.cell_size),color)
