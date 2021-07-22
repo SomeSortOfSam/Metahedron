@@ -30,3 +30,4 @@ func get_centered_position() -> Vector2:
 		var top_left_position := tilemap_position + tilemap_size/2
 		return rect_size/2 - top_left_position
 	return rect_size/2
+

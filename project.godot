@@ -95,7 +95,7 @@ Display=8
 [application]
 
 config/name="Metaheadron"
-run/main_scene="res://Window/MapWindow/LevelWindow.tscn"
+run/main_scene="res://Node.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]

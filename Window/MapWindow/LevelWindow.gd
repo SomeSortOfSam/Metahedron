@@ -20,7 +20,6 @@ func resize_window():
 
 func get_window(cell : Vector2):
 	if map.is_occupied(cell):
-		print("Get window at " + str(cell))
 		var movement_window = MovementWindow.get_window(cell, map, 3)
 		get_tree().current_scene.add_child(movement_window)
-		movement_window.popup()
+		movement_window.popup(Rect2(map.map_to_world(cell),MovementWindow.range_to_size(3,map.tile_map)))

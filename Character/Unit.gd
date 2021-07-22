@@ -13,9 +13,6 @@ onready var _sprite : AnimatedSprite = $PathFollow2D/AnimatedSprite
 
 var map
 
-func _ready():
-	z_index = 2
-
 func set_character(new_characeter : Character):
 	grab_onreadys()
 	assert(new_characeter is Character || new_characeter == null, "New character in not of type Character")
