@@ -74,6 +74,7 @@ func test_mouse_click():
 
 func mouse_click_return(cell):
 	assert_eq(cell, Vector2.ZERO, "Click accpeted")
+	assert_ne(cursor.modulate.a,1.0)
 
 class FakeInput extends Reference:
 	var is_echo : bool
@@ -97,8 +98,7 @@ class FakeInput extends Reference:
 		return is_echo
 
 func test_z_index():
-	var packed_unit = load("res://Character/Unit.tscn")
-	var unit := packed_unit.instance() as Unit
+	var unit := Unit.new()
 	add_child_autofree(unit)
 	assert_gt(unit.z_index,cursor.z_index)
 

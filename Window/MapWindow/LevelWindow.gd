@@ -3,6 +3,7 @@ class_name LevelWindow
 
 export(PackedScene) var level_data
 
+# warning-ignore:shadowed_variable
 func initalize(level_data : LevelData):
 	tilemap_container.add_child(level_data)
 	self.map = level_data.to_map()
@@ -18,8 +19,12 @@ func resize_window():
 	yield(get_tree(),"idle_frame")
 	center_tilemap()
 
-func get_window(cell : Vector2):
+func get_window(cell : Vector2) -> MovementWindow:
 	if map.is_occupied(cell):
 		var movement_window = MovementWindow.get_window(cell, map, 3)
-		get_tree().current_scene.add_child(movement_window)
-		movement_window.popup(Rect2(map.map_to_world(cell),MovementWindow.range_to_size(3,map.tile_map)))
+		add_child(movement_window)
+		var pos = map.map_to_world(cell)
+		var size = MovementWindow.range_to_size(3,map.tile_map)
+		movement_window.popup(Rect2(pos,size))
+		return movement_window
+	return null

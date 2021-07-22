@@ -1,13 +1,10 @@
 extends "res://addons/gut/test.gd"
 
-const PATH =  "res://Character/Unit.tscn"
 var unit : Unit
 
 func before_all():
-	var packedUnitScene := load(PATH)
-	var unitScene = packedUnitScene.instance()
-	unit = unitScene as Unit
-	add_child(unitScene)
+	unit = Unit.new()
+	add_child(unit)
 
 func test_in_level_map():
 	unit.in_level_map = true
@@ -32,24 +29,28 @@ func test_set_character():
 	assert_eq(unit._icon.texture,character.icon,"Unit uses icon")
 	assert_eq(unit._sprite.position,character.animations_offset,"Unit uses animation offset")
 
-func test_draw():
-	assert_has_method(unit, "_draw")
+func test_tile_snap():
+	unit.override_in_editor = true
 	
-	var old_pos := unit.position
-	unit._draw()
-	assert_eq(old_pos,unit.position,"Position does not change when parent is not tilemap")
+	unit.position = Vector2.ZERO
+	assert_eq(Vector2.ZERO,unit.position,"Position does not change when parent is not tilemap")
 	
-	unit.position = old_pos
-	var tilemap := TileMap.new()
-	add_child(tilemap)
-	remove_child(unit)
-	tilemap.add_child(unit)
-	unit._draw(true)
-	assert_ne(old_pos,unit.position,"Position adjusts when parent is tilemap. Cell size " + str(tilemap.cell_size))
+	unit.position = Vector2.ZERO
+	var tilemap := setup_tilemap()
+	unit.notification(2000)
+	assert_ne(Vector2.ZERO,unit.position,"Position adjusts when parent is tilemap. Cell size " + str(tilemap.cell_size))
+	
+	unit.override_in_editor = false
 	
 	tilemap.remove_child(unit)
 	add_child(unit)
-	tilemap.free()
+
+func setup_tilemap() -> TileMap:
+	var tilemap := TileMap.new()
+	add_child_autofree(tilemap)
+	remove_child(unit)
+	tilemap.add_child(unit)
+	return tilemap
 
 func after_all():
 	unit.free()

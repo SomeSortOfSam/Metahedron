@@ -7,14 +7,24 @@ const TOOL_ALPHA := .2
 export var friendly := false
 export var character : Resource setget set_character
 export var in_level_map := false setget set_in_level_map
+var override_in_editor := false
 
-onready var _icon : Sprite = $PathFollow2D/Sprite
-onready var _sprite : AnimatedSprite = $PathFollow2D/AnimatedSprite
+onready var _follower : PathFollow2D
+onready var _icon : Sprite
+onready var _sprite : AnimatedSprite
 
 var map
 
+func _init():
+	curve = null
+	_follower = PathFollow2D.new()
+	add_child(_follower)
+	_icon = Sprite.new()
+	_sprite = AnimatedSprite.new()
+	_follower.add_child(_icon)
+	_follower.add_child(_sprite)
+
 func set_character(new_characeter : Character):
-	grab_onreadys()
 	assert(new_characeter is Character || new_characeter == null, "New character in not of type Character")
 	if new_characeter is Character:
 		character = new_characeter
@@ -28,21 +38,26 @@ func set_character(new_characeter : Character):
 		_sprite.position = Vector2.ZERO
 
 func set_in_level_map(new_in_level_map : bool):
-	grab_onreadys()
 	in_level_map = new_in_level_map
 	_sprite.visible = !in_level_map
 	_icon.visible = in_level_map
 
-func grab_onreadys():
-	if _icon == null:
-		_icon = $PathFollow2D/Sprite
-	if _sprite == null:
-		_sprite = $PathFollow2D/AnimatedSprite
+func align_to_tilemap(position : Vector2, tilemap : TileMap) -> Vector2:
+	var aligned_pos := tilemap.map_to_world(tilemap.world_to_map(position))
+	return aligned_pos + tilemap.cell_size/2
 
-func _draw(is_editor := Engine.editor_hint):
+#align to grid
+func _notification(what):
+	if what == NOTIFICATION_TRANSFORM_CHANGED:
+		var tilemap := get_parent() as TileMap
+		if (Engine.editor_hint || override_in_editor) && tilemap:
+			set_notify_transform(false)
+			position = align_to_tilemap(position,tilemap)
+			set_notify_transform(true)
+
+func _draw():
 	var tilemap := get_parent() as TileMap
-	if is_editor && tilemap:
+	if (Engine.editor_hint || override_in_editor) && tilemap:
 		var color := Color.green if friendly else Color.red
 		color.a = TOOL_ALPHA
-		position = tilemap.map_to_world(tilemap.world_to_map(position)) + tilemap.cell_size/2
 		draw_rect(Rect2(-tilemap.cell_size/2,tilemap.cell_size),color)
