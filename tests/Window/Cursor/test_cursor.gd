@@ -30,47 +30,54 @@ func test_set_cell():
 	assert_eq(map.map_to_world(cursor.cell),cursor.position, "Cursor cell and position are linked")
 
 func test_mouse_movement():
-	var event := InputEventMouseMotion.new()
-	var new_pos := map.map_to_world(Vector2.ONE)
-	event.position = new_pos
+	var event := FakeInput.new([],cursor)
+	var new_pos := Vector2.ONE
+	event.set_position(new_pos)
 	cursor._input(event)
-	assert_eq(cursor.position, new_pos, "Mouse movement sets cell")
+	assert_eq(cursor.cell, new_pos, "Mouse movement sets cell")
 	
-	event.position = map.map_to_world(Vector2(0,-1))
+	event.set_position(Vector2(0,-1))
 	cursor._input(event)
-	assert_eq(cursor.modulate,Color(1,1,1,0), "Out of bounds mouse hides cursor")
+	assert_eq(cursor.modulate.a, 0.0, "Out of bounds mouse hides cursor")
 	
-	event.position = map.map_to_world(Vector2.ZERO)
+	event.set_position(Vector2.ZERO)
 	cursor._input(event)
-	assert_eq(cursor.modulate,Color.white, "In bounds mouse reveals cursor")
+	assert_eq(cursor.modulate.a, 1.0, "In bounds mouse reveals cursor")
 
 func test_keyboard_movement():
 	var old_pos := cursor.position
-	cursor._input(FakeInput.new(["ui_down"]))
+	cursor._input(FakeInput.new(["ui_down"], cursor))
 	assert_ne(old_pos, cursor.position, "Keyboard movement sets cell")
 	
 	cursor.cell = Vector2.ZERO
-	cursor._input(FakeInput.new(["ui_up"]))
+	cursor._input(FakeInput.new(["ui_up"], cursor))
 	assert_eq(cursor.cell, Vector2.ZERO, "Keyboard movement is clamped")
 	
+	var extended_cursor : Cursor = autofree(Cursor.new(setup_extend_map()))
+	extended_cursor.cell = Vector2(1,2)
+	extended_cursor._input(FakeInput.new(["ui_down"], extended_cursor))
+	assert_eq(extended_cursor.cell, Vector2(1,2), "Keyboard does not move off walkable tiles")
+
+func setup_extend_tilemap() -> TileMap:
 	var extended_tile_map := TileMap.new()
+	add_child_autofree(extended_tile_map)
 	for x in 3:
 		for y in 3:
 			extended_tile_map.set_cell(x,y,0)
 	extended_tile_map.set_cell(0,2,0)
-	add_child_autofree(extended_tile_map)
-	var extended_map := Map.new(extended_tile_map)
-	var extended_cursor := Cursor.new(extended_map)
-	extended_cursor.cell = Vector2(1,2)
-	extended_cursor._input(FakeInput.new(["ui_down"]))
-	assert_eq(extended_cursor.cell, Vector2(1,2), "Keyboard does not move off walkable tiles")
-	extended_cursor.free()
-	extended_map.tile_map.free()
+	return extended_tile_map
+
+func setup_extend_map() -> Map:
+	var extended_tile_map := setup_extend_tilemap()
+	return Map.new(extended_tile_map)
 
 func test_mouse_click():
+	
 # warning-ignore:return_value_discarded
 	cursor.connect("accept_pressed", self, "mouse_click_return")
-	cursor._input(FakeInput.new(["ui_accept"]))
+	var input := FakeInput.new(["ui_accept"], cursor)
+	input.set_position(Vector2(-1,0))
+	cursor._input(input)
 
 func mouse_click_return(cell):
 	assert_eq(cell, Vector2.ZERO, "Click accpeted")
@@ -78,9 +85,13 @@ func mouse_click_return(cell):
 
 class FakeInput extends Reference:
 	var is_echo : bool
+	var is_position_override : bool = false
+	var position_override : Vector2
 	var true_actions := []
+	var cursor : Cursor
 	
-	func _init(new_true_actions : Array, new_is_echo : bool = false):
+	func _init(new_true_actions : Array, new_cursor : Cursor = cursor, new_is_echo : bool = false):
+		cursor = new_cursor
 		true_actions = new_true_actions
 		is_echo = new_is_echo
 	
@@ -96,6 +107,15 @@ class FakeInput extends Reference:
 # warning-ignore:function_conflicts_variable
 	func is_echo():
 		return is_echo
+	
+	func set_position(value : Vector2):
+		is_position_override = true
+		position_override = value
+	
+	func get_position() -> Vector2:
+		if is_position_override:
+			return cursor.map.map_to_world(position_override)
+		return cursor.map.map_to_world(cursor.cell)
 
 func test_z_index():
 	var unit := Unit.new()

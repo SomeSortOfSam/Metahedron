@@ -33,15 +33,17 @@ func set_cell(new_cell : Vector2):
 	global_position = map.map_to_world(cell)
 
 func _input(event):
-	if event is InputEventMouseMotion:
-		handle_mouse_event(event)
-	elif event.is_action_pressed("ui_accept"):
-		emit_signal("accept_pressed", cell)
+	handle_mouse_event(event)
 	handle_keyboard_event(event)
 	set_cursor_color()
+	if event.is_action_pressed("ui_accept"):
+		emit_signal("accept_pressed", cell)
 
-func handle_mouse_event(event : InputEventMouseMotion):
-	var new_cell = map.world_to_map(event.position)
+func handle_mouse_event(event):
+	var event_position = map.map_to_world(cell)
+	if event.has_method("get_position"):
+		event_position = event.get_position()
+	var new_cell = map.world_to_map(event_position)
 	self.cell = new_cell
 	out_of_bounds = !cell.is_equal_approx(new_cell)
 
@@ -52,7 +54,8 @@ func handle_keyboard_event(event):
 	
 	if should_move:
 		keystroke_to_cell_transform(event)
-		out_of_bounds = false
+		if event is InputEventAction:
+			out_of_bounds = false
 
 func keystroke_to_cell_transform(event):
 	if event.is_action("ui_right"):
@@ -65,4 +68,4 @@ func keystroke_to_cell_transform(event):
 		self.cell += Vector2.DOWN
 
 func set_cursor_color():
-	modulate = Color.white if !out_of_bounds && map.is_walkable(cell) else Color(1,1,1,0)
+	modulate.a = 1.0 if !out_of_bounds && map.is_walkable(cell) else 0.0
