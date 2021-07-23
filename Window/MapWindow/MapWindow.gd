@@ -8,15 +8,19 @@ onready var tilemap_container : YSort = $TilemapContainer
 
 func set_map(new_map : Map):
 	map = new_map
+	if map.tile_map.get_parent():
+		map.tile_map.get_parent().remove_child(map.tile_map)
+	if !tilemap_container:
+		tilemap_container = $TilemapContainer
+	tilemap_container.add_child(map.tile_map)
 	reinitalize_cursor()
 
 func reinitalize_cursor():
 	if cursor:
 		cursor.free()
 	cursor = Cursor.new(map)
-	if tilemap_container == null:
-		tilemap_container = $TilemapContainer
-	tilemap_container.add_child(cursor)
+	map.tile_map.add_child(cursor)
+	map.tile_map.move_child(cursor,0)
 
 func center_tilemap():
 	tilemap_container.position = get_centered_position()

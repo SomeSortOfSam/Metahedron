@@ -24,4 +24,7 @@ func add_map(map : Map):
 func post_map_initalization_tests():
 	assert_not_null(map_window.map)
 	assert_not_null(map_window.cursor)
+	assert_eq(map_window.map.tile_map.get_parent(),map_window.tilemap_container)
+	assert_eq(map_window.cursor.get_index(),0, "Cursor is behind decorations and units")
+	assert_eq(map_window.cursor.get_parent(), map_window.map.tile_map, "Cursor parent is tilemap")
 	assert_eq(map_window.cursor.map, map_window.map)

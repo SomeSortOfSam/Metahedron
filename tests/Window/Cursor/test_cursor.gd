@@ -120,7 +120,7 @@ class FakeInput extends Reference:
 func test_z_index():
 	var unit := Unit.new()
 	add_child_autofree(unit)
-	assert_gt(unit.z_index,cursor.z_index)
+	assert_gt(unit.z_index ,cursor.z_index - 1)
 
 func after_all():
 	cursor.free()

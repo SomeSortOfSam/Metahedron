@@ -22,9 +22,7 @@ func _init(new_map : Map):
 	texture = sprite
 	modulate = Color(1,1,1,0)
 	scale = map.tile_map.scale
-	scale *= map.tile_map.cell_size / sprite.get_size()
-	show_behind_parent = true
-	z_index = 1
+	scale *= map.tile_map.cell_size / map.tile_map.scale / sprite.get_size()
 
 func set_cell(new_cell : Vector2):
 	var clamped_cell = map.clamp(new_cell)
