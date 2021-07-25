@@ -6,6 +6,11 @@ func populate_tilemap(tile_range : int, cell : Vector2):
 	for internal_tile in internal_map_tiles:
 		map.tilemap.set_cellv(map.internal_map_to_map(internal_tile),map.map.tile_map.get_cellv(internal_tile))
 
+func popup_around_tile(cell : Vector2):
+	var pos = Pathfinder.map_to_world(map,cell)
+	var size = range_to_size(3,map.tile_map)
+	popup(Rect2(pos,size))
+
 static func range_to_size(max_range : int, tile_map : TileMap) -> Vector2:
 	return Vector2.ONE * ((max_range * 2) + 3) * tile_map.cell_size * tile_map.scale
 
@@ -19,3 +24,4 @@ static func get_window(cell : Vector2, map : Map, window_range : int) -> Movemen
 	window.map = ReferenceMap.new(tilemap,map,cell,window_range)
 	window.populate_tilemap(window_range,cell)
 	return window
+

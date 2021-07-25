@@ -14,6 +14,7 @@ onready var _icon : Sprite
 onready var _sprite : AnimatedSprite
 
 var map
+var cell setget ,get_cell
 
 func _init():
 	curve = null
@@ -36,6 +37,9 @@ func set_character(new_characeter : Character):
 		_icon.texture = null
 		_icon.position = Vector2.ZERO
 		_sprite.position = Vector2.ZERO
+
+func get_cell() -> Vector2:
+	return Pathfinder.world_to_map(map,global_position)
 
 func set_in_level_map(new_in_level_map : bool):
 	in_level_map = new_in_level_map

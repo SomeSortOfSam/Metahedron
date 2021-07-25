@@ -28,7 +28,7 @@ func set_cell(new_cell : Vector2):
 	var clamped_cell = map.clamp(new_cell)
 	if map.is_walkable(clamped_cell):
 		cell = clamped_cell
-	global_position = map.map_to_world(cell)
+	global_position = Pathfinder.map_to_world(map,cell)
 
 func _input(event):
 	handle_mouse_event(event)
@@ -38,10 +38,10 @@ func _input(event):
 		emit_signal("accept_pressed", cell)
 
 func handle_mouse_event(event):
-	var event_position = map.map_to_world(cell)
+	var event_position = Pathfinder.map_to_world(map,cell)
 	if event.has_method("get_position"):
 		event_position = event.get_position()
-	var new_cell = map.world_to_map(event_position)
+	var new_cell = Pathfinder.world_to_map(map,event_position)
 	self.cell = new_cell
 	out_of_bounds = !cell.is_equal_approx(new_cell)
 

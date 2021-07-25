@@ -5,7 +5,7 @@ func to_map() -> Map:
 	var map := Map.new(self)
 	for child in get_children():
 		if child is Unit:
-			map.units[map.world_to_map(child.global_position)] = child as Unit
+			map.add_unit(child as Unit)
 	return map
 
 func add_unit(position : Vector2):

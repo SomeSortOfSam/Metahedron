@@ -3,25 +3,13 @@ class_name Map
 
 var tile_map : TileMap
 var units := {}
+var decorations := {}
 
 func _init(new_tilemap : TileMap):
 	tile_map = new_tilemap
 
 func get_used_rect() -> Rect2:
 	return tile_map.get_used_rect()
-
-func world_to_map(world_point : Vector2) -> Vector2:
-	var tile_world_point = (world_point - tile_map.global_position) / tile_map.scale
-	var tile_map_point = tile_world_point / tile_map.cell_size
-	var map_point = tile_map_point - get_used_rect().position
-	return map_point.floor()
-
-func map_to_world(map_point : Vector2) -> Vector2:
-	var tile_map_point = map_point + get_used_rect().position
-	var tile_world_point = tile_map.map_to_world(tile_map_point)
-	var world_point = (tile_world_point * tile_map.scale) + tile_map.global_position
-	var half_offset = tile_map.cell_size * tile_map.scale / 2
-	return world_point + half_offset
 
 func is_occupied(map_point : Vector2) -> bool:
 	return units.has(map_point)
@@ -59,3 +47,23 @@ func clamp(map_point : Vector2) -> Vector2:
 	map_point.x = clamp(map_point.x, 0, used_rect.size.x - 1 )
 	map_point.y = clamp(map_point.y, 0, used_rect.size.y - 1)
 	return map_point
+
+func get_unit_window(unit):
+	var dict = units[unit.cell]
+	return dict.window
+
+func add_unit(unit):
+	unit.map = self
+	var dict = {"unit" : unit, "window" : null}
+	units[unit.cell] = dict
+
+func add_window(window, unit):
+	var dict = units[unit.cell]
+	dict.window = window
+	units[unit.cell] = dict
+
+func remove_unit(unit):
+	units.erase(unit.cell)
+
+func add_decoration():
+	pass

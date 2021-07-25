@@ -19,12 +19,15 @@ func resize_window():
 	yield(get_tree(),"idle_frame")
 	center_tilemap()
 
-func get_window(cell : Vector2) -> MovementWindow:
+func get_window(cell : Vector2 , popup := true) -> MovementWindow:
 	if map.is_occupied(cell):
-		var movement_window = MovementWindow.get_window(cell, map, 3)
-		add_child(movement_window)
-		var pos = map.map_to_world(cell)
-		var size = MovementWindow.range_to_size(3,map.tile_map)
-		movement_window.popup(Rect2(pos,size))
+		var unit = map.units[cell].unit
+		var movement_window : MovementWindow = map.get_unit_window(unit)
+		if !movement_window:
+			map.add_window(MovementWindow.get_window(cell,map,3), unit)
+			movement_window = map.get_unit_window(unit)
+			add_child(movement_window)
+		if popup:
+			movement_window.popup_around_tile(cell)
 		return movement_window
 	return null
