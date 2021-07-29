@@ -6,7 +6,7 @@ func test_index_generation():
 	var checked := []
 	for x in MapTestUtilites.SIZE.x:
 		for y in MapTestUtilites.SIZE.y:
-			var index := Pathfinder.map_to_index(map,Vector2(x,y))
+			var index := map.map_to_index(Vector2(x,y))
 			has_duplicate = has_duplicate or checked.find(index) != -1
 			checked.append(index)
 	assert_false(has_duplicate, "Does not create duplicates")
@@ -58,7 +58,7 @@ func setup_walkable_map() -> Map:
 
 func test_get_walkable_tiles():
 	var map = setup_walkable_map()
-	var tiles := Pathfinder.get_walkable_tiles_in_range(map,Vector2.RIGHT,3)
+	var tiles = map.get_walkable_tiles_in_range(Vector2.RIGHT,3)
 	assert_eq(tiles.find(Vector2.ZERO),-1,"Unwalkable tiles not included " + str(Vector2.ZERO))
 	assert_ne(tiles.find(Vector2.RIGHT),-1, "Starting tile included " + str(Vector2.RIGHT))
 	assert_eq(tiles.find((Vector2(5,0))),-1, "Out of range tile not included " + str(Vector2(4,0)))

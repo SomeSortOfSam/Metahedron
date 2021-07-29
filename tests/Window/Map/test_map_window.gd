@@ -38,5 +38,5 @@ func test_centering(params = use_parameters(MapTestUtilites.get_map_params())):
 	map_window.center_tilemap()
 	var center_position := (map_window.rect_size/2) + map_window.rect_global_position
 	var center_tile := (map_window.map.get_used_rect().size/2).floor()
-	var center_tile_position := Pathfinder.map_to_world(map_window.map,center_tile)
+	var center_tile_position := map_window.map.map_to_global(center_tile)
 	assert_eq(center_tile_position, center_position, MapTestUtilites.get_parameter_description(params))

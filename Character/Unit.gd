@@ -13,7 +13,7 @@ onready var _follower : PathFollow2D
 onready var _icon : Sprite
 onready var _sprite : AnimatedSprite
 
-var map
+var map : Map
 var cell setget ,get_cell
 
 func _init():
@@ -39,7 +39,7 @@ func set_character(new_characeter : Character):
 		_sprite.position = Vector2.ZERO
 
 func get_cell() -> Vector2:
-	return Pathfinder.world_to_map(map,global_position)
+	return map.local_to_map(position)
 
 func set_in_level_map(new_in_level_map : bool):
 	in_level_map = new_in_level_map

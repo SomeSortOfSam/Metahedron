@@ -1,27 +1,22 @@
 extends "res://addons/gut/test.gd"
 
-func test_conversions(params = use_parameters(generate_conversion_paramaters())):
-	var map := MapTestUtilites.initalize_full_map(MapTestUtilites.SIZE)
-	var refrence_map := ReferenceMap.new(map.tile_map,map,Vector2(params.x,params.y),2)
-	run_conversion_tests(refrence_map, params)
-	map.tile_map.free()
+func test_conversions(params = use_parameters(MapTestUtilites.get_map_params())):
+	var parent = add_child_autofree(Node2D.new())
+	var map := MapTestUtilites.params_to_map(params,parent)
+	run_conversion_tests_with_each_starting_point(map, params)
 
-func generate_conversion_paramaters() -> Dictionary:
-	var out := []
+func run_conversion_tests_with_each_starting_point(parent_map, params):
 	for x in MapTestUtilites.SIZE.x:
 		for y in MapTestUtilites.SIZE.y:
-			out.append([x,y])
-	return ParameterFactory.named_parameters(["x","y"],out)
-
-func generate_conversion_paramater_description(params) -> String:
-	return "with a start tile of " + str(Vector2(params.x,params.y))
+			var refrence_map := ReferenceMap.new(autofree(TileMap.new()),parent_map,Vector2(x,y),2)
+			run_conversion_tests(refrence_map, params)
 
 func run_conversion_tests(refrence_map : ReferenceMap, params):
 	for x in MapTestUtilites.SIZE.x:
 		for y in MapTestUtilites.SIZE.y:
-			run_conversion_test(Vector2(x,y), refrence_map, params)
+			run_conversion_test(refrence_map, Vector2(x,y), params)
 
-func run_conversion_test(cell : Vector2, refrence_map : ReferenceMap , params):
-	var refrenced_cell := cell - refrence_map.refrence_rect.position
-	assert_eq(refrenced_cell, refrence_map.map_to_internal_map(cell), "Refrence map to map correct at " + str(cell) + generate_conversion_paramater_description(params))
-	assert_eq(cell, refrence_map.internal_map_to_map(refrenced_cell), "Internal map to map correct at " + str(cell) + generate_conversion_paramater_description(params))
+func run_conversion_test(refrence_map : ReferenceMap, cell : Vector2, params):
+	var internal_cell : Vector2 = cell - refrence_map.rect.position
+	assert_eq(refrence_map.map_to_internal_map(cell), internal_cell, "Map to internal cell" + MapTestUtilites.get_parameter_description(params))
+	assert_eq(cell, refrence_map.internal_map_to_map(internal_cell), "internal cell to map " + MapTestUtilites.get_parameter_description(params))

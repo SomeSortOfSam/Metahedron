@@ -10,8 +10,8 @@ func test_conversions(params = use_parameters(MapTestUtilites.get_map_params()))
 func run_conversion_test(map : Map, map_point : Vector2, params):
 	var world_point := map.tile_map.map_to_world(map_point + map.get_used_rect().position) * map.tile_map.scale + map.tile_map.global_position 
 	world_point += (map.tile_map.cell_size * map.tile_map.scale)/2
-	assert_eq(Pathfinder.world_to_map(map,world_point),map_point,"World to Map convertion at " + str(map_point) + MapTestUtilites.get_parameter_description(params))
-	assert_eq(Pathfinder.map_to_world(map,map_point),world_point,"Map to World convertion at " + str(map_point) + MapTestUtilites.get_parameter_description(params))
+	assert_eq(map.global_to_map(world_point),map_point,"World to Map convertion at " + str(map_point) + MapTestUtilites.get_parameter_description(params))
+	assert_eq(map.map_to_global(map_point),world_point,"Map to World convertion at " + str(map_point) + MapTestUtilites.get_parameter_description(params))
 
 func test_clamp():
 	var map := MapTestUtilites.initalize_full_map()

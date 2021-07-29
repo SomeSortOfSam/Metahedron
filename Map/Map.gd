@@ -42,6 +42,25 @@ func is_autotile_type_walkable(tile_type : int, autotile_coords : Vector2) -> bo
 		return true
 	return true
 
+func get_walkable_tiles() -> Array:
+	var out := []
+	var used_rect = get_used_rect()
+	for x in used_rect.size.x:
+		for y in used_rect.size.y:
+			var tile := Vector2(x,y)
+			if is_walkable(tile):
+				out.append(tile)
+	return out
+
+func get_walkable_tiles_in_range(map_point : Vector2, tile_range : int) -> Array:
+	var out := get_walkable_tiles()
+	for i in out.size():
+		var point = out[i]
+		if abs(map_point.x - point.x) > tile_range or abs(map_point.y - point.y) > tile_range :
+			out.remove(i)
+			i -= 1
+	return out
+
 func clamp(map_point : Vector2) -> Vector2:
 	var used_rect := get_used_rect()
 	map_point.x = clamp(map_point.x, 0, used_rect.size.x - 1 )
@@ -63,7 +82,29 @@ func add_window(window, unit):
 	units[unit.cell] = dict
 
 func remove_unit(unit):
+# warning-ignore:return_value_discarded
 	units.erase(unit.cell)
 
 func add_decoration():
 	pass
+
+func map_to_index(map_point : Vector2) -> int:
+	return int(map_point.y * get_used_rect().size.x + map_point.x)
+
+func map_to_tilemap(map_point : Vector2) -> Vector2:
+	return map_point + get_used_rect().position
+
+func tilemap_to_map(tilemap_point : Vector2) -> Vector2:
+	return tilemap_point - get_used_rect().position
+
+func map_to_local(map_point : Vector2) -> Vector2:
+	return tile_map.map_to_world(map_to_tilemap(map_point)) + tile_map.cell_size/2
+
+func local_to_map(local_point : Vector2) -> Vector2:
+	return tilemap_to_map(tile_map.world_to_map(local_point))
+
+func map_to_global(map_point : Vector2) -> Vector2:
+	return map_to_local(map_point) * tile_map.scale + tile_map.global_position
+
+func global_to_map(global_point : Vector2) -> Vector2:
+	return local_to_map((global_point - tile_map.global_position)/ tile_map.scale) 
