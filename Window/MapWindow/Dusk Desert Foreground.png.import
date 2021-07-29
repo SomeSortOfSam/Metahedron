@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DD Tileset.png-e226b312ae4f959d7b25f79b235a6a28.stex"
+path="res://.import/Dusk Desert Foreground.png-1682c5cf3f6063a80d96ba3f7eb40572.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Window/MapWindow/DD Tileset.png"
-dest_files=[ "res://.import/DD Tileset.png-e226b312ae4f959d7b25f79b235a6a28.stex" ]
+source_file="res://Window/MapWindow/Dusk Desert Foreground.png"
+dest_files=[ "res://.import/Dusk Desert Foreground.png-1682c5cf3f6063a80d96ba3f7eb40572.stex" ]
 
 [params]
 

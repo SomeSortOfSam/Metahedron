@@ -9,9 +9,11 @@ func populate(tile_range : int, center_cell : Vector2):
 func populate_tilemap(tile_range : int, center_cell : Vector2):
 	var internal_map_tiles = map.map.get_walkable_tiles_in_range(center_cell,tile_range)
 	for internal_tile in internal_map_tiles:
-		var internal_tile_type = map.map.tile_map.get_cellv(map.map.map_to_tilemap(internal_tile))
+		var internal_tilemap_tile = map.map.map_to_tilemap(internal_tile)
+		var internal_tile_type = map.map.tile_map.get_cellv(internal_tilemap_tile)
+		var internal_tile_autotile_coords = map.map.tile_map.get_cell_autotile_coord(internal_tilemap_tile.x, internal_tilemap_tile.y)
 		var tile = map.internal_map_to_map(internal_tile)
-		map.tile_map.set_cellv(tile,internal_tile_type)
+		map.tile_map.set_cell(tile.x, tile.y,internal_tile_type - 1,false,false,false,internal_tile_autotile_coords)
 
 func populate_units():
 	pass

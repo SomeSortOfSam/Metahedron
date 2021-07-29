@@ -54,11 +54,13 @@ func get_walkable_tiles() -> Array:
 
 func get_walkable_tiles_in_range(map_point : Vector2, tile_range : int) -> Array:
 	var out := get_walkable_tiles()
-	for i in out.size():
+	var i := 0
+	while i < out.size():
 		var point = out[i]
 		if abs(map_point.x - point.x) > tile_range or abs(map_point.y - point.y) > tile_range :
 			out.remove(i)
 			i -= 1
+		i += 1
 	return out
 
 func clamp(map_point : Vector2) -> Vector2:

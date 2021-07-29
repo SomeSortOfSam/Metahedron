@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Lowmap Tiles.png-d37d7bd43d7ef5cfb5eff61ac8c254be.stex"
+path="res://.import/Dusk Desert Backround.png-6164b225124cea7b4da6eaf15897a773.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Window/MapWindow/Lowmap Tiles.png"
-dest_files=[ "res://.import/Lowmap Tiles.png-d37d7bd43d7ef5cfb5eff61ac8c254be.stex" ]
+source_file="res://Window/MapWindow/Dusk Desert Backround.png"
+dest_files=[ "res://.import/Dusk Desert Backround.png-6164b225124cea7b4da6eaf15897a773.stex" ]
 
 [params]
 
