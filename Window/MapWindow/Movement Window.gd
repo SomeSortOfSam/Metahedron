@@ -1,6 +1,8 @@
 extends MapWindow
 class_name MovementWindow
 
+export var center := true
+
 func populate(tile_range : int, center_cell : Vector2):
 	populate_tilemap(tile_range,center_cell)
 	populate_units()
@@ -16,7 +18,8 @@ func populate_tile(internal_tile : Vector2):
 	var internal_tile_type = map.map.tile_map.get_cellv(internal_tilemap_tile)
 	var internal_tile_autotile_coords = map.map.tile_map.get_cell_autotile_coord(internal_tilemap_tile.x, internal_tilemap_tile.y)
 	var tile = map.internal_map_to_map(internal_tile)
-	map.tile_map.set_cell(tile.x, tile.y,internal_tile_type - 1,false,false,false,internal_tile_autotile_coords)
+# warning-ignore:narrowing_conversion
+	map.tile_map.set_cell(tile.x, tile.y,clamp(internal_tile_type - 1,0,100),false,false,false,internal_tile_autotile_coords)
 
 func populate_units():
 	pass
@@ -35,14 +38,16 @@ static func range_to_size(max_range : int, tile_map : TileMap) -> Vector2:
 static func get_popup_position(map : Map, cell : Vector2) -> Vector2:
 	return map.map_to_global(cell)
 
-static func get_window(cell : Vector2, map : Map, window_range : int) -> MovementWindow:
+static func get_window(cell : Vector2, map : Map, window_range : int, center_on_ready := true) -> MovementWindow:
 	var packed_window := load("res://Window/MapWindow/Movement Window.tscn")
 	var window := packed_window.instance() as MovementWindow
+	window.center = center_on_ready
 	var tilemap := window.get_node("TilemapContainer/TileMap") as TileMap
 	window.map = ReferenceMap.new(tilemap,map,cell,window_range)
 	window.populate(window_range,cell)
 	return window
 
 func _ready():
-	yield(get_tree(),"idle_frame")
-	center_tilemap()
+	if center:
+		yield(get_tree(),"idle_frame")
+		center_tilemap()

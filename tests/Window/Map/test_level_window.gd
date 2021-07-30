@@ -15,6 +15,6 @@ func before_each():
 func test_get_movement_window():
 	assert_has_method(level_window,"get_window")
 	if level_window.has_method("get_window"):
-		var movement_window = autofree(level_window.get_window(Vector2.ZERO))
+		var movement_window = autofree(level_window.get_window(Vector2.ZERO, false))
 		assert_not_null(movement_window)
 		assert_eq_deep(movement_window, autofree(level_window.get_window(Vector2.ZERO)))

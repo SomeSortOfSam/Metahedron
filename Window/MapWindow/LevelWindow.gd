@@ -24,7 +24,7 @@ func get_window(cell : Vector2 , popup := true) -> MovementWindow:
 		var unit = map.units[cell].unit
 		var movement_window : MovementWindow = map.get_unit_window(unit)
 		if !movement_window:
-			map.add_window(MovementWindow.get_window(cell,map,3), unit)
+			map.add_window(MovementWindow.get_window(cell,map,3, popup), unit)
 			movement_window = map.get_unit_window(unit)
 			add_child(movement_window)
 		if popup:
