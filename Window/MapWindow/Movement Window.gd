@@ -22,7 +22,10 @@ func populate_tile(internal_tile : Vector2):
 	map.tile_map.set_cell(tile.x, tile.y,clamp(internal_tile_type - 1,0,100),false,false,false,internal_tile_autotile_coords)
 
 func populate_units():
-	pass
+	for cell in map.units:
+		var unit := Unit.new()
+		map.tile_map.add_child(unit)
+		unit.subscribe(map.units[cell])
 
 func populate_decorations():
 	pass

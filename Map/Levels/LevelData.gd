@@ -5,7 +5,9 @@ func to_map() -> Map:
 	var map := Map.new(self)
 	for child in get_children():
 		if child is Unit:
-			map.add_unit(child as Unit)
+			var person := Person.new(child.character,map)
+			map.add_unit(person)
+			child.subscribe(person)
 	return map
 
 func add_unit(position : Vector2):

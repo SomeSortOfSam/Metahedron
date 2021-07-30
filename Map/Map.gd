@@ -69,21 +69,16 @@ func clamp(map_point : Vector2) -> Vector2:
 	map_point.y = clamp(map_point.y, 0, used_rect.size.y - 1)
 	return map_point
 
-func get_unit_window(unit):
-	var dict = units[unit.cell]
-	return dict.window
+func get_unit_window(unit : Person):
+	return units[unit.cell].window
 
-func add_unit(unit):
-	unit.map = self
-	var dict = {"unit" : unit, "window" : null}
-	units[unit.cell] = dict
+func add_unit(unit : Person):
+	units[unit.cell] = unit
 
-func add_window(window, unit):
-	var dict = units[unit.cell]
-	dict.window = window
-	units[unit.cell] = dict
+func add_window(window, unit : Person):
+	units[unit.cell].window = window
 
-func remove_unit(unit):
+func remove_unit(unit : Person):
 # warning-ignore:return_value_discarded
 	units.erase(unit.cell)
 

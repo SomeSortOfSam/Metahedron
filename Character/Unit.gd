@@ -13,9 +13,6 @@ onready var _follower : PathFollow2D
 onready var _icon : Sprite
 onready var _sprite : AnimatedSprite
 
-var map : Map
-var cell setget ,get_cell
-
 func _init():
 	curve = null
 	_follower = PathFollow2D.new()
@@ -37,9 +34,6 @@ func set_character(new_characeter : Character):
 		_icon.texture = null
 		_icon.position = Vector2.ZERO
 		_sprite.position = Vector2.ZERO
-
-func get_cell() -> Vector2:
-	return map.local_to_map(position)
 
 func set_in_level_map(new_in_level_map : bool):
 	in_level_map = new_in_level_map
@@ -65,3 +59,6 @@ func _draw():
 		var color := Color.green if friendly else Color.red
 		color.a = TOOL_ALPHA
 		draw_rect(Rect2(-tilemap.cell_size/2,tilemap.cell_size),color)
+
+func subscribe(_person : Person):
+	pass
