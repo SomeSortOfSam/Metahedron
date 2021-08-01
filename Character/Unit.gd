@@ -60,5 +60,6 @@ func _draw():
 		color.a = TOOL_ALPHA
 		draw_rect(Rect2(-tilemap.cell_size/2,tilemap.cell_size),color)
 
-func subscribe(_person : Person):
-	pass
+func subscribe(person : Person):
+	self.character = person.character
+	position = person.map.map_to_local(person.cell)

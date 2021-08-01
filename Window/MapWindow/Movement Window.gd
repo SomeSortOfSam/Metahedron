@@ -26,6 +26,7 @@ func populate_units():
 		var unit := Unit.new()
 		map.tile_map.add_child(unit)
 		unit.subscribe(map.units[cell])
+		unit.in_level_map = true
 
 func populate_decorations():
 	pass

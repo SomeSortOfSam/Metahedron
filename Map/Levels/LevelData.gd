@@ -6,6 +6,7 @@ func to_map() -> Map:
 	for child in get_children():
 		if child is Unit:
 			var person := Person.new(child.character,map)
+			person.cell = map.local_to_map(child.position)
 			map.add_unit(person)
 			child.subscribe(person)
 	return map
