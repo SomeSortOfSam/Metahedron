@@ -6,6 +6,8 @@ func to_map() -> Map:
 	for child in get_children():
 		if child is Unit:
 			add_person(child,map)
+		if child is DecorationDisplay:
+			add_decoration(child,map)
 	return map
 
 func add_unit(position : Vector2):
@@ -18,3 +20,7 @@ func add_person(child : Unit, map : Map):
 	person.cell = map.local_to_map(child.position)
 	map.add_person(person)
 	child.subscribe(person,map)
+
+func add_decoration(child : DecorationDisplay, map : Map):
+	map.add_decoration(child)
+	child.in_level = true

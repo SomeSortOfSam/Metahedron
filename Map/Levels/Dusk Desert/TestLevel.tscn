@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Map/Levels/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Map/Levels/LevelData.gd" type="Script" id=2]
-[ext_resource path="res://Map/Character/Unit.gd" type="Script" id=3]
-[ext_resource path="res://Map/Character/Jean/Jean.tres" type="Resource" id=4]
-
-
-
+[ext_resource path="res://Map/Character/Jean/Jean.tres" type="Resource" id=3]
+[ext_resource path="res://Map/Character/Unit.gd" type="Script" id=4]
+[ext_resource path="res://Map/Levels/Dusk Desert/Decorations/CactusLight1.tres" type="Resource" id=5]
+[ext_resource path="res://Map/Decoration/DecorationDisplay.gd" type="Script" id=6]
+[ext_resource path="res://Map/Levels/Dusk Desert/Decorations/CactusLight2.tres" type="Resource" id=7]
+[ext_resource path="res://Map/Levels/Dusk Desert/Decorations/CactusLight3.tres" type="Resource" id=8]
+[ext_resource path="res://Map/Levels/Dusk Desert/Decorations/CactusLight4.tres" type="Resource" id=9]
 
 [node name="LevelData" type="TileMap"]
 show_behind_parent = true
@@ -20,12 +22,32 @@ script = ExtResource( 2 )
 [node name="Unit" type="Path2D" parent="."]
 position = Vector2( 24, 24 )
 curve = null
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 friendly = true
-character = ExtResource( 4 )
+character = ExtResource( 3 )
 
 [node name="Unit2" type="Path2D" parent="."]
 position = Vector2( 56, 24 )
 curve = null
-script = ExtResource( 3 )
-character = ExtResource( 4 )
+script = ExtResource( 4 )
+character = ExtResource( 3 )
+
+[node name="DecorationDisplay" type="Node2D" parent="."]
+position = Vector2( 6.23618, 6.68174 )
+script = ExtResource( 6 )
+definition = ExtResource( 5 )
+
+[node name="DecorationDisplay2" type="Node2D" parent="."]
+position = Vector2( 118.935, 6.01362 )
+script = ExtResource( 6 )
+definition = ExtResource( 7 )
+
+[node name="DecorationDisplay3" type="Node2D" parent="."]
+position = Vector2( 10.0225, 72.3856 )
+script = ExtResource( 6 )
+definition = ExtResource( 8 )
+
+[node name="DecorationDisplay4" type="Node2D" parent="."]
+position = Vector2( 104.903, 70.8267 )
+script = ExtResource( 6 )
+definition = ExtResource( 9 )

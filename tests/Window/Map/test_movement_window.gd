@@ -19,7 +19,7 @@ func setup_movement_window(params):
 	var map := MapTestUtilites.params_to_map(params, parent)
 	var unit = Person.new(Character.new())
 	map.add_person(unit)
-	var decoration
+	var decoration = autofree(DecorationDisplay.new())
 	map.add_decoration(decoration)
 	movement_window = add_child_autofree(MovementWindow.get_window(Vector2.ZERO, map, 2, false)) as MovementWindow
 	

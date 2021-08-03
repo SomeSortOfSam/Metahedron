@@ -76,8 +76,8 @@ func add_person(person : Person):
 func add_window(window, person : Person):
 	people[person.cell].window = window
 
-func add_decoration(decoration):
-	pass
+func add_decoration(decoration : DecorationDisplay):
+	decorations[local_to_map(decoration.position)] = decoration
 
 func get_person(cell : Vector2) -> Person:
 	if people.has(cell):

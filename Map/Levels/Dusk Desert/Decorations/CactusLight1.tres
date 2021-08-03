@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://Map/Levels/Dusk Desert/Decorations/DD_Lightblooms.png" type="Texture" id=1]
+[ext_resource path="res://Map/Levels/Dusk Desert/Decorations/Lowmap_Cacti.png" type="Texture" id=2]
+[ext_resource path="res://Map/Decoration/DecorationDefinition.gd" type="Script" id=3]
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 2, 4, 24, 27 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 14, 27, 28 )
+
+[resource]
+script = ExtResource( 3 )
+level_texture = SubResource( 3 )
+level_offset = Vector2( 3, -13 )
+movement_texture = SubResource( 4 )
+movement_offset = Vector2( 0, -11 )
