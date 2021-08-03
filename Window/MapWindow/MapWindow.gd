@@ -7,7 +7,7 @@ onready var cursor : Cursor
 onready var tilemap_container : YSort = $Control/TilemapContainer
 
 func _ready():
-	get_tree().connect("screen_resized", self, "center_tilemap")
+	var _connection = get_tree().connect("screen_resized", self, "center_tilemap")
 
 func set_map(new_map : Map):
 	map = new_map
@@ -42,4 +42,7 @@ func get_centered_position() -> Vector2:
 	return rect_size/2
 
 func get_small_window_size() -> Vector2:
-	return get_viewport_rect().size/3
+	var third = get_viewport_rect().size/3
+	third.x = min(third.x,third.y)
+	third.y = min(third.x,third.y)
+	return third

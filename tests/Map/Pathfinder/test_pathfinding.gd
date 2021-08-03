@@ -43,7 +43,7 @@ func test_is_walkable():
 	map.tile_map.free()
 
 func add_unit(map : Map, map_point : Vector2):
-	var person = Person.new(Character.new(),map)
+	var person = Person.new(Character.new())
 	person.cell = map_point
 	map.add_person(person)
 

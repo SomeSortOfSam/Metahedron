@@ -1,26 +1,33 @@
 extends Sprite
 class_name Cursor
 
-signal accept_pressed(cell)
-
 const SPRITE_PATH := "res://Window/MapWindow/Cursor/TileGlow.png"
-
-var sprite : Texture = preload(SPRITE_PATH)
-
-var timer : Timer
 
 export(float) var ui_cooldown = .1
 
+var sprite : Texture = preload(SPRITE_PATH)
+var _timer : Timer
 var map : Map
 var cell : Vector2 setget set_cell
 var out_of_bounds : bool = false
 
+signal accept_pressed(cell)
+
 func _init(new_map : Map):
 	map = new_map
-	timer = Timer.new()
-	add_child(timer)
+	setup_children()
+	setup_texture()
+	setup_scale()
+
+func setup_children():
+	_timer = Timer.new()
+	add_child(_timer)
+
+func setup_texture():
 	texture = sprite
 	modulate = Color(1,1,1,0)
+
+func setup_scale():
 	scale = map.tile_map.scale
 	scale *= map.tile_map.cell_size / map.tile_map.scale / sprite.get_size()
 
@@ -48,7 +55,7 @@ func handle_mouse_event(event):
 func handle_keyboard_event(event):
 	var should_move : bool = event.is_pressed()
 	if event.is_echo():
-		should_move = should_move and timer.is_stopped()
+		should_move = should_move and _timer.is_stopped()
 	
 	if should_move:
 		keystroke_to_cell_transform(event)

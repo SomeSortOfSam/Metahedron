@@ -25,8 +25,8 @@ func populate_units():
 	for cell in map.people:
 		var unit := Unit.new()
 		map.tile_map.add_child(unit)
-		unit.subscribe(map.people[cell])
-		unit.in_level_map = true
+		unit.subscribe(map.people[cell],map)
+		unit.is_icon = false
 
 func populate_decorations():
 	pass

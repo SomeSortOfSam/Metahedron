@@ -12,8 +12,8 @@ func initialize_refrence_map() -> ReferenceMap:
 	refrence_tilemap = add_child_autofree(TileMap.new()) as TileMap
 	var map := MapTestUtilites.initalize_full_map()
 	autofree(map.tile_map)
-	map.add_person(Person.new(Character.new(),map))
-	var person := Person.new(Character.new(),map)
+	map.add_person(Person.new(Character.new()))
+	var person := Person.new(Character.new())
 	map.add_person(person)
 	person.cell = Vector2.ONE * 3
 	map.tile_map.name = "Map Tilemap"

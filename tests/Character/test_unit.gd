@@ -7,12 +7,12 @@ func before_all():
 	add_child(unit)
 
 func test_in_level_map():
-	unit.in_level_map = true
+	unit.is_icon = true
 	
 	assert_false(unit._sprite.visible)
 	assert_true(unit._icon.visible)
 	
-	unit.in_level_map = false
+	unit.is_icon = false
 	
 	assert_true(unit._sprite.visible)
 	assert_false(unit._icon.visible)

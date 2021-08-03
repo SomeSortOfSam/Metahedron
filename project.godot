@@ -50,11 +50,6 @@ _global_script_classes=[ {
 "path": "res://Window/MapWindow/Movement Window.gd"
 }, {
 "base": "Reference",
-"class": "Pathfinder",
-"language": "GDScript",
-"path": "res://Map/Pathfinder.gd"
-}, {
-"base": "Reference",
 "class": "Person",
 "language": "GDScript",
 "path": "res://Character/Person.gd"
@@ -78,7 +73,6 @@ _global_script_class_icons={
 "MapTestUtilites": "",
 "MapWindow": "",
 "MovementWindow": "",
-"Pathfinder": "",
 "Person": "",
 "ReferenceMap": "",
 "Unit": ""

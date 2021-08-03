@@ -5,13 +5,16 @@ func to_map() -> Map:
 	var map := Map.new(self)
 	for child in get_children():
 		if child is Unit:
-			var person := Person.new(child.character,map)
-			person.cell = map.local_to_map(child.position)
-			map.add_person(person)
-			child.subscribe(person)
+			add_person(child,map)
 	return map
 
 func add_unit(position : Vector2):
 	var new_unit = Unit.new()
 	new_unit.position = position
 	add_child(new_unit)
+
+func add_person(child : Unit, map : Map):
+	var person := Person.new(child.character)
+	person.cell = map.local_to_map(child.position)
+	map.add_person(person)
+	child.subscribe(person,map)

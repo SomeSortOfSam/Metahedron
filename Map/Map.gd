@@ -19,7 +19,8 @@ func is_walkable(map_point : Vector2) -> bool:
 	var tile_type = tile_map.get_cellv(tile_map_point)
 # warning-ignore:narrowing_conversion
 # warning-ignore:narrowing_conversion
-	return tile_type != -1 && is_tile_type_walkable(tile_type, tile_map.get_cell_autotile_coord(tile_map_point.x,tile_map_point.y))
+	var autotile_coords = tile_map.get_cell_autotile_coord(tile_map_point.x,tile_map_point.y)
+	return tile_type != -1 && is_tile_type_walkable(tile_type, autotile_coords)
 
 func is_tile_type_walkable(tile_type : int, autotile_coords : Vector2 = Vector2.ZERO) -> bool:
 	if tile_map.tile_set && tile_map.tile_set.get_tiles_ids().find(tile_type) != -1:
@@ -69,20 +70,36 @@ func clamp(map_point : Vector2) -> Vector2:
 	map_point.y = clamp(map_point.y, 0, max(used_rect.size.y -1, 1))
 	return map_point
 
-func get_window(person : Person):
-	return people[person.cell].window
-
 func add_person(person : Person):
 	people[person.cell] = person
 
 func add_window(window, person : Person):
 	people[person.cell].window = window
 
-func remove_unit(person : Person):
+func add_decoration(decoration):
+	pass
+
+func get_person(cell : Vector2) -> Person:
+	if people.has(cell):
+		return people[cell]
+	return null
+
+func get_window(person : Person):
+	return people[person.cell].window
+
+func get_decoration():
+	pass
+
+func remove_person(person : Person):
 # warning-ignore:return_value_discarded
 	people.erase(person.cell)
 
-func add_decoration():
+func remove_window(person : Person):
+	var window = people[person.cell].window
+	window.queue_free()
+	people[person.cell].window = null
+
+func remove_decoration():
 	pass
 
 func map_to_index(map_point : Vector2) -> int:
