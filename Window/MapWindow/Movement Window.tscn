@@ -5,9 +5,14 @@
 [ext_resource path="res://Window/MapWindow/Tileset.tres" type="TileSet" id=3]
 
 [node name="Window" instance=ExtResource( 1 )]
+visible = false
+margin_left = 0.0
+margin_top = 0.0
+margin_right = -920.0
+margin_bottom = -599.0
 script = ExtResource( 2 )
 
-[node name="TileMap" type="TileMap" parent="TilemapContainer" index="0"]
+[node name="TileMap" type="TileMap" parent="Control/TilemapContainer" index="0"]
 scale = Vector2( 4, 4 )
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )

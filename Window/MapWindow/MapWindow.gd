@@ -4,16 +4,22 @@ class_name MapWindow
 var map : Map setget set_map
 
 onready var cursor : Cursor
-onready var tilemap_container : YSort = $TilemapContainer
+onready var tilemap_container : YSort = $Control/TilemapContainer
+
+func _ready():
+	get_tree().connect("screen_resized", self, "center_tilemap")
 
 func set_map(new_map : Map):
 	map = new_map
+	reparent_map()
+	reinitalize_cursor()
+
+func reparent_map():
 	if map.tile_map.get_parent():
 		map.tile_map.get_parent().remove_child(map.tile_map)
 	if !tilemap_container:
-		tilemap_container = $TilemapContainer
+		tilemap_container = $Control/TilemapContainer
 	tilemap_container.add_child(map.tile_map)
-	reinitalize_cursor()
 
 func reinitalize_cursor():
 	if cursor:
@@ -35,3 +41,5 @@ func get_centered_position() -> Vector2:
 		return rect_size/2 - top_left_position
 	return rect_size/2
 
+func get_small_window_size() -> Vector2:
+	return get_viewport_rect().size/3

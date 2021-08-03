@@ -22,10 +22,10 @@ func populate_tile(internal_tile : Vector2):
 	map.tile_map.set_cell(tile.x, tile.y,clamp(internal_tile_type - 1,0,100),false,false,false,internal_tile_autotile_coords)
 
 func populate_units():
-	for cell in map.units:
+	for cell in map.people:
 		var unit := Unit.new()
 		map.tile_map.add_child(unit)
-		unit.subscribe(map.units[cell])
+		unit.subscribe(map.people[cell])
 		unit.in_level_map = true
 
 func populate_decorations():
@@ -33,11 +33,8 @@ func populate_decorations():
 
 func popup_around_tile(cell : Vector2):
 	var pos = get_popup_position(map,cell)
-	var size = range_to_size(3,map.tile_map)
+	var size = get_small_window_size()
 	popup(Rect2(pos,size))
-
-static func range_to_size(max_range : int, tile_map : TileMap) -> Vector2:
-	return Vector2.ONE * ((max_range * 2) + 3) * tile_map.cell_size * tile_map.scale
 
 static func get_popup_position(map : Map, cell : Vector2) -> Vector2:
 	return map.map_to_global(cell)
@@ -46,7 +43,7 @@ static func get_window(cell : Vector2, map : Map, window_range : int, center_on_
 	var packed_window := load("res://Window/MapWindow/Movement Window.tscn")
 	var window := packed_window.instance() as MovementWindow
 	window.center = center_on_ready
-	var tilemap := window.get_node("TilemapContainer/TileMap") as TileMap
+	var tilemap := window.get_node("Control/TilemapContainer/TileMap") as TileMap
 	window.map = ReferenceMap.new(tilemap,map,cell,window_range)
 	window.populate(window_range,cell)
 	return window

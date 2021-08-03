@@ -43,7 +43,9 @@ func test_is_walkable():
 	map.tile_map.free()
 
 func add_unit(map : Map, map_point : Vector2):
-	map.units[map_point] = Character.new()
+	var person = Person.new(Character.new(),map)
+	person.cell = map_point
+	map.add_person(person)
 
 func setup_walkable_map() -> Map:
 	var map := MapTestUtilites.initalize_full_map(Vector2(5,2))

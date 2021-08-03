@@ -2,7 +2,7 @@ extends Reference
 class_name Map
 
 var tile_map : TileMap
-var units := {}
+var people := {}
 var decorations := {}
 
 func _init(new_tilemap : TileMap):
@@ -12,7 +12,7 @@ func get_used_rect() -> Rect2:
 	return tile_map.get_used_rect()
 
 func is_occupied(map_point : Vector2) -> bool:
-	return units.has(map_point)
+	return people.has(map_point)
 
 func is_walkable(map_point : Vector2) -> bool:
 	var tile_map_point := map_point + get_used_rect().position
@@ -65,22 +65,22 @@ func get_walkable_tiles_in_range(map_point : Vector2, tile_range : int) -> Array
 
 func clamp(map_point : Vector2) -> Vector2:
 	var used_rect := get_used_rect()
-	map_point.x = clamp(map_point.x, 0, used_rect.size.x - 1 )
-	map_point.y = clamp(map_point.y, 0, used_rect.size.y - 1)
+	map_point.x = clamp(map_point.x, 0, max(used_rect.size.x -1, 1))
+	map_point.y = clamp(map_point.y, 0, max(used_rect.size.y -1, 1))
 	return map_point
 
-func get_unit_window(unit : Person):
-	return units[unit.cell].window
+func get_window(person : Person):
+	return people[person.cell].window
 
-func add_unit(unit : Person):
-	units[unit.cell] = unit
+func add_person(person : Person):
+	people[person.cell] = person
 
-func add_window(window, unit : Person):
-	units[unit.cell].window = window
+func add_window(window, person : Person):
+	people[person.cell].window = window
 
-func remove_unit(unit : Person):
+func remove_unit(person : Person):
 # warning-ignore:return_value_discarded
-	units.erase(unit.cell)
+	people.erase(person.cell)
 
 func add_decoration():
 	pass

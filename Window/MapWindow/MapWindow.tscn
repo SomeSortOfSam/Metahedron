@@ -6,5 +6,10 @@
 [node name="MapWindow" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="TilemapContainer" type="YSort" parent="." index="2"]
+[node name="Control" type="Control" parent="." index="2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+
+[node name="TilemapContainer" type="YSort" parent="Control" index="0"]
 show_behind_parent = true

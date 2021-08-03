@@ -21,11 +21,11 @@ func resize_window():
 
 func get_window(cell : Vector2 , popup := true) -> MovementWindow:
 	if map.is_occupied(cell):
-		var unit = map.units[cell]
-		var movement_window : MovementWindow = map.get_unit_window(unit)
+		var unit = map.people[cell]
+		var movement_window : MovementWindow = map.get_window(unit)
 		if !movement_window:
 			map.add_window(MovementWindow.get_window(cell,map,3, popup), unit)
-			movement_window = map.get_unit_window(unit)
+			movement_window = map.get_window(unit)
 			get_tree().current_scene.add_child(movement_window)
 		if popup:
 			movement_window.popup_around_tile(cell)

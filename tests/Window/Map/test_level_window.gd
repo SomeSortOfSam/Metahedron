@@ -6,7 +6,7 @@ func initialize_level_window():
 	var level_data = LevelData.new()
 	level_data.add_unit(Vector2.ZERO)
 	level_window = add_child_autofree(load("res://Window/MapWindow/LevelWindow.tscn").instance() as LevelWindow)
-	level_window.tilemap_container = level_window.get_node("TilemapContainer")
+	level_window.tilemap_container = level_window.get_node("Control/TilemapContainer")
 	level_window.initalize(level_data)
 
 func before_each():
