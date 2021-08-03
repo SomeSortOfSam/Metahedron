@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Dusk Desert Backround.png-6164b225124cea7b4da6eaf15897a773.stex"
+path="res://.import/8Ball.png-4ffba4ae0710153c175f84a4c123fe6b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Window/MapWindow/Dusk Desert Backround.png"
-dest_files=[ "res://.import/Dusk Desert Backround.png-6164b225124cea7b4da6eaf15897a773.stex" ]
+source_file="res://Map/Character/Jean/8Ball.png"
+dest_files=[ "res://.import/8Ball.png-4ffba4ae0710153c175f84a4c123fe6b.stex" ]
 
 [params]
 

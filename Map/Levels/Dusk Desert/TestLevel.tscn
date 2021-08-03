@@ -1,9 +1,12 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Window/MapWindow/Tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Map/Levels/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Map/Levels/LevelData.gd" type="Script" id=2]
-[ext_resource path="res://Character/Unit.gd" type="Script" id=3]
-[ext_resource path="res://Character/Jean/Jean.tres" type="Resource" id=4]
+[ext_resource path="res://Map/Character/Unit.gd" type="Script" id=3]
+[ext_resource path="res://Map/Character/Jean/Jean.tres" type="Resource" id=4]
+
+
+
 
 [node name="LevelData" type="TileMap"]
 show_behind_parent = true
