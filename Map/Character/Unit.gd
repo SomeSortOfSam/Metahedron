@@ -40,12 +40,14 @@ func populate_character(new_character : Character):
 	_icon.texture = character.icon
 	_icon.position = character.icon_offset
 	_sprite.position = character.animations_offset
+	_sprite.frames = character.animations
 
 func populate_null_character():
 	character = null
 	_icon.texture = null
 	_icon.position = Vector2.ZERO
 	_sprite.position = Vector2.ZERO
+	_sprite.frames = null
 
 func set_is_icon(new_is_icon : bool):
 	is_icon = new_is_icon
@@ -65,12 +67,16 @@ func _notification(what):
 			position = align_to_tilemap(position,tilemap)
 			set_notify_transform(true)
 
+func get_tool_color() -> Color:
+	var color := Color.green if friendly else Color.red
+	color.a = TOOL_ALPHA
+	return color
+
+func get_offset() -> Vector2:
+	return Vector2.ZERO
+
 func _draw():
-	var tilemap := get_parent() as TileMap
-	if (Engine.editor_hint || override_in_editor) && tilemap:
-		var color := Color.green if friendly else Color.red
-		color.a = TOOL_ALPHA
-		draw_rect(Rect2(-tilemap.cell_size/2,tilemap.cell_size),color)
+	DisplayUtilies.draw_index_rect(self)
 
 func subscribe(person : Person,map):
 	self.character = person.character

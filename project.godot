@@ -24,10 +24,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Map/Decoration/DecorationDefinition.gd"
 }, {
-"base": "Node2D",
+"base": "Sprite",
 "class": "DecorationDisplay",
 "language": "GDScript",
 "path": "res://Map/Decoration/DecorationDisplay.gd"
+}, {
+"base": "Reference",
+"class": "DisplayUtilies",
+"language": "GDScript",
+"path": "res://Map/Levels/display_utils.gd"
 }, {
 "base": "TileMap",
 "class": "LevelData",
@@ -79,6 +84,7 @@ _global_script_class_icons={
 "Cursor": "",
 "DecorationDefinition": "",
 "DecorationDisplay": "",
+"DisplayUtilies": "",
 "LevelData": "",
 "LevelWindow": "",
 "Map": "",

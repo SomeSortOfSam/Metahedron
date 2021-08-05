@@ -27,6 +27,7 @@ func populate_units():
 		map.tile_map.add_child(unit)
 		unit.subscribe(map.people[cell],map)
 		unit.is_icon = false
+		unit._sprite.animation = "Idel"
 
 func populate_decorations():
 	pass
