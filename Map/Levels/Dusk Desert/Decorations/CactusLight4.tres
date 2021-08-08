@@ -4,17 +4,17 @@
 [ext_resource path="res://Map/Levels/Dusk Desert/Decorations/Lowmap_Cacti.png" type="Texture" id=2]
 [ext_resource path="res://Map/Decoration/DecorationDefinition.gd" type="Script" id=3]
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
 region = Rect2( 79, 0, 19, 31 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
 region = Rect2( 89, 0, 21, 41 )
 
 [resource]
 script = ExtResource( 3 )
-level_texture = SubResource( 1 )
+level_texture = SubResource( 4 )
 level_offset = Vector2( -1, -15 )
-movement_texture = SubResource( 2 )
+movement_texture = SubResource( 5 )
 movement_offset = Vector2( 1.5, -19 )

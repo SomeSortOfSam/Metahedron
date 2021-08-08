@@ -53,22 +53,26 @@ character = ExtResource( 3 )
 position = Vector2( 10.9173, 61.3318 )
 texture = SubResource( 1 )
 script = ExtResource( 6 )
+in_level = true
 definition = ExtResource( 5 )
 
 [node name="DecorationDisplay2" type="Sprite" parent="."]
 position = Vector2( 119.421, 30.1178 )
 texture = SubResource( 2 )
 script = ExtResource( 6 )
+in_level = true
 definition = ExtResource( 7 )
 
 [node name="DecorationDisplay3" type="Sprite" parent="."]
 position = Vector2( 9.70327, -6.52339 )
 texture = SubResource( 3 )
 script = ExtResource( 6 )
+in_level = true
 definition = ExtResource( 8 )
 
 [node name="DecorationDisplay4" type="Sprite" parent="."]
 position = Vector2( 122.334, -8.91236 )
 texture = SubResource( 4 )
 script = ExtResource( 6 )
+in_level = true
 definition = ExtResource( 9 )

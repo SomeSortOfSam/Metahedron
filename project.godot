@@ -39,11 +39,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Map/Levels/LevelData.gd"
 }, {
-"base": "MapWindow",
-"class": "LevelWindow",
-"language": "GDScript",
-"path": "res://Window/MapWindow/LevelWindow.gd"
-}, {
 "base": "Reference",
 "class": "Map",
 "language": "GDScript",
@@ -86,7 +81,6 @@ _global_script_class_icons={
 "DecorationDisplay": "",
 "DisplayUtilies": "",
 "LevelData": "",
-"LevelWindow": "",
 "Map": "",
 "MapTestUtilites": "",
 "MapWindow": "",
@@ -113,7 +107,7 @@ Display=8
 [application]
 
 config/name="Metaheadron"
-run/main_scene="res://Node.tscn"
+run/main_scene="res://Gut.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]
