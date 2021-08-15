@@ -2,8 +2,6 @@ tool
 extends Path2D
 class_name Unit
 
-const TOOL_ALPHA := .2
-
 export var friendly := false
 export var character : Resource setget set_character
 export var is_icon := false setget set_is_icon
@@ -69,7 +67,7 @@ func _notification(what):
 
 func get_tool_color() -> Color:
 	var color := Color.green if friendly else Color.red
-	color.a = TOOL_ALPHA
+	color.a = DisplayUtilies.TOOL_ALPHA
 	return color
 
 func get_offset() -> Vector2:
@@ -78,6 +76,6 @@ func get_offset() -> Vector2:
 func _draw():
 	DisplayUtilies.draw_index_rect(self)
 
-func subscribe(person : Person,map):
+func subscribe(person,map):
 	self.character = person.character
 	position = map.map_to_local(person.cell)

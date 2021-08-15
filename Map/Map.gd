@@ -70,17 +70,18 @@ func clamp(map_point : Vector2) -> Vector2:
 	map_point.y = clamp(map_point.y, 0, max(used_rect.size.y -1, 1))
 	return map_point
 
-func add_person(person : Person):
+func add_person(person):
 	people[person.cell] = person
 
-func add_window(person : Person, parent : Node, popup := false):
+func add_window(person, parent : Node, popup := false):
 	person.initialize_window(self, popup)
 	parent.add_child(person.window)
+	return person.window
 
 func add_decoration(decoration : DecorationDisplay):
 	decorations[local_to_map(decoration.position)] = decoration
 
-func get_person(cell : Vector2) -> Person:
+func get_person(cell : Vector2):
 	if people.has(cell):
 		return people[cell]
 	return null
@@ -89,7 +90,7 @@ func get_window(cell : Vector2, parent : Node , popup := true):
 	if is_occupied(cell):
 		var person = people[cell]
 		var movement_window = person.window
-		if !movement_window:
+		if movement_window == null:
 			movement_window = add_window(person, parent, popup)
 		if popup:
 			movement_window.popup_around_tile(cell)
@@ -99,11 +100,11 @@ func get_window(cell : Vector2, parent : Node , popup := true):
 func get_decoration():
 	pass
 
-func remove_person(person : Person):
+func remove_person(person):
 # warning-ignore:return_value_discarded
 	people.erase(person.cell)
 
-func remove_window(person : Person):
+func remove_window(person):
 	var window = people[person.cell].window
 	window.queue_free()
 	people[person.cell].window = null

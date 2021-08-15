@@ -1,5 +1,7 @@
 class_name DisplayUtilies
 
+const TOOL_ALPHA := .2
+
 static func draw_index_rect(item):
 	var tilemap := item.get_parent() as TileMap
 	if (Engine.editor_hint || item.override_in_editor) && tilemap:
