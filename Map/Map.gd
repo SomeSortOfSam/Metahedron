@@ -73,8 +73,9 @@ func clamp(map_point : Vector2) -> Vector2:
 func add_person(person : Person):
 	people[person.cell] = person
 
-func add_window(window, person : Person):
-	people[person.cell].window = window
+func add_window(person : Person, parent : Node, popup := false):
+	person.initialize_window(self, popup)
+	parent.add_child(person.window)
 
 func add_decoration(decoration : DecorationDisplay):
 	decorations[local_to_map(decoration.position)] = decoration
@@ -84,8 +85,16 @@ func get_person(cell : Vector2) -> Person:
 		return people[cell]
 	return null
 
-func get_window(person : Person):
-	return people[person.cell].window
+func get_window(cell : Vector2, parent : Node , popup := true):
+	if is_occupied(cell):
+		var person = people[cell]
+		var movement_window = person.window
+		if !movement_window:
+			movement_window = add_window(person, parent, popup)
+		if popup:
+			movement_window.popup_around_tile(cell)
+		return movement_window
+	return null
 
 func get_decoration():
 	pass

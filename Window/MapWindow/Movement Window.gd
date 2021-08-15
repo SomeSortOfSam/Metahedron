@@ -37,10 +37,10 @@ func popup_around_tile(cell : Vector2):
 	var size = get_small_window_size()
 	popup(Rect2(pos,size))
 
-static func get_popup_position(map : Map, cell : Vector2) -> Vector2:
+static func get_popup_position(map, cell : Vector2) -> Vector2:
 	return map.map_to_global(cell)
 
-static func get_window(cell : Vector2, map : Map, window_range : int, center_on_ready := true) -> MovementWindow:
+static func get_window(cell : Vector2, map, window_range : int, center_on_ready := true) -> MovementWindow:
 	var packed_window := load("res://Window/MapWindow/Movement Window.tscn")
 	var window := packed_window.instance() as MovementWindow
 	window.center = center_on_ready

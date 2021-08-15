@@ -9,9 +9,9 @@ func before_each():
 	level_data.to_map()
 
 func test_to_map():
-	assert_is(level_data.map, Map)
-	assert_eq(level_data.map.tile_map,level_data)
-	assert_has(level_data.map.people,Vector2.ZERO)
+	var map = level_data.to_map()
+	assert_eq(map.tile_map,level_data)
+	assert_has(map.people,Vector2.ZERO)
 
 func test_initalization():
 	assert_is(level_data,TileMap)
