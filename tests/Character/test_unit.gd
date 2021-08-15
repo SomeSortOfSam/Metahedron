@@ -19,7 +19,7 @@ func test_in_level_map():
 
 func test_set_character():
 	var character = Character.new()
-	character.icon = load("res://Character/Jean/8Ball.png")
+	character.icon = load("res://Map/Character/Jean/8Ball.png")
 	character.icon_offset = Vector2.ONE
 	character.animations_offset = Vector2.DOWN
 	

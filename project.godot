@@ -54,12 +54,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://tests/Map/Map/test_initialization.gd"
 }, {
-"base": "WindowDialog",
-"class": "MapWindow",
-"language": "GDScript",
-"path": "res://Window/MapWindow/MapWindow.gd"
-}, {
-"base": "MapWindow",
+"base": "Control",
 "class": "MovementWindow",
 "language": "GDScript",
 "path": "res://Window/MapWindow/Movement Window.gd"
@@ -89,7 +84,6 @@ _global_script_class_icons={
 "LevelHandler": "",
 "Map": "",
 "MapTestUtilites": "",
-"MapWindow": "",
 "MovementWindow": "",
 "Person": "",
 "ReferenceMap": "",
