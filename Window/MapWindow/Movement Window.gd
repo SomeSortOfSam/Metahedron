@@ -68,17 +68,7 @@ func popup_around_tile(cell : Vector2):
 #	popup(Rect2(pos,size))
 
 func center_tilemap():
-	tilemap_container.position = get_centered_position()
-
-func get_centered_position() -> Vector2:
-	if map:
-		var used_rect := map.get_used_rect()
-		var cell_size := map.tile_map.cell_size * map.tile_map.global_scale
-		var tilemap_size := used_rect.size * cell_size
-		var tilemap_position := used_rect.position * cell_size
-		var top_left_position := map.tile_map.position + tilemap_position + tilemap_size/2
-		return rect_size/2 - top_left_position
-	return rect_size/2
+	tilemap_container.position = TileMapUtilites.get_centered_position(map,rect_size)
 
 func get_small_window_size() -> Vector2:
 	var third = get_viewport_rect().size/3
