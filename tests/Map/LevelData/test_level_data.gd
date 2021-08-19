@@ -22,10 +22,3 @@ func test_add_unit():
 	assert_gt(level_data.get_child_count(),1)
 	var unit := level_data.get_child(1) as Unit
 	assert_eq(unit.position, Vector2.ZERO)
-
-func test_get_movement_window():
-	assert_has_method(level_data,"get_window")
-	if level_data.has_method("get_window"):
-		var movement_window = autofree(level_data.get_window(Vector2.ZERO, false))
-		assert_not_null(movement_window)
-		assert_eq_deep(movement_window, autofree(level_data.get_window(Vector2.ZERO)))

@@ -41,8 +41,7 @@ func _input(event):
 	handle_mouse_event(event)
 	handle_keyboard_event(event)
 	set_cursor_color()
-	if event.is_action_pressed("ui_accept"):
-		emit_signal("accept_pressed", cell)
+	check_accept(event)
 
 func handle_mouse_event(event):
 	var event_position = map.map_to_global(cell)
@@ -74,3 +73,11 @@ func keystroke_to_cell_transform(event):
 
 func set_cursor_color():
 	modulate.a = 1.0 if !out_of_bounds && map.is_walkable(cell) else 0.0
+
+func check_accept(event):
+	if is_accept(event):
+		emit_signal("accept_pressed", cell)
+
+func is_accept(event):
+	var double : bool = event is InputEventMouseButton && event.button_index == 1 && event.is_doubleclick()
+	return event.is_action_pressed("ui_accept") || double

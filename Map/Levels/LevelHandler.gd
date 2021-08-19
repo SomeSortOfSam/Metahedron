@@ -17,7 +17,7 @@ func intialize_cursor():
 	var cursor = Cursor.new(map)
 	map.tile_map.add_child(cursor)
 	map.tile_map.move_child(cursor,0)
-	cursor.connect("accept_pressed",map,"get_window",[self])
+	cursor.connect("accept_pressed",map,"get_window",[self, true])
 
 # warning-ignore:shadowed_variable
 func validate_level_data(packed_level_data : PackedScene) -> LevelData:
