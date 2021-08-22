@@ -12,6 +12,8 @@ var cell : Vector2 setget set_cell
 var out_of_bounds : bool = false
 
 signal accept_pressed(cell)
+signal new_in_bounds
+signal confirmed_movement(delta)
 
 func _init(new_map : Map):
 	map = new_map
@@ -34,10 +36,15 @@ func setup_scale():
 func set_cell(new_cell : Vector2):
 	var clamped_cell = map.clamp(new_cell)
 	if map.is_walkable(clamped_cell):
+		if out_of_bounds:
+			emit_signal("new_in_bounds")
+		else:
+			emit_signal("confirmed_movement",clamped_cell - cell)
 		cell = clamped_cell
+
 	position = map.map_to_local(cell)
 
-func _input(event):
+func _unhandled_input(event):
 	handle_mouse_event(event)
 	handle_keyboard_event(event)
 	set_cursor_color()
@@ -79,5 +86,8 @@ func check_accept(event):
 		emit_signal("accept_pressed", cell)
 
 func is_accept(event):
-	var double : bool = event is InputEventMouseButton && event.button_index == 1 && event.is_doubleclick()
+	var double : bool = event is InputEventMouseButton 
+	if double:
+		double = double && event.button_index == 1 
+		double = double && event.is_doubleclick()
 	return event.is_action_pressed("ui_accept") || double

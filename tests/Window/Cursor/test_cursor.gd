@@ -33,29 +33,29 @@ func test_mouse_movement():
 	var event := FakeInput.new([],cursor)
 	var new_pos := Vector2.ONE
 	event.set_position(new_pos)
-	cursor._input(event)
+	cursor._unhandled_input(event)
 	assert_eq(cursor.cell, new_pos, "Mouse movement sets cell")
 	
 	event.set_position(Vector2(0,-1))
-	cursor._input(event)
+	cursor._unhandled_input(event)
 	assert_eq(cursor.modulate.a, 0.0, "Out of bounds mouse hides cursor")
 	
 	event.set_position(Vector2.ZERO)
-	cursor._input(event)
+	cursor._unhandled_input(event)
 	assert_eq(cursor.modulate.a, 1.0, "In bounds mouse reveals cursor")
 
 func test_keyboard_movement():
 	var old_pos := cursor.position
-	cursor._input(FakeInput.new(["ui_down"], cursor))
+	cursor._unhandled_input(FakeInput.new(["ui_down"], cursor))
 	assert_ne(old_pos, cursor.position, "Keyboard movement sets cell")
 	
 	cursor.cell = Vector2.ZERO
-	cursor._input(FakeInput.new(["ui_up"], cursor))
+	cursor._unhandled_input(FakeInput.new(["ui_up"], cursor))
 	assert_eq(cursor.cell, Vector2.ZERO, "Keyboard movement is clamped")
 	
 	var extended_cursor : Cursor = autofree(Cursor.new(setup_extend_map()))
 	extended_cursor.cell = Vector2(1,2)
-	extended_cursor._input(FakeInput.new(["ui_down"], extended_cursor))
+	extended_cursor._unhandled_input(FakeInput.new(["ui_down"], extended_cursor))
 	assert_eq(extended_cursor.cell, Vector2(1,2), "Keyboard does not move off walkable tiles")
 
 func setup_extend_tilemap() -> TileMap:
@@ -77,7 +77,7 @@ func test_mouse_click():
 	cursor.connect("accept_pressed", self, "mouse_click_return")
 	var input := FakeInput.new(["ui_accept"], cursor)
 	input.set_position(Vector2(-1,0))
-	cursor._input(input)
+	cursor._unhandled_input(input)
 
 func mouse_click_return(cell):
 	assert_eq(cell, Vector2.ZERO, "Click accpeted")
@@ -121,6 +121,17 @@ func test_z_index():
 	var unit := Unit.new()
 	add_child_autofree(unit)
 	assert_gt(unit.z_index ,cursor.z_index - 1)
+
+func test_new_in_bounds():
+	watch_signals(cursor)
+	var event := FakeInput.new([],cursor)
+	var new_pos := Vector2(-1,-1)
+	event.set_position(new_pos)
+	cursor._unhandled_input(event)
+	assert_signal_not_emitted(cursor,"new_in_bounds")
+	event.set_position(Vector2.ZERO)
+	cursor._unhandled_input(event)
+	assert_signal_emitted(cursor,"new_in_bounds")
 
 func after_all():
 	cursor.free()

@@ -6,14 +6,13 @@ export var packed_level_data : PackedScene
 var map : Map
 var is_dragging : bool = false
 
-
 func _ready():
 	initialize_level(validate_level_data(packed_level_data))
 	recenter_map()
-	get_tree().connect("screen_resized",self,"recenter_map")
+	get_tree().connect("screen_resized",self,"call_deferred",["recenter_map"])
 
 func recenter_map():
-	map.tile_map.position = TileMapUtilites.get_centered_position(map,get_viewport_rect().size)
+	move_tilemap(map.tile_map.position - TileMapUtilites.get_centered_position(map,get_viewport_rect().size))
 
 func initialize_level(level_data : LevelData):
 	add_child(level_data)
@@ -25,6 +24,7 @@ func intialize_cursor():
 	map.tile_map.add_child(cursor)
 	map.tile_map.move_child(cursor,0)
 	cursor.connect("accept_pressed",map,"get_window",[self, true])
+	cursor.connect("confirmed_movement",self,"cell_delta_to_transform")
 
 # warning-ignore:shadowed_variable
 func validate_level_data(packed_level_data : PackedScene) -> LevelData:
@@ -43,5 +43,22 @@ func _unhandled_input(event):
 			map.tile_map.scale *= 1.1
 		if event.button_index == 5:
 			map.tile_map.scale *= .9
-	if event is InputEventMouseMotion && is_dragging:
-		map.tile_map.position += event.get_relative()
+	elif event is InputEventMouseMotion && is_dragging:
+		move_tilemap(-event.get_relative())
+
+func cell_delta_to_transform(delta):
+	move_tilemap(delta * map.tile_map.cell_size * map.tile_map.scale)
+
+func move_tilemap(delta : Vector2):
+	map.tile_map.position -= delta 
+	var edge_rect := map.get_used_local_rect()
+	var window_rect := get_viewport_rect()
+	if edge_rect.position.x < window_rect.position.x:
+		map.tile_map.position.x = window_rect.position.x + map.get_border_amount()
+	if edge_rect.position.y < window_rect.position.y:
+		map.tile_map.position.y = window_rect.position.y + map.get_border_amount()
+	if edge_rect.end.x > window_rect.end.x:
+		map.tile_map.position.x = window_rect.end.x - edge_rect.size.x + map.get_border_amount()
+	if edge_rect.end.y > window_rect.end.y:
+		map.tile_map.position.y = window_rect.end.y - edge_rect.size.y + map.get_border_amount()
+	update()

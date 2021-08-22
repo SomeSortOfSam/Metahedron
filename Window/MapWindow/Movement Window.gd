@@ -87,5 +87,3 @@ static func get_window(cell : Vector2, map, window_range : int, center_on_ready 
 	window.map = ReferenceMap.new(tilemap,map,cell,window_range)
 	window.populate(window_range,cell)
 	return window
-
-

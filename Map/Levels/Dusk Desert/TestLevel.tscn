@@ -58,7 +58,7 @@ script = ExtResource( 6 )
 definition = ExtResource( 5 )
 
 [node name="DecorationDisplay2" type="Sprite" parent="."]
-position = Vector2( 119.421, 30.1178 )
+position = Vector2( 123.171, 28.3678 )
 texture = SubResource( 2 )
 script = ExtResource( 6 )
 definition = ExtResource( 7 )

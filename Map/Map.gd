@@ -1,6 +1,8 @@
 extends Reference
 class_name Map
 
+const NUM_BORDER_TILES := 3
+
 var tile_map : TileMap
 var people := {}
 var decorations := {}
@@ -8,14 +10,31 @@ var decorations := {}
 func _init(new_tilemap : TileMap):
 	tile_map = new_tilemap
 
-func get_used_rect() -> Rect2:
+func get_border_amount():
+	return NUM_BORDER_TILES * tile_map.scale.x * tile_map.cell_size.x
+
+func get_used_map_rect() -> Rect2:
 	return tile_map.get_used_rect()
+
+func get_used_local_rect() -> Rect2:
+	var rect := get_used_local_rect_without_margin()
+	rect = rect.grow(get_border_amount())
+	return rect
+
+func get_used_global_rect() -> Rect2:
+	return get_used_local_rect() 
+
+func get_used_local_rect_without_margin() -> Rect2:
+	var rect := get_used_map_rect()
+	rect.size *= tile_map.scale * tile_map.cell_size
+	rect.position = tile_map.position 
+	return rect
 
 func is_occupied(map_point : Vector2) -> bool:
 	return people.has(map_point)
 
 func is_walkable(map_point : Vector2) -> bool:
-	var tile_map_point := map_point + get_used_rect().position
+	var tile_map_point := map_point + get_used_map_rect().position
 	var tile_type = tile_map.get_cellv(tile_map_point)
 # warning-ignore:narrowing_conversion
 # warning-ignore:narrowing_conversion
@@ -45,7 +64,7 @@ func is_autotile_type_walkable(tile_type : int, autotile_coords : Vector2) -> bo
 
 func get_walkable_tiles() -> Array:
 	var out := []
-	var used_rect = get_used_rect()
+	var used_rect = get_used_map_rect()
 	for x in used_rect.size.x:
 		for y in used_rect.size.y:
 			var tile := Vector2(x,y)
@@ -65,7 +84,7 @@ func get_walkable_tiles_in_range(map_point : Vector2, tile_range : int) -> Array
 	return out
 
 func clamp(map_point : Vector2) -> Vector2:
-	var used_rect := get_used_rect()
+	var used_rect := get_used_map_rect()
 	map_point.x = clamp(map_point.x, 0, max(used_rect.size.x -1, 1))
 	map_point.y = clamp(map_point.y, 0, max(used_rect.size.y -1, 1))
 	return map_point
@@ -113,13 +132,13 @@ func remove_decoration():
 	pass
 
 func map_to_index(map_point : Vector2) -> int:
-	return int(map_point.y * get_used_rect().size.x + map_point.x)
+	return int(map_point.y * get_used_map_rect().size.x + map_point.x)
 
 func map_to_tilemap(map_point : Vector2) -> Vector2:
-	return map_point + get_used_rect().position
+	return map_point + get_used_map_rect().position
 
 func tilemap_to_map(tilemap_point : Vector2) -> Vector2:
-	return tilemap_point - get_used_rect().position
+	return tilemap_point - get_used_map_rect().position
 
 func map_to_local(map_point : Vector2) -> Vector2:
 	return tile_map.map_to_world(map_to_tilemap(map_point)) + tile_map.cell_size/2
