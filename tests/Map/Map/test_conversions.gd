@@ -32,5 +32,4 @@ func test_get_rect(params = use_parameters(MapTestUtilites.get_map_params())):
 	var map := MapTestUtilites.params_to_map(params,add_child_autofree(Node2D.new()))
 	var map_rect := map.get_used_map_rect()
 	var local_rect := map.get_used_local_rect()
-	assert_eq(local_rect.size,map_rect.size *3 * map.tile_map.cell_size * map.tile_map.scale )
-	pending()
+	assert_eq(local_rect.size,map_rect.size * map.get_border_amount())

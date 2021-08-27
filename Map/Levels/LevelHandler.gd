@@ -2,6 +2,7 @@ extends Node2D
 class_name LevelHandler
 
 export var packed_level_data : PackedScene
+export var debug : bool
 
 var map : Map
 var is_dragging : bool = false
@@ -47,18 +48,35 @@ func _unhandled_input(event):
 		move_tilemap(-event.get_relative())
 
 func cell_delta_to_transform(delta):
-	move_tilemap(delta * map.tile_map.cell_size * map.tile_map.scale)
+	move_tilemap(delta * map.tile_map.cell_size * map.tile_map.scale * .5)
 
 func move_tilemap(delta : Vector2):
 	map.tile_map.position -= delta 
+	constrain_tilemap()
+	if debug:
+		update()
+
+func constrain_tilemap():
 	var edge_rect := map.get_used_local_rect()
 	var window_rect := get_viewport_rect()
-	if edge_rect.position.x < window_rect.position.x:
-		map.tile_map.position.x = window_rect.position.x + map.get_border_amount()
-	if edge_rect.position.y < window_rect.position.y:
-		map.tile_map.position.y = window_rect.position.y + map.get_border_amount()
-	if edge_rect.end.x > window_rect.end.x:
-		map.tile_map.position.x = window_rect.end.x - edge_rect.size.x + map.get_border_amount()
-	if edge_rect.end.y > window_rect.end.y:
-		map.tile_map.position.y = window_rect.end.y - edge_rect.size.y + map.get_border_amount()
-	update()
+	map.tile_map.position.x = constrain_tilemap_horizontal(edge_rect, window_rect)
+	map.tile_map.position.y = constrain_tilemap_vertical(edge_rect, window_rect)
+
+func constrain_tilemap_horizontal(edge_rect : Rect2, window_rect : Rect2) -> float:
+	if edge_rect.end.x < window_rect.position.x:
+		return window_rect.end.x + map.get_border_amount()
+	if edge_rect.position.x > window_rect.end.x:
+		return window_rect.position.x - edge_rect.size.x + map.get_border_amount()
+	return edge_rect.position.x + map.get_border_amount()
+
+func constrain_tilemap_vertical(edge_rect : Rect2, window_rect : Rect2) -> float:
+	if edge_rect.end.y < window_rect.position.y:
+		return window_rect.end.y + map.get_border_amount()
+	if edge_rect.position.y > window_rect.end.y:
+		return window_rect.position.y - edge_rect.size.y + map.get_border_amount()
+	return edge_rect.position.y + map.get_border_amount()
+
+func _draw():
+	if debug:
+		draw_rect(map.get_used_local_rect(),Color.green,false)
+		draw_rect(get_viewport_rect(),Color.red,false)
