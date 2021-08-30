@@ -63,21 +63,20 @@ func populate_decorations():
 	pass
 
 func popup_around_tile(cell : Vector2):
-	var pos = get_popup_position(map,cell)
-	var size = get_small_window_size()
-#	popup(Rect2(pos,size))
+	var pos = get_popup_position(get_viewport_rect(),map,cell)
+	var size = get_small_window_size(get_viewport_rect())
 
 func center_tilemap():
 	tilemap_container.position = TileMapUtilites.get_centered_position(map,rect_size)
 
-func get_small_window_size() -> Vector2:
-	var third = get_viewport_rect().size/3
+static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
+	var third = veiwport_rect.size/3
 	third.x = min(third.x,third.y)
 	third.y = min(third.x,third.y)
 	return third
 
-static func get_popup_position(map, cell : Vector2) -> Vector2:
-	return map.map_to_global(cell)
+static func get_popup_position(veiwport_rect : Rect2 ,map, cell : Vector2) -> Vector2:
+	return veiwport_rect.size/2 - get_small_window_size(veiwport_rect)/2
 
 static func get_window(cell : Vector2, map, window_range : int, center_on_ready := true) -> MovementWindow:
 	var packed_window := load("res://Window/MapWindow/Movement Window.tscn")
