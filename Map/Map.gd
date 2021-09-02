@@ -2,6 +2,7 @@ extends Reference
 class_name Map
 
 const NUM_BORDER_TILES := 3
+const DEFUALT_CELL_SIZE := 16
 
 var tile_map : TileMap
 var people := {}
@@ -112,7 +113,7 @@ func get_window(cell : Vector2, parent : Node , popup := true):
 		if movement_window == null:
 			movement_window = add_window(person, parent, popup)
 		if popup:
-			movement_window.popup_around_tile(cell)
+			movement_window.popup_around_tile(self,cell)
 		return movement_window
 	return null
 
