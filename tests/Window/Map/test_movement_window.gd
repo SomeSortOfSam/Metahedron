@@ -19,5 +19,5 @@ func setup_movement_window(params):
 	var decoration = autofree(DecorationDisplay.new())
 	map.add_decoration(decoration)
 	movement_window = add_child_autofree(MovementWindow.get_window(Vector2.ZERO, map, 2, false)) as MovementWindow
-	
+
 
