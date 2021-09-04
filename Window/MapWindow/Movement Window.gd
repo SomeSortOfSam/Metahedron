@@ -24,7 +24,12 @@ func queue_centering():
 
 func center_tilemap():
 	tilemap_container.position = TileMapUtilites.get_centered_position(map.tile_map,useable_rect_size())
-	update()
+
+func useable_rect_size():
+	var size = rect_size 
+	size.x -= DEFUALT_PATCH_MARGIN_LEFT + DEFUALT_PATCH_MARGIN_RIGHT
+	size.y -= DEFUALT_PATCH_MARGIN_BOTTOM + DEFUALT_PATCH_MARGIN_TOP
+	return size
 
 func reset_size():
 	rect_size = get_small_window_size(get_viewport_rect())
@@ -43,34 +48,26 @@ func reinitalize_cursor():
 	map.tile_map.add_child(cursor)
 	map.tile_map.move_child(cursor,0)
 
-func popup_around_tile():
-	var veiwport_rect = get_viewport_rect()
-	rect_size = get_small_window_size(veiwport_rect)
-	scale_maps()
-	var position_delta = MapSpaceConverter.map_to_global(MapSpaceConverter.internal_map_to_map(map.center_cell, map), map)-rect_position
-	rect_position = MapSpaceConverter.map_to_global(map.center_cell, map.map) - position_delta
-
 func scale_maps():
-	var veiwport_rect = get_viewport_rect()
-	var scale = get_tilemap_scale(veiwport_rect,3)
+	var scale = get_tilemap_scale(get_viewport_rect(),3)
 	TileMapUtilites.scale_around_tile(map.map.tile_map, scale, map.center_cell)
 	map.tile_map.scale = get_tilemap_scale(get_viewport_rect(),map.tile_range)
 	center_tilemap()
 
-func useable_rect_size():
-	var size = rect_size 
-	size.x -= DEFUALT_PATCH_MARGIN_LEFT + DEFUALT_PATCH_MARGIN_RIGHT
-	size.y -= DEFUALT_PATCH_MARGIN_BOTTOM + DEFUALT_PATCH_MARGIN_TOP
-	return size
-
-func useable_rect_position():
-	return Vector2(DEFUALT_PATCH_MARGIN_LEFT,-DEFUALT_PATCH_MARGIN_TOP)
+func popup_around_tile():
+	rect_size = get_small_window_size(get_viewport_rect())
+	scale_maps()
+	rect_position = get_popup_position(map,rect_position)
 
 static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
 	var third = veiwport_rect.size/3
 	third.x = min(third.x,third.y)
 	third.y = min(third.x,third.y)
 	return veiwport_rect.size/3
+
+static func get_popup_position(map, rect_position):
+	var position_delta = MapSpaceConverter.map_to_global(MapSpaceConverter.internal_map_to_map(map.center_cell, map), map)-rect_position
+	return MapSpaceConverter.map_to_global(map.center_cell, map.map) - position_delta
 
 static func get_tilemap_scale(veiwport_rect : Rect2, window_range : int, left = DEFUALT_PATCH_MARGIN_LEFT, right = DEFUALT_PATCH_MARGIN_RIGHT, top = DEFUALT_PATCH_MARGIN_TOP, bottom = DEFUALT_PATCH_MARGIN_BOTTOM):
 	var size = get_small_window_size(veiwport_rect)
