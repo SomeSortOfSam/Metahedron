@@ -9,6 +9,7 @@ const DEFUALT_PATCH_MARGIN_BOTTOM = 5
 export var center := true
 
 var map : ReferenceMap setget set_map
+var is_dragging : bool = false
 
 onready var cursor : Cursor
 onready var tilemap_container : YSort = $Control/TilemapContainer
@@ -76,6 +77,16 @@ static func get_tilemap_scale(veiwport_rect : Rect2, window_range : int, left = 
 	var square_cell_size = Vector2(min(max_cell_size.x,max_cell_size.y),min(max_cell_size.x,max_cell_size.y))
 	return square_cell_size / TileMapUtilites.DEFUALT_CELL_SIZE
 
+func _gui_input(event):
+	if event is InputEventMouse:
+		if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
+			is_dragging = event.pressed
+		if event is InputEventMouseMotion && is_dragging:
+			var hypothetical = get_rect()
+			hypothetical.position += event.get_relative()
+			if get_viewport_rect().encloses(hypothetical):
+				rect_position += event.get_relative()
+
 static func get_window(cell : Vector2, map, window_range : int, center_on_ready := true) -> MovementWindow:
 	var packed_window := load("res://Window/MapWindow/Movement Window.tscn")
 	var window := packed_window.instance() as MovementWindow
@@ -83,3 +94,4 @@ static func get_window(cell : Vector2, map, window_range : int, center_on_ready 
 	var tilemap := window.get_node("Control/TilemapContainer/TileMap") as TileMap
 	window.map = ReferenceMap.new(tilemap,map,cell,window_range)
 	return window
+
