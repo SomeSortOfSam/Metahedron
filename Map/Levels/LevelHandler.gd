@@ -19,7 +19,8 @@ func recenter_map():
 func initialize_level(level_data : LevelData):
 	add_child(level_data)
 	map = level_data.to_map()
-	intialize_cursor()
+	map.connect("repopulated",self,"intialize_cursor")
+	map.repopulate_displays()
 
 func intialize_cursor():
 	if cursor:

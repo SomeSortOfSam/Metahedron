@@ -4,6 +4,7 @@ var movement_window : MovementWindow
 
 func test_populate(params = use_parameters(MapTestUtilites.get_map_params())):
 	setup_movement_window(params)
+	movement_window.map.repopulate_displays()
 	assert_ne(movement_window.map.tile_map.get_cell(0,0),-1,"Tilemap is filled" + MapTestUtilites.get_parameter_description(params))
 	assert_gt(movement_window.map.tile_map.get_child_count(),1, "Unit and decoration exist")
 

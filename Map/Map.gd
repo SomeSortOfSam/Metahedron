@@ -5,6 +5,8 @@ var tile_map : TileMap
 var people := {}
 var decorations := {}
 
+signal repopulated
+
 func _init(new_tilemap : TileMap):
 	tile_map = new_tilemap
 
@@ -33,4 +35,18 @@ func remove_person(person):
 	people.erase(person.cell)
 
 func remove_decoration():
+	pass
+
+func repopulate_displays():
+	for child in tile_map.get_children():
+		child.queue_free()
+	populate_units()
+	populate_decorations()
+	emit_signal("repopulated")
+
+func populate_units():
+	for cell in people:
+		people[cell].to_unit(self, true)
+
+func populate_decorations():
 	pass

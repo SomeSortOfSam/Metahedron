@@ -10,4 +10,4 @@ name = "Jean"
 icon = ExtResource( 1 )
 icon_offset = Vector2( 0, -4 )
 animations = ExtResource( 2 )
-animations_offset = Vector2( 0, -11 )
+animations_offset = Vector2( 0, -22 )
