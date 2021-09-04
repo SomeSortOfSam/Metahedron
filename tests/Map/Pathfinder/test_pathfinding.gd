@@ -6,7 +6,7 @@ func test_index_generation():
 	var checked := []
 	for x in MapTestUtilites.SIZE.x:
 		for y in MapTestUtilites.SIZE.y:
-			var index := map.map_to_index(Vector2(x,y))
+			var index := MapSpaceConverter.map_to_index(Vector2(x,y),map)
 			has_duplicate = has_duplicate or checked.find(index) != -1
 			checked.append(index)
 	assert_false(has_duplicate, "Does not create duplicates")
@@ -16,9 +16,9 @@ func test_index_generation():
 func test_is_occupied():
 	var map = MapTestUtilites.initalize_full_map()
 	
-	assert_false(map.is_occupied(Vector2.ZERO), "false when not occupied")
+	assert_false(Pathfinder.is_occupied(Vector2.ZERO,map), "false when not occupied")
 	add_unit(map, MapTestUtilites.SIZE - Vector2.ONE)
-	assert_true(map.is_occupied(MapTestUtilites.SIZE - Vector2.ONE), "true when occupied")
+	assert_true(Pathfinder.is_occupied(MapTestUtilites.SIZE - Vector2.ONE,map), "true when occupied")
 	
 	map.tile_map.free()
 
@@ -34,11 +34,11 @@ func test_is_walkable():
 	map.tile_map.set_cell(3,0,1,false,false,false,Vector2.RIGHT)
 	map.tile_map.set_cell(3,1,1,false,false,false,Vector2.ZERO)
 	add_unit(map, Vector2(2,0))
-	assert_true(map.is_walkable(Vector2.RIGHT), "true when full")
-	assert_false(map.is_walkable(Vector2.UP), "false when empty")
-	assert_true(map.is_walkable(Vector2(2,0)), "true when occupied")
-	assert_false(map.is_walkable(Vector2(3,0)), "false when has collision")
-	assert_true(map.is_walkable(Vector2(3,1)), "true when does not have collison")
+	assert_true(Pathfinder.is_walkable(Vector2.RIGHT, map), "true when full")
+	assert_false(Pathfinder.is_walkable(Vector2.UP, map), "false when empty")
+	assert_true(Pathfinder.is_walkable(Vector2(2,0), map), "true when occupied")
+	assert_false(Pathfinder.is_walkable(Vector2(3,0), map), "false when has collision")
+	assert_true(Pathfinder.is_walkable(Vector2(3,1), map), "true when does not have collison")
 	
 	map.tile_map.free()
 
@@ -60,7 +60,7 @@ func setup_walkable_map() -> Map:
 
 func test_get_walkable_tiles():
 	var map = setup_walkable_map()
-	var tiles = map.get_walkable_tiles_in_range(Vector2.RIGHT,3)
+	var tiles = Pathfinder.get_walkable_tiles_in_range(Vector2.RIGHT,3,map)
 	assert_eq(tiles.find(Vector2.ZERO),-1,"Unwalkable tiles not included " + str(Vector2.ZERO))
 	assert_ne(tiles.find(Vector2.RIGHT),-1, "Starting tile included " + str(Vector2.RIGHT))
 	assert_eq(tiles.find((Vector2(5,0))),-1, "Out of range tile not included " + str(Vector2(4,0)))

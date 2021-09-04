@@ -27,7 +27,7 @@ func test_set_cell():
 	assert_eq(cursor.cell, Vector2.RIGHT, "Cursor cell can change")
 	cursor.cell = Vector2.UP
 	assert_eq(cursor.cell, Vector2.ZERO, "Cursor cell is clamped")
-	assert_eq(map.map_to_local(cursor.cell),cursor.position, "Cursor cell and position are linked")
+	assert_eq(MapSpaceConverter.map_to_local(cursor.cell,map),cursor.position, "Cursor cell and position are linked")
 
 func test_mouse_movement():
 	var event := FakeInput.new([],cursor)
@@ -114,8 +114,8 @@ class FakeInput extends Reference:
 	
 	func get_position() -> Vector2:
 		if is_position_override:
-			return cursor.map.map_to_global(position_override)
-		return cursor.map.map_to_global(cursor.cell)
+			return MapSpaceConverter.map_to_global(position_override,cursor.map)
+		return MapSpaceConverter.map_to_global(cursor.cell,cursor.map)
 
 func test_z_index():
 	var unit := Unit.new()

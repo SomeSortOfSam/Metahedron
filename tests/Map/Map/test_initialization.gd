@@ -10,7 +10,7 @@ func test_empty_map_tests():
 	
 	assert_not_null(map,"Map is created")
 	assert_not_null(map.people, "Map has people dictonary")
-	assert_eq(map.get_used_map_rect().size,Vector2.ZERO,"map size is zero")
+	assert_eq(map.tile_map.get_used_rect().size,Vector2.ZERO,"map size is zero")
 	assert_lt(map.people.size(), 1, "Map's units is empty")
 	
 	map.tile_map.free()
@@ -19,9 +19,9 @@ func test_populated_map_tests():
 	var map := initalize_full_map()
 	
 	assert_not_null(map,"Map is created")
-	assert_ne(map.get_used_map_rect(), Rect2(Vector2.ZERO,Vector2.ZERO), "Map has rect")
+	assert_ne(map.tile_map.get_used_rect(), Rect2(Vector2.ZERO,Vector2.ZERO), "Map has rect")
 	assert_not_null(map.people, "Map has people dictonary")
-	assert_eq(map.get_used_map_rect().size,SIZE,"map size is " + str(SIZE))
+	assert_eq(map.tile_map.get_used_rect().size,SIZE,"map size is " + str(SIZE))
 	assert_lt(map.people.size(), 1, "Map's units is empty")
 	
 	map.tile_map.free()

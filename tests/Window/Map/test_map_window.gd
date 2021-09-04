@@ -8,15 +8,14 @@ func before_each():
 
 func test_initalization():
 	pre_map_initalzation_tests()
-	add_map(Map.new(TileMap.new()))
+	add_map()
 	post_map_initalization_tests()
 
 func pre_map_initalzation_tests():
 	assert_not_null(map_window.tilemap_container)
 
-func add_map(map : Map):
-	autofree(map.tile_map)
-	map_window.map = map
+func add_map():
+	map_window.map = ReferenceMap.new(autofree(TileMap.new()),Map.new(autofree(TileMap.new())),Vector2.ZERO,3)
 
 func post_map_initalization_tests():
 	assert_not_null(map_window.map)

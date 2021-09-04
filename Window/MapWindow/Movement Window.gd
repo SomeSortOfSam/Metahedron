@@ -8,7 +8,7 @@ const DEFUALT_PATCH_MARGIN_BOTTOM = 5
 
 export var center := true
 
-var map : Map setget set_map
+var map : ReferenceMap setget set_map
 
 onready var cursor : Cursor
 onready var tilemap_container : YSort = $Control/TilemapContainer
@@ -23,9 +23,9 @@ func queue_centering():
 		center_tilemap()
 
 func center_tilemap():
-	tilemap_container.position = TileMapUtilites.get_centered_position(map,rect_size)
+	tilemap_container.position = TileMapUtilites.get_centered_position(map.tile_map,rect_size)
 
-func set_map(new_map : Map):
+func set_map(new_map : ReferenceMap):
 	map = new_map
 	reparent_map()
 	reinitalize_cursor()
@@ -50,15 +50,15 @@ func populate(tile_range : int, center_cell : Vector2):
 	populate_decorations()
 
 func populate_tilemap(tile_range : int, center_cell : Vector2):
-	var internal_map_tiles = map.map.get_walkable_tiles_in_range(center_cell,tile_range)
+	var internal_map_tiles = Pathfinder.get_walkable_tiles_in_range(center_cell,tile_range,map.map)
 	for internal_tile in internal_map_tiles:
 		populate_tile(internal_tile)
 
 func populate_tile(internal_tile : Vector2):
-	var internal_tilemap_tile = map.map.map_to_tilemap(internal_tile)
+	var internal_tilemap_tile = MapSpaceConverter.map_to_tilemap(internal_tile,map.map)
 	var internal_tile_type = map.map.tile_map.get_cellv(internal_tilemap_tile)
 	var internal_tile_autotile_coords = map.map.tile_map.get_cell_autotile_coord(internal_tilemap_tile.x, internal_tilemap_tile.y)
-	var tile = map.internal_map_to_map(internal_tile)
+	var tile = MapSpaceConverter.internal_map_to_map(internal_tile,map)
 # warning-ignore:narrowing_conversion
 	map.tile_map.set_cell(tile.x, tile.y,clamp(internal_tile_type - 1,0,100),false,false,false,internal_tile_autotile_coords)
 
@@ -83,8 +83,8 @@ func popup_around_tile(parent_map : Map,cell : Vector2):
 func scale_maps(parent_map,cell):
 	var veiwport_rect = get_viewport_rect()
 	var scale = get_tilemap_scale(veiwport_rect,3)
-	TileMapUtilites.scale_around_tile(parent_map, scale, cell)
-	TileMapUtilites.scale_around_tile(map, scale, cell)
+	TileMapUtilites.scale_around_tile(parent_map.tile_map, scale, cell)
+	TileMapUtilites.scale_around_tile(map.tile_map, scale, cell)
 	center_tilemap()
 
 static func get_popup_position(veiwport_rect : Rect2 ,map, cell : Vector2) -> Vector2:
@@ -99,9 +99,9 @@ static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
 static func get_tilemap_scale(veiwport_rect : Rect2, window_range : int, left = DEFUALT_PATCH_MARGIN_LEFT, right = DEFUALT_PATCH_MARGIN_RIGHT, top = DEFUALT_PATCH_MARGIN_TOP, bottom = DEFUALT_PATCH_MARGIN_BOTTOM):
 	var size = get_small_window_size(veiwport_rect)
 	var content_size = size - Vector2(right + left, top + bottom)
-	var max_cell_size = content_size/(window_range + Map.NUM_BORDER_TILES)
+	var max_cell_size = content_size/(window_range + TileMapUtilites.NUM_BORDER_TILES)
 	var square_cell_size = Vector2(min(max_cell_size.x,max_cell_size.y),min(max_cell_size.x,max_cell_size.y))
-	return square_cell_size / Map.DEFUALT_CELL_SIZE
+	return square_cell_size / TileMapUtilites.DEFUALT_CELL_SIZE
 
 static func get_window(cell : Vector2, map, window_range : int, center_on_ready := true) -> MovementWindow:
 	var packed_window := load("res://Window/MapWindow/Movement Window.tscn")

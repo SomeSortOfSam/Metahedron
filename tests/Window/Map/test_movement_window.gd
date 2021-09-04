@@ -9,7 +9,7 @@ func test_populate(params = use_parameters(MapTestUtilites.get_map_params())):
 
 func test_position(params = use_parameters(MapTestUtilites.get_map_params())):
 	setup_movement_window(params)
-	assert_eq(movement_window.map.map_to_global(Vector2.ZERO),movement_window.map.map.map_to_global(Vector2.ZERO))
+	assert_eq(MapSpaceConverter.map_to_global(Vector2.ZERO,movement_window.map),MapSpaceConverter.map_to_global(Vector2.ZERO,movement_window.map.map))
 
 func setup_movement_window(params):
 	var parent = add_child_autofree(Node2D.new())

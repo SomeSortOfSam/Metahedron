@@ -79,4 +79,4 @@ func _draw():
 
 func subscribe(person,map):
 	self.character = person.character
-	position = map.map_to_local(person.cell)
+	position = MapSpaceConverter.map_to_local(person.cell,map)

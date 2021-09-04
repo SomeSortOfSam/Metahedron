@@ -20,7 +20,7 @@ func add_unit(position : Vector2):
 
 func add_person(child : Unit, map : Map):
 	var person := Person.new(child.character)
-	person.cell = map.local_to_map(child.position)
+	person.cell = MapSpaceConverter.local_to_map(child.position,map)
 	map.add_person(person)
 	child.subscribe(person,map)
 

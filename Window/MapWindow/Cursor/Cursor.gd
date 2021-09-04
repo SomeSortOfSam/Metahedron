@@ -35,14 +35,14 @@ func setup_scale():
 
 func set_cell(new_cell : Vector2):
 	var clamped_cell = map.clamp(new_cell)
-	if map.is_walkable(clamped_cell):
+	if Pathfinder.is_walkable(clamped_cell,map):
 		if out_of_bounds:
 			emit_signal("new_in_bounds")
 		else:
 			emit_signal("confirmed_movement",clamped_cell - cell)
 		cell = clamped_cell
 
-	position = map.map_to_local(cell)
+	position = MapSpaceConverter.map_to_local(cell,map)
 
 func _unhandled_input(event):
 	handle_mouse_event(event)
@@ -51,10 +51,10 @@ func _unhandled_input(event):
 	check_accept(event)
 
 func handle_mouse_event(event):
-	var event_position = map.map_to_global(cell)
+	var event_position = MapSpaceConverter.map_to_global(cell,map)
 	if event.has_method("get_position"):
 		event_position = event.get_position()
-	var new_cell = map.global_to_map(event_position)
+	var new_cell = MapSpaceConverter.global_to_map(event_position,map)
 	self.cell = new_cell
 	out_of_bounds = !cell.is_equal_approx(new_cell)
 
@@ -79,7 +79,7 @@ func keystroke_to_cell_transform(event):
 		self.cell += Vector2.DOWN
 
 func set_cursor_color():
-	modulate.a = 1.0 if !out_of_bounds && map.is_walkable(cell) else 0.0
+	modulate.a = 1.0 if !out_of_bounds && Pathfinder.is_walkable(cell,map) else 0.0
 
 func check_accept(event):
 	if is_accept(event):
