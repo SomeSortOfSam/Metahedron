@@ -39,6 +39,7 @@ func populate_character(new_character : Character):
 	_icon.position = character.icon_offset
 	_sprite.position = character.animations_offset
 	_sprite.frames = character.animations
+	_sprite.playing = true
 
 func populate_null_character():
 	character = null

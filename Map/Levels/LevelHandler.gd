@@ -44,9 +44,9 @@ func _unhandled_input(event):
 		if event.button_index == BUTTON_LEFT:
 			is_dragging = event.is_pressed()
 		if event.button_index == 4:
-			TileMapUtilites.scale_around_tile(map,.1, cursor.cell)
+			TileMapUtilites.scale_around_tile(map,map.tile_map.scale * 1.1, cursor.cell)
 		if event.button_index == 5:
-			TileMapUtilites.scale_around_tile(map,-.1, cursor.cell)
+			TileMapUtilites.scale_around_tile(map,map.tile_map.scale * .9, cursor.cell)
 	elif event is InputEventMouseMotion && is_dragging:
 		move_tilemap(-event.get_relative())
 

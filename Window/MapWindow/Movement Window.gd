@@ -77,9 +77,15 @@ func popup_around_tile(parent_map : Map,cell : Vector2):
 	var veiwport_rect = get_viewport_rect()
 	rect_position = get_popup_position(veiwport_rect,map,cell)
 	rect_size = get_small_window_size(veiwport_rect)
+	scale_maps(parent_map,cell)
+
+
+func scale_maps(parent_map,cell):
+	var veiwport_rect = get_viewport_rect()
 	var scale = get_tilemap_scale(veiwport_rect,3)
-	map.tile_map.scale = scale
-	parent_map.tile_map.scale = scale
+	TileMapUtilites.scale_around_tile(parent_map, scale, cell)
+	TileMapUtilites.scale_around_tile(map, scale, cell)
+	center_tilemap()
 
 static func get_popup_position(veiwport_rect : Rect2 ,map, cell : Vector2) -> Vector2:
 	return veiwport_rect.size/2 - get_small_window_size(veiwport_rect)/2

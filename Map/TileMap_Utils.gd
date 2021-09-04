@@ -11,9 +11,9 @@ static func get_centered_position(map : Map ,rect_size : Vector2):
 		return rect_size/2 - top_left_position
 	return rect_size/2
 
-static func scale_around_tile(map : Map, scale_delta : float, cell : Vector2):
+static func scale_around_tile(map : Map, new_scale : Vector2, cell : Vector2):
 	var old_cell_pos = map.map_to_global(cell)
-	map.tile_map.scale *= 1 + scale_delta
+	map.tile_map.scale = new_scale
 	var new_cell_pos = map.map_to_global(cell)
 	var delta = new_cell_pos - old_cell_pos
 	map.tile_map.position -= delta

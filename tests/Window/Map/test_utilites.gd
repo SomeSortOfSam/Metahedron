@@ -17,12 +17,12 @@ func test_zoom():
 	var old_zoom = map.tile_map.scale.x
 	var old_tile_pos = map.map_to_global(Vector2.ONE)
 	
-	TileMapUtilites.scale_around_tile(map,-.1,Vector2.ONE)
+	TileMapUtilites.scale_around_tile(map,Vector2.ONE*.5,Vector2.ONE)
 	assert_eq(old_tile_pos,map.map_to_global(Vector2.ONE), "Tile stays in postion on shrink")
 	assert_lt(map.tile_map.scale.x, old_zoom, "Tilemap shrinks")
 	old_zoom = map.tile_map.scale.x
 	old_tile_pos = map.map_to_global(Vector2.ONE)
 	
-	TileMapUtilites.scale_around_tile(map,.1,Vector2.ONE)
+	TileMapUtilites.scale_around_tile(map,Vector2.ONE*2,Vector2.ONE)
 	assert_gt(map.tile_map.scale.x, old_zoom, "Tilemap grows")
 	assert_eq(old_tile_pos,map.map_to_global(Vector2.ONE), "Tile stays in position on grow")
