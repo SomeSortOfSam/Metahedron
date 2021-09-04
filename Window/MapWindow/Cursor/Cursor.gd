@@ -44,7 +44,7 @@ func set_cell(new_cell : Vector2):
 
 	position = MapSpaceConverter.map_to_local(cell,map)
 
-func _unhandled_input(event):
+func _input(event):
 	handle_mouse_event(event)
 	handle_keyboard_event(event)
 	set_cursor_color()
