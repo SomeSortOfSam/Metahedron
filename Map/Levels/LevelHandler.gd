@@ -40,7 +40,7 @@ func get_window(cell, popup):
 			movement_window = person.window
 			get_parent().add_child(movement_window)
 		if popup:
-			movement_window.popup_around_tile(map,cell)
+			movement_window.popup_around_tile()
 		return movement_window
 	return null
 
