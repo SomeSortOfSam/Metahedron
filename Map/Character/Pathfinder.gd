@@ -54,4 +54,4 @@ static func get_walkable_tiles_in_range(map_point : Vector2, tile_range : int, m
 	return out
 
 static func is_cell_in_range(center_point : Vector2, check_point : Vector2, tile_range : int) -> bool:
-	return abs(center_point.x - check_point.x) + abs(center_point.y - check_point.y) < tile_range
+	return abs(center_point.x - check_point.x) + abs(center_point.y - check_point.y) <= tile_range
