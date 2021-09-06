@@ -10,7 +10,7 @@ func populate_map(map):
 	for child in get_children():
 		if child is Unit:
 			add_person(child,map)
-		if child is DecorationDisplay:
+		elif child is DecorationDisplay:
 			add_decoration(child,map)
 
 func add_unit(position : Vector2):
@@ -22,8 +22,9 @@ func add_person(child : Unit, map : Map):
 	var person := Person.new(child.character)
 	person.cell = MapSpaceConverter.local_to_map(child.position,map)
 	map.add_person(person)
-	child.subscribe(person,map)
 
 func add_decoration(child : DecorationDisplay, map : Map):
-	map.add_decoration(child)
-	child.in_level = true
+	var decoration = DecorationInstance.new(child.definition)
+	decoration.cell = MapSpaceConverter.local_to_map(child.position,map)
+	decoration.offset = child.position - MapSpaceConverter.map_to_local(decoration.cell,map)
+	map.add_decoration(decoration)
