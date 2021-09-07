@@ -56,15 +56,16 @@ static func get_walkable_tiles_in_range(map_point : Vector2, tile_range : int, m
 static func is_cell_in_range(center_point : Vector2, check_point : Vector2, tile_range : int) -> bool:
 	return abs(center_point.x - check_point.x) + abs(center_point.y - check_point.y) <= tile_range
 
-static func map_to_astar(map : Map) -> AStar2D:
+static func refrence_map_to_astar(map) -> AStar2D:
 	var astar = AStar2D.new()
-	var tiles = map.tile_map.get_used_cells()
+	var tiles = get_walkable_tiles_in_range(map.center_cell, map.tile_range, map.map)
 	for tile in tiles:
-		var cell = MapSpaceConverter.tilemap_to_map(tile,map);
-		var index = MapSpaceConverter.map_to_index(cell,map)
-		astar.add_point(index,cell)
+		var cell = MapSpaceConverter.tilemap_to_map(tile,map.map);
+		var refrence_cell = MapSpaceConverter.internal_map_to_map(tile,map)
+		var refrence_index = MapSpaceConverter.map_to_index(cell,map)
+		astar.add_point(refrence_index,refrence_cell)
 		for neighbor in get_neighbors(cell, map):
-			astar.connect_points(index,MapSpaceConverter.map_to_index(neighbor,map))
+			astar.connect_points(refrence_index,MapSpaceConverter.map_to_index(neighbor,map))
 	return astar
 
 static func get_neighbors(cell : Vector2, map : Map) -> Array:

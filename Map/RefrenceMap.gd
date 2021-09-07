@@ -48,11 +48,3 @@ func populate_tile(internal_tile : Vector2):
 	var tile = MapSpaceConverter.internal_map_to_map(internal_tile,self)
 # warning-ignore:narrowing_conversion
 	tile_map.set_cell(tile.x, tile.y,clamp(internal_tile_type - 1,0,100),false,false,false,internal_tile_autotile_coords)
-
-func get_refrence_rect() -> Rect2:
-	var top_left_position := center_cell - Vector2.ONE * tile_range
-	top_left_position = map.clamp(top_left_position)
-	var bottom_right_position := center_cell + Vector2.ONE * tile_range
-	bottom_right_position = map.clamp(bottom_right_position)
-	var size = bottom_right_position - top_left_position
-	return Rect2(top_left_position,size)

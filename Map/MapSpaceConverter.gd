@@ -1,8 +1,5 @@
 class_name MapSpaceConverter
 
-static func map_to_index(map_point : Vector2, map : Map) -> int:
-	return int(map_point.y * map.tile_map.get_used_rect().size.x + map_point.x)
-
 static func map_to_tilemap(map_point : Vector2, map : Map) -> Vector2:
 	return map_point + map.tile_map.get_used_rect().position
 
@@ -22,7 +19,12 @@ static func global_to_map(global_point : Vector2, map : Map) -> Vector2:
 	return local_to_map((global_point - map.tile_map.global_position)/ map.tile_map.scale, map) 
 
 static func internal_map_to_map(internal_map_point : Vector2, map) -> Vector2:
-	return internal_map_point - map.get_refrence_rect().position
+	return internal_map_point - map.center_cell
 
 static func map_to_internal_map(map_point : Vector2, map) -> Vector2:
-	return map_point + map.get_refrence_rect().position
+	return map_point + map.center_cell
+
+static func refrence_map_to_index(map_point : Vector2, map) -> int:
+	var side_length = (map.tile_range * 2) + 1
+	var positive_map_point = map_point + Vector2.ONE * map.tile_range
+	return int(positive_map_point.y * side_length + positive_map_point.x)

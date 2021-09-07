@@ -16,10 +16,8 @@ func test_position(params = use_parameters(MapTestUtilites.get_map_params())):
 func setup_movement_window(params):
 	var parent = add_child_autofree(Node2D.new())
 	var map := MapTestUtilites.params_to_map(params, parent)
-	var unit = Person.new(Character.new())
-	map.add_person(unit)
-	var decoration = autofree(DecorationDisplay.new())
-	map.add_decoration(decoration)
+	map.add_person(Person.new(Character.new()))
+	map.add_decoration(DecorationInstance.new(DecorationDefinition.new()))
 	movement_window = add_child_autofree(MovementWindow.get_window(Vector2.ZERO, map, 2, false)) as MovementWindow
 
 
