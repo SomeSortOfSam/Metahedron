@@ -10,7 +10,7 @@ func _init(new_tile_map : TileMap, new_map : Map, center_cell : Vector2, tile_ra
 	self.center_cell = center_cell
 	self.tile_range = tile_range
 	populate_people()
-	populate_decorations()
+	populate_decoration_instances()
 
 func repopulate_displays():
 	populate_tilemap()
@@ -20,17 +20,21 @@ func populate_units():
 	for cell in people:
 		people[cell].to_unit(self, false)
 
+func populate_decoration_display():
+	for decortation in decorations:
+		decortation.to_decoration_display(self,false)
+
 func populate_people():
 	for internal_cell in map.people.keys():
 		var cell = MapSpaceConverter.internal_map_to_map(internal_cell, self)
 		if Pathfinder.is_cell_in_range(center_cell, cell, tile_range):
 			people[cell] = map.people[internal_cell]
 
-func populate_decorations():
-	for internal_cell in map.decorations.keys():
-		var cell = MapSpaceConverter.internal_map_to_map(internal_cell, self)
+func populate_decoration_instances():
+	for decoration in map.decorations:
+		var cell = MapSpaceConverter.internal_map_to_map(decoration.cell, self)
 		if Pathfinder.is_cell_in_range(center_cell, cell, tile_range):
-			decorations[cell] = map.decorations[internal_cell]
+			decorations.append(decoration)
 
 func populate_tilemap():
 	var internal_map_tiles = Pathfinder.get_walkable_tiles_in_range(center_cell,tile_range,map)

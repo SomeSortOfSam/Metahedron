@@ -23,7 +23,9 @@ func set_definition(new_definition : DecorationDefinition):
 		populate_null_definition()
 
 func get_offset() -> Vector2:
-	return definition.level_offset if in_level else definition.movement_offset
+	if definition:
+		return definition.level_offset if in_level else definition.movement_offset
+	return Vector2.ZERO
 
 func get_tool_color() -> Color:
 	return Color(1,1,1,DisplayUtilies.TOOL_ALPHA)

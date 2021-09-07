@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://Map/Decoration/DecorationDisplay.gd"
 }, {
 "base": "Reference",
+"class": "DecorationInstance",
+"language": "GDScript",
+"path": "res://Map/Decoration/DecorationInstance.gd"
+}, {
+"base": "Reference",
 "class": "DisplayUtilies",
 "language": "GDScript",
 "path": "res://Map/Levels/display_utils.gd"
@@ -94,6 +99,7 @@ _global_script_class_icons={
 "Cursor": "",
 "DecorationDefinition": "",
 "DecorationDisplay": "",
+"DecorationInstance": "",
 "DisplayUtilies": "",
 "LevelData": "",
 "LevelHandler": "",

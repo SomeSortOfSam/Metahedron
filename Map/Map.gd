@@ -3,7 +3,7 @@ class_name Map
 
 var tile_map : TileMap
 var people := {}
-var decorations := {}
+var decorations := []
 
 signal repopulated
 
@@ -19,34 +19,32 @@ func clamp(map_point : Vector2) -> Vector2:
 func add_person(person):
 	people[person.cell] = person
 
-func add_decoration(decoration : DecorationDisplay):
-	pass
+func add_decoration(decoration):
+	decorations.append(decoration)
 
 func get_person(cell : Vector2):
 	if people.has(cell):
 		return people[cell]
 	return null
 
-func get_decoration():
-	pass
-
 func remove_person(person):
 # warning-ignore:return_value_discarded
 	people.erase(person.cell)
 
-func remove_decoration():
-	pass
+func remove_decoration(decoration):
+	decorations.remove(decoration)
 
 func repopulate_displays():
 	for child in tile_map.get_children():
 		child.queue_free()
 	populate_units()
-	populate_decorations()
+	populate_decoration_displays()
 	emit_signal("repopulated")
 
 func populate_units():
 	for cell in people:
 		people[cell].to_unit(self, true)
 
-func populate_decorations():
-	pass
+func populate_decoration_displays():
+	for decoration in decorations:
+		decoration.to_decoration_display(self, true) 
