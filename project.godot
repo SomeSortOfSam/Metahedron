@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "TileMap",
+"class": "ArrowLines",
+"language": "GDScript",
+"path": "res://Window/MapWindow/Cursor/ArrowLines.gd"
+}, {
 "base": "Resource",
 "class": "Character",
 "language": "GDScript",
@@ -95,6 +100,7 @@ _global_script_classes=[ {
 "path": "res://Map/Character/Unit.gd"
 } ]
 _global_script_class_icons={
+"ArrowLines": "",
 "Character": "",
 "Cursor": "",
 "DecorationDefinition": "",

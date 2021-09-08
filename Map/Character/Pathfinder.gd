@@ -62,10 +62,12 @@ static func refrence_map_to_astar(map) -> AStar2D:
 	for tile in tiles:
 		var cell = MapSpaceConverter.tilemap_to_map(tile,map.map);
 		var refrence_cell = MapSpaceConverter.internal_map_to_map(tile,map)
-		var refrence_index = MapSpaceConverter.map_to_index(cell,map)
+		var refrence_index = MapSpaceConverter.refrence_map_to_index(cell)
 		astar.add_point(refrence_index,refrence_cell)
 		for neighbor in get_neighbors(cell, map):
-			astar.connect_points(refrence_index,MapSpaceConverter.map_to_index(neighbor,map))
+			astar.connect_points(refrence_index,MapSpaceConverter.refrence_map_to_index(neighbor))
+	for point in astar.get_points():
+		print(str(point) + " connections:" + str(astar.get_point_connections(point)))
 	return astar
 
 static func get_neighbors(cell : Vector2, map : Map) -> Array:

@@ -13,9 +13,12 @@ var is_dragging : bool = false
 
 onready var cursor : Cursor
 onready var tilemap_container : YSort = $Control/TilemapContainer
+onready var arrowline : ArrowLines = $Control/TilemapContainer/ArrowLines
 
 func _ready():
 	queue_centering()
+	arrowline.astar = Pathfinder.refrence_map_to_astar(map)
+	cursor.connect("confirmed_movement",arrowline,"draw_path")
 
 func queue_centering():
 	var _connection = get_tree().connect("screen_resized", self, "reset_size")
@@ -34,7 +37,7 @@ func useable_rect_size():
 
 func reset_size():
 	rect_size = get_small_window_size(get_viewport_rect())
-	map.tile_map.scale = get_tilemap_scale(get_viewport_rect(),map.tile_range)
+	tilemap_container.scale = get_tilemap_scale(get_viewport_rect(),map.tile_range)
 	center_tilemap()
 
 func set_map(new_map : ReferenceMap):
@@ -52,7 +55,7 @@ func reinitalize_cursor():
 func scale_maps():
 	var scale = get_tilemap_scale(get_viewport_rect(),3)
 	TileMapUtilites.scale_around_tile(map.map.tile_map, scale, map.center_cell)
-	map.tile_map.scale = get_tilemap_scale(get_viewport_rect(),map.tile_range)
+	tilemap_container.scale = get_tilemap_scale(get_viewport_rect(),map.tile_range)
 	center_tilemap()
 
 func popup_around_tile():

@@ -24,7 +24,7 @@ static func internal_map_to_map(internal_map_point : Vector2, map) -> Vector2:
 static func map_to_internal_map(map_point : Vector2, map) -> Vector2:
 	return map_point + map.center_cell
 
-static func refrence_map_to_index(map_point : Vector2, map) -> int:
-	var side_length = (map.tile_range * 2) + 1
-	var positive_map_point = map_point + Vector2.ONE * map.tile_range
-	return int(positive_map_point.y * side_length + positive_map_point.x)
+static func refrence_map_to_index(map_point : Vector2) -> int:
+	var x = pow(7,map_point.x) if map_point.x > 0 else pow(3,map_point.x)
+	var y = pow(5,map_point.y) if map_point.x > 0 else pow(11,map_point.y)
+	return x*y

@@ -7,7 +7,7 @@ func test_index_generation():
 	var checked := []
 	for x in MapTestUtilites.SIZE.x:
 		for y in MapTestUtilites.SIZE.y:
-			var index := MapSpaceConverter.refrence_map_to_index(Vector2(x,y),refrence_map)
+			var index := MapSpaceConverter.refrence_map_to_index(Vector2(x,y))
 			has_duplicate = has_duplicate or checked.find(index) != -1
 			checked.append(index)
 	assert_false(has_duplicate, "Does not create duplicates")

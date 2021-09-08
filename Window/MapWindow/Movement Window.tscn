@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
+[ext_resource path="res://Window/MapWindow/Cursor/ArrowLines.tres" type="TileSet" id=1]
 [ext_resource path="res://Window/MapWindow/Movement Window.gd" type="Script" id=2]
 [ext_resource path="res://Map/Levels/Tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://Window/Window.png" type="Texture" id=4]
+[ext_resource path="res://Window/MapWindow/Cursor/ArrowLines.gd" type="Script" id=5]
 
 [node name="Window" type="NinePatchRect"]
 anchor_left = 0.5
@@ -46,8 +48,13 @@ mouse_filter = 1
 [node name="TilemapContainer" type="YSort" parent="Control"]
 show_behind_parent = true
 
+[node name="ArrowLines" type="TileMap" parent="Control/TilemapContainer"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+script = ExtResource( 5 )
+
 [node name="TileMap" type="TileMap" parent="Control/TilemapContainer"]
-scale = Vector2( 4, 4 )
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )
 format = 1
