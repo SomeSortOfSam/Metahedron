@@ -1,8 +1,6 @@
 extends "res://addons/gut/test.gd"
 
 func test_index_generation():
-	var map := MapTestUtilites.initalize_full_map()
-	var refrence_map := ReferenceMap.new(autofree(TileMap.new()),map,Vector2.ONE,1)
 	var has_duplicate := false
 	var checked := []
 	for x in MapTestUtilites.SIZE.x:
@@ -11,8 +9,6 @@ func test_index_generation():
 			has_duplicate = has_duplicate or checked.find(index) != -1
 			checked.append(index)
 	assert_false(has_duplicate, "Does not create duplicates")
-	
-	map.tile_map.free()
 
 func test_is_occupied():
 	var map = MapTestUtilites.initalize_full_map()

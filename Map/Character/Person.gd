@@ -23,4 +23,4 @@ func to_unit(map, icon):
 	map.tile_map.add_child(unit)
 	unit.subscribe(self,map)
 	unit.is_icon = icon
-	unit._sprite.play("Idel")
+	unit._sprite.playing = true

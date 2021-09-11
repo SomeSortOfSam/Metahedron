@@ -1,7 +1,7 @@
 extends "res://addons/gut/test.gd"
 
 func test_empty_centering():
-	assert_eq(TileMapUtilites.get_centered_position(autofree(TileMap.new()),Vector2.ONE * 6), Vector2.ONE * 3)
+	assert_eq(TileMapUtilites.get_centered_position(add_child_autofree(TileMap.new()),Vector2.ONE * 6), Vector2.ONE * 3)
 
 func test_centering(params = use_parameters(MapTestUtilites.get_map_params())):
 	var parent = add_child_autofree(Node2D.new())
@@ -13,7 +13,7 @@ func test_centering(params = use_parameters(MapTestUtilites.get_map_params())):
 
 func test_zoom():
 	var map = MapTestUtilites.initalize_full_map()
-	autofree(map.tile_map)
+	add_child_autofree(map.tile_map)
 	var old_zoom = map.tile_map.scale.x
 	var old_tile_pos = MapSpaceConverter.map_to_global(Vector2.ONE,map)
 	

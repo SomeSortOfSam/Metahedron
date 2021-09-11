@@ -40,7 +40,8 @@ func populate_character(new_character : Character):
 	_sprite.position = character.animations_offset
 	_sprite.frames = character.animations
 	_sprite.playing = true
-	_sprite.animation = "Idel"
+	if _sprite.frames: #Gets rid of errors when testing, real characters should always have frames anyway
+		_sprite.animation = "Idel"
 
 func populate_null_character():
 	character = null

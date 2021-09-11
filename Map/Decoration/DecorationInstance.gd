@@ -12,4 +12,5 @@ func to_decoration_display(map : Map, in_level : bool):
 	var display := DecorationDisplay.new()
 	display.definition = definition
 	display.position = MapSpaceConverter.map_to_local(cell,map) + offset
+	display.in_level = in_level
 	map.tile_map.add_child(display)

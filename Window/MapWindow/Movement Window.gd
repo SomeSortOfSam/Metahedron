@@ -18,7 +18,7 @@ onready var arrowline : ArrowLines = $Control/TilemapContainer/ArrowLines
 func _ready():
 	queue_centering()
 	arrowline.astar = Pathfinder.refrence_map_to_astar(map)
-	cursor.connect("confirmed_movement",arrowline,"draw_path")
+	var _connection = cursor.connect("confirmed_movement",arrowline,"draw_path")
 
 func queue_centering():
 	var _connection = get_tree().connect("screen_resized", self, "reset_size")
@@ -42,7 +42,7 @@ func reset_size():
 
 func set_map(new_map : ReferenceMap):
 	map = new_map
-	map.connect("repopulated",self,"reinitalize_cursor")
+	var _connection = map.connect("repopulated",self,"reinitalize_cursor")
 	map.repopulate_displays()
 
 func reinitalize_cursor():
@@ -69,6 +69,7 @@ static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
 	third.y = min(third.x,third.y)
 	return veiwport_rect.size/3
 
+# warning-ignore:shadowed_variable
 static func get_popup_position(map, rect_position):
 	var position_delta = MapSpaceConverter.map_to_global(MapSpaceConverter.internal_map_to_map(map.center_cell, map), map)-rect_position
 	return MapSpaceConverter.map_to_global(map.center_cell, map.map) - position_delta
@@ -90,6 +91,7 @@ func _gui_input(event):
 			if get_viewport_rect().encloses(hypothetical):
 				rect_position += event.get_relative()
 
+# warning-ignore:shadowed_variable
 static func get_window(cell : Vector2, map, window_range : int, center_on_ready := true) -> MovementWindow:
 	var packed_window := load("res://Window/MapWindow/Movement Window.tscn")
 	var window := packed_window.instance() as MovementWindow

@@ -5,10 +5,10 @@ var map : Map
 var center_cell : Vector2
 var tile_range : int
 
-func _init(new_tile_map : TileMap, new_map : Map, center_cell : Vector2, tile_range : int).(new_tile_map):
+func _init(new_tile_map : TileMap, new_map : Map, new_center_cell : Vector2, new_tile_range : int).(new_tile_map):
 	map = new_map
-	self.center_cell = center_cell
-	self.tile_range = tile_range
+	center_cell = new_center_cell
+	tile_range = new_tile_range
 	populate_people()
 	populate_decoration_instances()
 
