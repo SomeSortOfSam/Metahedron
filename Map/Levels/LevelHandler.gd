@@ -29,7 +29,7 @@ func intialize_cursor():
 	map.tile_map.add_child(cursor)
 	map.tile_map.move_child(cursor,0)
 	var _connection = cursor.connect("accept_pressed",self,"get_window",[true])
-	_connection = cursor.connect("confirmed_movement",self,"cell_delta_to_transform")
+	_connection = cursor.connect("confirmed_movement",self,"cursor_movement_to_transform")
 
 func get_window(cell, popup):
 	if Pathfinder.is_occupied(cell,map):
@@ -63,7 +63,8 @@ func _unhandled_input(event):
 	elif event is InputEventMouseMotion && is_dragging:
 		move_tilemap(-event.get_relative())
 
-func cell_delta_to_transform(delta):
+func cursor_movement_to_transform(cell):
+	var delta = cell - cursor.cell
 	move_tilemap(delta * map.tile_map.cell_size * map.tile_map.scale * .5)
 
 func move_tilemap(delta : Vector2):

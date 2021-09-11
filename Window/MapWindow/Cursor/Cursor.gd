@@ -39,7 +39,7 @@ func set_cell(new_cell : Vector2):
 		if out_of_bounds:
 			emit_signal("new_in_bounds")
 		else:
-			emit_signal("confirmed_movement",clamped_cell - cell)
+			emit_signal("confirmed_movement",clamped_cell)
 		cell = clamped_cell
 
 	position = MapSpaceConverter.map_to_local(cell,map)
