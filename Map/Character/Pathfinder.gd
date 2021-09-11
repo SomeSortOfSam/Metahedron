@@ -4,6 +4,9 @@ static func is_occupied(map_point : Vector2, map : Map) -> bool:
 	return map.people.has(map_point)
 
 static func is_walkable(map_point : Vector2, map : Map) -> bool:
+	if map.get("map"):
+		map_point = MapSpaceConverter.map_to_internal_map(map_point,map)
+		map = map.map
 	var tile_map_point := MapSpaceConverter.map_to_tilemap(map_point, map)
 	var tile_type = map.tile_map.get_cellv(tile_map_point)
 # warning-ignore:narrowing_conversion
@@ -61,10 +64,10 @@ static func refrence_map_to_astar(map) -> AStar2D:
 	var tiles = get_walkable_tiles_in_range(map.center_cell, map.tile_range, map.map)
 	for tile in tiles:
 		var cell = MapSpaceConverter.tilemap_to_map(tile,map.map);
-		var refrence_cell = MapSpaceConverter.internal_map_to_map(tile,map)
-		var refrence_index = MapSpaceConverter.refrence_map_to_index(cell)
+		var refrence_cell = MapSpaceConverter.internal_map_to_map(cell,map)
+		var refrence_index = MapSpaceConverter.refrence_map_to_index(refrence_cell)
 		astar.add_point(refrence_index,refrence_cell)
-		for neighbor in get_neighbors(cell, map.map):
+		for neighbor in get_neighbors(refrence_cell, map):
 			var neighbor_index = MapSpaceConverter.refrence_map_to_index(neighbor)
 			if astar.has_point(neighbor_index):
 				astar.connect_points(refrence_index,neighbor_index)
@@ -74,8 +77,10 @@ static func get_neighbors(cell : Vector2, map : Map) -> Array:
 	var out := []
 	for x in range(-1,2):
 		for y in range(-1,2):
+			var is_cardinal := (x == 0 && y != 0 || x != 0 && y == 0)
 			var direction := Vector2(x,y)
 			var neighbor := cell + direction
-			if (x == 0 && y != 0 || x != 0 && y == 0)  && is_walkable(neighbor, map):
+			var is_walkable := is_walkable(neighbor, map)
+			if is_cardinal && is_walkable :
 				out.append(neighbor)
 	return out

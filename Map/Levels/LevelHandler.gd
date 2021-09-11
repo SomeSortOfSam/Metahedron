@@ -11,7 +11,7 @@ var is_dragging : bool = false
 func _ready():
 	initialize_level(validate_level_data(packed_level_data))
 	recenter_map()
-	get_tree().connect("screen_resized",self,"call_deferred",["recenter_map"])
+	var _connection = get_tree().connect("screen_resized",self,"call_deferred",["recenter_map"])
 
 func recenter_map():
 	move_tilemap(map.tile_map.position - TileMapUtilites.get_centered_position(map.tile_map,get_viewport_rect().size))
@@ -19,7 +19,7 @@ func recenter_map():
 func initialize_level(level_data : LevelData):
 	add_child(level_data)
 	map = level_data.to_map()
-	map.connect("repopulated",self,"intialize_cursor")
+	var _connection = map.connect("repopulated",self,"intialize_cursor")
 	map.repopulate_displays()
 
 func intialize_cursor():
@@ -28,16 +28,15 @@ func intialize_cursor():
 	cursor = Cursor.new(map)
 	map.tile_map.add_child(cursor)
 	map.tile_map.move_child(cursor,0)
-	cursor.connect("accept_pressed",self,"get_window",[true])
-	cursor.connect("confirmed_movement",self,"cell_delta_to_transform")
+	var _connection = cursor.connect("accept_pressed",self,"get_window",[true])
+	_connection = cursor.connect("confirmed_movement",self,"cell_delta_to_transform")
 
 func get_window(cell, popup):
 	if Pathfinder.is_occupied(cell,map):
 		var person : Person = map.people[cell]
 		var movement_window = person.window
 		if movement_window == null:
-			person.initialize_window(map, popup)
-			movement_window = person.window
+			movement_window = person.initialize_window(map, popup)
 			get_parent().add_child(movement_window)
 		if popup:
 			movement_window.popup_around_tile()
