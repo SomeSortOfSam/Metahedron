@@ -48,3 +48,8 @@ func populate_tile(internal_tile : Vector2):
 	var tile = MapSpaceConverter.internal_map_to_map(internal_tile,self)
 # warning-ignore:narrowing_conversion
 	tile_map.set_cell(tile.x, tile.y,clamp(internal_tile_type - 1,0,100),false,false,false,internal_tile_autotile_coords)
+
+func clamp(map_point : Vector2) -> Vector2:
+	map_point.x = clamp(map_point.x, -tile_range, tile_range)
+	map_point.y = clamp(map_point.y, -tile_range, tile_range)
+	return map_point

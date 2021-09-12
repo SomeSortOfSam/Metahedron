@@ -1,9 +1,13 @@
 class_name MapSpaceConverter
 
 static func map_to_tilemap(map_point : Vector2, map : Map) -> Vector2:
+	if "map" in map:
+		return map_point
 	return map_point + map.tile_map.get_used_rect().position
 
 static func tilemap_to_map(tilemap_point : Vector2, map : Map) -> Vector2:
+	if "map" in map:
+		return tilemap_point
 	return tilemap_point - map.tile_map.get_used_rect().position
 
 static func map_to_local(map_point : Vector2, map : Map) -> Vector2:

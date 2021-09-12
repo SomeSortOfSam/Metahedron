@@ -4,7 +4,7 @@ static func is_occupied(map_point : Vector2, map : Map) -> bool:
 	return map.people.has(map_point)
 
 static func is_walkable(map_point : Vector2, map : Map) -> bool:
-	if map.get("map"):
+	if "map" in map:
 		map_point = MapSpaceConverter.map_to_internal_map(map_point,map)
 		map = map.map
 	var tile_map_point := MapSpaceConverter.map_to_tilemap(map_point, map)

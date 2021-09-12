@@ -41,7 +41,7 @@ func set_cell(new_cell : Vector2):
 		else:
 			emit_signal("confirmed_movement",clamped_cell)
 		cell = clamped_cell
-
+	
 	position = MapSpaceConverter.map_to_local(cell,map)
 
 func _input(event):
