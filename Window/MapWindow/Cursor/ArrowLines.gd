@@ -9,3 +9,4 @@ func draw_path(to : Vector2):
 	for point in path:
 		set_cellv(point,0)
 	update_bitmask_region()
+	set_cell(0,0,0,false,false,false,Vector2.ZERO) #set center cell to non arrow
