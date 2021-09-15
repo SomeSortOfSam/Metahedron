@@ -57,7 +57,10 @@ static func get_walkable_tiles_in_range(map_point : Vector2, tile_range : int, m
 	return out
 
 static func is_cell_in_range(center_point : Vector2, check_point : Vector2, tile_range : int) -> bool:
-	return abs(center_point.x - check_point.x) + abs(center_point.y - check_point.y) <= tile_range
+	var x = abs(center_point.x - check_point.x)
+	var y = abs(center_point.y - check_point.y)
+	var delta = x+y
+	return delta <= tile_range
 
 static func refrence_map_to_astar(map) -> AStar2D:
 	var astar = AStar2D.new()

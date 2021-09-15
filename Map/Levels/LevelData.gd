@@ -25,6 +25,6 @@ func add_person(child : Unit, map : Map):
 
 func add_decoration(child : DecorationDisplay, map : Map):
 	var decoration = DecorationInstance.new(child.definition)
-	decoration.cell = MapSpaceConverter.local_to_map(child.position,map)
+	decoration.cell = MapSpaceConverter.local_to_map(child.position - child.definition.level_offset,map)
 	decoration.offset = child.position - MapSpaceConverter.map_to_local(decoration.cell,map)
 	map.add_decoration(decoration)

@@ -27,13 +27,13 @@ func populate_decoration_display():
 func populate_people():
 	for internal_cell in map.people.keys():
 		var cell = MapSpaceConverter.internal_map_to_map(internal_cell, self)
-		if Pathfinder.is_cell_in_range(center_cell, cell, tile_range):
+		if Pathfinder.is_cell_in_range(Vector2.ZERO, cell, tile_range):
 			people[cell] = map.people[internal_cell]
 
 func populate_decoration_instances():
 	for decoration in map.decorations:
 		var cell = MapSpaceConverter.internal_map_to_map(decoration.cell, self)
-		if Pathfinder.is_cell_in_range(center_cell, cell, tile_range):
+		if Pathfinder.is_cell_in_range(Vector2.ZERO, cell, tile_range):
 			decorations.append(decoration)
 
 func populate_tilemap():
