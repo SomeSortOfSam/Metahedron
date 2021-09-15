@@ -2,7 +2,6 @@ extends Node2D
 class_name LevelHandler
 
 export var packed_level_data : PackedScene
-export var debug : bool
 
 var map : Map
 var cursor : Cursor
@@ -63,15 +62,14 @@ func _unhandled_input(event):
 	elif event is InputEventMouseMotion && is_dragging:
 		move_tilemap(-event.get_relative())
 
-func cursor_movement_to_transform(cell):
-	var delta = cell - cursor.cell
-	move_tilemap(delta * map.tile_map.cell_size * map.tile_map.scale * .5)
+func cursor_movement_to_transform(_cell):
+	pass
+#	var delta = cell - cursor.cell
+#	move_tilemap(delta * map.tile_map.cell_size * map.tile_map.scale * .5)
 
 func move_tilemap(delta : Vector2):
 	map.tile_map.position -= delta 
 	constrain_tilemap()
-	if debug:
-		update()
 
 func constrain_tilemap():
 	var edge_rect := TileMapUtilites.get_used_local_rect(map.tile_map)
@@ -92,8 +90,3 @@ func constrain_tilemap_vertical(edge_rect : Rect2, window_rect : Rect2) -> float
 	if edge_rect.position.y > window_rect.end.y:
 		return window_rect.position.y - edge_rect.size.y + TileMapUtilites.get_border_amount(map.tile_map)
 	return edge_rect.position.y + TileMapUtilites.get_border_amount(map.tile_map)
-
-func _draw():
-	if debug:
-		draw_rect(map.get_used_local_rect(),Color.green,false)
-		draw_rect(get_viewport_rect(),Color.red,false)

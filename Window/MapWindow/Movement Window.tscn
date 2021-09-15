@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Window/MapWindow/Cursor/ArrowLines.tres" type="TileSet" id=1]
 [ext_resource path="res://Window/MapWindow/Movement Window.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Window/MapWindow/Cursor/ArrowLines.gd" type="Script" id=5]
 [ext_resource path="res://Window/MapWindow/DraggableArea.gd" type="Script" id=6]
 [ext_resource path="res://Window/MapWindow/WindowCursor.gd" type="Script" id=7]
+[ext_resource path="res://Window/MapWindow/WindowMapScaler.gd" type="Script" id=8]
 
 [node name="Window" type="NinePatchRect"]
 anchor_left = 0.5
@@ -56,6 +57,7 @@ __meta__ = {
 
 [node name="TilemapContainer" type="YSort" parent="Control"]
 show_behind_parent = true
+script = ExtResource( 8 )
 
 [node name="ArrowLines" type="TileMap" parent="Control/TilemapContainer"]
 z_index = 1
@@ -77,3 +79,5 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="accepted_window_movement" from="DraggableArea" to="." method="_on_DraggableArea_accepted_window_movement"]
