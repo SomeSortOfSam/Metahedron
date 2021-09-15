@@ -23,6 +23,7 @@ func popup_around_tile():
 func set_map(new_map : ReferenceMap):
 	map = new_map
 	map.repopulate_displays()
+	$Control/TilemapContainer/ArrowLines.astar = Pathfinder.refrence_map_to_astar(map)
 
 func _on_DraggableArea_accepted_window_movement(delta):
 	rect_position += delta
