@@ -32,7 +32,7 @@ static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
 	var third = veiwport_rect.size/3
 	third.x = min(third.x,third.y)
 	third.y = min(third.x,third.y)
-	return veiwport_rect.size/3
+	return third
 
 # warning-ignore:shadowed_variable
 static func get_window(cell : Vector2, map, window_range : int, center_on_ready := true) -> MovementWindow:
