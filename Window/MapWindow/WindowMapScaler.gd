@@ -5,7 +5,7 @@ onready var tile_map : TileMap = $TileMap
 func center():
 	position = TileMapUtilites.get_centered_position(tile_map,get_parent().rect_size)
 
-func scale(outside_tilemap : TileMap = null):
+func scale():
 	var tile_rect = add_border(tile_map.get_used_rect())
 	var max_cell_size = get_parent().rect_size/tile_rect.size
 	var square_cell_size = Vector2(min(max_cell_size.x,max_cell_size.y),min(max_cell_size.x,max_cell_size.y))

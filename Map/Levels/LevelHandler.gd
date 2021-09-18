@@ -35,7 +35,7 @@ func get_window(cell, popup):
 		var person : Person = map.people[cell]
 		var movement_window = person.window
 		if movement_window == null:
-			movement_window = person.initialize_window(map, popup)
+			movement_window = person.initialize_window(map)
 			get_parent().add_child(movement_window)
 		if popup:
 			movement_window.popup_around_tile()

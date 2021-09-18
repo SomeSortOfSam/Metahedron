@@ -3,7 +3,7 @@ extends "res://addons/gut/test.gd"
 var map_window : MovementWindow
 
 func before_each():
-	map_window = MovementWindow.get_window(Vector2.ZERO,Map.new(autofree(TileMap.new())),3, false)
+	map_window = MovementWindow.get_window(Vector2.ZERO,Map.new(autofree(TileMap.new())),3)
 	add_child_autofree(map_window)
 
 func test_initalization():

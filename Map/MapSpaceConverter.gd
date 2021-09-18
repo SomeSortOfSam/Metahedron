@@ -11,16 +11,18 @@ static func tilemap_to_map(tilemap_point : Vector2, map : Map) -> Vector2:
 	return tilemap_point - map.tile_map.get_used_rect().position
 
 static func map_to_local(map_point : Vector2, map : Map) -> Vector2:
-	return map.tile_map.map_to_world(map_to_tilemap(map_point, map)) + map.tile_map.cell_size/2
+	var local_point = map.tile_map.map_to_world(map_to_tilemap(map_point, map))
+	local_point += map.tile_map.cell_size/2 #Get center of the tile instead of the top left
+	return local_point
 
 static func local_to_map(local_point : Vector2, map : Map) -> Vector2:
 	return tilemap_to_map(map.tile_map.world_to_map(local_point), map)
 
 static func map_to_global(map_point : Vector2, map : Map) -> Vector2:
-	return map_to_local(map_point, map) * map.tile_map.scale + map.tile_map.global_position
+	return map.tile_map.to_global(map_to_local(map_point, map))
 
 static func global_to_map(global_point : Vector2, map : Map) -> Vector2:
-	return local_to_map((global_point - map.tile_map.global_position)/ map.tile_map.scale, map) 
+	return local_to_map(map.tile_map.to_local(global_point), map) 
 
 static func internal_map_to_map(internal_map_point : Vector2, map) -> Vector2:
 	return internal_map_point - map.center_cell

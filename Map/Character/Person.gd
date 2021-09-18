@@ -14,8 +14,8 @@ func set_cell(new_cell : Vector2):
 	cell = new_cell
 	emit_signal("cell_change",cell)
 
-func initialize_window(map,popup) -> MovementWindow:
-	window = MovementWindow.get_window(cell,map,3,popup)
+func initialize_window(map) -> MovementWindow:
+	window = MovementWindow.get_window(cell,map,3)
 	return window
 
 func to_unit(map, icon):

@@ -11,13 +11,15 @@ func test_populate(params = use_parameters(MapTestUtilites.get_map_params())):
 func test_position(params = use_parameters(MapTestUtilites.get_map_params())):
 	setup_movement_window(params)
 	movement_window.popup_around_tile()
-	assert_almost_eq(MapSpaceConverter.map_to_global(Vector2.ZERO,movement_window.map),MapSpaceConverter.map_to_global(Vector2.ZERO,movement_window.map.map), Vector2.ONE * .1)
+	var tile_pos = MapSpaceConverter.map_to_global(Vector2.ZERO,movement_window.map)
+	var internal_tile_pos = MapSpaceConverter.map_to_global(Vector2.ZERO,movement_window.map.map)
+	assert_almost_eq(tile_pos,internal_tile_pos, Vector2.ONE * .1)
 
 func setup_movement_window(params):
 	var parent = add_child_autofree(Node2D.new())
 	var map := MapTestUtilites.params_to_map(params, parent)
 	map.add_person(Person.new(Character.new()))
 	map.add_decoration(DecorationInstance.new(DecorationDefinition.new()))
-	movement_window = add_child_autofree(MovementWindow.get_window(Vector2.ZERO, map, 2, false)) as MovementWindow
+	movement_window = add_child_autofree(MovementWindow.get_window(Vector2.ZERO, map, 2)) as MovementWindow
 
 

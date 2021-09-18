@@ -8,8 +8,7 @@ func test_conversions(params = use_parameters(MapTestUtilites.get_map_params()))
 			run_conversion_test(map, Vector2(x,y), params)
 
 func run_conversion_test(map : Map, map_point : Vector2, params):
-	var world_point := map.tile_map.map_to_world(map_point + map.tile_map.get_used_rect().position) * map.tile_map.scale + map.tile_map.global_position 
-	world_point += (map.tile_map.cell_size * map.tile_map.scale)/2
+	var world_point := map.tile_map.to_global(map.tile_map.map_to_world(map_point + map.tile_map.get_used_rect().position) + (map.tile_map.cell_size)/2)
 	var description = "World to Map convertion at " + str(map_point) + MapTestUtilites.get_parameter_description(params)
 	assert_eq(MapSpaceConverter.global_to_map(world_point,map),map_point,description)
 	description ="Map to World convertion at " + str(map_point) + MapTestUtilites.get_parameter_description(params)

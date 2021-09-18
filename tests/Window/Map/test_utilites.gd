@@ -9,7 +9,7 @@ func test_centering(params = use_parameters(MapTestUtilites.get_map_params())):
 	map.tile_map.position = TileMapUtilites.get_centered_position(map.tile_map, Vector2.ONE * 9)
 	var center_tile = (map.tile_map.get_used_rect().size/2).floor()
 	var center_tile_position = MapSpaceConverter.map_to_global(center_tile,map)
-	assert_eq(center_tile_position, parent.position + Vector2.ONE*9*.5/parent.scale, MapTestUtilites.get_parameter_description(params))
+	assert_eq(center_tile_position, parent.position + Vector2.ONE*9*.5, MapTestUtilites.get_parameter_description(params))
 
 func test_zoom():
 	var map = MapTestUtilites.initalize_full_map()

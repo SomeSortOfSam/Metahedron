@@ -16,9 +16,11 @@ func resize():
 
 func popup_around_tile():
 	resize()
-	var delta = MapSpaceConverter.map_to_global(MapSpaceConverter.internal_map_to_map(map.center_cell, map), map)
-	delta += get_node("Control").rect_position
-	rect_position = MapSpaceConverter.map_to_global(map.center_cell,map.map) -delta
+	rect_position = MapSpaceConverter.map_to_global(map.center_cell,map.map)
+	rect_position -= $Control.rect_position
+	var container = $Control/TilemapContainer
+	rect_position -= container.position
+	rect_position -= MapSpaceConverter.map_to_local(Vector2.ZERO, map) * container.scale
 
 func set_map(new_map : ReferenceMap):
 	map = new_map
@@ -35,7 +37,7 @@ static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
 	return third
 
 # warning-ignore:shadowed_variable
-static func get_window(cell : Vector2, map, window_range : int, center_on_ready := true) -> MovementWindow:
+static func get_window(cell : Vector2, map, window_range : int) -> MovementWindow:
 	var packed_window := load("res://Window/MapWindow/Movement Window.tscn")
 	var window := packed_window.instance() as MovementWindow
 	var tilemap := window.get_node("Control/TilemapContainer/TileMap") as TileMap
