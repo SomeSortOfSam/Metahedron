@@ -1,6 +1,8 @@
 extends TileMap
 class_name LevelData
 
+export var music : AudioStream
+
 func to_map():
 	var map = Map.new(self)
 	populate_map(map)

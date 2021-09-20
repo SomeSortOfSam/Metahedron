@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Map/Levels/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Map/Levels/LevelData.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Map/Levels/Dusk Desert/Decorations/CactusLight3.tres" type="Resource" id=8]
 [ext_resource path="res://Map/Levels/Dusk Desert/Decorations/CactusLight4.tres" type="Resource" id=9]
 [ext_resource path="res://Map/Levels/Dusk Desert/Decorations/Lowmap_Cacti.png" type="Texture" id=10]
+[ext_resource path="res://Music/Melting_Point.mid.mp3" type="AudioStream" id=11]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 10 )
@@ -38,6 +39,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+music = ExtResource( 11 )
 
 [node name="Unit" type="Path2D" parent="."]
 position = Vector2( 24, 24 )

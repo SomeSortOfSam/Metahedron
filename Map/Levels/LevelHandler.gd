@@ -18,6 +18,9 @@ func recenter_map():
 func initialize_level(level_data : LevelData):
 	add_child(level_data)
 	map = level_data.to_map()
+	var music = $"/root/MusicScene"
+	music.stream = level_data.music
+	music.play() 
 	var _connection = map.connect("repopulated",self,"intialize_cursor")
 	map.repopulate_displays()
 
