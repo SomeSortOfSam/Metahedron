@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Dusk Desert Backround.png-a312420ee0ce1af8d4c6c1b66dcb0cf5.stex"
+path="res://.import/Dusk_Desert_Background.png-f035bfc98e3166a5c0fdf6a73f6f9953.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Map/Levels/Dusk Desert/Tileset/Dusk Desert Backround.png"
-dest_files=[ "res://.import/Dusk Desert Backround.png-a312420ee0ce1af8d4c6c1b66dcb0cf5.stex" ]
+source_file="res://Map/Levels/Dusk Desert/Tileset/Dusk_Desert_Background.png"
+dest_files=[ "res://.import/Dusk_Desert_Background.png-f035bfc98e3166a5c0fdf6a73f6f9953.stex" ]
 
 [params]
 
