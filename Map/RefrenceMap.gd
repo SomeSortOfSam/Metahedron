@@ -20,7 +20,7 @@ func populate_units():
 	for cell in people:
 		people[cell].to_unit(self, false)
 
-func populate_decoration_display():
+func populate_decoration_displays():
 	for decortation in decorations:
 		decortation.to_decoration_display(self,false)
 
