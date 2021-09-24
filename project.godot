@@ -140,10 +140,6 @@ config/name="Metaheadron"
 run/main_scene="res://Menu.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-MusicScene="*res://Music/MusicScene.tscn"
-
 [editor_plugins]
 
 enabled=PoolStringArray( "gut" )

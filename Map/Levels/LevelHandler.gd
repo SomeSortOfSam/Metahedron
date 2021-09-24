@@ -3,6 +3,8 @@ class_name LevelHandler
 
 export var packed_level_data : PackedScene
 
+onready var music = $AudioStreamPlayer
+
 var map : Map
 var cursor : Cursor
 var is_dragging : bool = false
@@ -18,7 +20,6 @@ func recenter_map():
 func initialize_level(level_data : LevelData):
 	add_child(level_data)
 	map = level_data.to_map()
-	var music = $"/root/MusicScene"
 	music.stream = level_data.music
 	music.play() 
 	var _connection = map.connect("repopulated",self,"intialize_cursor")

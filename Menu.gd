@@ -1,15 +1,20 @@
 extends TextureRect
 
+
+onready var gut_button = $GutButton
+
+var gut
+
 func _ready():
 	# Hide Gut Button in release
 	if (!OS.is_debug_build()):
-		$GutButton.hide()
-		$GutButton.disabled = true
+		gut_button.hide()
+		gut_button.disabled = true
 
 func _input(event):
 	if (event is InputEventKey and event.scancode == KEY_ESCAPE):
-		if ($Gut.get_gut().is_visible()):
-			$Gut.get_gut().set_visible(false)
+		if (gut.is_visible()):
+			gut.set_visible(false)
 		
 	
 func _on_NewGameButton_pressed():
@@ -25,11 +30,12 @@ func _on_CreditsButton_pressed():
 	pass # Replace with function body.
 
 func _on_Gut_gut_ready():
-	$Gut.get_gut().set_visible(false)
+	gut = $Gut.get_gut()
+	gut.set_visible(false)
 	
 func _on_GutButton_pressed():
-	if ($Gut.get_gut() != null):
-		if (!$Gut.get_gut().is_visible()):
-			$Gut.get_gut().maximize()
-			$Gut.get_gut().set_visible(true)
-			$Gut.get_gut().test_scripts()
+	if (gut != null):
+		if (!gut.is_visible()):
+			gut.maximize()
+			gut.set_visible(true)
+			gut.test_scripts()
