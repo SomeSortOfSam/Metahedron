@@ -12,92 +12,92 @@ _global_script_classes=[ {
 "base": "TileMap",
 "class": "ArrowLines",
 "language": "GDScript",
-"path": "res://Window/MapWindow/Cursor/ArrowLines.gd"
+"path": "res://Scripts/Primary/Window/ArrowOverlay/ArrowLines.gd"
 }, {
 "base": "Resource",
 "class": "Character",
 "language": "GDScript",
-"path": "res://Map/Character/Character.gd"
+"path": "res://Scripts/Primary/Map/Resources/Character.gd"
 }, {
 "base": "Sprite",
 "class": "Cursor",
 "language": "GDScript",
-"path": "res://Window/MapWindow/Cursor/Cursor.gd"
+"path": "res://Scripts/Primary/Map/Cursor/Cursor.gd"
 }, {
 "base": "Resource",
 "class": "DecorationDefinition",
 "language": "GDScript",
-"path": "res://Map/Decoration/DecorationDefinition.gd"
+"path": "res://Scripts/Primary/Map/Resources/DecorationDefinition.gd"
 }, {
 "base": "Sprite",
 "class": "DecorationDisplay",
 "language": "GDScript",
-"path": "res://Map/Decoration/DecorationDisplay.gd"
+"path": "res://Scripts/Primary/Map/Displays/DecorationDisplay.gd"
 }, {
 "base": "Reference",
 "class": "DecorationInstance",
 "language": "GDScript",
-"path": "res://Map/Decoration/DecorationInstance.gd"
+"path": "res://Scripts/Primary/Map/Instances/DecorationInstance.gd"
 }, {
 "base": "Reference",
 "class": "DisplayUtilies",
 "language": "GDScript",
-"path": "res://Map/Levels/display_utils.gd"
+"path": "res://Scripts/Primary/Map/Displays/display_utils.gd"
 }, {
 "base": "TileMap",
 "class": "LevelData",
 "language": "GDScript",
-"path": "res://Map/Levels/LevelData.gd"
+"path": "res://Scripts/Primary/Map/LevelData.gd"
 }, {
 "base": "Node2D",
 "class": "LevelHandler",
 "language": "GDScript",
-"path": "res://Map/Levels/LevelHandler.gd"
+"path": "res://Scripts/Primary/Map/LevelHandler.gd"
 }, {
 "base": "Reference",
 "class": "Map",
 "language": "GDScript",
-"path": "res://Map/Map.gd"
+"path": "res://Scripts/Primary/Map/Map.gd"
 }, {
 "base": "Reference",
 "class": "MapSpaceConverter",
 "language": "GDScript",
-"path": "res://Map/MapSpaceConverter.gd"
+"path": "res://Scripts/Primary/Map/Utilites/MapSpaceConverter.gd"
 }, {
 "base": "Node",
 "class": "MapTestUtilites",
 "language": "GDScript",
-"path": "res://tests/Map/Map/test_initialization.gd"
+"path": "res://Tests/Map/Map/test_initialization.gd"
 }, {
 "base": "NinePatchRect",
 "class": "MovementWindow",
 "language": "GDScript",
-"path": "res://Window/MapWindow/Movement Window.gd"
+"path": "res://Scripts/Primary/Window/Movement Window.gd"
 }, {
 "base": "Reference",
 "class": "Pathfinder",
 "language": "GDScript",
-"path": "res://Map/Character/Pathfinder.gd"
+"path": "res://Scripts/Primary/Map/Utilites/Pathfinder.gd"
 }, {
 "base": "Reference",
 "class": "Person",
 "language": "GDScript",
-"path": "res://Map/Character/Person.gd"
+"path": "res://Scripts/Primary/Map/Instances/Person.gd"
 }, {
 "base": "Map",
 "class": "ReferenceMap",
 "language": "GDScript",
-"path": "res://Map/RefrenceMap.gd"
+"path": "res://Scripts/Primary/Window/RefrenceMap.gd"
 }, {
 "base": "Reference",
 "class": "TileMapUtilites",
 "language": "GDScript",
-"path": "res://Map/TileMap_Utils.gd"
+"path": "res://Scripts/Primary/Map/Utilites/TileMap_Utils.gd"
 }, {
 "base": "Path2D",
 "class": "Unit",
 "language": "GDScript",
-"path": "res://Map/Character/Unit.gd"
+"path": "res://Scripts/Primary/Map/Displays/Unit.gd"
 } ]
 _global_script_class_icons={
 "ArrowLines": "",
@@ -137,8 +137,8 @@ Display=8
 [application]
 
 config/name="Metaheadron"
-run/main_scene="res://Menu.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://Scripts/Menu/Menu.tscn"
+config/icon="res://Assets/Menu/Textures/icon.png"
 
 [editor_plugins]
 
@@ -209,4 +209,3 @@ ui_down={
 [rendering]
 
 environment/default_clear_color=Color( 0, 0, 0, 1 )
-environment/default_environment="res://default_env.tres"

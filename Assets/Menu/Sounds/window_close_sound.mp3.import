@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/window_close_sound.mp3-af73fde51f09035054ae6ed100d3b340.mp3str"
+
+[deps]
+
+source_file="res://Assets/Menu/Sounds/window_close_sound.mp3"
+dest_files=[ "res://.import/window_close_sound.mp3-af73fde51f09035054ae6ed100d3b340.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Melting_Point_intro.mp3-db5073b61aca54a55883375ff5ca645d.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Melting_Point_intro.mp3"
+dest_files=[ "res://.import/Melting_Point_intro.mp3-db5073b61aca54a55883375ff5ca645d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

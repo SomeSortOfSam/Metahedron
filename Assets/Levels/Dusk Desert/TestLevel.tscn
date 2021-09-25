@@ -1,0 +1,81 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Assets/Levels/Tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Scripts/Primary/Map/LevelData.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Characters/Jean/Jean.tres" type="Resource" id=3]
+[ext_resource path="res://Scripts/Primary/Map/Displays/Unit.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/CactusLight1.tres" type="Resource" id=5]
+[ext_resource path="res://Scripts/Primary/Map/Displays/DecorationDisplay.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/CactusLight2.tres" type="Resource" id=7]
+[ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/CactusLight3.tres" type="Resource" id=8]
+[ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/CactusLight4.tres" type="Resource" id=9]
+[ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/Lowmap_Cacti.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Music/Melting_Point.mid.mp3" type="AudioStream" id=11]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 10 )
+region = Rect2( 2, 4, 24, 27 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 10 )
+region = Rect2( 26, 4, 25, 27 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 10 )
+region = Rect2( 57, 1, 12, 30 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 10 )
+region = Rect2( 79, 0, 19, 31 )
+
+[node name="LevelData" type="TileMap"]
+show_behind_parent = true
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 1, 1, 0, 4, 2, 0, 2, 3, 0, 0, 4, 0, 3, 5, 0, 0, 6, 0, 1, 7, 0, 4, 65536, 0, 4, 65537, 0, 2, 65538, 0, 0, 65539, 0, 3, 65540, 0, 0, 65541, 0, 1, 65542, 0, 4, 65543, 0, 3, 131072, 0, 2, 131073, 0, 0, 131074, 0, 3, 131075, 0, 0, 131076, 0, 1, 131077, 0, 4, 131078, 0, 3, 131079, 0, 0, 196608, 0, 0, 196609, 0, 3, 196610, 0, 0, 196611, 0, 1, 196612, 0, 4, 262144, 0, 2, 262145, 0, 0, 262146, 0, 1, 262147, 0, 4, 262148, 0, 3, 262150, 0, 1, 262151, 0, 4 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+music = ExtResource( 11 )
+
+[node name="Unit" type="Path2D" parent="."]
+position = Vector2( 24, 24 )
+curve = null
+script = ExtResource( 4 )
+friendly = true
+character = ExtResource( 3 )
+is_icon = true
+
+[node name="Unit2" type="Path2D" parent="."]
+position = Vector2( 56, 24 )
+curve = null
+script = ExtResource( 4 )
+character = ExtResource( 3 )
+is_icon = true
+
+[node name="DecorationDisplay" type="Sprite" parent="."]
+position = Vector2( 10.9173, 61.3318 )
+texture = SubResource( 1 )
+script = ExtResource( 6 )
+definition = ExtResource( 5 )
+
+[node name="DecorationDisplay2" type="Sprite" parent="."]
+position = Vector2( 123.171, 28.3678 )
+texture = SubResource( 2 )
+script = ExtResource( 6 )
+definition = ExtResource( 7 )
+
+[node name="DecorationDisplay3" type="Sprite" parent="."]
+position = Vector2( 9.70327, -6.52339 )
+texture = SubResource( 3 )
+script = ExtResource( 6 )
+definition = ExtResource( 8 )
+
+[node name="DecorationDisplay4" type="Sprite" parent="."]
+position = Vector2( 122.334, -8.91236 )
+texture = SubResource( 4 )
+script = ExtResource( 6 )
+definition = ExtResource( 9 )
