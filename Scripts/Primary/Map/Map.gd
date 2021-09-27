@@ -3,7 +3,7 @@ class_name Map
 
 var tile_map : TileMap
 var people := {}
-var decorations := []
+var decorations := [] 
 
 signal repopulated
 
@@ -48,3 +48,4 @@ func populate_units():
 func populate_decoration_displays():
 	for decoration in decorations:
 		decoration.to_decoration_display(self, true) 
+	
