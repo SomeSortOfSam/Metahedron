@@ -16,7 +16,15 @@ func handle_mouse_event(event : InputEventMouse):
 
 
 func check_delta(delta : Vector2):
-	var hypothetical = get_parent().get_rect()
+	
+	var window = get_parent().get_rect()
+	var viewportWindow = get_viewport_rect()
+	
+	var hypothetical = window
 	hypothetical.position += delta
-	if get_viewport_rect().encloses(hypothetical):
+	
+	var currentDistance = window.position.distance_squared_to(viewportWindow.position + (viewportWindow.size / 2))
+	var hypotheticalDistance = hypothetical.position.distance_squared_to(viewportWindow.position + (viewportWindow.size / 2))
+	
+	if viewportWindow.encloses(hypothetical) || hypotheticalDistance < currentDistance :
 		emit_signal("accepted_window_movement",delta)
