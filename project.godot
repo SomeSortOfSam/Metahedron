@@ -67,7 +67,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "MapTestUtilites",
 "language": "GDScript",
-"path": "res://Tests/Map/Map/test_initialization.gd"
+"path": "res://Tests/Primary/Map/Map/test_initialization.gd"
 }, {
 "base": "NinePatchRect",
 "class": "MovementWindow",

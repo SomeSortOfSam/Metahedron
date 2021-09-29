@@ -6,8 +6,6 @@ export var friendly := false
 export var character : Resource setget set_character
 export var is_icon := false setget set_is_icon
 var override_in_editor := false
-var person
-var cell : Vector2
 
 onready var _follower : PathFollow2D
 onready var _icon : Sprite
@@ -34,11 +32,6 @@ func set_character(new_character : Character):
 		populate_character(new_character)
 	elif new_character == null:
 		populate_null_character()
-
-func set_person(new_person):
-	if(new_person != null):
-		person = new_person
-		person.connect("cell_change", self, "move_cell")
 
 func populate_character(new_character : Character):
 	character = new_character
@@ -96,3 +89,4 @@ func subscribe(person,map):
 	if "map" in map:
 		cell = MapSpaceConverter.internal_map_to_map(cell,map)
 	position = MapSpaceConverter.map_to_local(cell,map)
+	person.connect("cell_change", self, "move_cell")
