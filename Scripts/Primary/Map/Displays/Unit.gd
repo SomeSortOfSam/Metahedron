@@ -6,6 +6,8 @@ export var friendly := false
 export var character : Resource setget set_character
 export var is_icon := false setget set_is_icon
 var override_in_editor := false
+var person
+var cell : Vector2
 
 onready var _follower : PathFollow2D
 onready var _icon : Sprite
@@ -33,6 +35,11 @@ func set_character(new_character : Character):
 	elif new_character == null:
 		populate_null_character()
 
+func set_person(new_person):
+	if(new_person != null):
+		person = new_person
+		person.connect("cell_change", self, "move_cell")
+
 func populate_character(new_character : Character):
 	character = new_character
 	_icon.texture = character.icon
@@ -49,6 +56,10 @@ func populate_null_character():
 	_icon.position = Vector2.ZERO
 	_sprite.position = Vector2.ZERO
 	_sprite.frames = null
+
+#Called when a Person is moved, moves the associated icon as well
+func move_cell(offset : Vector2):
+	position += offset * 16
 
 func set_is_icon(new_is_icon : bool):
 	is_icon = new_is_icon
