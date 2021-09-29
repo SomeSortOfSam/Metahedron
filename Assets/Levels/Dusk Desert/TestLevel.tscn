@@ -10,7 +10,7 @@
 [ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/CactusLight3.tres" type="Resource" id=8]
 [ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/CactusLight4.tres" type="Resource" id=9]
 [ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/Lowmap_Cacti.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Music/Melting_Point.mid.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Assets/Levels/Dusk Desert/Epiphreatic.mid.mp3" type="AudioStream" id=11]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 10 )
