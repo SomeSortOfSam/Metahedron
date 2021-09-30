@@ -64,11 +64,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Primary/Map/Utilites/MapSpaceConverter.gd"
 }, {
-"base": "Node",
-"class": "MapTestUtilites",
-"language": "GDScript",
-"path": "res://Tests/Primary/Map/Map/test_initialization.gd"
-}, {
 "base": "NinePatchRect",
 "class": "MovementWindow",
 "language": "GDScript",
@@ -111,7 +106,6 @@ _global_script_class_icons={
 "LevelHandler": "",
 "Map": "",
 "MapSpaceConverter": "",
-"MapTestUtilites": "",
 "MovementWindow": "",
 "Pathfinder": "",
 "Person": "",
