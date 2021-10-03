@@ -32,8 +32,7 @@ func move_window(offset : Vector2):
 	window.map.repopulate_displays()
 
 func to_unit(map, icon):
-	var unit := Unit.new()
+	var unit := preload("res://Scripts/Primary/Map/Displays/Unit.tscn").instance()
 	map.tile_map.add_child(unit)
 	unit.subscribe(self,map)
 	unit.is_icon = icon
-	unit._sprite.playing = true

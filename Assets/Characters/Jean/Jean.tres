@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource( 3 )
 name = "Jean"
-icon = ExtResource( 1 )
-icon_offset = Vector2( 0, -4 )
+level_texture = ExtResource( 1 )
+level_offset = Vector2( 0, -5 )
 animations = ExtResource( 2 )
 animations_offset = Vector2( 0, -22 )

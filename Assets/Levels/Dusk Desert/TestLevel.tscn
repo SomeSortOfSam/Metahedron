@@ -1,31 +1,32 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Levels/Tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://Scripts/Primary/Map/LevelData.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Characters/Jean/Jean.tres" type="Resource" id=3]
-[ext_resource path="res://Scripts/Primary/Map/Displays/Unit.gd" type="Script" id=4]
-[ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/CactusLight1.tres" type="Resource" id=5]
-[ext_resource path="res://Scripts/Primary/Map/Displays/DecorationDisplay.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Primary/Level/LevelData.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Primary/Level/Placeholder.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Primary/Level/EnemyPlaceholder.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Characters/Jean/Jean.tres" type="Resource" id=5]
+[ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/CactusLight1.tres" type="Resource" id=6]
 [ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/CactusLight2.tres" type="Resource" id=7]
 [ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/CactusLight3.tres" type="Resource" id=8]
 [ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/CactusLight4.tres" type="Resource" id=9]
-[ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/Lowmap_Cacti.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Characters/Jean/8Ball.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Levels/Dusk Desert/Epiphreatic.mid.mp3" type="AudioStream" id=11]
+[ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/Lowmap_Cacti.png" type="Texture" id=12]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 10 )
+atlas = ExtResource( 12 )
 region = Rect2( 2, 4, 24, 27 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 10 )
+atlas = ExtResource( 12 )
 region = Rect2( 26, 4, 25, 27 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 10 )
+atlas = ExtResource( 12 )
 region = Rect2( 57, 1, 12, 30 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 10 )
+atlas = ExtResource( 12 )
 region = Rect2( 79, 0, 19, 31 )
 
 [node name="LevelData" type="TileMap"]
@@ -41,41 +42,45 @@ __meta__ = {
 }
 music = ExtResource( 11 )
 
-[node name="Unit" type="Path2D" parent="."]
+[node name="Placeholder" type="Sprite" parent="."]
 position = Vector2( 24, 24 )
-curve = null
-script = ExtResource( 4 )
-friendly = true
-character = ExtResource( 3 )
-is_icon = true
-
-[node name="Unit2" type="Path2D" parent="."]
-position = Vector2( 56, 24 )
-curve = null
-script = ExtResource( 4 )
-character = ExtResource( 3 )
-is_icon = true
-
-[node name="DecorationDisplay" type="Sprite" parent="."]
-position = Vector2( 10.9173, 61.3318 )
-texture = SubResource( 1 )
-script = ExtResource( 6 )
+texture = ExtResource( 10 )
+offset = Vector2( 0, -5 )
+script = ExtResource( 3 )
 definition = ExtResource( 5 )
 
-[node name="DecorationDisplay2" type="Sprite" parent="."]
-position = Vector2( 123.171, 28.3678 )
+[node name="EnemyPlaceholder" type="Sprite" parent="."]
+position = Vector2( 56, 24 )
+texture = ExtResource( 10 )
+offset = Vector2( 0, -5 )
+script = ExtResource( 4 )
+definition = ExtResource( 5 )
+
+[node name="Placeholder2" type="Sprite" parent="."]
+position = Vector2( 8, 8 )
+texture = SubResource( 1 )
+offset = Vector2( 3, -13 )
+script = ExtResource( 3 )
+definition = ExtResource( 6 )
+
+[node name="Placeholder3" type="Sprite" parent="."]
+position = Vector2( 120, 8 )
 texture = SubResource( 2 )
-script = ExtResource( 6 )
+offset = Vector2( 2, -13 )
+script = ExtResource( 3 )
 definition = ExtResource( 7 )
 
-[node name="DecorationDisplay3" type="Sprite" parent="."]
-position = Vector2( 9.70327, -6.52339 )
+[node name="Placeholder4" type="Sprite" parent="."]
+position = Vector2( 8, 72 )
 texture = SubResource( 3 )
-script = ExtResource( 6 )
+offset = Vector2( 0, -15 )
+script = ExtResource( 3 )
 definition = ExtResource( 8 )
 
-[node name="DecorationDisplay4" type="Sprite" parent="."]
-position = Vector2( 122.334, -8.91236 )
+[node name="Placeholder5" type="Sprite" parent="."]
+position = Vector2( 123.415, 44.462 )
 texture = SubResource( 4 )
-script = ExtResource( 6 )
+offset = Vector2( -1, -15 )
+script = ExtResource( 3 )
 definition = ExtResource( 9 )
+cell_offset = Vector2( 3.415, 4.462 )
