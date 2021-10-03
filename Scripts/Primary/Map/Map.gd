@@ -18,6 +18,11 @@ func clamp(map_point : Vector2) -> Vector2:
 
 func add_person(person):
 	people[person.cell] = person
+	var connection = person.connect("cell_change",self,"on_person_cell_change",[person])
+
+func on_person_cell_change(cell_delta,person):
+	if people.erase(person.cell - cell_delta):
+		people[person.cell] = person
 
 func add_decoration(decoration):
 	decorations.append(decoration)

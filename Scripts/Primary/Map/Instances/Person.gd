@@ -5,7 +5,7 @@ var character : Character
 export var cell : Vector2 setget set_cell
 var window
 
-signal cell_change(cell)
+signal cell_change(delta)
 
 func _init(new_character : Character):
 	character = new_character
@@ -22,7 +22,6 @@ func move_cell(offset : Vector2):
 
 func initialize_window(map) -> MovementWindow:
 	window = MovementWindow.get_window(cell,map,3)
-	assert(window.get_node("Control"),"Unable to connect Person.gd to WindowCursor.gd")
 	window.get_node("Control").connect("cell_selected", self, "move_cell")
 	return window
 	
@@ -30,6 +29,7 @@ func move_window(offset : Vector2):
 	window.map.center_cell += offset
 	window.map.repopulate_fields()
 	window.map.repopulate_displays()
+	window.regenerate_astar()
 
 func to_unit(map, icon):
 	var unit := preload("res://Scripts/Primary/Map/Displays/Unit.tscn").instance()

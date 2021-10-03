@@ -18,13 +18,15 @@ func popup_around_tile():
 	resize()
 	rect_position = MapSpaceConverter.map_to_global(map.center_cell,map.map)
 	rect_position -= $Control.rect_position
-	var container = $Control/TilemapContainer
 	rect_position -= container.position
 	rect_position -= MapSpaceConverter.map_to_local(Vector2.ZERO, map) * container.scale
 
 func set_map(new_map : ReferenceMap):
 	map = new_map
 	map.repopulate_displays()
+	regenerate_astar()
+
+func regenerate_astar():
 	$Control/TilemapContainer/ArrowLines.astar = Pathfinder.refrence_map_to_astar(map)
 
 func _on_DraggableArea_accepted_window_movement(delta):

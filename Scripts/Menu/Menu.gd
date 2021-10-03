@@ -17,7 +17,7 @@ func _input(event):
 		
 	
 func _on_NewGameButton_pressed():
-	get_tree().change_scene("res://Scripts/Primary/Map/LevelHandler.tscn")
+	var _scene = get_tree().change_scene("res://Scripts/Primary/Map/LevelHandler.tscn")
 
 func _on_LoadGameButton_pressed():
 	pass # Replace with function body.
