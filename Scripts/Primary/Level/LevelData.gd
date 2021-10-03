@@ -1,7 +1,13 @@
+tool
 extends TileMap
 class_name LevelData
 
 export var music : AudioStream
+
+func _init():
+	tile_set = load("res://Assets/Levels/Tileset.tres")
+	cell_size = Vector2.ONE * 16
+	scale = Vector2.ONE * 4
 
 func to_map():
 	var map = Map.new(self)
