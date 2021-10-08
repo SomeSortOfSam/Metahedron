@@ -16,13 +16,13 @@ func _input(event):
 			gut.set_visible(false)
 		
 	
-func _on_NewGameButton_pressed():
+func _on_PlayButton_pressed():
 	var _scene = get_tree().change_scene("res://Scripts/Primary/Map/LevelHandler.tscn")
 
-func _on_LoadGameButton_pressed():
+func _on_OptionsButton_pressed():
 	pass # Replace with function body.
 
-func _on_SettingsButton_pressed():
+func _on_LoreButton_pressed():
 	pass # Replace with function body.
 
 func _on_CreditsButton_pressed():
