@@ -1,8 +1,10 @@
 extends Control
 
 onready var gut_button = $GutButton
+onready var main_menu = $VBoxContainer
 
 var gut
+var desiered_pos : Vector2
 
 func _ready():
 	# Hide Gut Button in release
@@ -14,16 +16,20 @@ func _input(event):
 	if (event is InputEventKey and event.scancode == KEY_ESCAPE):
 		if (gut.is_visible()):
 			gut.set_visible(false)
-		
-	
+		desiered_pos = Vector2.ZERO
+
+func _process(delta):
+	if main_menu.rect_position != desiered_pos:
+		main_menu.rect_position = lerp(main_menu.rect_position,desiered_pos,.1)
+
 func _on_PlayButton_pressed():
 	var _scene = get_tree().change_scene("res://Scripts/Primary/Map/LevelHandler.tscn")
 
 func _on_OptionsButton_pressed():
-	pass # Replace with function body.
+	desiered_pos.x = rect_size.x
 
 func _on_LoreButton_pressed():
-	pass # Replace with function body.
+	desiered_pos.x = -rect_size.x
 
 func _on_CreditsButton_pressed():
 	pass # Replace with function body.
