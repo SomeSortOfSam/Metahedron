@@ -14,6 +14,17 @@ static func is_walkable(map_point : Vector2, map : Map) -> bool:
 	var autotile_coords = map.tile_map.get_cell_autotile_coord(tile_map_point.x,tile_map_point.y)
 	return tile_type != -1 && is_tile_type_walkable(tile_type, autotile_coords, map.tile_map)
 
+static func is_path_walkable(to : Vector2, map : Map) -> bool:
+	var is_walkable := true
+	var astar = refrence_map_to_astar(map)
+	var path = astar.get_point_path(MapSpaceConverter.refrence_map_to_index(Vector2.ZERO),MapSpaceConverter.refrence_map_to_index(to))
+	if path.size() == 0:
+		is_walkable = false
+	for point in path:
+		if !is_walkable(point,map):
+			is_walkable = false
+	return is_walkable
+
 static func is_tile_type_walkable(tile_type : int, autotile_coords : Vector2, tile_map : TileMap) -> bool:
 	if tile_map.tile_set && tile_map.tile_set.get_tiles_ids().find(tile_type) != -1:
 		if tile_map.tile_set.tile_get_tile_mode(tile_type) == TileSet.SINGLE_TILE:

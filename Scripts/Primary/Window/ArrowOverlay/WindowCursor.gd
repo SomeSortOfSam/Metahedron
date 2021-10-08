@@ -6,7 +6,7 @@ func _gui_input(event):
 	if "position" in event:
 		var map : ReferenceMap = get_parent().map
 		var cell := position_to_cell(event.position, map)
-		if is_cell_acceptable(cell,map):
+		if is_cell_acceptable(cell,map) && !Pathfinder.is_occupied(cell,map) && Pathfinder.is_path_walkable(cell,map):
 			if event is InputEventMouseButton:
 				if event.button_index == BUTTON_LEFT and event.pressed:
 					emit_signal("cell_selected", cell) 
