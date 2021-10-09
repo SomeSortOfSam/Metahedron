@@ -28,6 +28,10 @@ func populate_null_character():
 	_icon.texture = null
 	_sprite.frames = null
 
+#pre-onready-null protection
+func follow_path_deffered(path : PoolVector2Array):
+	call_deferred("follow_path", path)
+
 func follow_path(path : PoolVector2Array):
 	end_follow_path()
 	curve = path_to_curve(path)
@@ -53,20 +57,24 @@ func follow_animation():
 	var parent : TileMap  = get_parent()
 	if parent && parent.get_cellv(parent.world_to_map(parent.to_local(_follower.global_position))) < 0:
 		modulate.a = lerp(modulate.a,0,.6)
+	else:
+		modulate.a = lerp(modulate.a,1,.6)
 
 func end_follow_path():
 	_follower.unit_offset = 1
+	position += _follower.position
+	end_follow_animation()
 	curve = null
 	_follower.offset = 0
-	position += _follower.position
 	_follower.position = Vector2.ZERO
+
+
+func end_follow_animation():
 	if _sprite.frames.has_animation("Idle"):
 		_sprite.animation = "Idle"
 	var parent : TileMap  = get_parent()
-	if parent.get_cellv(parent.world_to_map(position)) < 0:
-		print(modulate)
+	if curve && parent.get_cellv(parent.world_to_map(position)) < 0:
 		queue_free()
-
 
 #pre-onready-null protection
 func deffer_set_is_icon(new_is_icon):
@@ -83,4 +91,4 @@ func subscribe(person,map):
 	if "map" in map:
 		cell = MapSpaceConverter.internal_map_to_map(cell,map)
 	position = MapSpaceConverter.map_to_local(cell,map)
-	person.connect("requesting_follow_path", self, "follow_path")
+	person.connect("requesting_follow_path", self, "follow_path_deffered")

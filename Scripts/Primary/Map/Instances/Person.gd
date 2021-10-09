@@ -34,8 +34,9 @@ func move_window(offset : Vector2):
 	window.map.repopulate_displays()
 	window.regenerate_astar()
 
-func to_unit(map, icon):
+func to_unit(map, icon) -> Unit:
 	var unit : Unit = preload("res://Scripts/Primary/Map/Displays/Unit.tscn").instance()
 	map.tile_map.add_child(unit)
 	unit.subscribe(self,map)
 	unit.is_icon = icon
+	return unit
