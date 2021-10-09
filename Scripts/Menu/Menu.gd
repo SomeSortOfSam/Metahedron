@@ -1,6 +1,6 @@
 extends Control
 
-onready var gut_button = $GutButton
+onready var gut_button = $VBoxContainer/VBoxContainer/GutButton
 onready var main_menu = $VBoxContainer
 
 var gut
@@ -20,7 +20,7 @@ func _input(event):
 
 func _process(delta):
 	if main_menu.rect_position != desiered_pos:
-		main_menu.rect_position = lerp(main_menu.rect_position,desiered_pos,.1)
+		main_menu.rect_position = lerp(main_menu.rect_position,desiered_pos,.1 * delta)
 
 func _on_PlayButton_pressed():
 	var _scene = get_tree().change_scene("res://Scripts/Primary/Map/LevelHandler.tscn")

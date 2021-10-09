@@ -28,18 +28,20 @@ func populate_decoration_displays():
 		decortation.to_decoration_display(self,false)
 
 func repopulate_people():
+	for cell in people.keys():
+		people[cell].disconnect("cell_change",self,"on_person_cell_change")
 	people.clear()
 	for internal_cell in map.people.keys():
 		var cell = MapSpaceConverter.internal_map_to_map(internal_cell, self)
 		if Pathfinder.is_cell_in_range(Vector2.ZERO, cell, tile_range):
-			people[cell] = map.people[internal_cell]
+			add_person(map.people[internal_cell])
 
 func repopulate_decoration_instances():
 	decorations.clear()
 	for decoration in map.decorations:
 		var cell = MapSpaceConverter.internal_map_to_map(decoration.cell, self)
 		if Pathfinder.is_cell_in_range(Vector2.ZERO, cell, tile_range):
-			decorations.append(decoration)
+			add_decoration(decoration)
 
 func repopulate_tilemap():
 	tile_map.clear()
@@ -59,3 +61,14 @@ func clamp(map_point : Vector2) -> Vector2:
 	map_point.x = clamp(map_point.x, -tile_range, tile_range)
 	map_point.y = clamp(map_point.y, -tile_range, tile_range)
 	return map_point
+
+func add_person(person):
+	people[MapSpaceConverter.internal_map_to_map(person.cell,self)] = person
+	var _connection = person.connect("cell_change",self,"on_person_cell_change",[person])
+
+func on_person_cell_change(cell_delta,person):
+	if people.erase(MapSpaceConverter.internal_map_to_map(person.cell - cell_delta,self)):
+		people[MapSpaceConverter.internal_map_to_map(person.cell,self)] = person
+	if !Pathfinder.is_cell_in_range(center_cell,person.cell - cell_delta,tile_range) && Pathfinder.is_cell_in_range(center_cell,person.cell,tile_range):
+		var unit = person.to_unit(self, false)
+		unit.position -= cell_delta * tile_map.cell_size

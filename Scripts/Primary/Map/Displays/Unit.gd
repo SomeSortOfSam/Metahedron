@@ -3,6 +3,7 @@ class_name Unit
 
 export var character : Resource setget set_character
 export var is_icon := false setget deffer_set_is_icon
+export var speed : float = 10
 
 onready var _follower : PathFollow2D = $Follower
 onready var _icon : Sprite = $Follower/Icon
@@ -27,9 +28,53 @@ func populate_null_character():
 	_icon.texture = null
 	_sprite.frames = null
 
-#Called when a Person is moved, moves the associated icon as well
-func move_cell(offset : Vector2):
-	position += offset * 16
+#pre-onready-null protection
+func follow_path_deffered(path : PoolVector2Array):
+	call_deferred("follow_path", path)
+
+func follow_path(path : PoolVector2Array):
+	end_follow_path()
+	curve = path_to_curve(path)
+	if _sprite.frames.has_animation("Walk"):
+		_sprite.animation = "Walk"
+
+func path_to_curve(path : PoolVector2Array) -> Curve2D:
+	var new_curve = Curve2D.new()
+	var cell_size = (get_parent() as TileMap).cell_size
+	for i in path.size():
+		new_curve.add_point(path[i] * cell_size)
+	return new_curve
+
+func _process(delta):
+	if curve:
+		_follower.offset += delta * speed
+		follow_animation()
+		if _follower.unit_offset >= 1:
+			end_follow_path()
+
+func follow_animation():
+	_sprite.flip_h = (curve.get_point_position(curve.get_point_count() - 1) - _follower.position).x < 0
+	var parent : TileMap  = get_parent()
+	if parent && parent.get_cellv(parent.world_to_map(parent.to_local(_follower.global_position))) < 0:
+		modulate.a = lerp(modulate.a,0,.6)
+	else:
+		modulate.a = lerp(modulate.a,1,.6)
+
+func end_follow_path():
+	_follower.unit_offset = 1
+	position += _follower.position
+	end_follow_animation()
+	curve = null
+	_follower.offset = 0
+	_follower.position = Vector2.ZERO
+
+
+func end_follow_animation():
+	if _sprite.frames.has_animation("Idle"):
+		_sprite.animation = "Idle"
+	var parent : TileMap  = get_parent()
+	if curve && parent.get_cellv(parent.world_to_map(position)) < 0:
+		queue_free()
 
 #pre-onready-null protection
 func deffer_set_is_icon(new_is_icon):
@@ -46,4 +91,4 @@ func subscribe(person,map):
 	if "map" in map:
 		cell = MapSpaceConverter.internal_map_to_map(cell,map)
 	position = MapSpaceConverter.map_to_local(cell,map)
-	person.connect("cell_change", self, "move_cell")
+	person.connect("requesting_follow_path", self, "follow_path_deffered")
