@@ -76,6 +76,7 @@ __meta__ = {
 }
 _should_maximize = true
 _should_print_to_console = false
+_file_prefix = "feature_"
 _include_subdirectories = true
 _directory1 = "res://Tests"
 
