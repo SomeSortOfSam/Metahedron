@@ -44,9 +44,15 @@ func path_to_curve(path : PoolVector2Array) -> Curve2D:
 func _process(delta):
 	if curve:
 		_follower.offset += delta * speed
-		_sprite.flip_h = (curve.get_point_position(curve.get_point_count() - 1) - _follower.position).x < 0
+		follow_animation()
 		if _follower.unit_offset >= 1:
 			end_follow_path()
+
+func follow_animation():
+	_sprite.flip_h = (curve.get_point_position(curve.get_point_count() - 1) - _follower.position).x < 0
+	var parent : TileMap  = get_parent()
+	if parent && parent.get_cellv(parent.world_to_map(parent.to_local(_follower.global_position))) < 0:
+		modulate.a = lerp(modulate.a,0,.6)
 
 func end_follow_path():
 	_follower.unit_offset = 1
@@ -56,6 +62,10 @@ func end_follow_path():
 	_follower.position = Vector2.ZERO
 	if _sprite.frames.has_animation("Idle"):
 		_sprite.animation = "Idle"
+	var parent : TileMap  = get_parent()
+	if parent.get_cellv(parent.world_to_map(position)) < 0:
+		print(modulate)
+		queue_free()
 
 
 #pre-onready-null protection

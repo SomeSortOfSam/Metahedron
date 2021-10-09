@@ -1,13 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Primary/Map/Displays/Unit.gd" type="Script" id=1]
 
-[sub_resource type="Curve2D" id=1]
-_data = {
-"points": PoolVector2Array(  )
-}
-
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [  ],
 "loop": true,
@@ -16,7 +11,7 @@ animations = [ {
 } ]
 
 [node name="Unit" type="Path2D"]
-curve = SubResource( 1 )
+curve = null
 script = ExtResource( 1 )
 speed = 45.0
 
@@ -27,6 +22,6 @@ loop = false
 [node name="Icon" type="Sprite" parent="Follower"]
 
 [node name="Sprite" type="AnimatedSprite" parent="Follower"]
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 animation = "Idle"
 playing = true
