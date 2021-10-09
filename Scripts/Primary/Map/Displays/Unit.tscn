@@ -18,8 +18,11 @@ animations = [ {
 [node name="Unit" type="Path2D"]
 curve = SubResource( 1 )
 script = ExtResource( 1 )
+speed = 35.0
 
 [node name="Follower" type="PathFollow2D" parent="."]
+rotate = false
+loop = false
 
 [node name="Icon" type="Sprite" parent="Follower"]
 

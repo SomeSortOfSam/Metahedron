@@ -1,16 +1,18 @@
 extends Control
 
 signal cell_selected(cell)
+signal path_accepted(path)
 
 func _gui_input(event):
 	if "position" in event:
 		var map : ReferenceMap = get_parent().map
 		var cell := position_to_cell(event.position, map)
 		if is_cell_acceptable(cell,map):
+			var path = $TilemapContainer/ArrowLines.draw_path(cell)
 			if event is InputEventMouseButton:
 				if event.button_index == BUTTON_LEFT and event.pressed:
-					emit_signal("cell_selected", cell) 
-			$TilemapContainer/ArrowLines.draw_path(cell)
+					emit_signal("cell_selected", cell)
+					emit_signal("path_accepted", path)
 		else:
 			$TilemapContainer/ArrowLines.clear()
 
