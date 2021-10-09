@@ -31,16 +31,20 @@ func populate_null_character():
 func follow_path(path : PoolVector2Array):
 	end_follow_path()
 	curve = path_to_curve(path)
+	if _sprite.frames.has_animation("Walk"):
+		_sprite.animation = "Walk"
 
-func path_to_curve(path : PoolVector2Array):
+func path_to_curve(path : PoolVector2Array) -> Curve2D:
 	var new_curve = Curve2D.new()
 	var cell_size = (get_parent() as TileMap).cell_size
 	for i in path.size():
 		new_curve.add_point(path[i] * cell_size)
+	return new_curve
 
 func _process(delta):
 	if curve:
 		_follower.offset += delta * speed
+		_sprite.flip_h = (curve.get_point_position(curve.get_point_count() - 1) - _follower.position).x < 0
 		if _follower.unit_offset >= 1:
 			end_follow_path()
 
@@ -50,6 +54,8 @@ func end_follow_path():
 	_follower.offset = 0
 	position += _follower.position
 	_follower.position = Vector2.ZERO
+	if _sprite.frames.has_animation("Idle"):
+		_sprite.animation = "Idle"
 
 
 #pre-onready-null protection
