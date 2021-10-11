@@ -5,8 +5,8 @@ var character : Character
 export var cell : Vector2 setget set_cell
 var window
 
-const MAX_MOVES = 2
-var moves_left = MAX_MOVES
+const MAX_MOVES := 2
+export var moves_left := MAX_MOVES
 
 signal cell_change(delta)
 signal requesting_follow_path(path)
@@ -23,13 +23,14 @@ func set_cell(new_cell : Vector2):
 func move_cell(path : PoolVector2Array):
 	var offset = path[path.size() - 1]
 	cell += offset
-	emit_signal("cell_change", offset)
-	emit_signal("requesting_follow_path",path)
 	
 	if moves_left > 0:
 		moves_left = moves_left - 1
 	else:
 		lock_movemement_window()
+	
+	emit_signal("cell_change", offset)
+	emit_signal("requesting_follow_path",path)
 	print("moves left ")
 	print(moves_left)
 	move_window(offset)
