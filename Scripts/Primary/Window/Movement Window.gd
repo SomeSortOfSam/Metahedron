@@ -32,6 +32,10 @@ func regenerate_astar():
 func _on_DraggableArea_accepted_window_movement(delta):
 	rect_position += delta
 
+func lock_window():
+	#TODO implement locking
+	print("Locked")
+
 static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
 	var third = veiwport_rect.size/3
 	third.x = min(third.x,third.y)
