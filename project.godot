@@ -64,7 +64,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Primary/Map/Utilites/MapSpaceConverter.gd"
 }, {
-"base": "NinePatchRect",
+"base": "Control",
 "class": "MovementWindow",
 "language": "GDScript",
 "path": "res://Scripts/Primary/Window/Movement Window.gd"

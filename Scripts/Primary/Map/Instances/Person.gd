@@ -25,7 +25,7 @@ func move_cell(path : PoolVector2Array):
 
 func initialize_window(map) -> MovementWindow:
 	window = MovementWindow.get_window(cell,map,3)
-	window.get_node("Control").connect("path_accepted", self, "move_cell")
+	window.get_node("VSplitContainer/Body/Body").connect("path_accepted", self, "move_cell")
 	return window
 	
 func move_window(offset : Vector2):

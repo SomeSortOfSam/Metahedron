@@ -20,7 +20,7 @@ func _input(event):
 
 func _process(delta):
 	if main_menu.rect_position != desiered_pos:
-		main_menu.rect_position = lerp(main_menu.rect_position,desiered_pos,.1 * delta)
+		main_menu.rect_position = lerp(main_menu.rect_position,desiered_pos,.9 * delta)
 
 func _on_PlayButton_pressed():
 	var _scene = get_tree().change_scene("res://Scripts/Primary/Map/LevelHandler.tscn")

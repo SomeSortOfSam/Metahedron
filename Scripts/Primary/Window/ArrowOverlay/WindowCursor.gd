@@ -5,7 +5,7 @@ signal path_accepted(path)
 
 func _gui_input(event):
 	if "position" in event:
-		var map : ReferenceMap = get_parent().map
+		var map : ReferenceMap = get_parent().get_parent().get_parent().map
 		var cell := position_to_cell(event.position, map)
 		if is_cell_acceptable(cell,map):
 			var path = $TilemapContainer/ArrowLines.draw_path(cell)
