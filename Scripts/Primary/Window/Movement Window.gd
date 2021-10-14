@@ -1,7 +1,11 @@
 extends Control
 class_name MovementWindow
 
+onready var close_button : TextureButton = $VSplitContainer/TopBar/Close
+
 onready var container = $VSplitContainer/Body/Body/TilemapContainer
+onready var arrow_lines : ArrowLines = $VSplitContainer/Body/Body/TilemapContainer/ArrowLines
+onready var tilemap : TileMap = $VSplitContainer/Body/Body/TilemapContainer/TileMap
 
 var map : ReferenceMap setget set_map
 
@@ -16,11 +20,13 @@ func resize():
 
 func popup_around_tile():
 	resize()
-	rect_position = MapSpaceConverter.map_to_global(map.center_cell,map.map)
-	rect_position -= $VSplitContainer/Body/Body.rect_position
-	rect_position -= container.position
-	rect_position -= MapSpaceConverter.map_to_local(Vector2.ZERO, map) * container.scale
+	center_around_tile(map.center_cell)
 	show()
+
+func center_around_tile(tile : Vector2):
+	rect_position = MapSpaceConverter.map_to_global(tile,map.map)
+	rect_position -= container.global_position - rect_global_position
+	rect_position -= MapSpaceConverter.map_to_local(Vector2.ZERO, map) * container.scale
 
 func set_map(new_map : ReferenceMap):
 	map = new_map
@@ -28,7 +34,7 @@ func set_map(new_map : ReferenceMap):
 	regenerate_astar()
 
 func regenerate_astar():
-	$VSplitContainer/Body/Body/TilemapContainer/ArrowLines.astar = Pathfinder.refrence_map_to_astar(map)
+	arrow_lines.astar = Pathfinder.refrence_map_to_astar(map)
 
 func lock_window():
 	#TODO implement locking
@@ -40,13 +46,14 @@ static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
 	third.y = min(third.x,third.y)
 	return third
 
-# warning-ignore:shadowed_variable
-static func get_window(cell : Vector2, map, window_range : int) -> MovementWindow:
+static func get_window(cell : Vector2, parent_map, window_range : int) -> MovementWindow:
 	var packed_window := load("res://Scripts/Primary/Window/Movement Window.tscn")
 	var window := packed_window.instance() as MovementWindow
-	var tilemap := window.get_node("VSplitContainer/Body/Body/TilemapContainer/TileMap") as TileMap
-	window.map = ReferenceMap.new(tilemap,map,cell,window_range)
+	window.call_deferred("populate_map",parent_map,cell,window_range)
 	return window
+
+func populate_map(parent_map, cell, window_range):
+	self.map = ReferenceMap.new(tilemap,parent_map,cell,window_range)
 
 func _on_Close_pressed():
 	hide()
