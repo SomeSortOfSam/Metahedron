@@ -4,6 +4,7 @@ class_name LevelHandler
 export var packed_level_data : PackedScene
 
 onready var music = $AudioStreamPlayer
+onready var end_turn_button = $EndTurnButton
 
 var map : Map
 var cursor : Cursor
@@ -13,6 +14,7 @@ func _ready():
 	initialize_level(validate_level_data(packed_level_data))
 	recenter_map()
 	var _connection = get_tree().connect("screen_resized",self,"call_deferred",["recenter_map"])
+	raise_EndTurnButton()
 
 func recenter_map():
 	move_tilemap(map.tile_map.position - TileMapUtilites.get_centered_position(map.tile_map,get_viewport_rect().size))
@@ -24,6 +26,8 @@ func initialize_level(level_data : LevelData):
 	music.play() 
 	var _connection = map.connect("repopulated",self,"intialize_cursor")
 	map.repopulate_displays()
+	map.connect("lower_end_turn_button", self, "lower_EndTurnButton")
+	map.connect("raise_end_turn_button", self, "raise_EndTurnButton")
 
 func intialize_cursor():
 	if cursor:
@@ -94,3 +98,12 @@ func constrain_tilemap_vertical(edge_rect : Rect2, window_rect : Rect2) -> float
 	if edge_rect.position.y > window_rect.end.y:
 		return window_rect.position.y - edge_rect.size.y + TileMapUtilites.get_border_amount(map.tile_map)
 	return edge_rect.position.y + TileMapUtilites.get_border_amount(map.tile_map)
+
+func raise_EndTurnButton():
+	end_turn_button.set_global_position(Vector2(0, -100))
+
+func lower_EndTurnButton():
+	end_turn_button.set_global_position(Vector2.ZERO)
+
+func _on_EndTurnButton_pressed():
+	print("Turn Ended")

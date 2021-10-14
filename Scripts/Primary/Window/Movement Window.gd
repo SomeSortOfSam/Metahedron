@@ -30,6 +30,10 @@ func set_map(new_map : ReferenceMap):
 func regenerate_astar():
 	$VSplitContainer/Body/Body/TilemapContainer/ArrowLines.astar = Pathfinder.refrence_map_to_astar(map)
 
+func lock_window():
+	#TODO implement locking
+	print("Locked")
+
 static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
 	var third = veiwport_rect.size/3
 	third.x = min(third.x,third.y)
