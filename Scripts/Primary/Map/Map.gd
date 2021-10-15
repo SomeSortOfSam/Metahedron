@@ -6,8 +6,6 @@ var people := {}
 var decorations := [] 
 
 signal repopulated
-signal lower_end_turn_button
-signal raise_end_turn_button
 
 func _init(new_tilemap : TileMap):
 	tile_map = new_tilemap
@@ -25,7 +23,6 @@ func add_person(person):
 func on_person_cell_change(cell_delta,person):
 	if people.erase(person.cell - cell_delta):
 		people[person.cell] = person
-		check_moves()
 
 func add_decoration(decoration):
 	decorations.append(decoration)
@@ -36,8 +33,7 @@ func get_person(cell : Vector2):
 	return null
 
 func remove_person(person):
-# warning-ignore:return_value_discarded
-	people.erase(person.cell)
+	var _person =people.erase(person.cell)
 
 func remove_decoration(decoration):
 	decorations.remove(decoration)
@@ -56,19 +52,3 @@ func populate_units():
 func populate_decoration_displays():
 	for decoration in decorations:
 		decoration.to_decoration_display(self, true) 
-
-func check_moves(): #TODO Make this be affected by closed windows, not moves left
-	var movesLeft = false 
-	for cell in people:
-		if people[cell].moves_left > 0 && movesLeft == false:
-			movesLeft = true
-	if movesLeft:
-		raise_end_turn_button()
-	else:
-		lower_end_turn_button()
-
-func lower_end_turn_button():
-	emit_signal("lower_end_turn_button")
-
-func raise_end_turn_button():
-	emit_signal("raise_end_turn_button")
