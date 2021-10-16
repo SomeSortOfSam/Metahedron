@@ -5,9 +5,8 @@ const MAP_SIZE := 5
 class ConversionTest:
 	extends "res://addons/gut/test.gd"
 
-	var grid_size := Vector2.ONE
-	var use_half_offset := true
 	var use_parent_transforms := false
+	var to_map := false
 
 	func tested_function(_cell : Vector2,_map : Map) -> Vector2:
 		return Vector2.ZERO
@@ -37,10 +36,11 @@ class ConversionTest:
 		var map := create_test_map()
 		for cell in map.tile_map.get_used_cells():
 			var expected = cell 
-			if (use_half_offset):
+			if !to_map:
 				expected += map.tile_map.cell_size/2
-			cell *= grid_size
-			assert_eq(tested_function(cell,map), expected)
+				assert_eq(tested_function(cell,map), expected)
+			else:
+				assert_eq(tested_function(expected,map),cell)
 
 	func test_with_parent_movement():
 		#setup
@@ -53,10 +53,11 @@ class ConversionTest:
 			var expected = cell
 			if use_parent_transforms:
 				expected += Vector2.ONE * 2
-			if (use_half_offset):
+			if !to_map:
 				expected += map.tile_map.cell_size/2
-			cell *= grid_size
-			assert_eq(tested_function(cell,map), expected)
+				assert_eq(tested_function(cell,map), expected)
+			else:
+				assert_eq(tested_function(expected,map),cell)
 
 	func test_with_parent_scale():
 		#setup
@@ -67,14 +68,15 @@ class ConversionTest:
 		#Assert
 		for cell in map.tile_map.get_used_cells():
 			var expected = cell
+			var scale = 1
 			if use_parent_transforms:
 				expected *= 3
-				if use_half_offset:
-					expected += map.tile_map.cell_size*3/2
-			elif (use_half_offset):
-				expected += map.tile_map.cell_size/2
-			cell *= grid_size
-			assert_eq(tested_function(cell,map), expected)
+				scale = 3
+			if !to_map:
+				expected += map.tile_map.cell_size*scale/2
+				assert_eq(tested_function(cell,map), expected)
+			else:
+				assert_eq(tested_function(expected,map),cell)
 
 	func test_with_parent_movement_squared():
 		#setup
@@ -88,10 +90,11 @@ class ConversionTest:
 			var expected = cell
 			if use_parent_transforms:
 				expected += Vector2.ONE * 2
-			if (use_half_offset):
+			if !to_map:
 				expected += map.tile_map.cell_size/2
-			cell *= grid_size
-			assert_eq(tested_function(cell,map), expected)
+				assert_eq(tested_function(cell,map), expected)
+			else:
+				assert_eq(tested_function(expected,map),cell)
 
 	func test_with_parent_scale_squared():
 		#setup
@@ -103,14 +106,15 @@ class ConversionTest:
 		#Assert
 		for cell in map.tile_map.get_used_cells():
 			var expected = cell
+			var scale = 1
 			if use_parent_transforms:
 				expected *= 3
-				if use_half_offset:
-					expected += map.tile_map.cell_size*3/2
-			elif (use_half_offset):
-				expected += map.tile_map.cell_size/2
-			cell *= grid_size
-			assert_eq(tested_function(cell,map), expected)
+				scale = 3
+			if !to_map:
+				expected += map.tile_map.cell_size*scale/2
+				assert_eq(tested_function(cell,map), expected)
+			else:
+				assert_eq(tested_function(expected,map),cell)
 
 	func test_with_offset():
 		#setup and act
@@ -118,10 +122,11 @@ class ConversionTest:
 		#Assert
 		for cell in map.tile_map.get_used_cells():
 			var expected = cell + Vector2.ONE * 2
-			if (use_half_offset):
+			if !to_map:
 				expected += map.tile_map.cell_size/2
-			cell *= grid_size
-			assert_eq(tested_function(cell,map), expected)
+				assert_eq(tested_function(cell,map), expected)
+			else:
+				assert_eq(tested_function(expected,map),cell)
 
 	func test_with_cell_size():
 		#setup
@@ -131,10 +136,11 @@ class ConversionTest:
 		#Assert
 		for cell in map.tile_map.get_used_cells():
 			var expected = cell * 3
-			if (use_half_offset):
+			if !to_map:
 				expected += map.tile_map.cell_size/2
-			cell *= grid_size
-			assert_eq(tested_function(cell,map), expected)
+				assert_eq(tested_function(cell,map), expected)
+			else:
+				assert_eq(tested_function(expected,map),cell)
 
 class Test_map_to_local:
 	extends ConversionTest
@@ -155,7 +161,7 @@ class Test_local_to_map:
 	extends ConversionTest
 
 	func before_all():
-		use_half_offset = false
+		to_map = true
 
 	func tested_function(cell : Vector2,map : Map) -> Vector2:
 		return MapSpaceConverter.local_to_map(cell,map)
@@ -164,7 +170,8 @@ class Test_global_to_map:
 	extends ConversionTest
 
 	func before_all():
-		use_half_offset = false
+		use_parent_transforms = true
+		to_map = true
 
 	func tested_function(cell : Vector2,map : Map) -> Vector2:
 		return MapSpaceConverter.global_to_map(cell,map)
