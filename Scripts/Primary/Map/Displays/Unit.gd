@@ -29,18 +29,20 @@ func populate_null_character():
 	_sprite.frames = null
 
 #pre-onready-null protection
-func follow_path_deffered(path : PoolVector2Array):
+func follow_path_deferred(path : PoolVector2Array):
 	call_deferred("follow_path", path)
 
 func follow_path(path : PoolVector2Array):
 	end_follow_path()
-	curve = path_to_curve(path)
+	var cell_size = (get_parent() as TileMap).cell_size
+	if position == Vector2.ONE * 8: # If at the center of a movement window
+		position -= path[path.size()-1] * cell_size
+	curve = path_to_curve(path,cell_size)
 	if _sprite.frames.has_animation("Walk"):
 		_sprite.animation = "Walk"
 
-func path_to_curve(path : PoolVector2Array) -> Curve2D:
+func path_to_curve(path : PoolVector2Array, cell_size : Vector2) -> Curve2D:
 	var new_curve = Curve2D.new()
-	var cell_size = (get_parent() as TileMap).cell_size
 	for i in path.size():
 		new_curve.add_point(path[i] * cell_size)
 	return new_curve
@@ -91,4 +93,4 @@ func subscribe(person,map):
 	if "map" in map:
 		cell = MapSpaceConverter.internal_map_to_map(cell,map)
 	position = MapSpaceConverter.map_to_local(cell,map)
-	person.connect("requesting_follow_path", self, "follow_path_deffered")
+	person.connect("requesting_follow_path", self, "follow_path_deferred")
