@@ -2,6 +2,10 @@ extends Node2D
 
 onready var tile_map : TileMap = $TileMap
 
+func correct_transform():
+	scale()
+	center()
+	
 func center():
 	position = TileMapUtilites.get_centered_position(tile_map,get_parent().rect_size)
 

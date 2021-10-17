@@ -11,6 +11,8 @@ var has_set_end_turn := false
 
 signal cell_change(delta)
 signal requesting_follow_path(path)
+# warning-ignore:unused_signal
+signal lock_window()
 signal new_turn()
 
 func _init(new_character : Character):

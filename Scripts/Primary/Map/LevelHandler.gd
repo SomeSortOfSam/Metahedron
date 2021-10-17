@@ -26,8 +26,6 @@ func initialize_level(level_data : LevelData):
 	music.play() 
 	var _connection = map.connect("repopulated",self,"intialize_cursor")
 	map.repopulate_displays()
-	map.connect("lower_end_turn_button", self, "lower_EndTurnButton")
-	map.connect("raise_end_turn_button", self, "raise_EndTurnButton")
 
 func intialize_cursor():
 	if cursor:

@@ -2,7 +2,7 @@ extends Control
 class_name MovementWindow
 
 onready var close_button : TextureButton = $VSplitContainer/TopBar/Close
-onready var cursor = $VSplitContainer/Body/Body
+onready var cursor : WindowCursor = $VSplitContainer/Body/Body
 onready var container = $VSplitContainer/Body/Body/TilemapContainer
 
 var map : ReferenceMap setget set_map_deferred
@@ -15,8 +15,7 @@ func _ready():
 
 func resize():
 	rect_size = get_small_window_size(get_viewport_rect())
-	container.scale()
-	container.center()
+	container.call_deferred("correct_transform")
 
 func popup_around_tile():
 	resize()
@@ -33,8 +32,8 @@ func set_map_deferred(new_map : ReferenceMap):
 
 func set_map(new_map : ReferenceMap):
 	map = new_map
+	cursor.map = new_map
 	map.repopulate_displays()
-	cursor.set_map()
 	var _connection = map.connect("position_changed", self, "resize")
 
 func subscribe(person):

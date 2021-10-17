@@ -14,7 +14,7 @@ func _gui_input(event):
 		if is_cell_acceptable(cell):
 			handle_acceptable_cell(cell, event)
 		else:
-			$TilemapContainer/ArrowLines.clear()
+			arrow_lines.clear()
 
 func handle_acceptable_cell(cell : Vector2, event):
 	var path = arrow_lines.draw_path(cell)
@@ -29,7 +29,9 @@ func is_cell_acceptable(cell : Vector2):
 	return out 
 
 func position_to_cell(pos : Vector2) -> Vector2:
-	return MapSpaceConverter.local_to_map(container.to_local(pos),map)
+	var tilemap_container : Node2D = $TilemapContainer
+	var local_position : Vector2 =(pos - tilemap_container.position) / tilemap_container.scale
+	return MapSpaceConverter.local_to_map(local_position,map)
 
 func set_map(new_map : ReferenceMap):
 	map = new_map
