@@ -36,13 +36,13 @@ func populate_decoration_displays():
 		decortation.to_decoration_display(self,false)
 
 func repopulate_people():
-	for cell in people.keys():
-		people[cell].disconnect("cell_change",self,"on_person_cell_change")
 	people.clear()
 	for internal_cell in map.people.keys():
 		var cell = MapSpaceConverter.internal_map_to_map(internal_cell, self)
 		if Pathfinder.is_cell_in_range(Vector2.ZERO, cell, tile_range):
 			add_person(map.people[internal_cell])
+		if !map.people[internal_cell].is_connected("cell_change", self, "on_person_cell_change"):
+			map.people[internal_cell].connect("cell_change", self, "on_person_cell_change",[map.people[internal_cell]])
 
 func repopulate_decoration_instances():
 	decorations.clear()
@@ -72,7 +72,6 @@ func clamp(map_point : Vector2) -> Vector2:
 
 func add_person(person):
 	people[MapSpaceConverter.internal_map_to_map(person.cell,self)] = person
-	var _connection = person.connect("cell_change",self,"on_person_cell_change",[person])
 
 func on_person_cell_change(cell_delta,person):
 	if people.erase(MapSpaceConverter.internal_map_to_map(person.cell - cell_delta,self)):
