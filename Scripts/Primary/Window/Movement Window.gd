@@ -80,7 +80,7 @@ func _on_TopBar_accepted_window_movement(delta):
 
 func _on_Window_focus_entered():
 	outline0.color.v += .05
-	outline1.color.v += .02
+	outline1.color.v += .05
 
 func _on_Window_focus_exited():
 	outline0.color.v -= .05

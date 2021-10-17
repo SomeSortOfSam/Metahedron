@@ -100,6 +100,7 @@ script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+display_path = NodePath("TilemapContainer/ArrowLines")
 
 [node name="TilemapContainer" type="Node2D" parent="VSplitContainer/Body/Body"]
 script = ExtResource( 8 )

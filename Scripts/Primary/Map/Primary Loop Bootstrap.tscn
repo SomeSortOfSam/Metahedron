@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Primary/Window/MapScaler.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Primary/Map/PrimaryLoopBootstrap.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Levels/Dusk Desert/TestLevel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Primary/Window/ArrowOverlay/WindowCursor.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Levels/TileGlow.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Primary/Map/Cursor/Cursor.gd" type="Script" id=6]
 
 [node name="Primary Loop Bootstrap" type="Control"]
 anchor_right = 1.0
@@ -44,6 +46,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+display_path = NodePath("WindowMapScaler/TileMap/Cursor")
 
 [node name="WindowMapScaler" type="Node2D" parent="VSplitContainer/Control/ColorRect2"]
 script = ExtResource( 1 )
@@ -51,6 +54,14 @@ script = ExtResource( 1 )
 [node name="TileMap" type="TileMap" parent="VSplitContainer/Control/ColorRect2/WindowMapScaler"]
 cell_size = Vector2( 16, 16 )
 format = 1
+
+[node name="Cursor" type="Sprite" parent="VSplitContainer/Control/ColorRect2/WindowMapScaler/TileMap"]
+texture = ExtResource( 5 )
+script = ExtResource( 6 )
+
+[node name="Timer" type="Timer" parent="VSplitContainer/Control/ColorRect2/WindowMapScaler/TileMap/Cursor"]
+wait_time = 0.02
+one_shot = true
 
 [node name="Control2" type="Control" parent="VSplitContainer"]
 margin_top = 545.0
@@ -80,3 +91,6 @@ __meta__ = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="position_accepted" from="VSplitContainer/Control/ColorRect2" to="." method="_on_Cursor_position_accepted"]
+[connection signal="timeout" from="VSplitContainer/Control/ColorRect2/WindowMapScaler/TileMap/Cursor/Timer" to="VSplitContainer/Control/ColorRect2/WindowMapScaler/TileMap/Cursor" method="_on_Timer_timeout"]

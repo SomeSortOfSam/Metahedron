@@ -40,7 +40,8 @@ func remove_decoration(decoration):
 
 func repopulate_displays():
 	for child in tile_map.get_children():
-		child.queue_free()
+		if "definition" in child:
+			child.queue_free()
 	populate_units()
 	populate_decoration_displays()
 	emit_signal("repopulated")
