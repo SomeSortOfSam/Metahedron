@@ -20,14 +20,6 @@ func set_cell(new_cell : Vector2):
 	var old_cell = cell
 	cell = new_cell
 	emit_signal("cell_change",new_cell - old_cell)
-	
-func move_cell(path : PoolVector2Array):
-	if !has_attacked && !has_moved:
-		var offset = path[path.size() - 1]
-		cell += offset
-		emit_signal("cell_change", offset)
-		emit_signal("requesting_follow_path",path)
-		has_moved = true
 
 func reset_turn():
 	has_moved = false
@@ -47,5 +39,13 @@ func to_unit(map, icon) -> Unit:
 	unit.is_icon = icon
 	return unit
 
-func on_window_closed():
+func _on_path_accepted(path : PoolVector2Array):
+	if !has_attacked && !has_moved:
+		var offset = path[path.size() - 1]
+		cell += offset
+		emit_signal("cell_change", offset)
+		emit_signal("requesting_follow_path",path)
+		has_moved = true
+
+func _on_window_closed():
 	has_set_end_turn = true

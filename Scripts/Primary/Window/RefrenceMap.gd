@@ -2,14 +2,22 @@ extends Map
 class_name ReferenceMap
 
 var map : Map
-var center_cell : Vector2
+var center_cell : Vector2 setget set_center_cell
 var tile_range : int
+
+signal position_changed
 
 func _init(new_tile_map : TileMap, new_map : Map, new_center_cell : Vector2, new_tile_range : int).(new_tile_map):
 	map = new_map
 	center_cell = new_center_cell
 	tile_range = new_tile_range
 	repopulate_fields()
+
+func set_center_cell(new_center_cell : Vector2):
+	center_cell = new_center_cell
+	repopulate_fields()
+	repopulate_displays()
+	emit_signal("position_changed")
 
 func repopulate_fields():
 	repopulate_people()
