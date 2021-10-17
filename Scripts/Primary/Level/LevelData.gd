@@ -9,7 +9,7 @@ func _init():
 	cell_size = Vector2.ONE * 16
 	scale = Vector2.ONE * 4
 
-func to_map():
+func to_map() -> Map:
 	var map = Map.new(self)
 	populate_map(map)
 	return map

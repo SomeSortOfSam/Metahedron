@@ -11,7 +11,6 @@ var has_set_end_turn := false
 
 signal cell_change(delta)
 signal requesting_follow_path(path)
-# warning-ignore:unused_signal
 signal lock_window()
 signal new_turn()
 
@@ -48,6 +47,7 @@ func _on_path_accepted(path : PoolVector2Array):
 		emit_signal("cell_change", offset)
 		emit_signal("requesting_follow_path",path)
 		has_moved = true
+		emit_signal("lock_window")
 
 func _on_window_closed():
 	has_set_end_turn = true

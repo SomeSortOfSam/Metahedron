@@ -6,7 +6,7 @@
 [ext_resource path="res://Scripts/Primary/Window/ArrowOverlay/ArrowLines.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Primary/Window/DraggableArea.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/Primary/Window/ArrowOverlay/WindowCursor.gd" type="Script" id=7]
-[ext_resource path="res://Scripts/Primary/Window/WindowMapScaler.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/Primary/Window/MapScaler.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Window Sprites/Close.png" type="Texture" id=9]
 
 [node name="Window" type="Control"]
@@ -101,12 +101,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TilemapContainer" type="YSort" parent="VSplitContainer/Body/Body"]
+[node name="TilemapContainer" type="Node2D" parent="VSplitContainer/Body/Body"]
 script = ExtResource( 8 )
 
 [node name="ArrowLines" type="TileMap" parent="VSplitContainer/Body/Body/TilemapContainer"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
+cell_tile_origin = 2
 cell_y_sort = true
 format = 1
 script = ExtResource( 5 )
@@ -119,3 +120,7 @@ format = 1
 
 [connection signal="accepted_window_movement" from="VSplitContainer/TopBar" to="." method="_on_TopBar_accepted_window_movement"]
 [connection signal="pressed" from="VSplitContainer/TopBar/Close" to="." method="_on_Close_pressed"]
+[connection signal="focus_entered" from="VSplitContainer/Body/Body" to="." method="_on_Window_focus_entered"]
+[connection signal="focus_exited" from="VSplitContainer/Body/Body" to="." method="_on_Window_focus_exited"]
+[connection signal="mouse_entered" from="VSplitContainer/Body/Body" to="." method="_on_Window_focus_entered"]
+[connection signal="mouse_exited" from="VSplitContainer/Body/Body" to="." method="_on_Window_focus_exited"]

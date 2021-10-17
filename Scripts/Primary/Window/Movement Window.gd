@@ -3,7 +3,10 @@ class_name MovementWindow
 
 onready var close_button : TextureButton = $VSplitContainer/TopBar/Close
 onready var cursor : WindowCursor = $VSplitContainer/Body/Body
-onready var container = $VSplitContainer/Body/Body/TilemapContainer
+onready var container : MapScaler = $VSplitContainer/Body/Body/TilemapContainer
+
+onready var outline0 : ColorRect = $VSplitContainer/Body/Outline
+onready var outline1 : ColorRect = $VSplitContainer/TopBar/Outline
 
 var map : ReferenceMap setget set_map_deferred
 
@@ -15,7 +18,6 @@ func _ready():
 
 func resize():
 	rect_size = get_small_window_size(get_viewport_rect())
-	container.call_deferred("correct_transform")
 
 func popup_around_tile():
 	resize()
@@ -75,3 +77,11 @@ func _on_Close_pressed():
 
 func _on_TopBar_accepted_window_movement(delta):
 	rect_position += delta
+
+func _on_Window_focus_entered():
+	outline0.color.v += .05
+	outline1.color.v += .02
+
+func _on_Window_focus_exited():
+	outline0.color.v -= .05
+	outline1.color.v -= .05

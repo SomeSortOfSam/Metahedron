@@ -42,4 +42,4 @@ func regenerate_astar():
 	arrow_lines.astar = Pathfinder.refrence_map_to_astar(map)
 
 func disable():
-	arrow_lines.disable()
+	arrow_lines.hide()
