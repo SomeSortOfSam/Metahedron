@@ -105,15 +105,16 @@ __meta__ = {
 script = ExtResource( 8 )
 
 [node name="ArrowLines" type="TileMap" parent="VSplitContainer/Body/Body/TilemapContainer"]
-z_index = 1
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
+cell_y_sort = true
 format = 1
 script = ExtResource( 5 )
 
 [node name="TileMap" type="TileMap" parent="VSplitContainer/Body/Body/TilemapContainer"]
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )
+cell_y_sort = true
 format = 1
 
 [connection signal="accepted_window_movement" from="VSplitContainer/TopBar" to="." method="_on_TopBar_accepted_window_movement"]
