@@ -3,9 +3,10 @@ class_name PrimaryLoopBootstrap
 
 export var packed_level_data : PackedScene
 
+onready var turn_gui_holder = $VSplitContainer/UnitGUI
 onready var music = $AudioStreamPlayer
-onready var cursor = $VSplitContainer/Control/ColorRect2
-onready var map_scaler : MapScaler = $VSplitContainer/Control/ColorRect2/WindowMapScaler
+onready var cursor = $VSplitContainer/Playspace/Body
+onready var map_scaler : MapScaler = $VSplitContainer/Playspace/Body/MapScaler
 
 var map : Map
 
@@ -30,6 +31,7 @@ func initialize_map(level_data : LevelData):
 	map.tile_map = map_scaler.tile_map
 	map.repopulate_displays()
 	cursor.map = map
+	populate_turn_gui()
 
 # warning-ignore:shadowed_variable
 func validate_level_data(packed_level_data : PackedScene) -> LevelData:
@@ -48,3 +50,13 @@ func _on_Cursor_position_accepted(cell):
 			movement_window = person.initialize_window(map)
 			cursor.add_child(movement_window)
 		movement_window.call_deferred("popup_around_tile")
+
+func populate_turn_gui():
+	var turn_gui = turn_gui_holder.get_child(0)
+	turn_gui.queue_free()
+	for cell in map.people:
+		var person = map.people[cell]
+		if !person.is_evil:
+			var unit_turn_gui = turn_gui.duplicate()
+			unit_turn_gui.subscribe(person)
+			turn_gui_holder.add_child(unit_turn_gui)
