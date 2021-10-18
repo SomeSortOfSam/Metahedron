@@ -17,8 +17,8 @@ func handle_mouse_event(event : InputEventMouse):
 
 func check_delta(delta : Vector2):
 	
-	var window = get_parent().get_rect()
-	var viewportWindow = get_viewport_rect()
+	var window = get_parent().get_parent().get_rect()
+	var viewportWindow = get_parent().get_parent().get_parent().get_rect()
 	
 	var hypothetical = window
 	hypothetical.position += delta

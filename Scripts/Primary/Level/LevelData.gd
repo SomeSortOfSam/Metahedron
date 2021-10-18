@@ -9,7 +9,7 @@ func _init():
 	cell_size = Vector2.ONE * 16
 	scale = Vector2.ONE * 4
 
-func to_map():
+func to_map() -> Map:
 	var map = Map.new(self)
 	populate_map(map)
 	return map
@@ -28,6 +28,8 @@ func add_placeholder(placeholder : Placeholder,map):
 func add_person(placeholder : Placeholder, map : Map):
 	var person := Person.new(placeholder.definition)
 	person.cell = MapSpaceConverter.local_to_map(placeholder.position,map)
+	if placeholder is EnemyPlaceholder:
+		person.is_evil = true
 	map.add_person(person)
 
 func add_decoration(placeholder : Placeholder, map : Map):

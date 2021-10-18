@@ -33,15 +33,15 @@ func get_person(cell : Vector2):
 	return null
 
 func remove_person(person):
-# warning-ignore:return_value_discarded
-	people.erase(person.cell)
+	var _person =people.erase(person.cell)
 
 func remove_decoration(decoration):
 	decorations.remove(decoration)
 
 func repopulate_displays():
 	for child in tile_map.get_children():
-		child.queue_free()
+		if "definition" in child:
+			child.queue_free()
 	populate_units()
 	populate_decoration_displays()
 	emit_signal("repopulated")
@@ -53,4 +53,3 @@ func populate_units():
 func populate_decoration_displays():
 	for decoration in decorations:
 		decoration.to_decoration_display(self, true) 
-	

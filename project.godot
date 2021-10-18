@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Primary/Map/Resources/Character.gd"
 }, {
+"base": "Node",
+"class": "ConversionTests",
+"language": "GDScript",
+"path": "res://Tests/Primary/feature_convertions.gd"
+}, {
 "base": "Sprite",
 "class": "Cursor",
 "language": "GDScript",
@@ -49,22 +54,22 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Primary/Level/LevelData.gd"
 }, {
-"base": "Node2D",
-"class": "LevelHandler",
-"language": "GDScript",
-"path": "res://Scripts/Primary/Map/LevelHandler.gd"
-}, {
 "base": "Reference",
 "class": "Map",
 "language": "GDScript",
 "path": "res://Scripts/Primary/Map/Map.gd"
+}, {
+"base": "Node2D",
+"class": "MapScaler",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Window/MapScaler.gd"
 }, {
 "base": "Reference",
 "class": "MapSpaceConverter",
 "language": "GDScript",
 "path": "res://Scripts/Primary/Map/Utilites/MapSpaceConverter.gd"
 }, {
-"base": "NinePatchRect",
+"base": "Control",
 "class": "MovementWindow",
 "language": "GDScript",
 "path": "res://Scripts/Primary/Window/Movement Window.gd"
@@ -84,6 +89,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Primary/Level/Placeholder.gd"
 }, {
+"base": "Node",
+"class": "PrimaryLoopBootstrap",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Map/PrimaryLoopBootstrap.gd"
+}, {
 "base": "Map",
 "class": "ReferenceMap",
 "language": "GDScript",
@@ -98,26 +108,34 @@ _global_script_classes=[ {
 "class": "Unit",
 "language": "GDScript",
 "path": "res://Scripts/Primary/Map/Displays/Unit.gd"
+}, {
+"base": "Control",
+"class": "WindowCursor",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Window/ArrowOverlay/WindowCursor.gd"
 } ]
 _global_script_class_icons={
 "ArrowLines": "",
 "Character": "",
+"ConversionTests": "",
 "Cursor": "",
 "DecorationDefinition": "",
 "DecorationDisplay": "",
 "DecorationInstance": "",
 "EnemyPlaceholder": "",
 "LevelData": "",
-"LevelHandler": "",
 "Map": "",
+"MapScaler": "",
 "MapSpaceConverter": "",
 "MovementWindow": "",
 "Pathfinder": "",
 "Person": "",
 "Placeholder": "",
+"PrimaryLoopBootstrap": "",
 "ReferenceMap": "",
 "TileMapUtilites": "",
-"Unit": ""
+"Unit": "",
+"WindowCursor": ""
 }
 
 [WAT]
