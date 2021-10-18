@@ -66,6 +66,7 @@ func _on_lock_window():
 
 func _on_new_turn():
 	close_button.show()
+	cursor.enable()
 
 func _on_cell_change(offset : Vector2):
 	map.center_cell += offset

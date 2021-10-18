@@ -50,5 +50,8 @@ func set_map(new_map : Map):
 	if map is ReferenceMap:
 		var _connection = map.connect("position_changed", display, "_on_map_change",[map])
 
+func enable():
+	display.show()
+
 func disable():
 	display.hide()

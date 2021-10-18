@@ -70,7 +70,6 @@ func end_follow_path():
 	_follower.offset = 0
 	_follower.position = Vector2.ZERO
 
-
 func end_follow_animation():
 	if _sprite.frames.has_animation("Idle"):
 		_sprite.animation = "Idle"
