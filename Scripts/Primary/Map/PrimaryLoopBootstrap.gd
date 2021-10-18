@@ -49,7 +49,8 @@ func _on_Cursor_position_accepted(cell):
 		if movement_window == null:
 			movement_window = person.initialize_window(map)
 			cursor.add_child(movement_window)
-		movement_window.call_deferred("popup_around_tile")
+		if(!person.is_evil):
+			movement_window.call_deferred("popup_around_tile")
 
 func populate_turn_gui():
 	var turn_gui = turn_gui_holder.get_child(0)

@@ -10,6 +10,8 @@ onready var outline1 : ColorRect = $VSplitContainer/TopBar/Outline
 
 var map : ReferenceMap setget set_map_deferred
 
+var player_accessible := true
+
 signal closed
 
 func _ready():
@@ -39,11 +41,20 @@ func set_map(new_map : ReferenceMap):
 	var _connection = map.connect("position_changed", self, "resize")
 
 func subscribe(person):
-	var _connection = cursor.connect("path_accepted", person, "_on_path_accepted")
+	player_accessible = !person.is_evil
+	
+	var _connection
+	
+	if (player_accessible):
+		_connection = cursor.connect("path_accepted", person, "_on_path_accepted")
+		_connection = connect("closed", person, "_on_window_closed")
+	else:
+		_on_lock_window()
+	
 	_connection = person.connect("lock_window", self, "_on_lock_window")
 	_connection = person.connect("cell_change", self, "_on_cell_change")
 	_connection = person.connect("new_turn", self, "_on_new_turn")
-	_connection = connect("closed", person, "_on_window_closed")
+	
 
 static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
 	var third = veiwport_rect.size/3
@@ -77,12 +88,15 @@ func _on_Close_pressed():
 	emit_signal("closed")
 
 func _on_TopBar_accepted_window_movement(delta):
-	rect_position += delta
+	if (player_accessible):
+		rect_position += delta
 
 func _on_Window_focus_entered():
-	outline0.color.v += .05
-	outline1.color.v += .05
+	if (player_accessible):
+		outline0.color.v += .05
+		outline1.color.v += .05
 
 func _on_Window_focus_exited():
-	outline0.color.v -= .05
-	outline1.color.v -= .05
+	if (player_accessible):
+		outline0.color.v -= .05
+		outline1.color.v -= .05
