@@ -9,11 +9,12 @@ var is_evil := false
 
 var has_moved := false
 var has_attacked := false
-var has_set_end_turn := false
+var has_set_end_turn := false setget set_end_turn
 
 signal cell_change(delta)
 signal requesting_follow_path(path)
 signal lock_window()
+signal has_set_end_turn()
 signal new_turn()
 
 func _init(new_character : Character):
@@ -52,4 +53,8 @@ func _on_path_accepted(path : PoolVector2Array):
 		emit_signal("lock_window")
 
 func _on_window_closed():
-	has_set_end_turn = true
+	self.has_set_end_turn = true
+
+func set_end_turn(new_end_turn):
+	has_set_end_turn = new_end_turn
+	emit_signal("has_set_end_turn")

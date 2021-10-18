@@ -5,7 +5,10 @@ var tile_map : TileMap
 var people := {}
 var decorations := [] 
 
+var num_units_with_turn := 0 setget set_num_turns
+
 signal repopulated
+signal turn_ended
 
 func _init(new_tilemap : TileMap):
 	tile_map = new_tilemap
@@ -19,6 +22,9 @@ func clamp(map_point : Vector2) -> Vector2:
 func add_person(person):
 	people[person.cell] = person
 	var _connection = person.connect("cell_change",self,"on_person_cell_change",[person])
+	_connection = person.connect("new_turn",self,"set",["num_units_with_turn",num_units_with_turn + 1])
+	_connection = person.connect("has_set_end_turn",self,"set",["num_units_with_turn",num_units_with_turn - 1])
+	_connection = connect("turn_ended",person,"reset_turn")
 
 func on_person_cell_change(cell_delta,person):
 	if people.erase(person.cell - cell_delta):
@@ -53,3 +59,8 @@ func populate_units():
 func populate_decoration_displays():
 	for decoration in decorations:
 		decoration.to_decoration_display(self, true) 
+
+func set_num_turns(new_num_turns):
+	num_units_with_turn = new_num_turns
+	if num_units_with_turn <= 0:
+		emit_signal("turn_ended")
