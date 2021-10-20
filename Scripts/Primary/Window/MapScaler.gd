@@ -4,7 +4,7 @@ class_name MapScaler
 onready var tile_map : TileMap = $TileMap
 
 func _ready():
-	var _connection = get_parent().connect("resized",self,"correct_transform")
+	var _connection = get_parent().connect("resized",self,"call_deferred",["correct_transform"])
 
 func correct_transform():
 	scale()
