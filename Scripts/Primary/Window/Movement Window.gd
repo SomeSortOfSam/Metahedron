@@ -23,7 +23,7 @@ func resize():
 
 func popup_around_tile():
 	show()
-	call_deferred("call_deferred","center_around_tile",map.center_cell)
+	call_deferred("call_deferred","center_around_tile",map.center_cell) #1 frame to render, 1 frame for rect_size to update
 
 
 func center_around_tile(tile : Vector2):

@@ -55,3 +55,6 @@ func enable():
 
 func disable():
 	display.hide()
+
+func _on_Body_mouse_exited():
+	handle_cell(Vector2.ZERO,false,null)
