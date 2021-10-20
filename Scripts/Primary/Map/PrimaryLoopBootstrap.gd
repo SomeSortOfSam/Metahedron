@@ -59,5 +59,5 @@ func populate_turn_gui():
 		var person = map.people[cell]
 		if !person.is_evil:
 			var unit_turn_gui = turn_gui.duplicate()
-			unit_turn_gui.subscribe(person)
+			unit_turn_gui.call_deferred("subscribe",person)
 			turn_gui_holder.add_child(unit_turn_gui)

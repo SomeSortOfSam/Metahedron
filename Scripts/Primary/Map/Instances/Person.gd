@@ -15,6 +15,7 @@ signal cell_change(delta)
 signal requesting_follow_path(path)
 signal lock_window()
 signal has_set_end_turn()
+signal has_attacked()
 signal new_turn()
 
 func _init(new_character : Character):
@@ -58,3 +59,7 @@ func _on_window_closed():
 func set_end_turn(new_end_turn):
 	has_set_end_turn = new_end_turn
 	emit_signal("has_set_end_turn")
+
+func set_attacked(new_attacked):
+	has_attacked = new_attacked
+	emit_signal("has_attacked")

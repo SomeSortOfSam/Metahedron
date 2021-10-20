@@ -15,6 +15,7 @@ __meta__ = {
 [node name="Outline" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+color = Color( 0.235294, 0.235294, 0.235294, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -26,28 +27,77 @@ margin_left = 5.0
 margin_top = 5.0
 margin_right = -5.0
 margin_bottom = -5.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 0.596078, 0.596078, 0.596078, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Body"]
+[node name="Icon" type="TextureRect" parent="Body"]
+anchor_bottom = 1.0
+margin_right = 64.0
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Body"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-text = "Jean"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="Body/HBoxContainer"]
+margin_right = 314.0
+margin_bottom = 590.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Control" type="Control" parent="Body/HBoxContainer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -100.0
+margin_right = 100.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Portrait" type="TextureRect" parent="Body/HBoxContainer/Control/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -100.0
+margin_bottom = 100.0
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Body/HBoxContainer"]
+margin_left = 318.0
+margin_top = 288.0
+margin_right = 947.0
+margin_bottom = 302.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
 align = 3
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EndTurn" type="Button" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -50.0
+[node name="EndTurn" type="Button" parent="Body/HBoxContainer"]
+margin_left = 951.0
+margin_right = 1014.0
+margin_bottom = 590.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="EndTurn" to="." method="_on_EndTurn_pressed"]
+[connection signal="pressed" from="Body/HBoxContainer/EndTurn" to="." method="_on_EndTurn_pressed"]
