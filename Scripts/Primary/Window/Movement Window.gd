@@ -8,7 +8,7 @@ onready var container : MapScaler = $VSplitContainer/Body/Body/TilemapContainer
 onready var outline0 : ColorRect = $VSplitContainer/Body/Outline
 onready var outline1 : ColorRect = $VSplitContainer/TopBar/Outline
 
-var map : ReferenceMap setget set_map_deferred
+var map : ReferenceMap setget set_map
 
 var player_accessible := true
 
@@ -30,9 +30,6 @@ func center_around_tile(tile : Vector2):
 	rect_position = MapSpaceConverter.map_to_global(tile,map.map)
 	rect_position -= container.global_position - rect_global_position
 	rect_position -= MapSpaceConverter.map_to_local(Vector2.ZERO, map) * container.scale
-
-func set_map_deferred(new_map : ReferenceMap):
-	call_deferred("set_map",new_map)
 
 func set_map(new_map : ReferenceMap):
 	map = new_map
@@ -69,7 +66,7 @@ static func get_window(cell : Vector2, parent_map, window_range : int) -> Moveme
 	return window
 
 func populate_map(parent_map, cell, window_range):
-	self.map = ReferenceMap.new($VSplitContainer/Body/Body/TilemapContainer/TileMap,parent_map,cell,window_range)
+	call_deferred("set_map",ReferenceMap.new($VSplitContainer/Body/Body/TilemapContainer/TileMap,parent_map,cell,window_range))
 
 func _on_lock_window():
 	close_button.hide()
