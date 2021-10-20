@@ -23,12 +23,12 @@ func resize():
 
 func popup_around_tile():
 	show()
-	call_deferred("center_around_tile",map.center_cell)
+	call_deferred("call_deferred","center_around_tile",map.center_cell)
 
 
 func center_around_tile(tile : Vector2):
 	rect_position = MapSpaceConverter.map_to_global(tile,map.map)
-	rect_position -= container.global_position - rect_global_position
+	rect_position -= -rect_global_position + container.global_position
 	rect_position -= MapSpaceConverter.map_to_local(Vector2.ZERO, map) * container.scale
 
 func set_map(new_map : ReferenceMap):
