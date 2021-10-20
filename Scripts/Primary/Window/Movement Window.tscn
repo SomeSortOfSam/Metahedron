@@ -10,6 +10,7 @@
 [ext_resource path="res://Assets/Window Sprites/Close.png" type="Texture" id=9]
 
 [node name="Window" type="Control"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

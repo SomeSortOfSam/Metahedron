@@ -4,13 +4,12 @@ class_name MapScaler
 onready var tile_map : TileMap = $TileMap
 
 func _ready():
-	call_deferred("correct_transform")
 	var _connection = get_parent().connect("resized",self,"call_deferred",["correct_transform"])
 
 func correct_transform():
 	scale()
 	center()
-	
+
 func center():
 	position = TileMapUtilites.get_centered_position(tile_map,get_parent().rect_size)
 
@@ -18,7 +17,7 @@ func scale():
 	var tile_rect = add_border(tile_map.get_used_rect())
 	var max_cell_size = get_parent().rect_size/tile_rect.size
 	var square_cell_size = Vector2(min(max_cell_size.x,max_cell_size.y),min(max_cell_size.x,max_cell_size.y))
-	scale = square_cell_size / TileMapUtilites.DEFUALT_CELL_SIZE
+	scale = square_cell_size / tile_map.cell_size
 
 func add_border(tile_rect : Rect2) -> Rect2:
 	tile_rect.size.y += TileMapUtilites.NUM_BORDER_TILES

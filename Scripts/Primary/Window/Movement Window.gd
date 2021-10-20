@@ -8,7 +8,9 @@ onready var container : MapScaler = $VSplitContainer/Body/Body/TilemapContainer
 onready var outline0 : ColorRect = $VSplitContainer/Body/Outline
 onready var outline1 : ColorRect = $VSplitContainer/TopBar/Outline
 
-var map : ReferenceMap setget set_map_deferred
+var map : ReferenceMap setget set_map
+
+var player_accessible := true
 
 signal closed
 
@@ -20,17 +22,14 @@ func resize():
 	rect_size = get_small_window_size(get_viewport_rect())
 
 func popup_around_tile():
-	resize()
-	center_around_tile(map.center_cell)
 	show()
+	call_deferred("center_around_tile",map.center_cell)
+
 
 func center_around_tile(tile : Vector2):
 	rect_position = MapSpaceConverter.map_to_global(tile,map.map)
 	rect_position -= container.global_position - rect_global_position
 	rect_position -= MapSpaceConverter.map_to_local(Vector2.ZERO, map) * container.scale
-
-func set_map_deferred(new_map : ReferenceMap):
-	call_deferred("set_map",new_map)
 
 func set_map(new_map : ReferenceMap):
 	map = new_map
@@ -39,11 +38,20 @@ func set_map(new_map : ReferenceMap):
 	var _connection = map.connect("position_changed", self, "resize")
 
 func subscribe(person):
-	var _connection = cursor.connect("path_accepted", person, "_on_path_accepted")
+	player_accessible = !person.is_evil
+	
+	var _connection
+	
+	if (player_accessible):
+		_connection = cursor.connect("path_accepted", person, "_on_path_accepted")
+		_connection = connect("closed", person, "_on_window_closed")
+	else:
+		_on_lock_window()
+	
 	_connection = person.connect("lock_window", self, "_on_lock_window")
 	_connection = person.connect("cell_change", self, "_on_cell_change")
 	_connection = person.connect("new_turn", self, "_on_new_turn")
-	_connection = connect("closed", person, "_on_window_closed")
+	
 
 static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
 	var third = veiwport_rect.size/3
@@ -58,7 +66,7 @@ static func get_window(cell : Vector2, parent_map, window_range : int) -> Moveme
 	return window
 
 func populate_map(parent_map, cell, window_range):
-	self.map = ReferenceMap.new($VSplitContainer/Body/Body/TilemapContainer/TileMap,parent_map,cell,window_range)
+	call_deferred("set_map",ReferenceMap.new($VSplitContainer/Body/Body/TilemapContainer/TileMap,parent_map,cell,window_range))
 
 func _on_lock_window():
 	close_button.hide()
@@ -77,12 +85,15 @@ func _on_Close_pressed():
 	emit_signal("closed")
 
 func _on_TopBar_accepted_window_movement(delta):
-	rect_position += delta
+	if (player_accessible):
+		rect_position += delta
 
 func _on_Window_focus_entered():
-	outline0.color.v += .05
-	outline1.color.v += .05
+	if (player_accessible):
+		outline0.color.v += .05
+		outline1.color.v += .05
 
 func _on_Window_focus_exited():
-	outline0.color.v -= .05
-	outline1.color.v -= .05
+	if (player_accessible):
+		outline0.color.v -= .05
+		outline1.color.v -= .05
