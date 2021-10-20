@@ -15,6 +15,7 @@ var player_accessible := true
 signal closed
 
 func _ready():
+	show()
 	resize()
 	var _connection = get_tree().connect("screen_resized",self,"resize")
 
@@ -22,9 +23,9 @@ func resize():
 	rect_size = get_small_window_size(get_viewport_rect())
 
 func popup_around_tile():
-	resize()
-	center_around_tile(map.center_cell)
 	show()
+	call_deferred("center_around_tile",map.center_cell)
+
 
 func center_around_tile(tile : Vector2):
 	rect_position = MapSpaceConverter.map_to_global(tile,map.map)
