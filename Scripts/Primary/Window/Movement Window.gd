@@ -36,6 +36,7 @@ func set_map(new_map : ReferenceMap):
 	cursor.map = new_map
 	map.repopulate_displays()
 	var _connection = map.connect("position_changed", self, "resize")
+	_connection = map.connect("position_changed", container, "correct_transform")
 
 func subscribe(person):
 	player_accessible = !person.is_evil
