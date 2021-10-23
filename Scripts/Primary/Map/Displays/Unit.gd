@@ -1,13 +1,14 @@
-extends Path2D
+extends Node2D
 class_name Unit
 
 export var definition : Resource setget set_character
 export var is_icon := false setget deffer_set_is_icon
 export var speed : float = 10
 
-onready var _follower : PathFollow2D = $Follower
-onready var _icon : Sprite = $Follower/Icon
-onready var _sprite : AnimatedSprite = $Follower/Sprite
+onready var _followe : Path2D = $Path2D
+onready var _follower : PathFollow2D = $Path2D/Follower
+onready var _icon : Sprite = $Node2D/Icon
+onready var _sprite : AnimatedSprite = $Node2D/Sprite
 
 func set_character(new_character : Character):
 	assert(new_character is Character || new_character == null, "New definition in not of type Character")
@@ -37,7 +38,7 @@ func follow_path(path : PoolVector2Array):
 	var cell_size = (get_parent() as TileMap).cell_size
 	if position == Vector2.ONE * 8: # If at the center of a movement window
 		position -= path[path.size()-1] * cell_size
-	curve = path_to_curve(path,cell_size)
+	_followe.curve = path_to_curve(path,cell_size)
 	if _sprite.frames.has_animation("Walk"):
 		_sprite.animation = "Walk"
 
@@ -48,14 +49,14 @@ func path_to_curve(path : PoolVector2Array, cell_size : Vector2) -> Curve2D:
 	return new_curve
 
 func _process(delta):
-	if curve:
+	if _followe.curve:
 		_follower.offset += delta * speed
 		follow_animation()
 		if _follower.unit_offset >= 1:
 			end_follow_path()
 
 func follow_animation():
-	_sprite.flip_h = (curve.get_point_position(curve.get_point_count() - 1) - _follower.position).x < 0
+	_sprite.flip_h = (_followe.curve.get_point_position(_followe.curve.get_point_count() - 1) - _follower.position).x < 0
 	var parent : TileMap  = get_parent()
 	if parent && parent.get_cellv(parent.world_to_map(parent.to_local(_follower.global_position))) < 0:
 		modulate.a = lerp(modulate.a,0,.6)
@@ -66,7 +67,7 @@ func end_follow_path():
 	_follower.unit_offset = 1
 	position += _follower.position
 	end_follow_animation()
-	curve = null
+	_followe.curve = null
 	_follower.offset = 0
 	_follower.position = Vector2.ZERO
 
@@ -74,7 +75,7 @@ func end_follow_animation():
 	if _sprite.frames.has_animation("Idle"):
 		_sprite.animation = "Idle"
 	var parent : TileMap  = get_parent()
-	if curve && parent.get_cellv(parent.world_to_map(position)) < 0:
+	if _followe.curve && parent.get_cellv(parent.world_to_map(position)) < 0:
 		queue_free()
 
 #pre-onready-null protection
