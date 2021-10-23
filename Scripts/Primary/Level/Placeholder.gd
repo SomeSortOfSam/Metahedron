@@ -3,7 +3,7 @@ extends Sprite
 class_name Placeholder
 
 const TOOL_ALPHA := .2
-const RECT_WIDTH := 4
+const RECT_WIDTH := 2
 
 export var definition : Resource setget set_definition
 export var cell_offset : Vector2 setget set_offset
@@ -55,5 +55,5 @@ func draw_index_rect():
 
 func get_cell_rect(tilemap):
 	var cell = tilemap.world_to_map(position)
-	var cell_position = tilemap.map_to_world(cell) - position
-	return Rect2(cell_position,tilemap.cell_size)
+	var cell_position = tilemap.map_to_world(cell) - position + Vector2.ONE * RECT_WIDTH *.5
+	return Rect2(cell_position,tilemap.cell_size - Vector2.ONE * RECT_WIDTH)

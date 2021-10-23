@@ -49,8 +49,15 @@ offset = Vector2( 0, -5 )
 script = ExtResource( 3 )
 definition = ExtResource( 5 )
 
+[node name="Placeholder6" type="Sprite" parent="."]
+position = Vector2( 24, 56 )
+texture = ExtResource( 10 )
+offset = Vector2( 0, -5 )
+script = ExtResource( 3 )
+definition = ExtResource( 5 )
+
 [node name="EnemyPlaceholder" type="Sprite" parent="."]
-position = Vector2( 56, 24 )
+position = Vector2( 104, 24 )
 texture = ExtResource( 10 )
 offset = Vector2( 0, -5 )
 script = ExtResource( 4 )

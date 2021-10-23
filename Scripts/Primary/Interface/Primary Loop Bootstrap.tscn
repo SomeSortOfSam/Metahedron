@@ -58,6 +58,7 @@ cell_size = Vector2( 16, 16 )
 format = 1
 
 [node name="Cursor" type="Sprite" parent="VSplitContainer/Playspace/Body/MapScaler/TileMap"]
+modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 5 )
 script = ExtResource( 6 )
 

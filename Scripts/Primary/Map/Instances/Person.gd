@@ -3,7 +3,7 @@ class_name Person
 
 var character : Character
 var cell : Vector2 setget set_cell
-var window : MovementWindow
+var window : MovementWindow setget ,get_movement_window
 
 var is_evil := false
 
@@ -14,7 +14,7 @@ var has_set_end_turn := false setget set_end_turn
 signal cell_change(delta)
 signal requesting_follow_path(path)
 signal lock_window()
-signal has_set_end_turn()
+signal has_set_end_turn(is_true)
 signal has_attacked()
 signal new_turn()
 
@@ -26,15 +26,22 @@ func set_cell(new_cell : Vector2):
 	cell = new_cell
 	emit_signal("cell_change",new_cell - old_cell)
 
-func reset_turn():
-	has_moved = false
-	has_attacked = false
-	has_set_end_turn = false
-	emit_signal("new_turn")
+func reset_turn(evil_turn):
+	if evil_turn == is_evil:
+		has_moved = false
+		has_attacked = false
+		has_set_end_turn = false
+		emit_signal("new_turn")
+		if is_evil:
+			self.has_set_end_turn = true
 
 func initialize_window(map) -> MovementWindow:
 	window = MovementWindow.get_window(cell,map,3)
 	window.call_deferred("subscribe",self)
+	return window
+
+func get_movement_window() -> MovementWindow:
+	self.has_set_end_turn = false
 	return window
 
 func to_unit(map, icon) -> Unit:
@@ -57,8 +64,9 @@ func _on_window_closed():
 	self.has_set_end_turn = true
 
 func set_end_turn(new_end_turn):
-	has_set_end_turn = new_end_turn
-	emit_signal("has_set_end_turn")
+	if has_set_end_turn != new_end_turn:
+		has_set_end_turn = new_end_turn
+		emit_signal("has_set_end_turn",has_set_end_turn)
 
 func set_attacked(new_attacked):
 	has_attacked = new_attacked
