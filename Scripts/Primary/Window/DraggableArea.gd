@@ -2,9 +2,15 @@ extends Control
 
 onready var body : ColorRect = $Body
 
+onready var window : Control = $"../.."
+onready var viewport_window : Control = window.get_node("..")
+
 signal accepted_window_movement(delta)
 
 var is_dragging : bool = false setget set_is_dragging
+
+func _ready():
+	var _connection = get_tree().connect("screen_resized",self,"correct_window_pos",[],CONNECT_DEFERRED)
 
 func _gui_input(event):
 	if event is InputEventMouse:
@@ -17,18 +23,31 @@ func handle_mouse_event(event : InputEventMouse):
 		check_delta(event.get_relative())
 
 func check_delta(delta : Vector2):
+	var window_rect := window.get_rect()
+	var viewport_rect := viewport_window.get_rect()
+
+	var hypotheical := window_rect
+	hypotheical.position += delta
+
+	emit_signal("accepted_window_movement",clamp_delta(delta,hypotheical,viewport_rect))
+
+func correct_window_pos():
+	var window_rect := window.get_rect()
+	var viewport_rect := viewport_window.get_rect()
+
+	emit_signal("accepted_window_movement",clamp_delta(Vector2.ZERO,window_rect,viewport_rect))
+
+func clamp_delta(delta : Vector2, window_rect : Rect2, viewport_rect : Rect2) -> Vector2:
+	if window_rect.position.x < viewport_rect.position.x:
+		delta.x -= window_rect.position.x
+	if window_rect.position.y < viewport_rect.position.y:
+		delta.y -= window_rect.position.y
+	if window_rect.position.x + window_rect.size.x > viewport_rect.position.x + viewport_rect.size.x:
+		delta.x -= (window_rect.position.x + window_rect.size.x)-(viewport_rect.position.x + viewport_rect.size.x)
+	if window_rect.position.y + window_rect.size.y > viewport_rect.position.y + viewport_rect.size.y:
+		delta.y -= (window_rect.position.y + window_rect.size.y)-(viewport_rect.position.y + viewport_rect.size.y)
 	
-	var window = get_parent().get_parent().get_rect()
-	var viewportWindow = get_parent().get_parent().get_parent().get_rect()
-	
-	var hypothetical = window
-	hypothetical.position += delta
-	
-	var currentDistance = window.position.distance_squared_to(viewportWindow.position + (viewportWindow.size / 2))
-	var hypotheticalDistance = hypothetical.position.distance_squared_to(viewportWindow.position + (viewportWindow.size / 2))
-	
-	if viewportWindow.encloses(hypothetical) || hypotheticalDistance < currentDistance :
-		emit_signal("accepted_window_movement",delta)
+	return delta
 
 func set_is_dragging(new_is_dragging):
 	if is_dragging != new_is_dragging:
