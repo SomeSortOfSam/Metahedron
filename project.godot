@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "TileMap",
 "class": "ArrowLines",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Window/ArrowOverlay/ArrowLines.gd"
+"path": "res://Scripts/Primary/Interface/Cursor/ArrowLines.gd"
 }, {
 "base": "Resource",
 "class": "Character",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Map/Resources/Character.gd"
+"path": "res://Scripts/Primary/Level/Resources/Character.gd"
 }, {
 "base": "Node",
 "class": "ConversionTests",
@@ -27,12 +27,12 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "Cursor",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Map/Cursor/Cursor.gd"
+"path": "res://Scripts/Primary/Interface/Cursor/Cursor.gd"
 }, {
 "base": "Resource",
 "class": "DecorationDefinition",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Map/Resources/DecorationDefinition.gd"
+"path": "res://Scripts/Primary/Level/Resources/DecorationDefinition.gd"
 }, {
 "base": "Sprite",
 "class": "DecorationDisplay",
@@ -62,7 +62,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "MapScaler",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Window/MapScaler.gd"
+"path": "res://Scripts/Primary/Map/MapScaler.gd"
 }, {
 "base": "Reference",
 "class": "MapSpaceConverter",
@@ -92,7 +92,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "PrimaryLoopBootstrap",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Map/PrimaryLoopBootstrap.gd"
+"path": "res://Scripts/Primary/Interface/PrimaryLoopBootstrap.gd"
 }, {
 "base": "Map",
 "class": "ReferenceMap",
@@ -112,7 +112,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "WindowCursor",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Window/ArrowOverlay/WindowCursor.gd"
+"path": "res://Scripts/Primary/Interface/Cursor/WindowCursor.gd"
 } ]
 _global_script_class_icons={
 "ArrowLines": "",

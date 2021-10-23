@@ -23,7 +23,7 @@ func resize():
 
 func popup_around_tile():
 	show()
-	call_deferred("call_deferred","center_around_tile",map.center_cell)
+	call_deferred("call_deferred","center_around_tile",map.center_cell) #1 frame to render, 1 frame for rect_size to update
 
 
 func center_around_tile(tile : Vector2):
@@ -36,6 +36,7 @@ func set_map(new_map : ReferenceMap):
 	cursor.map = new_map
 	map.repopulate_displays()
 	var _connection = map.connect("position_changed", self, "resize")
+	_connection = map.connect("position_changed", container, "correct_transform")
 
 func subscribe(person):
 	player_accessible = !person.is_evil

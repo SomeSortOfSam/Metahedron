@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Scripts/Primary/Map/PlayerUnitGUI.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Primary/Interface/PlayerUnitGUI.gd" type="Script" id=1]
 
 [node name="PlayerUnitGUI" type="Control"]
 anchor_right = 1.0
@@ -11,6 +11,11 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+new_turn_outline_color = Color( 0.29, 0.29, 0.29, 1 )
+has_moved_outline_color = Color( 0.22, 0.22, 0.22, 1 )
+new_turn_body_color = Color( 0.596078, 0.596078, 0.596078, 1 )
+has_set_end_turn_body_color = Color( 0.52, 0.52, 0.52, 1 )
+has_attacked_body_color = Color( 0.41, 0.41, 0.41, 1 )
 
 [node name="Outline" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -70,6 +75,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -100.0
 margin_bottom = 100.0
+mouse_filter = 2
 expand = true
 stretch_mode = 6
 __meta__ = {

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Arrowlines.png-f8cc79329c8622e909a7967819354aa6.stex"
+path="res://.import/Arrowlines.png-c22763e31f3099f64dcd4a5220af6668.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scripts/Primary/Window/ArrowOverlay/Arrowlines.png"
-dest_files=[ "res://.import/Arrowlines.png-f8cc79329c8622e909a7967819354aa6.stex" ]
+source_file="res://Assets/Window Sprites/Arrowlines.png"
+dest_files=[ "res://.import/Arrowlines.png-c22763e31f3099f64dcd4a5220af6668.stex" ]
 
 [params]
 

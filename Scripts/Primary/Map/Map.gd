@@ -6,9 +6,10 @@ var people := {}
 var decorations := [] 
 
 var num_units_with_turn := 0 setget set_num_turns
+var evil_turn := false
 
 signal repopulated
-signal turn_ended
+signal turn_ended(evil_turn)
 
 func _init(new_tilemap : TileMap):
 	tile_map = new_tilemap
@@ -21,14 +22,20 @@ func clamp(map_point : Vector2) -> Vector2:
 
 func add_person(person):
 	people[person.cell] = person
-	var _connection = person.connect("cell_change",self,"on_person_cell_change",[person])
-	_connection = person.connect("new_turn",self,"set",["num_units_with_turn",num_units_with_turn + 1])
-	_connection = person.connect("has_set_end_turn",self,"set",["num_units_with_turn",num_units_with_turn - 1])
+	var _connection = person.connect("cell_change",self,"_on_person_cell_change",[person])
+	_connection = person.connect("new_turn",self,"_on_person_new_turn")
+	_connection = person.connect("has_set_end_turn",self,"_on_person_has_set_end_turn")
 	_connection = connect("turn_ended",person,"reset_turn")
 
-func on_person_cell_change(cell_delta,person):
+func _on_person_cell_change(cell_delta,person):
 	if people.erase(person.cell - cell_delta):
 		people[person.cell] = person
+
+func _on_person_new_turn():
+	self.num_units_with_turn += 1
+
+func _on_person_has_set_end_turn(ending_turn):
+	self.num_units_with_turn -= 1 if ending_turn else -1 
 
 func add_decoration(decoration):
 	decorations.append(decoration)
@@ -37,12 +44,6 @@ func get_person(cell : Vector2):
 	if people.has(cell):
 		return people[cell]
 	return null
-
-func remove_person(person):
-	var _person =people.erase(person.cell)
-
-func remove_decoration(decoration):
-	decorations.remove(decoration)
 
 func repopulate_displays():
 	for child in tile_map.get_children():
@@ -63,4 +64,6 @@ func populate_decoration_displays():
 func set_num_turns(new_num_turns):
 	num_units_with_turn = new_num_turns
 	if num_units_with_turn <= 0:
-		emit_signal("turn_ended")
+		evil_turn = !evil_turn
+		emit_signal("turn_ended",evil_turn)
+		
