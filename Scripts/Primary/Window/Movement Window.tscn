@@ -104,12 +104,10 @@ __meta__ = {
 }
 display_path = NodePath("TilemapContainer/ArrowLines")
 
-[node name="TilemapContainer" type="RemoteTransform2D" parent="VSplitContainer/Body/Body"]
-remote_path = NodePath("../../AttackRenderer")
+[node name="TilemapContainer" type="Node2D" parent="VSplitContainer/Body/Body"]
 script = ExtResource( 8 )
 
 [node name="ArrowLines" type="TileMap" parent="VSplitContainer/Body/Body/TilemapContainer"]
-position = Vector2( -8, -8 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 cell_tile_origin = 2
@@ -118,14 +116,17 @@ format = 1
 script = ExtResource( 5 )
 
 [node name="TileMap" type="TileMap" parent="VSplitContainer/Body/Body/TilemapContainer"]
-position = Vector2( -8, -8 )
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )
 cell_y_sort = true
 format = 1
 
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="VSplitContainer/Body/Body/TilemapContainer"]
+position = Vector2( 8, 8 )
+remote_path = NodePath("../../../AttackRenderer")
+
 [node name="AttackRenderer" type="Node2D" parent="VSplitContainer/Body"]
-position = Vector2( 5, 0 )
+position = Vector2( 13, 8 )
 script = ExtResource( 4 )
 
 [connection signal="accepted_window_movement" from="VSplitContainer/TopBar" to="." method="_on_TopBar_accepted_window_movement"]
