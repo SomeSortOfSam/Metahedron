@@ -8,6 +8,7 @@ onready var display : Node2D = get_node(display_path)
 
 var map : Map setget set_map
 
+signal position_selected(cell)
 signal position_accepted(cell)
 signal path_accepted(path)
 
@@ -18,6 +19,8 @@ func _gui_input(event):
 		handle_cell(cell,acceptable, event)
 
 func handle_cell(cell : Vector2, acceptable : bool , event):
+	if acceptable:
+		emit_signal("position_selected",cell)
 	var out = display.draw_display(cell, acceptable)
 	if is_accepted(acceptable, event):
 		if out is PoolVector2Array:

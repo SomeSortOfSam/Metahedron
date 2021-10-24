@@ -11,7 +11,7 @@ func correct_transform():
 	center()
 
 func center():
-	position = TileMapUtilites.get_centered_position(tile_map,get_parent().rect_size)
+	position = TileMapUtilites.get_centered_position(tile_map,get_parent().rect_size) + tile_map.cell_size/2
 
 func scale():
 	var tile_rect = add_border(tile_map.get_used_rect())
