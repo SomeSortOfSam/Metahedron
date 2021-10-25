@@ -1,69 +1,19 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/gut/plugin_control.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Menu/Menu.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Menu/Textures/MenuPlay.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Menu/Textures/MenuOptions.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Menu/Textures/MenuLore.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Menu/Textures/MHTitle.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Menu/Textures/MiniBackground.png" type="Texture" id=7]
-[ext_resource path="res://Scripts/Menu/ScrollingBackround.gd" type="Script" id=8]
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 3 )
-region = Rect2( 2, 0, 123, 64 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 3 )
-region = Rect2( 2, 128, 123, 64 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 3 )
-region = Rect2( 2, 64, 123, 64 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 4 )
-region = Rect2( 1, 0, 63, 64 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 4 )
-region = Rect2( 1, 128, 63, 64 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 4 )
-region = Rect2( 1, 64, 63, 64 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 63, 64 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 128, 63, 64 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 64, 63, 64 )
+[ext_resource path="res://Scripts/Menu/Main.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/Menu/Settings.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/Menu/Lore.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/Menu/Credits.tscn" type="PackedScene" id=6]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_lock_": true
-}
-
-[node name="TextureRect" type="TextureRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 7 )
-expand = true
-stretch_mode = 2
-script = ExtResource( 8 )
-__meta__ = {
 "_edit_use_anchors_": false
 }
-rate = 15.0
 
 [node name="Gut" type="Control" parent="."]
 visible = false
@@ -71,113 +21,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 740, 250 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-_should_maximize = true
 _should_print_to_console = false
 _file_prefix = "feature_"
 _include_subdirectories = true
 _directory1 = "res://Tests"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Credits" parent="." instance=ExtResource( 6 )]
+visible = false
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
-margin_right = 1024.0
-margin_bottom = 197.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 6 )
-expand = true
-stretch_mode = 6
+[node name="Lore" parent="." instance=ExtResource( 5 )]
+visible = false
 
-[node name="Control" type="Control" parent="VBoxContainer"]
-margin_top = 201.0
-margin_right = 1024.0
-margin_bottom = 398.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Settings" parent="." instance=ExtResource( 4 )]
+visible = false
 
-[node name="PlayButton" type="TextureButton" parent="VBoxContainer/Control"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = -64.0
-margin_right = 128.0
-margin_bottom = 64.0
-keep_pressed_outside = true
-texture_normal = SubResource( 1 )
-texture_pressed = SubResource( 2 )
-texture_hover = SubResource( 3 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="OptionsButton" type="TextureButton" parent="VBoxContainer/Control/PlayButton"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = -216.0
-margin_top = -54.3351
-margin_bottom = 113.665
-texture_normal = SubResource( 4 )
-texture_pressed = SubResource( 5 )
-texture_hover = SubResource( 6 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LoreButton" type="TextureButton" parent="VBoxContainer/Control/PlayButton"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_top = -56.4539
-margin_right = 216.0
-margin_bottom = 111.546
-texture_normal = SubResource( 7 )
-texture_pressed = SubResource( 8 )
-texture_hover = SubResource( 9 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 402.0
-margin_right = 1024.0
-margin_bottom = 600.0
-size_flags_vertical = 3
-
-[node name="CreditsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_right = 1024.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-size_flags_vertical = 2
-text = "Credits"
-
-[node name="GutButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_top = 101.0
-margin_right = 1024.0
-margin_bottom = 121.0
-size_flags_horizontal = 3
-size_flags_vertical = 2
-text = "Gut"
+[node name="Main" parent="." instance=ExtResource( 3 )]
 
 [connection signal="gut_ready" from="Gut" to="." method="_on_Gut_gut_ready"]
-[connection signal="pressed" from="VBoxContainer/Control/PlayButton" to="." method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/Control/PlayButton/OptionsButton" to="." method="_on_OptionsButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/Control/PlayButton/LoreButton" to="." method="_on_LoreButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/GutButton" to="." method="_on_GutButton_pressed"]
+[connection signal="request_credits" from="Main" to="." method="_on_Main_request_credits"]
+[connection signal="request_game" from="Main" to="." method="_on_Main_request_game"]
+[connection signal="request_gut" from="Main" to="." method="_on_Main_request_gut"]
+[connection signal="request_lore" from="Main" to="." method="_on_Main_request_lore"]
+[connection signal="request_options" from="Main" to="." method="_on_Main_request_options"]
