@@ -16,12 +16,14 @@ func _ready():
 	data.queue_free()
 
 func initialize_level(level_data : LevelData):
-	initialize_music(level_data)
+	var settings = Settings.new()
+	initialize_music(level_data, settings)
 	initialize_map(level_data)
 
-func initialize_music(level_data : LevelData):
+func initialize_music(level_data : LevelData, settings : Settings):
 	music.stream = level_data.music
-	music.play() 
+	music.play()
+	music.volume_db = lerp(-50,0,settings.volume)
 
 func initialize_map(level_data : LevelData):
 	map = level_data.to_map()
