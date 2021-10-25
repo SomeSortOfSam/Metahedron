@@ -9,14 +9,16 @@ export var definition : Resource setget set_definition
 export var cell_offset : Vector2 setget set_offset
 
 func set_definition(new_definition):
-	if "level_texture" in new_definition && "level_offset" in new_definition:
+	if "level_texture" in new_definition && "level_offset" in new_definition && "level_scale" in new_definition:
 		definition = new_definition
 		texture = definition.level_texture
 		offset = definition.level_offset
+		scale = definition.level_scale
 	elif !new_definition:
 		definition = null
 		texture = null
 		offset = Vector2.ZERO
+		scale = Vector2.ONE
 	else:
 		assert(false, "Definition is not a valid resource type")
 
