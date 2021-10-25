@@ -1,6 +1,6 @@
 extends Control
 
-onready var gut_button = $VBoxContainer/Buttons2/GutButton
+onready var gut_button = $GutButton
 
 signal request_options()
 signal request_lore()

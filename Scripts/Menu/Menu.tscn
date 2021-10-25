@@ -38,6 +38,7 @@ visible = false
 [node name="Main" parent="." instance=ExtResource( 3 )]
 
 [connection signal="gut_ready" from="Gut" to="." method="_on_Gut_gut_ready"]
+[connection signal="request_back" from="Settings" to="." method="_on_Settings_request_back"]
 [connection signal="request_credits" from="Main" to="." method="_on_Main_request_credits"]
 [connection signal="request_game" from="Main" to="." method="_on_Main_request_game"]
 [connection signal="request_gut" from="Main" to="." method="_on_Main_request_gut"]

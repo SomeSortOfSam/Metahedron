@@ -9,12 +9,14 @@ var gut
 
 func _input(event):
 	if (event is InputEventKey and event.scancode == KEY_ESCAPE):
-		if (gut.is_visible()):
-			gut.set_visible(false)
-		main.show()
-		settings.hide()
-		lore.hide()
-		credits.hide()
+		back()
+
+func back():
+	main.show()
+	gut.hide()
+	settings.hide()
+	lore.hide()
+	credits.hide()
 
 func _on_Gut_gut_ready():
 	gut = $Gut.get_gut()
@@ -40,3 +42,6 @@ func _on_Main_request_lore():
 func _on_Main_request_options():
 	main.hide()
 	settings.show()
+
+func _on_Settings_request_back():
+	back()

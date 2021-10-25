@@ -1,5 +1,116 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Menu/SettingsMenu.gd" type="Script" id=1]
 
 [node name="Settings" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_clip_content = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.231373, 0.529412, 0.815686, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="."]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 50.0
+margin_bottom = 25.0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 30.0
+margin_right = -5.0
+margin_bottom = -5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Volume" type="HBoxContainer" parent="Settings"]
+margin_right = 1014.0
+margin_bottom = 185.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Settings/Volume"]
+margin_right = 233.0
+margin_bottom = 185.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+text = "Volume"
+align = 1
+valign = 1
+
+[node name="HSlider" type="HSlider" parent="Settings/Volume"]
+margin_left = 237.0
+margin_right = 1014.0
+margin_bottom = 185.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 1.0
+step = 0.01
+
+[node name="FullMap" type="HBoxContainer" parent="Settings"]
+margin_top = 189.0
+margin_right = 1014.0
+margin_bottom = 375.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Settings/FullMap"]
+margin_right = 233.0
+margin_bottom = 186.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+text = "Use full map in windows"
+align = 1
+valign = 1
+
+[node name="CheckBox" type="CheckBox" parent="Settings/FullMap"]
+margin_left = 237.0
+margin_right = 1014.0
+margin_bottom = 186.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FullMap2" type="HBoxContainer" parent="Settings"]
+margin_top = 379.0
+margin_right = 1014.0
+margin_bottom = 565.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Settings/FullMap2"]
+margin_right = 233.0
+margin_bottom = 186.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+text = "Use square windows"
+align = 1
+valign = 1
+
+[node name="CheckBox" type="CheckBox" parent="Settings/FullMap2"]
+margin_left = 237.0
+margin_right = 1014.0
+margin_bottom = 186.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="Back" to="." method="_on_Button_pressed"]

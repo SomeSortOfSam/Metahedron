@@ -100,6 +100,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/Primary/Window/RefrenceMap.gd"
 }, {
 "base": "Reference",
+"class": "Settings",
+"language": "GDScript",
+"path": "res://Scripts/Menu/Settings.gd"
+}, {
+"base": "Reference",
 "class": "TileMapUtilites",
 "language": "GDScript",
 "path": "res://Scripts/Primary/Map/Utilites/TileMap_Utils.gd"
@@ -133,6 +138,7 @@ _global_script_class_icons={
 "Placeholder": "",
 "PrimaryLoopBootstrap": "",
 "ReferenceMap": "",
+"Settings": "",
 "TileMapUtilites": "",
 "Unit": "",
 "WindowCursor": ""
