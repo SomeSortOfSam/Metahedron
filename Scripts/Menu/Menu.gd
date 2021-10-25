@@ -42,6 +42,3 @@ func _on_Main_request_lore():
 func _on_Main_request_options():
 	main.hide()
 	settings.show()
-
-func _on_Settings_request_back():
-	back()

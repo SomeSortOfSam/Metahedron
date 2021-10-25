@@ -64,6 +64,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 max_value = 1.0
 step = 0.01
+value = 1.0
 
 [node name="FullMap" type="HBoxContainer" parent="Settings"]
 margin_top = 189.0
@@ -89,14 +90,14 @@ margin_bottom = 186.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="FullMap2" type="HBoxContainer" parent="Settings"]
+[node name="SquareWindow" type="HBoxContainer" parent="Settings"]
 margin_top = 379.0
 margin_right = 1014.0
 margin_bottom = 565.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Settings/FullMap2"]
+[node name="Label" type="Label" parent="Settings/SquareWindow"]
 margin_right = 233.0
 margin_bottom = 186.0
 size_flags_horizontal = 3
@@ -106,11 +107,12 @@ text = "Use square windows"
 align = 1
 valign = 1
 
-[node name="CheckBox" type="CheckBox" parent="Settings/FullMap2"]
+[node name="CheckBox" type="CheckBox" parent="Settings/SquareWindow"]
 margin_left = 237.0
 margin_right = 1014.0
 margin_bottom = 186.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+pressed = true
 
 [connection signal="pressed" from="Back" to="." method="_on_Button_pressed"]
