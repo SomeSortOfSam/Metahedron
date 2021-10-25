@@ -4,7 +4,7 @@ onready var portait : TextureRect = $Body/HBoxContainer/Control/Control/Portrait
 onready var icon : TextureRect = $Body/Icon
 onready var label : Label = $Body/HBoxContainer/Label
 
-onready var end_turn : Button = $Body/HBoxContainer/EndTurn
+onready var end_turn : TextureButton = $AspectRatioContainer/EndTurn
 onready var outline : ColorRect = $Outline
 onready var body : ColorRect = $Body
 
