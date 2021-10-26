@@ -9,6 +9,7 @@ onready var cursor = $VSplitContainer/Playspace/Body
 onready var map_scaler : MapScaler = $VSplitContainer/Playspace/Body/MapScaler
 
 var map : Map
+var turn_manager := TurnManager.new()
 
 func _ready():
 	var data = validate_level_data(packed_level_data)
@@ -26,12 +27,9 @@ func initialize_music(level_data : LevelData):
 	music.volume_db = lerp(-50,0,settings.volume)
 
 func initialize_map(level_data : LevelData):
-	map = level_data.to_map()
-	map_scaler.tile_map.tile_set = level_data.tile_set
-	for cell in level_data.get_used_cells():
-		map_scaler.tile_map.set_cell(cell.x,cell.y,level_data.get_cellv(cell),false,false,false,level_data.get_cell_autotile_coord(cell.x,cell.y))
-	map.tile_map = map_scaler.tile_map
+	map = level_data.to_map(map_scaler.tile_map)
 	map.repopulate_displays()
+	turn_manager.subscribe(map)
 	cursor.map = map
 	populate_turn_gui()
 
