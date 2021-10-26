@@ -56,8 +56,9 @@ func subscribe(person):
 
 static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
 	var third = veiwport_rect.size/3
-	third.x = min(third.x,third.y)
-	third.y = min(third.x,third.y)
+	if Settings.new().squareWindows:
+		third.x = min(third.x,third.y)
+		third.y = min(third.x,third.y)
 	return third
 
 static func get_window(cell : Vector2, parent_map, window_range : int) -> MovementWindow:
@@ -67,7 +68,10 @@ static func get_window(cell : Vector2, parent_map, window_range : int) -> Moveme
 	return window
 
 func populate_map(parent_map, cell, window_range):
-	call_deferred("set_map",ReferenceMap.new($VSplitContainer/Body/Body/TilemapContainer/TileMap,parent_map,cell,window_range))
+	var new_map = ReferenceMap.new($VSplitContainer/Body/Body/TilemapContainer/TileMap,parent_map,cell,window_range)
+	if Settings.new().fullMap:
+		new_map.outer_tile_map = $VSplitContainer/Body/Body/TilemapContainer/OuterMap
+	call_deferred("set_map",new_map)
 
 func _on_lock_window():
 	close_button.hide()

@@ -16,16 +16,16 @@ func _ready():
 	data.queue_free()
 
 func initialize_level(level_data : LevelData):
-	var settings = Settings.new()
-	initialize_music(level_data, settings)
-	initialize_map(level_data, settings)
+	initialize_music(level_data)
+	initialize_map(level_data)
 
-func initialize_music(level_data : LevelData, settings : Settings):
+func initialize_music(level_data : LevelData):
 	music.stream = level_data.music
 	music.play()
+	var settings = Settings.new()
 	music.volume_db = lerp(-50,0,settings.volume)
 
-func initialize_map(level_data : LevelData, settings : Settings):
+func initialize_map(level_data : LevelData):
 	map = level_data.to_map()
 	map_scaler.tile_map.tile_set = level_data.tile_set
 	for cell in level_data.get_used_cells():
@@ -48,7 +48,7 @@ func _on_Cursor_position_accepted(cell):
 	if Pathfinder.is_occupied(cell,map):
 		var person : Person = map.people[cell]
 		if(!person.is_evil):
-			person.window.call_deferred("popup_around_tile")
+			person.window.popup_around_tile()
 
 func populate_turn_gui():
 	var turn_gui = turn_gui_holder.get_child(0)

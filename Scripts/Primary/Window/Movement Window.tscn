@@ -103,7 +103,7 @@ __meta__ = {
 }
 display_path = NodePath("TilemapContainer/ArrowLines")
 
-[node name="TilemapContainer" type="Node2D" parent="VSplitContainer/Body/Body"]
+[node name="TilemapContainer" type="YSort" parent="VSplitContainer/Body/Body"]
 script = ExtResource( 8 )
 
 [node name="ArrowLines" type="TileMap" parent="VSplitContainer/Body/Body/TilemapContainer"]
@@ -113,6 +113,14 @@ cell_tile_origin = 2
 cell_y_sort = true
 format = 1
 script = ExtResource( 5 )
+
+[node name="OuterMap" type="TileMap" parent="VSplitContainer/Body/Body/TilemapContainer"]
+modulate = Color( 0.54, 0.54, 0.54, 1 )
+z_index = -1
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+cell_y_sort = true
+format = 1
 
 [node name="TileMap" type="TileMap" parent="VSplitContainer/Body/Body/TilemapContainer"]
 tile_set = ExtResource( 3 )
