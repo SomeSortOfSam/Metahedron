@@ -9,5 +9,7 @@ script = ExtResource( 3 )
 name = "Jean"
 level_texture = ExtResource( 1 )
 level_offset = Vector2( 0, -5 )
+level_scale = Vector2( 1, 1 )
 animations = ExtResource( 2 )
 animations_offset = Vector2( 0, -22 )
+animations_scale = Vector2( 0.5, 0.5 )

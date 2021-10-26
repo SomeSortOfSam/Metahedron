@@ -9,15 +9,19 @@ func _init():
 	cell_size = Vector2.ONE * 16
 	scale = Vector2.ONE * 4
 
-func to_map() -> Map:
-	var map = Map.new(self)
+func to_map(tilemap : TileMap = self) -> Map:
+	var map = Map.new(tilemap)
 	populate_map(map)
 	return map
 
-func populate_map(map):
+func populate_map(map : Map):
 	for child in get_children():
 		if child is Placeholder:
 			add_placeholder(child,map)
+	if map.tile_map != self:
+		map.tile_map.tile_set = tile_set
+		for cell in get_used_cells():
+			map.tile_map.set_cell(cell.x,cell.y,get_cellv(cell),false,false,false,get_cell_autotile_coord(cell.x,cell.y))
 
 func add_placeholder(placeholder : Placeholder,map):
 	if placeholder.definition is DecorationDefinition:
@@ -26,13 +30,7 @@ func add_placeholder(placeholder : Placeholder,map):
 		add_person(placeholder, map)
 
 func add_person(placeholder : Placeholder, map : Map):
-	var person := Person.new(placeholder.definition)
-	person.cell = MapSpaceConverter.local_to_map(placeholder.position,map)
-	if placeholder is EnemyPlaceholder:
-		person.is_evil = true
-	else:
-		map.num_units_with_turn += 1
-	map.add_person(person)
+	map.add_person(Person.new(placeholder.definition,placeholder is EnemyPlaceholder,MapSpaceConverter.local_to_map(placeholder.position,map)))
 
 func add_decoration(placeholder : Placeholder, map : Map):
 	var decoration = DecorationInstance.new(placeholder.definition)

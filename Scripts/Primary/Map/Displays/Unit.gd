@@ -21,8 +21,10 @@ func populate_character(new_character : Character):
 	definition = new_character
 	_icon.texture = definition.level_texture
 	_icon.position = definition.level_offset
+	_icon.scale = definition.level_scale
 	_sprite.frames = definition.animations
 	_sprite.offset = definition.animations_offset
+	_sprite.scale = definition.animations_scale
 
 func populate_null_character():
 	definition = null

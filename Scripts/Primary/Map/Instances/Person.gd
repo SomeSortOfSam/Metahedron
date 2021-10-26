@@ -18,8 +18,10 @@ signal has_set_end_turn(is_true)
 signal has_attacked()
 signal new_turn()
 
-func _init(new_character : Character):
+func _init(new_character : Character, new_is_evil := false, new_cell := Vector2.ZERO):
 	character = new_character
+	is_evil = new_is_evil
+	cell = new_cell
 
 func set_cell(new_cell : Vector2):
 	var old_cell = cell

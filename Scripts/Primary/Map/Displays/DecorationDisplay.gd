@@ -9,6 +9,7 @@ func set_in_level(new_in_level : bool):
 	if definition:
 		texture = definition.level_texture if in_level else definition.movement_texture
 		offset = definition.level_offset if in_level else definition.movement_offset
+		scale = definition.level_scale if in_level else definition.movement_scale
 
 func set_definition(new_definition : DecorationDefinition):
 	assert(new_definition is DecorationDefinition || new_definition == null, "New DecorationDefinition in not of type DecorationDefinition")
