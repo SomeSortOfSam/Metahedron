@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Primary/Interface/PlayerUnitGUI.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Window Sprites/end_turn_button.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Interface Sprites/end_turn_button.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Interface Sprites/Iconsheet.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -14,6 +15,14 @@ region = Rect2( 64, 0, 32, 47 )
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 32, 47 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 32, 16, 16 )
 
 [node name="PlayerUnitGUI" type="Control"]
 anchor_right = 1.0
@@ -119,7 +128,6 @@ ratio = 0.666
 stretch_mode = 1
 alignment_horizontal = 2
 __meta__ = {
-"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
@@ -130,6 +138,46 @@ hint_tooltip = "End Turn"
 texture_normal = SubResource( 1 )
 texture_pressed = SubResource( 2 )
 texture_hover = SubResource( 3 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control2" type="HBoxContainer" parent="AspectRatioContainer/EndTurn"]
+show_behind_parent = true
+anchor_bottom = 1.0
+margin_left = -110.0
+margin_right = -10.0
+grow_horizontal = 0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Moved" type="TextureRect" parent="AspectRatioContainer/EndTurn/Control2"]
+margin_right = 48.0
+margin_bottom = 595.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 5
+texture = SubResource( 4 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attacked" type="TextureRect" parent="AspectRatioContainer/EndTurn/Control2"]
+margin_left = 52.0
+margin_right = 100.0
+margin_bottom = 595.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 5
+texture = SubResource( 5 )
 expand = true
 stretch_mode = 6
 __meta__ = {
