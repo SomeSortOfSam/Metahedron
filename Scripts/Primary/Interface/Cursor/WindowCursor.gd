@@ -19,7 +19,8 @@ func _gui_input(event):
 		handle_cell(cell,acceptable, event)
 
 func handle_cell(cell : Vector2, acceptable : bool , event):
-	emit_signal("position_selected",cell)
+	if event:
+		emit_signal("position_selected",cell)
 	var out = display.draw_display(cell, acceptable)
 	if is_accepted(acceptable, event):
 		if out is PoolVector2Array:
