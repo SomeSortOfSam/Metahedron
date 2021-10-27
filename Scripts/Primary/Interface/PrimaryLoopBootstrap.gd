@@ -9,6 +9,7 @@ onready var cursor = $VSplitContainer/Playspace/Body
 onready var map_scaler : MapScaler = $VSplitContainer/Playspace/Body/MapScaler
 
 var map : Map
+var enemy_ai : EnemyAI
 
 func _ready():
 	var data = validate_level_data(packed_level_data)
@@ -31,6 +32,7 @@ func initialize_map(level_data : LevelData):
 	map.tile_map = map_scaler.tile_map
 	map.repopulate_displays()
 	cursor.map = map
+	initialize_enemy_ai()
 	populate_turn_gui()
 
 # warning-ignore:shadowed_variable
@@ -61,3 +63,7 @@ func populate_turn_gui():
 			var unit_turn_gui = turn_gui.duplicate()
 			unit_turn_gui.call_deferred("subscribe",person)
 			turn_gui_holder.add_child(unit_turn_gui)
+
+func initialize_enemy_ai():
+	enemy_ai = EnemyAI.new(map)
+	var _connection = map.connect("friendly_turn_ended", enemy_ai, "check_turn")

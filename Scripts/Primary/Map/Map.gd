@@ -9,7 +9,8 @@ var num_units_with_turn := 0 setget set_num_turns
 var evil_turn := false
 
 signal repopulated
-signal turn_ended(evil_turn)
+signal friendly_turn_ended(evil_turn)
+signal evil_turn_ended(evil_turn)
 
 func _init(new_tilemap : TileMap):
 	tile_map = new_tilemap
@@ -25,7 +26,7 @@ func add_person(person):
 	var _connection = person.connect("cell_change",self,"_on_person_cell_change",[person])
 	_connection = person.connect("new_turn",self,"_on_person_new_turn")
 	_connection = person.connect("has_set_end_turn",self,"_on_person_has_set_end_turn")
-	_connection = connect("turn_ended",person,"reset_turn")
+	_connection = connect("evil_turn_ended",person,"reset_turn")
 
 func _on_person_cell_change(cell_delta,person):
 	if people.erase(person.cell - cell_delta):
@@ -64,6 +65,10 @@ func populate_decoration_displays():
 func set_num_turns(new_num_turns):
 	num_units_with_turn = new_num_turns
 	if num_units_with_turn <= 0:
-		evil_turn = !evil_turn
-		emit_signal("turn_ended",evil_turn)
+		evil_turn = true
+		emit_signal("friendly_turn_ended",evil_turn)
+		print("SIGNAL EMITTED " + String(evil_turn))
 		
+func end_evil_turn():
+	evil_turn = false
+	emit_signal("evil_turn_ended",evil_turn)

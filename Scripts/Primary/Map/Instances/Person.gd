@@ -71,3 +71,6 @@ func set_end_turn(new_end_turn):
 func set_attacked(new_attacked):
 	has_attacked = new_attacked
 	emit_signal("has_attacked")
+
+func follow_path(path : PoolVector2Array):
+	emit_signal("requesting_follow_path", path)
