@@ -4,6 +4,8 @@ class_name EnemyAI
 var enemies := {}
 var map : Map
 
+signal enemy_turn_ended()
+
 func _init(new_map : Map):
 	var map = new_map
 	var people = map.people
@@ -20,7 +22,9 @@ func start_enemy_turn():
 	print("Enemy Turn Started >:)")
 	for cell in enemies:
 		var enemy = enemies[cell]
-		enemy.set_cell(cell + Vector2.DOWN)
-		var astar = Pathfinder.refrence_map_to_astar(enemy.window.map)
-		var path = astar.get_point_path(MapSpaceConverter.refrence_map_to_index(cell),MapSpaceConverter.refrence_map_to_index(cell + Vector2.DOWN))
-		enemy.follow_path(path)
+		print("I'm sure the enemy would have moved here")
+	end_enemy_turn()
+		
+func end_enemy_turn():
+	print("Enemy Turn Ended")
+	emit_signal("enemy_turn_ended")

@@ -66,9 +66,11 @@ func set_num_turns(new_num_turns):
 	num_units_with_turn = new_num_turns
 	if num_units_with_turn <= 0:
 		evil_turn = true
-		emit_signal("friendly_turn_ended",evil_turn)
 		print("SIGNAL EMITTED " + String(evil_turn))
+		emit_signal("friendly_turn_ended",evil_turn)
 		
 func end_evil_turn():
 	evil_turn = false
+	print("SIGNAL EMITTED " + String(evil_turn))
 	emit_signal("evil_turn_ended",evil_turn)
+	

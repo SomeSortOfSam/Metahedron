@@ -67,3 +67,4 @@ func populate_turn_gui():
 func initialize_enemy_ai():
 	enemy_ai = EnemyAI.new(map)
 	var _connection = map.connect("friendly_turn_ended", enemy_ai, "check_turn")
+	_connection = enemy_ai.connect("enemy_turn_ended", map, "end_evil_turn")
