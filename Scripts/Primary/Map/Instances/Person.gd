@@ -34,8 +34,6 @@ func reset_turn(evil_turn):
 		has_attacked = false
 		has_set_end_turn = false
 		emit_signal("new_turn")
-		if is_evil:
-			self.has_set_end_turn = true
 
 func initialize_window(map) -> MovementWindow:
 	window = MovementWindow.get_window(cell,map,3)
