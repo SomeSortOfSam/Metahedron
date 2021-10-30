@@ -2,6 +2,7 @@ extends Reference
 class_name Map
 
 var tile_map : TileMap
+var astar : AStar2D
 var people := {}
 var decorations := [] 
 
@@ -10,6 +11,7 @@ signal person_added(person)
 
 func _init(new_tilemap : TileMap):
 	tile_map = new_tilemap
+	astar = Pathfinder.map_to_astar(self)
 
 func clamp(map_point : Vector2) -> Vector2:
 	var used_rect := tile_map.get_used_rect()

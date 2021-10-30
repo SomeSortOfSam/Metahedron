@@ -58,6 +58,7 @@ func repopulate_tilemap():
 	var internal_map_tiles = Pathfinder.get_walkable_tiles_in_range(self)
 	for internal_tile in internal_map_tiles:
 		populate_tile(internal_tile,tile_map)
+	astar = Pathfinder.map_to_astar(self)
 	if Settings.new().fullMap && outer_tile_map:
 		outer_tile_map.clear()
 		for internal_tile in map.tile_map.get_used_cells():

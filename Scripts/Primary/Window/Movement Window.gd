@@ -33,8 +33,8 @@ func center_around_tile(tile : Vector2):
 
 func set_map(new_map : ReferenceMap):
 	map = new_map
-	cursor.map = new_map
 	map.repopulate_displays()
+	cursor.map = new_map
 	var _connection = map.connect("position_changed", self, "resize")
 	_connection = map.connect("position_changed", container, "correct_transform")
 

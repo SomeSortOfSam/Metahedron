@@ -1,9 +1,9 @@
 class_name Pathfinder
 
-static func is_occupied(map_point : Vector2, map : Map) -> bool:
+static func is_occupied(map_point : Vector2, map) -> bool:
 	return map.people.has(map_point)
 
-static func is_walkable(map_point : Vector2, map : Map) -> bool:
+static func is_walkable(map_point : Vector2, map) -> bool:
 	if "map" in map:
 		map_point = MapSpaceConverter.map_to_internal_map(map_point,map)
 		map = map.map
@@ -14,10 +14,9 @@ static func is_walkable(map_point : Vector2, map : Map) -> bool:
 	var autotile_coords = map.tile_map.get_cell_autotile_coord(tile_map_point.x,tile_map_point.y)
 	return tile_type != -1 && is_tile_type_walkable(tile_type, autotile_coords, map.tile_map)
 
-static func is_path_walkable(to : Vector2, map : Map) -> bool:
+static func is_path_walkable(to : Vector2, map) -> bool:
 	var is_walkable := true
-	var astar = map_to_astar(map)
-	var path = astar.get_point_path(MapSpaceConverter.map_to_index(Vector2.ZERO),MapSpaceConverter.map_to_index(to))
+	var path = map.astar.get_point_path(MapSpaceConverter.map_to_index(Vector2.ZERO),MapSpaceConverter.map_to_index(to))
 	if path.size() == 0:
 		is_walkable = false
 	for point in path:
@@ -84,7 +83,7 @@ static func map_to_astar(map) -> AStar2D:
 				astar.connect_points(index,neighbor_index)
 	return astar
 
-static func get_neighbors(cell : Vector2, map : Map) -> Array:
+static func get_neighbors(cell : Vector2, map) -> Array:
 	var out := []
 	for x in range(-1,2):
 		for y in range(-1,2):

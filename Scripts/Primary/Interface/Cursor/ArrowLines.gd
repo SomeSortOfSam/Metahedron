@@ -16,4 +16,4 @@ func draw_display(to : Vector2, acceptable : bool) -> PoolVector2Array:
 		return PoolVector2Array([])
 
 func _on_map_change(map):
-	astar = Pathfinder.map_to_astar(map)
+	astar = map.astar
