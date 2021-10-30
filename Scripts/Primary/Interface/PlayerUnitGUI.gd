@@ -27,6 +27,7 @@ func subscribe(person : Person):
 	var _connection = connect("request_skip_turn",person,"set_skipped",[true])
 	_connection = person.connect("move",self,"_on_person_move")
 	_connection = person.connect("skip_turn",self,"_on_person_skip_turn")
+	_connection = person.connect("unskip_turn",self,"_on_person_unskip_turn")
 	_connection = person.connect("attack",self,"_on_person_attack")
 	_connection = person.connect("new_turn",self,"_on_person_new_turn")
 
@@ -40,8 +41,11 @@ func _on_person_attack():
 	body.color = has_attacked_body_color
 	attacked.modulate = has_attacked_body_color
 
-func _on_person_skip_turn(new_end_turn):
-	body.color = has_set_end_turn_body_color if new_end_turn else new_turn_body_color
+func _on_person_skip_turn():
+	body.color = has_set_end_turn_body_color
+
+func _on_person_unskip_turn():
+	body.color = new_turn_body_color
 
 func _on_person_new_turn():
 	end_turn.show()

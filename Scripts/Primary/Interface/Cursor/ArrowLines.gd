@@ -3,7 +3,7 @@ class_name ArrowLines
 
 var astar : AStar2D
 
-func draw_display(to : Vector2, acceptable : bool) -> PoolVector2Array:
+func draw_display(to : Vector2, acceptable : bool):
 	clear()
 	if acceptable:
 		var path := astar.get_point_path(MapSpaceConverter.map_to_index(Vector2.ZERO),MapSpaceConverter.map_to_index(to))
@@ -11,9 +11,6 @@ func draw_display(to : Vector2, acceptable : bool) -> PoolVector2Array:
 			set_cellv(point,0)
 		update_bitmask_region()
 		set_cell(0,0,0,false,false,false,Vector2.ZERO) #set center cell to non arrow
-		return path
-	else:
-		return PoolVector2Array([])
 
 func _on_map_change(map):
 	astar = map.astar

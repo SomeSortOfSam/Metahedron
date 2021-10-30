@@ -61,9 +61,9 @@ func _on_window_requesting_close():
 
 func open_window():
 	emit_signal("open_window")
-	set_skipped("false")
+	set_skipped(false)
 
-func set_skipped(new_end_turn):
+func set_skipped(new_end_turn : bool):
 	if has_skipped != new_end_turn:
 		has_skipped = new_end_turn
 		if new_end_turn:

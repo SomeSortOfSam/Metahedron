@@ -43,6 +43,7 @@ func subscribe(person):
 	
 	if (player_accessible):
 		_connection = connect("requesting_close", person, "_on_window_requesting_close")
+		_connection = cursor.connect("position_accepted", self, "_on_cursor_position_accepted",[person])
 		_connection = person.connect("new_turn", self, "_on_person_new_turn")
 	else:
 		lock_window()
@@ -89,6 +90,9 @@ func _on_person_close_window():
 
 func _on_person_open_window():
 	popup_around_tile()
+
+func _on_cursor_position_accepted(delta : Vector2, person):
+	person.cell += delta
 
 func _on_TopBar_accepted_window_movement(delta):
 	if (player_accessible):
