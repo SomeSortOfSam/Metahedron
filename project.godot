@@ -47,7 +47,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "EnemyAI",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Level/EnemyAI.gd"
+"path": "res://Scripts/Primary/Interface/EnemyAI.gd"
 }, {
 "base": "Placeholder",
 "class": "EnemyPlaceholder",

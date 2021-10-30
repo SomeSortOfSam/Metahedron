@@ -31,6 +31,8 @@ func initialize_map(level_data : LevelData):
 	map = level_data.to_map(map_scaler.tile_map)
 	map.repopulate_displays()
 	turn_manager.subscribe(map)
+	$Label.text = str(turn_manager.turns)
+	var _connection = turn_manager.connect("new_turns", $Label, "set")
 	cursor.map = map
 	initialize_enemy_ai()
 	populate_turn_gui()
@@ -63,5 +65,4 @@ func populate_turn_gui():
 
 func initialize_enemy_ai():
 	enemy_ai = EnemyAI.new(map)
-	var _connection = map.connect("friendly_turn_ended", enemy_ai, "check_turn")
-	_connection = enemy_ai.connect("enemy_turn_ended", map, "end_evil_turn")
+	var _connection = turn_manager.connect("turn_ended", enemy_ai, "check_turn")
