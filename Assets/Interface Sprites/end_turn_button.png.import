@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SettingsButton.png-82af31cfbd5e4d6d7466f28a389fb583.stex"
+path="res://.import/end_turn_button.png-eedceb404e56108f563ac991e5ca71fa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Menu/Textures/SettingsButton.png"
-dest_files=[ "res://.import/SettingsButton.png-82af31cfbd5e4d6d7466f28a389fb583.stex" ]
+source_file="res://Assets/Interface Sprites/end_turn_button.png"
+dest_files=[ "res://.import/end_turn_button.png-eedceb404e56108f563ac991e5ca71fa.stex" ]
 
 [params]
 

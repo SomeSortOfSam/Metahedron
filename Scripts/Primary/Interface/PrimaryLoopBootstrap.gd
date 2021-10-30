@@ -10,6 +10,7 @@ onready var map_scaler : MapScaler = $VSplitContainer/Playspace/Body/MapScaler
 
 var map : Map
 var enemy_ai : EnemyAI
+var turn_manager := TurnManager.new()
 
 func _ready():
 	var data = validate_level_data(packed_level_data)
@@ -22,15 +23,14 @@ func initialize_level(level_data : LevelData):
 
 func initialize_music(level_data : LevelData):
 	music.stream = level_data.music
-	music.play() 
+	music.play()
+	var settings = Settings.new()
+	music.volume_db = lerp(-50,0,settings.volume)
 
 func initialize_map(level_data : LevelData):
-	map = level_data.to_map()
-	map_scaler.tile_map.tile_set = level_data.tile_set
-	for cell in level_data.get_used_cells():
-		map_scaler.tile_map.set_cell(cell.x,cell.y,level_data.get_cellv(cell),false,false,false,level_data.get_cell_autotile_coord(cell.x,cell.y))
-	map.tile_map = map_scaler.tile_map
+	map = level_data.to_map(map_scaler.tile_map)
 	map.repopulate_displays()
+	turn_manager.subscribe(map)
 	cursor.map = map
 	initialize_enemy_ai()
 	populate_turn_gui()
@@ -47,18 +47,15 @@ func validate_level_data(packed_level_data : PackedScene) -> LevelData:
 func _on_Cursor_position_accepted(cell):
 	if Pathfinder.is_occupied(cell,map):
 		var person : Person = map.people[cell]
-		var movement_window = person.window
-		if movement_window == null:
-			movement_window = person.initialize_window(map)
-			cursor.add_child(movement_window)
 		if(!person.is_evil):
-			movement_window.call_deferred("popup_around_tile")
+			person.open_window()
 
 func populate_turn_gui():
 	var turn_gui = turn_gui_holder.get_child(0)
 	turn_gui.queue_free()
 	for cell in map.people:
-		var person = map.people[cell]
+		var person : Person = map.people[cell]
+		cursor.add_child(person.initialize_window(map))
 		if !person.is_evil:
 			var unit_turn_gui = turn_gui.duplicate()
 			unit_turn_gui.call_deferred("subscribe",person)

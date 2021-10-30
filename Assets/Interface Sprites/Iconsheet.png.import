@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Window.png-6cf62ca32da1c820dd662dc3d0589fde.stex"
+path="res://.import/Iconsheet.png-a0e0f715ba0e24d6ca3fd551fc36d432.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Menu/Textures/Window.png"
-dest_files=[ "res://.import/Window.png-6cf62ca32da1c820dd662dc3d0589fde.stex" ]
+source_file="res://Assets/Interface Sprites/Iconsheet.png"
+dest_files=[ "res://.import/Iconsheet.png-a0e0f715ba0e24d6ca3fd551fc36d432.stex" ]
 
 [params]
 

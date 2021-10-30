@@ -12,7 +12,7 @@ var map : ReferenceMap setget set_map
 
 var player_accessible := true
 
-signal closed
+signal requesting_close()
 
 func _ready():
 	resize()
@@ -25,7 +25,6 @@ func popup_around_tile():
 	show()
 	call_deferred("call_deferred","center_around_tile",map.center_cell) #1 frame to render, 1 frame for rect_size to update
 
-
 func center_around_tile(tile : Vector2):
 	rect_position = MapSpaceConverter.map_to_global(tile,map.map)
 	rect_position -= -rect_global_position + container.global_position
@@ -33,10 +32,9 @@ func center_around_tile(tile : Vector2):
 
 func set_map(new_map : ReferenceMap):
 	map = new_map
-	cursor.map = new_map
 	map.repopulate_displays()
-	var _connection = map.connect("position_changed", self, "resize")
-	_connection = map.connect("position_changed", container, "correct_transform")
+	cursor.map = new_map
+	var _connection = map.connect("position_changed", container, "correct_transform")
 
 func subscribe(person):
 	player_accessible = !person.is_evil
@@ -44,20 +42,21 @@ func subscribe(person):
 	var _connection
 	
 	if (player_accessible):
-		_connection = cursor.connect("path_accepted", person, "_on_path_accepted")
-		_connection = connect("closed", person, "_on_window_closed")
+		_connection = connect("requesting_close", person, "_on_window_requesting_close")
+		_connection = cursor.connect("position_accepted", self, "_on_cursor_position_accepted",[person])
+		_connection = person.connect("new_turn", self, "_on_person_new_turn")
 	else:
-		_on_lock_window()
+		lock_window()
 	
-	_connection = person.connect("lock_window", self, "_on_lock_window")
-	_connection = person.connect("cell_change", self, "_on_cell_change")
-	_connection = person.connect("new_turn", self, "_on_new_turn")
-	
+	_connection = person.connect("move", self, "_on_person_move")
+	_connection = person.connect("close_window", self, "_on_person_close_window")
+	_connection = person.connect("open_window", self, "_on_person_open_window")	
 
 static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
 	var third = veiwport_rect.size/3
-	third.x = min(third.x,third.y)
-	third.y = min(third.x,third.y)
+	if Settings.new().squareWindows:
+		third.x = min(third.x,third.y)
+		third.y = min(third.x,third.y)
 	return third
 
 static func get_window(cell : Vector2, parent_map, window_range : int) -> MovementWindow:
@@ -67,23 +66,33 @@ static func get_window(cell : Vector2, parent_map, window_range : int) -> Moveme
 	return window
 
 func populate_map(parent_map, cell, window_range):
-	call_deferred("set_map",ReferenceMap.new($VSplitContainer/Body/Body/TilemapContainer/TileMap,parent_map,cell,window_range))
+	var new_map = ReferenceMap.new($VSplitContainer/Body/Body/TilemapContainer/TileMap,parent_map,cell,window_range)
+	new_map.outer_tile_map = $VSplitContainer/Body/Body/TilemapContainer/OuterMap
+	call_deferred("set_map",new_map)
 
-func _on_lock_window():
+func lock_window():
 	close_button.hide()
 	cursor.disable()
 
-func _on_new_turn():
+func _on_person_new_turn():
 	close_button.show()
 	cursor.enable()
 
-func _on_cell_change(offset : Vector2):
-	map.center_cell += offset
-	close_button.hide()
+func _on_person_move(delta : Vector2):
+	map.center_cell += delta
+	lock_window()
 
 func _on_Close_pressed():
+	emit_signal("requesting_close")
+
+func _on_person_close_window():
 	hide()
-	emit_signal("closed")
+
+func _on_person_open_window():
+	popup_around_tile()
+
+func _on_cursor_position_accepted(delta : Vector2, person):
+	person.cell += delta
 
 func _on_TopBar_accepted_window_movement(delta):
 	if (player_accessible):

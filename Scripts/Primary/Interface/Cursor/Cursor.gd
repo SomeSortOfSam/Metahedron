@@ -10,12 +10,11 @@ func setup_scale():
 	scale = map.tile_map.scale
 	scale *= map.tile_map.cell_size / map.tile_map.scale / texture.get_size()
 
-func draw_display(cell : Vector2, acceptable : bool) -> Vector2:
+func draw_display(cell : Vector2, acceptable : bool):
 	if acceptable:
 		position = MapSpaceConverter.map_to_local(cell,map)
 	in_bounds = acceptable
 	_timer.start()
-	return cell
 
 func _on_map_change(new_map):
 	map = new_map
