@@ -16,8 +16,8 @@ static func is_walkable(map_point : Vector2, map : Map) -> bool:
 
 static func is_path_walkable(to : Vector2, map : Map) -> bool:
 	var is_walkable := true
-	var astar = refrence_map_to_astar(map)
-	var path = astar.get_point_path(MapSpaceConverter.refrence_map_to_index(Vector2.ZERO),MapSpaceConverter.refrence_map_to_index(to))
+	var astar = map_to_astar(map)
+	var path = astar.get_point_path(MapSpaceConverter.map_to_index(Vector2.ZERO),MapSpaceConverter.map_to_index(to))
 	if path.size() == 0:
 		is_walkable = false
 	for point in path:
@@ -46,26 +46,24 @@ static func is_autotile_type_walkable(tile_type : int, autotile_coords : Vector2
 		return true
 	return true
 
-static func get_walkable_tiles(map : Map) -> Array:
+static func get_walkable_tiles(map) -> Array:
 	var out := []
-	var used_rect = map.tile_map.get_used_rect()
-	for x in used_rect.size.x:
-		for y in used_rect.size.y:
-			var tile := Vector2(x,y)
-			if is_walkable(tile, map):
-				out.append(tile)
+	for tile in map.tile_map.get_used_cells():
+		if is_walkable(tile, map):
+			out.append(tile)
 	return out
 
-static func get_walkable_tiles_in_range(map_point : Vector2, tile_range : int, map : Map) -> Array:
-	var out := get_walkable_tiles(map)
+static func get_walkable_tiles_in_range(map,walkable_tiles := []) -> Array:
+	if walkable_tiles.size() < 1:
+		walkable_tiles = get_walkable_tiles(map.map)
 	var i := 0
-	while i < out.size():
-		var point = out[i]
-		if !is_cell_in_range(map_point, point, tile_range):
-			out.remove(i)
+	while i < walkable_tiles.size():
+		var point = walkable_tiles[i]
+		if !is_cell_in_range(map.center_cell, point, map.tile_range):
+			walkable_tiles.remove(i)
 			i -= 1
 		i += 1
-	return out
+	return walkable_tiles
 
 static func is_cell_in_range(center_point : Vector2, check_point : Vector2, tile_range : int) -> bool:
 	var x = abs(center_point.x - check_point.x)
@@ -73,18 +71,17 @@ static func is_cell_in_range(center_point : Vector2, check_point : Vector2, tile
 	var delta = x+y
 	return delta <= tile_range
 
-static func refrence_map_to_astar(map) -> AStar2D:
+static func map_to_astar(map) -> AStar2D:
 	var astar = AStar2D.new()
-	var tiles = get_walkable_tiles_in_range(map.center_cell, map.tile_range, map.map)
+	var tiles = get_walkable_tiles(map)
 	for tile in tiles:
-		var cell = MapSpaceConverter.tilemap_to_map(tile,map.map);
-		var refrence_cell = MapSpaceConverter.internal_map_to_map(cell,map)
-		var refrence_index = MapSpaceConverter.refrence_map_to_index(refrence_cell)
-		astar.add_point(refrence_index,refrence_cell)
-		for neighbor in get_neighbors(refrence_cell, map):
-			var neighbor_index = MapSpaceConverter.refrence_map_to_index(neighbor)
+		var cell = MapSpaceConverter.tilemap_to_map(tile,map)
+		var index = MapSpaceConverter.map_to_index(cell)
+		astar.add_point(index,cell)
+		for neighbor in get_neighbors(cell, map):
+			var neighbor_index = MapSpaceConverter.map_to_index(neighbor)
 			if astar.has_point(neighbor_index):
-				astar.connect_points(refrence_index,neighbor_index)
+				astar.connect_points(index,neighbor_index)
 	return astar
 
 static func get_neighbors(cell : Vector2, map : Map) -> Array:

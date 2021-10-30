@@ -55,7 +55,7 @@ func repopulate_decoration_instances():
 
 func repopulate_tilemap():
 	tile_map.clear()
-	var internal_map_tiles = Pathfinder.get_walkable_tiles_in_range(center_cell,tile_range,map)
+	var internal_map_tiles = Pathfinder.get_walkable_tiles_in_range(self)
 	for internal_tile in internal_map_tiles:
 		populate_tile(internal_tile,tile_map)
 	if Settings.new().fullMap && outer_tile_map:
