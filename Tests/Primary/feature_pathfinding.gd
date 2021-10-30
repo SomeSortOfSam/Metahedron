@@ -18,7 +18,24 @@ func test_refrence_astar_generation():
 	#act
 	var astar := Pathfinder.refrence_map_to_astar(map)
 	#assert
-	var points := astar.get_points()
-	var center_index := MapSpaceConverter.refrence_map_to_index(Vector2.ZERO)
-	print(str(points) + " " + str(center_index))
-	assert_ne(points.find(center_index),-1,"Center cell included")	
+	astar_asserts(astar,MapSpaceConverter.refrence_map_to_index(Vector2.ZERO),MapSpaceConverter.refrence_map_to_index(Vector2.RIGHT),MapSpaceConverter.refrence_map_to_index(Vector2.RIGHT*2))
+
+func test_map_astar_generation():
+	#arrange
+	var map = Map.new(add_child_autofree(TileMap.new()))
+	for x in range(5):
+		for y in range(5):
+			map.tile_map.set_cell(x,y,0)
+	#act
+	var astar := Pathfinder.refrence_map_to_astar(map)
+	#assert
+	astar_asserts(astar,MapSpaceConverter.refrence_map_to_index(Vector2.ONE*2),MapSpaceConverter.refrence_map_to_index(Vector2(1,2)),MapSpaceConverter.refrence_map_to_index(Vector2.DOWN*2))
+
+
+func astar_asserts(astar : AStar2D, center_cell : int, neighbor_cell : int, distant_cell : int):
+	assert_true(astar.has_point(center_cell),"Center cell included")
+	assert_true(astar.has_point(neighbor_cell),"Neigbor cell included")
+	assert_true(astar.are_points_connected(center_cell,neighbor_cell),"Center Cell is connected to neighbor cell")
+	assert_true(astar.has_point(distant_cell),"Distant cell included")
+	assert_false(astar.are_points_connected(center_cell,distant_cell),"Center Cell is not connected to distant cell")
+	assert_true(astar.are_points_connected(neighbor_cell,distant_cell),"Neighbor Cell is connected to distant cell")
