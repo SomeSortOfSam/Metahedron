@@ -30,14 +30,31 @@ func populate_null_character():
 func _on_person_move_deferred(path : PoolVector2Array):
 	call_deferred("_on_person_move", path)
 
-func _on_person_move(path : PoolVector2Array):
+func _on_person_move(delta : Vector2, origin : Vector2, map):
 	end_on_person_move()
-	var cell_size = (get_parent() as TileMap).cell_size
-	if position == Vector2.ONE * 8: # If at the center of a movement window
-		position -= path[path.size()-1] * cell_size
+
+	var cell_size = parent_tilemap.cell_size
+	if "map" in map && origin == Vector2.ZERO:
+		position -= delta * cell_size	
+		
+	var path := get_follow_path(origin,origin + delta,map)
 	_followe.curve = path_to_curve(path,cell_size)
+
 	if _sprite.frames.has_animation("Walk"):
 		_sprite.animation = "Walk"
+
+func get_follow_path(from : Vector2, to : Vector2, map) -> PoolVector2Array:
+	if "map" in map:
+		map = map.map
+
+	var from_index = MapSpaceConverter.map_to_index(from)
+	var to_index = MapSpaceConverter.map_to_index(to)
+
+	var path : PoolVector2Array = map.astar.get_point_path(from_index,to_index)
+	for i in path.size(): # make from 0
+		path[i] -= from
+
+	return path
 
 func path_to_curve(path : PoolVector2Array, cell_size : Vector2) -> Curve2D:
 	var new_curve = Curve2D.new()
