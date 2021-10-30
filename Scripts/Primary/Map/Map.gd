@@ -21,10 +21,10 @@ func clamp(map_point : Vector2) -> Vector2:
 
 func add_person(person):
 	people[person.cell] = person
-	var _connection = person.connect("cell_change",self,"_on_person_cell_change",[person])
+	var _connection = person.connect("move",self,"_on_person_move",[person])
 	emit_signal("person_added",person)
 
-func _on_person_cell_change(cell_delta,person):
+func _on_person_move(cell_delta,person):
 	if people.erase(person.cell - cell_delta):
 		people[person.cell] = person
 

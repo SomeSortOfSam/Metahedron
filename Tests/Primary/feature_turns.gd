@@ -14,7 +14,7 @@ func test_single_attack():
 	turn_manager._on_map_person_added(person)
 	watch_signals(turn_manager)
 	#Act
-	person.emit_signal("has_attacked")
+	person.emit_signal("attack",0)
 	#Assert
 	assert_signal_emitted(turn_manager,"turn_ended")
 
@@ -27,7 +27,7 @@ func test_eneimes_ignored(params = use_parameters([true,false])):
 	turn_manager._on_map_person_added(Person.new(Character.new(),!params))
 	watch_signals(turn_manager)
 	#Act
-	person.emit_signal("has_attacked")
+	person.emit_signal("attack",0)
 	#Assert
 	assert_signal_emitted(turn_manager,"turn_ended")
 	
@@ -41,8 +41,8 @@ func test_turn_sequence(params = use_parameters([true,false])):
 	turn_manager._on_map_person_added(other)
 	watch_signals(turn_manager)
 	#Act
-	person.emit_signal("has_attacked")
-	other.emit_signal("has_attacked")
+	person.emit_signal("attack",0)
+	other.emit_signal("attack",0)
 	#Assert
 	assert_signal_emit_count(turn_manager,"turn_ended",2)
 
@@ -64,11 +64,13 @@ func test_doubles_turn_sequence(params = use_parameters([true,false])):
 	watch_signals(turn_manager)
 
 	#Act
-	person0.emit_signal("has_attacked")
-	person1.emit_signal("has_attacked")
-	other0.emit_signal("has_attacked")
+	person0.emit_signal("attack",0)
+	person1.emit_signal("attack",0)
+	other0.emit_signal("attack",0)
+	#Assert
 	assert_signal_emit_count(turn_manager,"turn_ended",1)
-	other1.emit_signal("has_attacked")
+	#Act
+	other1.emit_signal("attack",0)
 	#Assert
 	assert_signal_emit_count(turn_manager,"turn_ended",2)
 
@@ -79,7 +81,7 @@ func test_single_move():
 	turn_manager._on_map_person_added(person)
 	watch_signals(turn_manager)
 	#Act
-	person.emit_signal("cell_change",Vector2.ZERO)
+	person.emit_signal("move",Vector2.ZERO)
 	#Assert
 	assert_signal_not_emitted(turn_manager,"turn_ended")
 
@@ -90,7 +92,7 @@ func test_single_close():
 	turn_manager._on_map_person_added(person)
 	watch_signals(turn_manager)
 	#Act
-	person.emit_signal("has_set_end_turn",true)
+	person.emit_signal("close_window")
 	#Assert
 	assert_signal_emitted(turn_manager,"turn_ended")
 
@@ -101,7 +103,7 @@ func test_single_skip():
 	turn_manager._on_map_person_added(person)
 	watch_signals(turn_manager)
 	#Act
-	person.emit_signal("has_set_end_turn",true)
+	person.emit_signal("skip_turn")
 	#Assert
 	assert_signal_emitted(turn_manager,"turn_ended")
 
@@ -113,8 +115,8 @@ func test_reversed_close():
 	turn_manager._on_map_person_added(person)
 	watch_signals(turn_manager)
 	#Act
-	person.emit_signal("has_set_end_turn",true)
-	person.emit_signal("has_set_end_turn",false)
+	person.emit_signal("close_window")
+	person.emit_signal("open_window")
 	#Assert
 	assert_signal_not_emitted(turn_manager,"turn_ended")
 
@@ -126,8 +128,8 @@ func test_reversed_skip():
 	turn_manager._on_map_person_added(person)
 	watch_signals(turn_manager)
 	#Act
-	person.emit_signal("has_set_end_turn",true)
-	person.emit_signal("has_set_end_turn",false)
+	person.emit_signal("skip_turn")
+	person.emit_signal("unskip_turn")
 	#Assert
 	assert_signal_not_emitted(turn_manager,"turn_ended")
 
@@ -139,6 +141,6 @@ func test_double_attack():
 	turn_manager._on_map_person_added(person)
 	watch_signals(turn_manager)
 	#Act
-	person.emit_signal("has_attacked")
+	person.emit_signal("attack",0)
 	#Assert
 	assert_signal_not_emitted(turn_manager,"turn_ended")

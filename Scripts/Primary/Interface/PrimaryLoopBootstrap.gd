@@ -46,7 +46,7 @@ func _on_Cursor_position_accepted(cell):
 	if Pathfinder.is_occupied(cell,map):
 		var person : Person = map.people[cell]
 		if(!person.is_evil):
-			person.window.popup_around_tile()
+			person.open_window()
 
 func populate_turn_gui():
 	var turn_gui = turn_gui_holder.get_child(0)
