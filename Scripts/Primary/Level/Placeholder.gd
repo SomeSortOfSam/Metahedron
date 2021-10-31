@@ -1,6 +1,6 @@
 tool
 extends Sprite
-class_name Placeholder
+class_name Placeholder,"res://Assets/Editor Icons/Placeholder.png"
 
 const TOOL_ALPHA := .2
 const RECT_WIDTH := 2

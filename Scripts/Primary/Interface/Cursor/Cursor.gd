@@ -1,5 +1,5 @@
 extends Sprite
-class_name Cursor
+class_name Cursor, "res://Assets/Editor Icons/Cursor.png"
 
 onready var _timer : Timer = $Timer
 

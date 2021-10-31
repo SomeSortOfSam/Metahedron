@@ -1,5 +1,5 @@
 extends Map
-class_name ReferenceMap
+class_name ReferenceMap,"res://Assets/Editor Icons/ReferenceMap.png" 
 
 var map : Map
 var center_cell : Vector2 setget set_center_cell

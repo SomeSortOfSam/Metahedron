@@ -1,5 +1,5 @@
 extends Control
-class_name MovementWindow
+class_name MovementWindow, "res://Assets/Editor Icons/MovementWindow.png"
 
 onready var close_button : TextureButton = $VSplitContainer/TopBar/Close
 onready var cursor : WindowCursor = $VSplitContainer/Body/Body

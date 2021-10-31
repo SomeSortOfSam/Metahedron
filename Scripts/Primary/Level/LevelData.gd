@@ -1,6 +1,6 @@
 tool
 extends TileMap
-class_name LevelData
+class_name LevelData, "res://Assets/Editor Icons/LevelData.png"
 
 export var music : AudioStream
 

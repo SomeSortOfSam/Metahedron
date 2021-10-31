@@ -1,5 +1,5 @@
 extends Reference
-class_name Map
+class_name Map,"res://Assets/Editor Icons/LevelData.png"
 
 var tile_map : TileMap
 var astar : AStar2D

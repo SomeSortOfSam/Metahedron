@@ -1,5 +1,5 @@
 extends Node
-class_name PrimaryLoopBootstrap
+class_name PrimaryLoopBootstrap,"res://Assets/Editor Icons/PrimaryLoopBootstrap.png"
 
 export var packed_level_data : PackedScene
 

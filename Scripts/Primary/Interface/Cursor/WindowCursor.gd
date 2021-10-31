@@ -1,5 +1,5 @@
 extends Control
-class_name WindowCursor
+class_name WindowCursor,"res://Assets/Editor Icons/WindowCursor.png"
 
 export var display_path : NodePath
 

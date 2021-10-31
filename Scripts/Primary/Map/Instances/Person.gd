@@ -1,5 +1,5 @@
 extends Reference
-class_name Person
+class_name Person, "res://Assets/Editor Icons/Person.png"
 
 var character : Character
 var cell : Vector2 setget set_cell

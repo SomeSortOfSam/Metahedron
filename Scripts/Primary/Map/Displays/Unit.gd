@@ -1,5 +1,5 @@
 extends Node2D
-class_name Unit
+class_name Unit, "res://Assets/Editor Icons/Unit.png"
 
 export var speed : float = 10
 

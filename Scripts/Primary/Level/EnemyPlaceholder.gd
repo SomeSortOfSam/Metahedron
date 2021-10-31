@@ -1,6 +1,6 @@
 tool
 extends Placeholder
-class_name EnemyPlaceholder
+class_name EnemyPlaceholder, "res://Assets/Editor Icons/EnemyPlaceholder.png"
 
 export var health : int
 export var tile_range : int

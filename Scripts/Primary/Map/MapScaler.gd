@@ -1,5 +1,5 @@
 extends Node2D
-class_name MapScaler
+class_name MapScaler, "res://Assets/Editor Icons/MapScaler.png"
 
 onready var tile_map : TileMap = $TileMap
 

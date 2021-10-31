@@ -1,5 +1,5 @@
 extends TileMap
-class_name ArrowLines
+class_name ArrowLines, "res://Assets/Editor Icons/Arrowlines.png"
 
 var astar : AStar2D
 

@@ -1,5 +1,5 @@
 extends Reference
-class_name DecorationInstance
+class_name DecorationInstance, "res://Assets/Editor Icons/DecorationInstance.png"
 
 var definition : DecorationDefinition
 var cell : Vector2

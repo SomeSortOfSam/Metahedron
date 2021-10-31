@@ -1,5 +1,5 @@
 extends Resource
-class_name DecorationDefinition
+class_name DecorationDefinition,"res://Assets/Editor Icons/DecorationDefinition.png"
 
 export var level_texture : Texture
 export var level_offset : Vector2

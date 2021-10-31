@@ -1,5 +1,5 @@
 extends Sprite
-class_name DecorationDisplay
+class_name DecorationDisplay, "res://Assets/Editor Icons/DecorationDisplay.png"
 
 export var in_level := true setget set_in_level
 export var definition : Resource setget set_definition

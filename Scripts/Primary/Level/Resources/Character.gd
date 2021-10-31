@@ -1,6 +1,6 @@
 tool
 extends Resource
-class_name Character
+class_name Character, "res://Assets/Editor Icons/Character.png"
 
 export var name : String
 
