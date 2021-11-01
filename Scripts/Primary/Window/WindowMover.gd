@@ -1,10 +1,15 @@
 extends Control
 class_name WindowMover, "res://Assets/Editor Icons/WindowMover.png"
 
+export var window_path : NodePath
+export var tilemap_path : NodePath
+
 onready var body : ColorRect = $Body
 
-onready var window : Control = $"../.."
-onready var viewport_window : Control = window.get_node("..")
+onready var window : Control = get_node(window_path)
+onready var viewport_window : Control = window.get_parent()
+onready var tilemap : TileMap = get_node(tilemap_path)
+onready var tilemap_container : Control = tilemap.get_parent().get_parent()
 
 signal accepted_window_movement(delta)
 
@@ -21,16 +26,16 @@ func handle_mouse_event(event : InputEventMouse):
 	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
 		self.is_dragging = event.pressed
 	if event is InputEventMouseMotion && is_dragging:
-		check_delta(event.get_relative())
+		emit_signal("accepted_window_movement",check_delta(event.get_relative()))
 
-func check_delta(delta : Vector2):
+func check_delta(delta : Vector2) -> Vector2:
 	var window_rect := window.get_rect()
 	var viewport_rect := viewport_window.get_rect()
 
 	var hypotheical := window_rect
 	hypotheical.position += delta
 
-	emit_signal("accepted_window_movement",clamp_delta(delta,hypotheical,viewport_rect))
+	return clamp_delta(delta,hypotheical,viewport_rect)
 
 func correct_window_pos():
 	var window_rect := window.get_rect()
@@ -38,7 +43,7 @@ func correct_window_pos():
 
 	emit_signal("accepted_window_movement",clamp_delta(Vector2.ZERO,window_rect,viewport_rect))
 
-func clamp_delta(delta : Vector2, window_rect : Rect2, viewport_rect : Rect2) -> Vector2:
+static func clamp_delta(delta : Vector2, window_rect : Rect2, viewport_rect : Rect2) -> Vector2:
 	if window_rect.position.x < viewport_rect.position.x:
 		delta.x -= window_rect.position.x
 	if window_rect.position.y < viewport_rect.position.y:

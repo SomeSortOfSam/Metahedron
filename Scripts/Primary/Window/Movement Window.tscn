@@ -40,6 +40,8 @@ margin_bottom = 32.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 script = ExtResource( 6 )
+window_path = NodePath("../..")
+tilemap_path = NodePath("../Body/Body/TilemapContainer/TileMap")
 
 [node name="Outline" type="ColorRect" parent="VSplitContainer/TopBar"]
 anchor_right = 1.0

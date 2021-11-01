@@ -153,7 +153,7 @@ _global_script_class_icons={
 "TurnManager": "",
 "Unit": "res://Assets/Editor Icons/Unit.png",
 "WindowCursor": "res://Assets/Editor Icons/WindowCursor.png",
-"WindowMover": ""
+"WindowMover": "res://Assets/Editor Icons/WindowMover.png"
 }
 
 [WAT]
