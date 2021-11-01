@@ -1,4 +1,5 @@
 extends Control
+class_name WindowMover, "res://Assets/Editor Icons/WindowMover.png"
 
 onready var body : ColorRect = $Body
 
