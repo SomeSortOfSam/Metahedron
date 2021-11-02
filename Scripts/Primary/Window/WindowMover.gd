@@ -14,7 +14,6 @@ onready var tilemap_container : Control = tilemap.get_parent().get_parent()
 signal accepted_window_movement(delta)
 
 var is_dragging : bool = false setget set_is_dragging
-var stored_delta : Vector2
 
 func _ready():
 	var _connection = get_tree().connect("screen_resized",self,"correct_window_pos",[],CONNECT_DEFERRED)
@@ -24,7 +23,6 @@ func correct_window_pos():
 	var viewport_rect := viewport_window.get_rect()
 	viewport_rect.position = Vector2.ZERO
 	
-	emit_signal("accepted_window_movement",clamp_delta(Vector2.ZERO, window_rect, viewport_rect))
 	emit_signal("accepted_window_movement",quatizize())
 
 func _gui_input(event):
@@ -38,7 +36,6 @@ func handle_mouse_event(event : InputEventMouse):
 		var window_rect := window.get_rect()
 		var viewport_rect := viewport_window.get_rect()
 		viewport_rect.position = Vector2.ZERO
-		
 		
 		emit_signal("accepted_window_movement",clamp_delta(event.get_relative(),window_rect,viewport_rect))
 
