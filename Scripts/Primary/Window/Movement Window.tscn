@@ -80,6 +80,7 @@ margin_right = 1024.0
 margin_bottom = 600.0
 
 [node name="Outline" type="ColorRect" parent="VSplitContainer/Body"]
+visible = false
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -90,6 +91,7 @@ __meta__ = {
 }
 
 [node name="Body" type="ColorRect" parent="VSplitContainer/Body"]
+visible = false
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -130,6 +132,7 @@ cell_size = Vector2( 16, 16 )
 cell_y_sort = true
 format = 1
 
+[connection signal="accepted_window_movement" from="VSplitContainer/TopBar" to="." method="_on_TopBar_accepted_window_movement"]
 [connection signal="mouse_entered" from="VSplitContainer/TopBar" to="VSplitContainer/TopBar" method="_on_TopBar_mouse_entered"]
 [connection signal="mouse_exited" from="VSplitContainer/TopBar" to="VSplitContainer/TopBar" method="_on_TopBar_mouse_exited"]
 [connection signal="pressed" from="VSplitContainer/TopBar/Close" to="." method="_on_Close_pressed"]
