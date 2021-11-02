@@ -80,7 +80,6 @@ margin_right = 1024.0
 margin_bottom = 600.0
 
 [node name="Outline" type="ColorRect" parent="VSplitContainer/Body"]
-visible = false
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -91,7 +90,6 @@ __meta__ = {
 }
 
 [node name="Body" type="ColorRect" parent="VSplitContainer/Body"]
-visible = false
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
