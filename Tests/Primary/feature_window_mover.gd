@@ -44,9 +44,9 @@ func test_quantization():
 	var moverx := populate_mover(parent)
 	var movery := populate_mover(parent)
 	#Act
-	mover.window.rect_position += mover.check_delta(Vector2.ZERO)
-	moverx.window.rect_position += moverx.check_delta(Vector2(2,.1))
-	movery.window.rect_position += movery.check_delta(Vector2(.1,2))
+	mover.window.rect_position += mover.quatizize()
+	moverx.window.rect_position += moverx.quatizize()
+	movery.window.rect_position += movery.quatizize()
 	#Assert
 	var pos = mover.tilemap.to_global(mover.tilemap.map_to_world(Vector2.ZERO))
 	var xpos = moverx.tilemap.to_global(moverx.tilemap.map_to_world(Vector2.ZERO))
