@@ -22,7 +22,7 @@ func populate_mover(parent : Control) -> WindowMover:
 	
 	var tilemap = TileMap.new()
 	sub_container.add_child(tilemap)
-	tilemap.cell_size = Vector2.ONE * .5
+	tilemap.cell_size = Vector2.ONE
 	
 	var mover := Control.new()
 	child.add_child(mover) 
@@ -43,13 +43,17 @@ func test_quantization():
 	var mover := populate_mover(parent)
 	var moverx := populate_mover(parent)
 	var movery := populate_mover(parent)
+	
+	moverx.window.rect_position += Vector2(32,.2)
+	movery.window.rect_position += Vector2(.2,32)
 	#Act
 	mover.window.rect_position += mover.quatizize()
 	moverx.window.rect_position += moverx.quatizize()
 	movery.window.rect_position += movery.quatizize()
 	#Assert
-	var pos = mover.tilemap.to_global(mover.tilemap.map_to_world(Vector2.ZERO))
-	var xpos = moverx.tilemap.to_global(moverx.tilemap.map_to_world(Vector2.ZERO))
-	var ypos = movery.tilemap.to_global(movery.tilemap.map_to_world(Vector2.ZERO))
+	var pos := mover.tilemap.to_global(mover.tilemap.map_to_world(Vector2.ZERO))
+	var xpos := moverx.tilemap.to_global(moverx.tilemap.map_to_world(Vector2.ZERO))
+	var ypos := movery.tilemap.to_global(movery.tilemap.map_to_world(Vector2.ZERO))
+	
 	assert_eq(pos.y,xpos.y)
 	assert_eq(pos.x,ypos.x)

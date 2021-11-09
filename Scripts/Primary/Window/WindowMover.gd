@@ -19,10 +19,6 @@ func _ready():
 	var _connection = get_tree().connect("screen_resized",self,"correct_window_pos",[],CONNECT_DEFERRED)
 
 func correct_window_pos():
-	var window_rect := window.get_rect()
-	var viewport_rect := viewport_window.get_rect()
-	viewport_rect.position = Vector2.ZERO
-	
 	emit_signal("accepted_window_movement",quatizize())
 
 func _gui_input(event):
