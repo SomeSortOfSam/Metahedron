@@ -26,14 +26,14 @@ func populate_null_character():
 	_icon.texture = null
 	_sprite.frames = null
 
-func _on_person_move(delta : Vector2, origin : Vector2, map):
+func _on_person_move(delta : Vector2, person, map):
 	end_on_person_move()
 	
 	var cell_size = parent_tilemap.cell_size
-	#if "map" in map && origin == Vector2.ZERO:
-		#position -= delta * cell_size	
-		
-	var path := get_follow_path(origin,origin + delta,map)
+	if "map" in map && person.cell - delta == Vector2.ZERO:
+		position -= delta * cell_size
+	
+	var path := get_follow_path(person.cell - delta,person.cell,map)
 	_followe.curve = path_to_curve(path,cell_size)
 
 	if _sprite.frames.has_animation("Walk"):
@@ -111,4 +111,4 @@ func subscribe(person,map):
 		cell = MapSpaceConverter.internal_map_to_map(cell,map)
 	position = MapSpaceConverter.map_to_local(cell,map)
 	parent_tilemap = map.tile_map
-	person.connect("move", self, "_on_person_move",[person.cell, map])
+	person.connect("move", self, "_on_person_move",[person, map])

@@ -44,6 +44,14 @@ func before_each():
 	person0.cell = Vector2.ZERO
 	person1.cell = Vector2.RIGHT * 3
 	personE.cell = Vector2.DOWN * 3
+	for unit in map.tile_map.get_children():
+		unit.end_follow_animation()
+	for unit in map0.tile_map.get_children():
+		unit.end_follow_animation()
+	for unit in map1.tile_map.get_children():
+		unit.end_follow_animation()
+	for unit in mapE.tile_map.get_children():
+		unit.end_follow_animation()
 
 func after_all():
 	map.tile_map.free()
@@ -61,7 +69,8 @@ func test_refrence_map_unit_inter_moves():
 	#Act
 	person0.cell += Vector2.ONE
 	#Assert
-	var curve : Curve2D = map0.tile_map.get_child(0)._followe.curve
+	var unit : Unit = map0.tile_map.get_child(0)
+	var curve : Curve2D = unit._followe.curve
 	assert_not_null(curve)
 	if curve:
 		assert_gt(curve.get_point_count(),1)
@@ -75,8 +84,8 @@ func test_refrence_map_unit_emigrate():
 	assert_not_null(curve)
 	if curve:
 		assert_gt(curve.get_point_count(),1)
-	unit.end_follow_animation()
-	assert_ne(unit,map0.tile_map.get_child(1))
+	unit.end_on_person_move()
+	assert_true(unit.is_queued_for_deletion())
 
 func test_refrecne_map_unit_immigrate():
 	pending()
