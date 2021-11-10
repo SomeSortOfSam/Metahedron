@@ -55,5 +55,5 @@ func test_quantization():
 	var xpos := moverx.tilemap.to_global(moverx.tilemap.map_to_world(Vector2.ZERO))
 	var ypos := movery.tilemap.to_global(movery.tilemap.map_to_world(Vector2.ZERO))
 	
-	assert_eq(pos.y,xpos.y)
-	assert_eq(pos.x,ypos.x)
+	assert_almost_eq(pos.y,xpos.y, .001)
+	assert_almost_eq(pos.x,ypos.x, .001)

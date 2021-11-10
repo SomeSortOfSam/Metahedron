@@ -72,11 +72,11 @@ func populate_map(parent_map, cell, window_range):
 
 func lock_window():
 	close_button.hide()
-	cursor.disable()
+	cursor.enable(false)
 
 func _on_person_new_turn():
 	close_button.show()
-	cursor.enable()
+	cursor.enable(true)
 
 func _on_person_move(delta : Vector2):
 	map.center_cell += delta

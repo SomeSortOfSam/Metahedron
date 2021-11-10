@@ -30,8 +30,8 @@ func _on_person_move(delta : Vector2, origin : Vector2, map):
 	end_on_person_move()
 	
 	var cell_size = parent_tilemap.cell_size
-	if "map" in map && origin == Vector2.ZERO:
-		position -= delta * cell_size	
+	#if "map" in map && origin == Vector2.ZERO:
+		#position -= delta * cell_size	
 		
 	var path := get_follow_path(origin,origin + delta,map)
 	_followe.curve = path_to_curve(path,cell_size)

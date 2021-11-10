@@ -14,6 +14,7 @@ func before_all():
 	for x in range(0,4):
 		for y in range(0,4):
 			map.tile_map.set_cell(x,y,0)
+	map.astar = Pathfinder.map_to_astar(map)
 	person0 = Person.new(Character.new())
 	person1 = Person.new(Character.new(),false, Vector2(0,3))
 	personE = Person.new(Character.new(),true, Vector2(3,0))
@@ -53,15 +54,29 @@ func after_all():
 func test_map_unit_moves():
 	#Act
 	person0.cell += Vector2.ONE
-	yield_for(2,"Wait for population")
 	#Assert
 	assert_not_null(map.tile_map.get_child(0)._followe.curve)
 
 func test_refrence_map_unit_inter_moves():
-	pending()
+	#Act
+	person0.cell += Vector2.ONE
+	#Assert
+	var curve : Curve2D = map0.tile_map.get_child(0)._followe.curve
+	assert_not_null(curve)
+	if curve:
+		assert_gt(curve.get_point_count(),1)
 
 func test_refrence_map_unit_emigrate():
-	pending()
+	#Act
+	person1.cell += Vector2.DOWN * 3
+	#Assert
+	var unit : Unit = map0.tile_map.get_child(1)
+	var curve : Curve2D = unit._followe.curve
+	assert_not_null(curve)
+	if curve:
+		assert_gt(curve.get_point_count(),1)
+	unit.end_follow_animation()
+	assert_ne(unit,map0.tile_map.get_child(1))
 
 func test_refrecne_map_unit_immigrate():
 	pending()
