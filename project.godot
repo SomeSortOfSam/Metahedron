@@ -143,7 +143,7 @@ _global_script_class_icons={
 "ArrowLines": "res://Assets/Editor Icons/Arrowlines.png",
 "Character": "res://Assets/Editor Icons/Character.png",
 "ConversionTests": "",
-"Cursor": "",
+"Cursor": "res://Assets/Editor Icons/Cursor.png",
 "DecorationDefinition": "res://Assets/Editor Icons/DecorationDefinition.png",
 "DecorationDisplay": "res://Assets/Editor Icons/DecorationDisplay.png",
 "DecorationInstance": "res://Assets/Editor Icons/DecorationInstance.png",
@@ -165,7 +165,7 @@ _global_script_class_icons={
 "TurnManager": "",
 "Unit": "res://Assets/Editor Icons/Unit.png",
 "WindowCursor": "res://Assets/Editor Icons/WindowCursor.png",
-"WindowMover": ""
+"WindowMover": "res://Assets/Editor Icons/WindowMover.png"
 }
 
 [WAT]

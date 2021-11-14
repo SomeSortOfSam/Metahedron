@@ -1,9 +1,9 @@
 extends Control
 class_name WindowCursor,"res://Assets/Editor Icons/WindowCursor.png"
+## GUI that takes control inputs and gives tilemap outputs, with optional cursor Node2D for feedback
 
 export var display_path : NodePath
 
-onready var container : Node2D = get_child(1)
 onready var display : Node2D = get_node(display_path)
 
 var map : Map setget set_map
@@ -18,7 +18,8 @@ func _gui_input(event):
 		handle_cell(cell,acceptable, event)
 
 func handle_cell(cell : Vector2, acceptable : bool , event):
-	display.draw_display(cell, acceptable)
+	if display:
+		display.draw_display(cell, acceptable)
 	if is_accepted(acceptable, event):
 		emit_signal("position_accepted", cell)
 
@@ -38,6 +39,7 @@ func is_accepted(acceptable,event):
 	return acceptable
 
 func position_to_cell(pos : Vector2) -> Vector2:
+	var container : Node2D = map.tile_map.get_parent()
 	var local_position : Vector2 = (pos - container.position) / container.scale
 	return MapSpaceConverter.local_to_map(local_position,map)
 

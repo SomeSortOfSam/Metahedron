@@ -1,5 +1,6 @@
 extends Control
 class_name WindowMover, "res://Assets/Editor Icons/WindowMover.png"
+## Moves the movement window without letting it go to far
 
 export var window_path : NodePath
 export var tilemap_path : NodePath
@@ -11,9 +12,9 @@ onready var viewport_window : Control = window.get_parent()
 onready var tilemap : TileMap = get_node(tilemap_path)
 onready var tilemap_container : Control = tilemap.get_parent().get_parent()
 
-signal accepted_window_movement(delta)
-
 var is_dragging : bool = false setget set_is_dragging
+
+signal accepted_window_movement(delta)
 
 func _ready():
 	var _connection = get_tree().connect("screen_resized",self,"correct_window_pos",[],CONNECT_DEFERRED)

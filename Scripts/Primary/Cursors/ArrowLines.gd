@@ -1,5 +1,6 @@
 extends TileMap
 class_name ArrowLines, "res://Assets/Editor Icons/Arrowlines.png"
+## A cursor for WindowDursor that draws a pathfound line
 
 var astar : AStar2D
 

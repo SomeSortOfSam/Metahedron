@@ -1,5 +1,6 @@
 extends Control
 class_name MovementWindow, "res://Assets/Editor Icons/MovementWindow.png"
+## Application window what lets units move. Main element of the game.
 
 onready var close_button : TextureButton = $VSplitContainer/TopBar/Close
 onready var cursor : WindowCursor = $VSplitContainer/Body/Body

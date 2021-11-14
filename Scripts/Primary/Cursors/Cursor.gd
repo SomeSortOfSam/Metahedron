@@ -1,5 +1,6 @@
 extends Sprite
 class_name Cursor, "res://Assets/Editor Icons/Cursor.png"
+## A cursor for WindowCursor that draws a texture on a tile
 
 onready var _timer : Timer = $Timer
 

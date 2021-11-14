@@ -1,5 +1,6 @@
 extends Node2D
 class_name MapScaler, "res://Assets/Editor Icons/MapScaler.png"
+## Scales up so that its tilemap child fills its control parent
 
 onready var tile_map : TileMap = $TileMap
 
