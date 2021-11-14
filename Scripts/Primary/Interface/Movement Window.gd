@@ -61,7 +61,7 @@ static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
 	return third
 
 static func get_window(cell : Vector2, parent_map, window_range : int) -> MovementWindow:
-	var packed_window := load("res://Scripts/Primary/Window/Movement Window.tscn")
+	var packed_window := load("res://Scripts/Primary/Interface/Movement Window.tscn")
 	var window : MovementWindow = packed_window.instance()
 	window.populate_map(parent_map,cell,window_range)
 	return window

@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Scripts/Primary/Displays/Unit.gd" type="Script" id=1]
 
-
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [  ],

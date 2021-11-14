@@ -1,4 +1,5 @@
 extends Control
+class_name PlayerUnitGUI
 
 onready var portait : TextureRect = $Body/HBoxContainer/Control/Control/Portrait
 onready var icon : TextureRect = $Body/Icon

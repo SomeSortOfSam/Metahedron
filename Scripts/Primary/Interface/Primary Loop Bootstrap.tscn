@@ -55,7 +55,6 @@ display_path = NodePath("MapScaler/TileMap/Cursor")
 [node name="ScrollingBackround" type="TextureRect" parent="VSplitContainer/Playspace/Body"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -8634.95
 mouse_filter = 2
 texture = ExtResource( 9 )
 expand = true

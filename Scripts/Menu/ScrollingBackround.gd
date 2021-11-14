@@ -11,9 +11,10 @@ func _init():
 	mouse_filter = MOUSE_FILTER_IGNORE
 
 func _process(delta):
-	scroll_negitive()
-	scroll_x()
-	scroll_y()
+	if not Engine.editor_hint:
+		scroll_negitive()
+		scroll_x()
+		scroll_y()
 
 func scroll_negitive():
 	if scroll_vector.x < 0 :
