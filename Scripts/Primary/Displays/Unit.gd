@@ -1,5 +1,6 @@
 extends Node2D
 class_name Unit, "res://Assets/Editor Icons/Unit.png"
+## Display object for people
 
 export var speed : float = 10
 
@@ -20,11 +21,6 @@ func set_character(new_character : Character):
 	_sprite.frames = definition.animations
 	_sprite.offset = definition.animations_offset
 	_sprite.scale = definition.animations_scale
-
-func populate_null_character():
-	definition = null
-	_icon.texture = null
-	_sprite.frames = null
 
 func _on_person_move(delta : Vector2, person, map):
 	end_on_person_move()

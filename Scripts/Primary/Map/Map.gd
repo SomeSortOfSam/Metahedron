@@ -1,5 +1,6 @@
 extends Reference
 class_name Map,"res://Assets/Editor Icons/LevelData.png"
+## Storage object for the current game state. Also responsible for populating the display objects
 
 var tile_map : TileMap
 var astar : AStar2D
@@ -31,23 +32,18 @@ func _on_person_move(cell_delta,person):
 func add_decoration(decoration):
 	decorations.append(decoration)
 
-func get_person(cell : Vector2):
-	if people.has(cell):
-		return people[cell]
-	return null
-
-func repopulate_displays():
+func repopulate_displays(use_icons := true):
 	for child in tile_map.get_children():
 		if "definition" in child:
 			child.queue_free()
-	populate_units()
-	populate_decoration_displays()
+	populate_units(use_icons)
+	populate_decoration_displays(use_icons)
 	emit_signal("repopulated")
 
-func populate_units():
+func populate_units(use_icons : bool):
 	for cell in people:
-		people[cell].to_unit(self, true)
+		people[cell].to_unit(self, use_icons)
 
-func populate_decoration_displays():
+func populate_decoration_displays(use_icons : bool):
 	for decoration in decorations:
-		decoration.to_decoration_display(self, true) 
+		decoration.to_decoration_display(self, use_icons) 

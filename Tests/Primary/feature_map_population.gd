@@ -10,7 +10,7 @@ func test_populate_people():
 		assert_typeof(map.people,TYPE_DICTIONARY,"Map.people is dictonary")
 		var character = Character.new()
 		map.people[Vector2.ZERO] = Person.new(character)
-		map.populate_units()
+		map.populate_units(false)
 		assert_gt(map.tile_map.get_child_count(),0,"Map is populated by something")
 		assert_eq((map.tile_map.get_child(0) as Unit).character, character, "Map is populated by unit with correct character")
 
@@ -19,7 +19,7 @@ func test_populate_decorations():
 		assert_typeof(map.people,TYPE_ARRAY,"Map.people is array")
 		var definiton = DecorationDefinition.new()
 		map.decorations.append(DecorationInstance.new(definiton))
-		map.populate_decoration_displays()
+		map.populate_decoration_displays(false)
 		assert_gt(map.tile_map.get_child_count(),0,"Map is populated by something")
 		assert_eq((map.tile_map.get_child(0) as DecorationDisplay).definition, definiton, "Map is populated by Decoration with correct Definition")
 

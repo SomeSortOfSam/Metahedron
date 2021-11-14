@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Lowmap_Cacti.png-8655578376a46ba351581d0009cee53f.stex"
+path="res://.import/JeanPunch.png-c64d3f28fa21ca93d16957889875c6e7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Levels/Dusk Desert/Decorations/Lowmap_Cacti.png"
-dest_files=[ "res://.import/Lowmap_Cacti.png-8655578376a46ba351581d0009cee53f.stex" ]
+source_file="res://Assets/Characters/Jean/JeanPunch.png"
+dest_files=[ "res://.import/JeanPunch.png-c64d3f28fa21ca93d16957889875c6e7.stex" ]
 
 [params]
 

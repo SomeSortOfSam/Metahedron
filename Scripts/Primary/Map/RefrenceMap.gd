@@ -1,5 +1,6 @@
 extends Map
 class_name ReferenceMap,"res://Assets/Editor Icons/ReferenceMap.png" 
+## A piece of the world stored in the same format as the whole thing
 
 var map : Map
 var center_cell : Vector2 setget set_center_cell
@@ -25,17 +26,9 @@ func repopulate_fields():
 	repopulate_people()
 	repopulate_decoration_instances()
 
-func repopulate_displays():
+func repopulate_displays(use_icons := false):
 	repopulate_tilemap()
-	.repopulate_displays() # call map.repopulate displays
-
-func populate_units():
-	for cell in people:
-		people[cell].to_unit(self, false)
-
-func populate_decoration_displays():
-	for decortation in decorations:
-		decortation.to_decoration_display(self,false)
+	.repopulate_displays(use_icons) # call map.repopulate displays
 
 func repopulate_people():
 	people.clear()
@@ -71,11 +64,6 @@ func populate_tile(internal_tile : Vector2, tilemap : TileMap):
 	var tile = MapSpaceConverter.internal_map_to_map(internal_tile,self)
 # warning-ignore:narrowing_conversion
 	tilemap.set_cell(tile.x, tile.y,clamp(internal_tile_type + 1,0,5),false,false,false,internal_tile_autotile_coords)
-
-func clamp(map_point : Vector2) -> Vector2:
-	map_point.x = clamp(map_point.x, -tile_range, tile_range)
-	map_point.y = clamp(map_point.y, -tile_range, tile_range)
-	return map_point
 
 func add_person(person):
 	people[MapSpaceConverter.internal_map_to_map(person.cell,self)] = person

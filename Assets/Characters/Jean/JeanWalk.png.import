@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ProtoJeanWalk.png-991a7504f75591a49632d5ae8a47729e.stex"
+path="res://.import/JeanWalk.png-0816c3c3414818911d965996f9932e85.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Jean/ProtoJeanWalk.png"
-dest_files=[ "res://.import/ProtoJeanWalk.png-991a7504f75591a49632d5ae8a47729e.stex" ]
+source_file="res://Assets/Characters/Jean/JeanWalk.png"
+dest_files=[ "res://.import/JeanWalk.png-0816c3c3414818911d965996f9932e85.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false
