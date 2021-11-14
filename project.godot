@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "TileMap",
 "class": "ArrowLines",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Interface/Cursor/ArrowLines.gd"
+"path": "res://Scripts/Primary/Cursors/ArrowLines.gd"
 }, {
 "base": "Resource",
 "class": "Character",
@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "Cursor",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Interface/Cursor/Cursor.gd"
+"path": "res://Scripts/Primary/Cursors/Cursor.gd"
 }, {
 "base": "Resource",
 "class": "DecorationDefinition",
@@ -37,7 +37,7 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "DecorationDisplay",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Map/Displays/DecorationDisplay.gd"
+"path": "res://Scripts/Primary/Displays/DecorationDisplay.gd"
 }, {
 "base": "Reference",
 "class": "DecorationInstance",
@@ -62,22 +62,22 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "MapScaler",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Map/MapScaler.gd"
+"path": "res://Scripts/Primary/Interface/MapScaler.gd"
 }, {
 "base": "Reference",
 "class": "MapSpaceConverter",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Map/Utilites/MapSpaceConverter.gd"
+"path": "res://Scripts/Primary/Utilites/MapSpaceConverter.gd"
 }, {
 "base": "Control",
 "class": "MovementWindow",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Window/Movement Window.gd"
+"path": "res://Scripts/Primary/Interface/Movement Window.gd"
 }, {
 "base": "Reference",
 "class": "Pathfinder",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Map/Utilites/Pathfinder.gd"
+"path": "res://Scripts/Primary/Utilites/Pathfinder.gd"
 }, {
 "base": "Reference",
 "class": "Person",
@@ -97,7 +97,7 @@ _global_script_classes=[ {
 "base": "Map",
 "class": "ReferenceMap",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Window/RefrenceMap.gd"
+"path": "res://Scripts/Primary/Map/RefrenceMap.gd"
 }, {
 "base": "TextureRect",
 "class": "ScrollingBackround",
@@ -112,27 +112,27 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "TileMapUtilites",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Map/Utilites/TileMap_Utils.gd"
+"path": "res://Scripts/Primary/Utilites/TileMap_Utils.gd"
 }, {
 "base": "Reference",
 "class": "TurnManager",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Interface/TurnManager.gd"
+"path": "res://Scripts/Primary/Utilites/TurnManager.gd"
 }, {
 "base": "Node2D",
 "class": "Unit",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Map/Displays/Unit.gd"
+"path": "res://Scripts/Primary/Displays/Unit.gd"
 }, {
 "base": "Control",
 "class": "WindowCursor",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Interface/Cursor/WindowCursor.gd"
+"path": "res://Scripts/Primary/Cursors/WindowCursor.gd"
 }, {
 "base": "Control",
 "class": "WindowMover",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Window/WindowMover.gd"
+"path": "res://Scripts/Primary/Interface/WindowMover.gd"
 } ]
 _global_script_class_icons={
 "ArrowLines": "res://Assets/Editor Icons/Arrowlines.png",
@@ -140,24 +140,24 @@ _global_script_class_icons={
 "ConversionTests": "",
 "Cursor": "res://Assets/Editor Icons/Cursor.png",
 "DecorationDefinition": "res://Assets/Editor Icons/DecorationDefinition.png",
-"DecorationDisplay": "res://Assets/Editor Icons/DecorationDisplay.png",
+"DecorationDisplay": "",
 "DecorationInstance": "res://Assets/Editor Icons/DecorationInstance.png",
 "EnemyPlaceholder": "res://Assets/Editor Icons/EnemyPlaceholder.png",
 "LevelData": "res://Assets/Editor Icons/LevelData.png",
 "Map": "res://Assets/Editor Icons/LevelData.png",
 "MapScaler": "res://Assets/Editor Icons/MapScaler.png",
 "MapSpaceConverter": "",
-"MovementWindow": "res://Assets/Editor Icons/MovementWindow.png",
+"MovementWindow": "",
 "Pathfinder": "",
 "Person": "res://Assets/Editor Icons/Person.png",
 "Placeholder": "res://Assets/Editor Icons/Placeholder.png",
 "PrimaryLoopBootstrap": "res://Assets/Editor Icons/PrimaryLoopBootstrap.png",
-"ReferenceMap": "res://Assets/Editor Icons/ReferenceMap.png",
+"ReferenceMap": "",
 "ScrollingBackround": "res://Assets/Editor Icons/ScrollingBackround.svg",
 "Settings": "",
 "TileMapUtilites": "",
 "TurnManager": "",
-"Unit": "res://Assets/Editor Icons/Unit.png",
+"Unit": "",
 "WindowCursor": "res://Assets/Editor Icons/WindowCursor.png",
 "WindowMover": "res://Assets/Editor Icons/WindowMover.png"
 }
