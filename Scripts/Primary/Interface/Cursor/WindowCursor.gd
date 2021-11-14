@@ -3,7 +3,7 @@ class_name WindowCursor,"res://Assets/Editor Icons/WindowCursor.png"
 
 export var display_path : NodePath
 
-onready var container : Node2D = get_child(0)
+onready var container : Node2D = get_child(1)
 onready var display : Node2D = get_node(display_path)
 
 var map : Map setget set_map

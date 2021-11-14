@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/Menu/Textures/MenuOptions.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Menu/Textures/MenuLore.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/Menu/Main.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Menu/Textures/MiniBackground.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Menu/Textures/Background2.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/Menu/ScrollingBackround.gd" type="Script" id=7]
 [ext_resource path="res://addons/gut/icon.png" type="Texture" id=8]
 
@@ -54,6 +54,11 @@ script = ExtResource( 5 )
 [node name="Backround" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -53.0
+margin_right = 10.0
+margin_bottom = 10.0
+mouse_filter = 2
 texture = ExtResource( 6 )
 expand = true
 stretch_mode = 2
@@ -61,7 +66,7 @@ script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-rate = 15.0
+scroll_vector = Vector2( -1, -1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0

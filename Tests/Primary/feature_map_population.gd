@@ -35,9 +35,9 @@ func test_refrence_map_populate_tiles():
 	populate_map_with_tiles()
 	var ref_map := get_refrence_map()
 	ref_map.repopulate_tilemap()
-	assert_eq(ref_map.tile_map.get_cell(0,0),0, "Tilemap center cell is populated")
-	assert_eq(ref_map.tile_map.get_cell(1,0),0, "Tilemap neighbor cell is populated")
-	assert_ne(ref_map.tile_map.get_cell(2,0),0, "Tilemap far cell is  not populated")
+	assert_gt(ref_map.tile_map.get_cell(0,0),-1, "Tilemap center cell is populated")
+	assert_gt(ref_map.tile_map.get_cell(1,0),-1, "Tilemap neighbor cell is populated")
+	assert_eq(ref_map.tile_map.get_cell(2,0),-1, "Tilemap far cell is  not populated")
 
 func populate_map_with_units():
 	var person := Person.new(Character.new())

@@ -70,7 +70,7 @@ func populate_tile(internal_tile : Vector2, tilemap : TileMap):
 	var internal_tile_autotile_coords = map.tile_map.get_cell_autotile_coord(internal_tilemap_tile.x, internal_tilemap_tile.y)
 	var tile = MapSpaceConverter.internal_map_to_map(internal_tile,self)
 # warning-ignore:narrowing_conversion
-	tilemap.set_cell(tile.x, tile.y,clamp(internal_tile_type - 1,0,100),false,false,false,internal_tile_autotile_coords)
+	tilemap.set_cell(tile.x, tile.y,clamp(internal_tile_type + 1,0,5),false,false,false,internal_tile_autotile_coords)
 
 func clamp(map_point : Vector2) -> Vector2:
 	map_point.x = clamp(map_point.x, -tile_range, tile_range)

@@ -15,6 +15,7 @@ var player_accessible := true
 signal requesting_close()
 
 func _ready():
+	hide()
 	resize()
 	var _connection = get_tree().connect("screen_resized",self,"resize")
 
