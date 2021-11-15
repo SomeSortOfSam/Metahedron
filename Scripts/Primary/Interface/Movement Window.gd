@@ -110,8 +110,3 @@ func _on_Window_focus_exited():
 	if (player_accessible):
 		outline0.color.v -= .05
 		outline1.color.v -= .05
-
-
-func _on_Attack_pressed():
-	attack_button.set_texture()
-	pass # Replace with function body.
