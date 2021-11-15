@@ -1,6 +1,7 @@
 tool
 extends TileMap
-class_name LevelData
+class_name LevelData, "res://Assets/Editor Icons/LevelData.png"
+## Level creation object, by which I mean that it is the level that is being created
 
 export var music : AudioStream
 

@@ -10,7 +10,7 @@ func test_populate_people():
 		assert_typeof(map.people,TYPE_DICTIONARY,"Map.people is dictonary")
 		var character = Character.new()
 		map.people[Vector2.ZERO] = Person.new(character)
-		map.populate_units()
+		map.populate_units(false)
 		assert_gt(map.tile_map.get_child_count(),0,"Map is populated by something")
 		assert_eq((map.tile_map.get_child(0) as Unit).character, character, "Map is populated by unit with correct character")
 
@@ -19,7 +19,7 @@ func test_populate_decorations():
 		assert_typeof(map.people,TYPE_ARRAY,"Map.people is array")
 		var definiton = DecorationDefinition.new()
 		map.decorations.append(DecorationInstance.new(definiton))
-		map.populate_decoration_displays()
+		map.populate_decoration_displays(false)
 		assert_gt(map.tile_map.get_child_count(),0,"Map is populated by something")
 		assert_eq((map.tile_map.get_child(0) as DecorationDisplay).definition, definiton, "Map is populated by Decoration with correct Definition")
 
@@ -35,9 +35,9 @@ func test_refrence_map_populate_tiles():
 	populate_map_with_tiles()
 	var ref_map := get_refrence_map()
 	ref_map.repopulate_tilemap()
-	assert_eq(ref_map.tile_map.get_cell(0,0),0, "Tilemap center cell is populated")
-	assert_eq(ref_map.tile_map.get_cell(1,0),0, "Tilemap neighbor cell is populated")
-	assert_ne(ref_map.tile_map.get_cell(2,0),0, "Tilemap far cell is  not populated")
+	assert_gt(ref_map.tile_map.get_cell(0,0),-1, "Tilemap center cell is populated")
+	assert_gt(ref_map.tile_map.get_cell(1,0),-1, "Tilemap neighbor cell is populated")
+	assert_eq(ref_map.tile_map.get_cell(2,0),-1, "Tilemap far cell is  not populated")
 
 func populate_map_with_units():
 	var person := Person.new(Character.new())

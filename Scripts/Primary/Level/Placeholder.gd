@@ -1,6 +1,7 @@
 tool
 extends Sprite
-class_name Placeholder
+class_name Placeholder,"res://Assets/Editor Icons/Placeholder.png"
+## Level Creation object that will later be replaced by either Unit or DecorationDisplay
 
 const TOOL_ALPHA := .2
 const RECT_WIDTH := 2
@@ -47,9 +48,9 @@ func get_tool_color() -> Color:
 
 func _draw():
 	if definition:
-		draw_index_rect()
+		draw_cell_rect()
 
-func draw_index_rect():
+func draw_cell_rect():
 	var tilemap := get_parent() as TileMap
 	if Engine.editor_hint && tilemap:
 		var rect = get_cell_rect(tilemap)

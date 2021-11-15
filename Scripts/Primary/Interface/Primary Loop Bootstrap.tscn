@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Scripts/Primary/Map/MapScaler.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Primary/Interface/MapScaler.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Primary/Interface/PrimaryLoopBootstrap.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Levels/Dusk Desert/TestLevel.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scripts/Primary/Interface/Cursor/WindowCursor.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Primary/Cursors/WindowCursor.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Levels/TileGlow.png" type="Texture" id=5]
-[ext_resource path="res://Scripts/Primary/Interface/Cursor/Cursor.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Primary/Cursors/Cursor.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/Primary/Interface/PlayerUnitGUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/Menu/ScrollingBackround.gd" type="Script" id=8]
+[ext_resource path="res://Assets/Menu/Textures/Background4.png" type="Texture" id=9]
 
 [node name="Primary Loop Bootstrap" type="Control"]
 anchor_right = 1.0
@@ -49,6 +51,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 display_path = NodePath("MapScaler/TileMap/Cursor")
+
+[node name="ScrollingBackround" type="TextureRect" parent="VSplitContainer/Playspace/Body"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 2
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+scroll_vector = Vector2( -0.5, 0 )
 
 [node name="MapScaler" type="Node2D" parent="VSplitContainer/Playspace/Body"]
 script = ExtResource( 1 )
