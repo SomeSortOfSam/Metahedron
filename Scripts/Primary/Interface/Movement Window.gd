@@ -2,6 +2,7 @@ extends Control
 class_name MovementWindow, "res://Assets/Editor Icons/MovementWindow.png"
 ## Application window what lets units move. Main element of the game.
 
+onready var attack_button : TextureButton = $VSplitContainer/TopBar/Attack
 onready var close_button : TextureButton = $VSplitContainer/TopBar/Close
 onready var cursor : WindowCursor = $VSplitContainer/Body/Body
 onready var container : MapScaler = $VSplitContainer/Body/Body/TilemapContainer
@@ -73,11 +74,11 @@ func populate_map(parent_map, cell, window_range):
 	call_deferred("set_map",new_map)
 
 func lock_window():
-	close_button.hide()
+	close_button.set_disabled(true)
 	cursor.enable(false)
 
 func _on_person_new_turn():
-	close_button.show()
+	close_button.set_disabled(false)
 	cursor.enable(true)
 
 func _on_person_move(delta : Vector2):
@@ -109,3 +110,8 @@ func _on_Window_focus_exited():
 	if (player_accessible):
 		outline0.color.v -= .05
 		outline1.color.v -= .05
+
+
+func _on_Attack_pressed():
+	attack_button.set_texture()
+	pass # Replace with function body.
