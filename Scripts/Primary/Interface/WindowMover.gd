@@ -20,7 +20,7 @@ func _ready():
 	var _connection = get_tree().connect("screen_resized",self,"correct_window_pos",[],CONNECT_DEFERRED)
 
 func correct_window_pos():
-	emit_signal("accepted_window_movement",quatizize())
+	emit_signal("accepted_window_movement",clamp_delta(Vector2.ZERO,window.get_rect(),viewport_window.get_rect()))
 
 func _gui_input(event):
 	if event is InputEventMouse:

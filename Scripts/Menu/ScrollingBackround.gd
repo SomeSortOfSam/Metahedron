@@ -10,7 +10,7 @@ func _init():
 	stretch_mode = TextureRect.STRETCH_TILE
 	mouse_filter = MOUSE_FILTER_IGNORE
 
-func _process(delta):
+func _process(_delta):
 	if not Engine.editor_hint:
 		scroll_negitive()
 		scroll_x()
