@@ -2,6 +2,7 @@ extends Reference
 class_name Map
 
 var tile_map : TileMap
+var astar : AStar2D
 var people := {}
 var decorations := [] 
 
@@ -10,6 +11,7 @@ signal person_added(person)
 
 func _init(new_tilemap : TileMap):
 	tile_map = new_tilemap
+	astar = Pathfinder.map_to_astar(self)
 
 func clamp(map_point : Vector2) -> Vector2:
 	var used_rect := tile_map.get_used_rect()
@@ -19,10 +21,10 @@ func clamp(map_point : Vector2) -> Vector2:
 
 func add_person(person):
 	people[person.cell] = person
-	var _connection = person.connect("cell_change",self,"_on_person_cell_change",[person])
+	var _connection = person.connect("move",self,"_on_person_move",[person])
 	emit_signal("person_added",person)
 
-func _on_person_cell_change(cell_delta,person):
+func _on_person_move(cell_delta,person):
 	if people.erase(person.cell - cell_delta):
 		people[person.cell] = person
 

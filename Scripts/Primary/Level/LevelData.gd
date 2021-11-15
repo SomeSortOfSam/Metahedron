@@ -22,6 +22,7 @@ func populate_map(map : Map):
 		map.tile_map.tile_set = tile_set
 		for cell in get_used_cells():
 			map.tile_map.set_cell(cell.x,cell.y,get_cellv(cell),false,false,false,get_cell_autotile_coord(cell.x,cell.y))
+		map.astar = Pathfinder.map_to_astar(map)
 
 func add_placeholder(placeholder : Placeholder,map):
 	if placeholder.definition is DecorationDefinition:

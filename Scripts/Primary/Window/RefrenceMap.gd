@@ -43,8 +43,8 @@ func repopulate_people():
 		var cell = MapSpaceConverter.internal_map_to_map(internal_cell, self)
 		if Pathfinder.is_cell_in_range(Vector2.ZERO, cell, tile_range):
 			add_person(map.people[internal_cell])
-		if !map.people[internal_cell].is_connected("cell_change", self, "on_person_cell_change"):
-			map.people[internal_cell].connect("cell_change", self, "on_person_cell_change",[map.people[internal_cell]])
+		if !map.people[internal_cell].is_connected("move", self, "on_person_move"):
+			map.people[internal_cell].connect("move", self, "on_person_move",[map.people[internal_cell]])
 
 func repopulate_decoration_instances():
 	decorations.clear()
@@ -55,10 +55,11 @@ func repopulate_decoration_instances():
 
 func repopulate_tilemap():
 	tile_map.clear()
-	var internal_map_tiles = Pathfinder.get_walkable_tiles_in_range(center_cell,tile_range,map)
+	var internal_map_tiles = Pathfinder.get_walkable_tiles_in_range(self)
 	for internal_tile in internal_map_tiles:
 		populate_tile(internal_tile,tile_map)
-	if Settings.new().fullMap:
+	astar = Pathfinder.map_to_astar(self)
+	if Settings.new().fullMap && outer_tile_map:
 		outer_tile_map.clear()
 		for internal_tile in map.tile_map.get_used_cells():
 			populate_tile(internal_tile,outer_tile_map)
@@ -79,7 +80,7 @@ func clamp(map_point : Vector2) -> Vector2:
 func add_person(person):
 	people[MapSpaceConverter.internal_map_to_map(person.cell,self)] = person
 
-func on_person_cell_change(cell_delta,person):
+func on_person_move(cell_delta,person):
 	if people.erase(MapSpaceConverter.internal_map_to_map(person.cell - cell_delta,self)):
 		people[MapSpaceConverter.internal_map_to_map(person.cell,self)] = person
 	if !Pathfinder.is_cell_in_range(center_cell,person.cell - cell_delta,tile_range) && Pathfinder.is_cell_in_range(center_cell,person.cell,tile_range):

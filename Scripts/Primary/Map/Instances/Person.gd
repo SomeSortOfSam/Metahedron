@@ -3,19 +3,21 @@ class_name Person
 
 var character : Character
 var cell : Vector2 setget set_cell
-var window : MovementWindow setget ,get_movement_window
+var window : MovementWindow
 
 var is_evil := false
 
 var has_moved := false
 var has_attacked := false
-var has_set_end_turn := false setget set_end_turn
+var has_skipped := false setget set_skipped
 
-signal cell_change(delta)
-signal requesting_follow_path(path)
-signal lock_window()
-signal has_set_end_turn(is_true)
-signal has_attacked()
+signal move(cell_delta)
+signal attack(direction)
+signal close_window()
+signal open_window()
+signal skip_turn()
+signal unskip_turn()
+
 signal new_turn()
 
 func _init(new_character : Character, new_is_evil := false, new_cell := Vector2.ZERO):
@@ -26,24 +28,20 @@ func _init(new_character : Character, new_is_evil := false, new_cell := Vector2.
 func set_cell(new_cell : Vector2):
 	var old_cell = cell
 	cell = new_cell
-	emit_signal("cell_change",new_cell - old_cell)
+	has_moved = true
+	emit_signal("move",new_cell - old_cell)
+	set_skipped(false)
 
 func reset_turn(evil_turn):
 	if evil_turn == is_evil:
 		has_moved = false
 		has_attacked = false
-		has_set_end_turn = false
+		has_skipped = false
 		emit_signal("new_turn")
-		if is_evil:
-			self.has_set_end_turn = true
 
 func initialize_window(map) -> MovementWindow:
 	window = MovementWindow.get_window(cell,map,3)
 	window.call_deferred("subscribe",self)
-	return window
-
-func get_movement_window() -> MovementWindow:
-	self.has_set_end_turn = false
 	return window
 
 func to_unit(map, icon) -> Unit:
@@ -56,20 +54,20 @@ func to_unit(map, icon) -> Unit:
 func _on_path_accepted(path : PoolVector2Array):
 	if !has_attacked && !has_moved:
 		var offset = path[path.size() - 1]
-		cell += offset
-		emit_signal("cell_change", offset)
-		emit_signal("requesting_follow_path",path)
-		has_moved = true
-		emit_signal("lock_window")
+		self.cell += offset
 
-func _on_window_closed():
-	self.has_set_end_turn = true
+func _on_window_requesting_close():
+	emit_signal("close_window")
+	set_skipped(true)
 
-func set_end_turn(new_end_turn):
-	if has_set_end_turn != new_end_turn:
-		has_set_end_turn = new_end_turn
-		emit_signal("has_set_end_turn",has_set_end_turn)
+func open_window():
+	emit_signal("open_window")
+	set_skipped(false)
 
-func set_attacked(new_attacked):
-	has_attacked = new_attacked
-	emit_signal("has_attacked")
+func set_skipped(new_end_turn : bool):
+	if has_skipped != new_end_turn:
+		has_skipped = new_end_turn
+		if new_end_turn:
+			emit_signal("skip_turn")
+		else:
+			emit_signal("unskip_turn")

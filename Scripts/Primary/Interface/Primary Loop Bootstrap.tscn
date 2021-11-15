@@ -82,6 +82,16 @@ margin_bottom = 55.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
+[node name="Label" type="Label" parent="."]
+margin_right = 182.0
+margin_bottom = 133.0
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="mouse_exited" from="VSplitContainer/Playspace/Body" to="VSplitContainer/Playspace/Body" method="_on_Body_mouse_exited"]
 [connection signal="position_accepted" from="VSplitContainer/Playspace/Body" to="." method="_on_Cursor_position_accepted"]
 [connection signal="timeout" from="VSplitContainer/Playspace/Body/MapScaler/TileMap/Cursor/Timer" to="VSplitContainer/Playspace/Body/MapScaler/TileMap/Cursor" method="_on_Timer_timeout"]

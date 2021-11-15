@@ -10,7 +10,6 @@ var map : Map setget set_map
 
 signal position_selected(cell)
 signal position_accepted(cell)
-signal path_accepted(path)
 
 func _gui_input(event):
 	if "position" in event && map && display:
@@ -19,14 +18,9 @@ func _gui_input(event):
 		handle_cell(cell,acceptable, event)
 
 func handle_cell(cell : Vector2, acceptable : bool , event):
-	if event:
-		emit_signal("position_selected",cell)
-	var out = display.draw_display(cell, acceptable)
+	display.draw_display(cell, acceptable)
 	if is_accepted(acceptable, event):
-		if out is PoolVector2Array:
-			emit_signal("path_accepted", out)
-		elif out is Vector2:
-			emit_signal("position_accepted", out)
+		emit_signal("position_accepted", cell)
 
 func is_cell_acceptable(cell : Vector2) -> bool:
 	var out := Pathfinder.is_walkable(cell,map)
