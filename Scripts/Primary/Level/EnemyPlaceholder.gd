@@ -1,6 +1,7 @@
 tool
 extends Placeholder
-class_name EnemyPlaceholder
+class_name EnemyPlaceholder, "res://Assets/Editor Icons/EnemyPlaceholder.png"
+## Level creation object specifically for hostile units
 
 export var health : int
 export var tile_range : int

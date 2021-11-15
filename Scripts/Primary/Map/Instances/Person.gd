@@ -1,5 +1,5 @@
 extends Reference
-class_name Person
+class_name Person, "res://Assets/Editor Icons/Person.png"
 
 var character : Character
 var cell : Vector2 setget set_cell
@@ -45,7 +45,7 @@ func initialize_window(map) -> MovementWindow:
 	return window
 
 func to_unit(map, icon) -> Unit:
-	var unit : Unit = preload("res://Scripts/Primary/Map/Displays/Unit.tscn").instance()
+	var unit : Unit = preload("res://Scripts/Primary/Displays/Unit.tscn").instance()
 	map.tile_map.add_child(unit)
 	unit.subscribe(self,map)
 	unit.is_icon = icon

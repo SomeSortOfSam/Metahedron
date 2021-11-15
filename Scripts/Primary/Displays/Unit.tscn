@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Primary/Displays/Unit.gd" type="Script" id=1]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+} ]
+
+[node name="Unit" type="YSort"]
+script = ExtResource( 1 )
+speed = 45.0
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = null
+
+[node name="Follower" type="PathFollow2D" parent="Path2D"]
+rotate = false
+loop = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/Follower"]
+remote_path = NodePath("../../../Node2D")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Icon" type="Sprite" parent="Node2D"]
+
+[node name="Sprite" type="AnimatedSprite" parent="Node2D"]
+frames = SubResource( 2 )
+animation = "Idle"
+playing = true

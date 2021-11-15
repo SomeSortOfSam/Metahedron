@@ -1,10 +1,11 @@
 extends Control
+class_name PlayerUnitGUI
+## Displays the state of a unit in the players control
 
-onready var portait : TextureRect = $Body/HBoxContainer/Control/Control/Portrait
+onready var portrait : TextureRect = $Body/HBoxContainer/Control/Control/Portrait
 onready var icon : TextureRect = $Body/Icon
 onready var label : Label = $Body/HBoxContainer/Label
 
-onready var end_turn : TextureButton = $AspectRatioContainer/EndTurn
 onready var moved : TextureRect = $AspectRatioContainer/EndTurn/Control2/Moved
 onready var attacked : TextureRect = $AspectRatioContainer/EndTurn/Control2/Attacked
 onready var outline : ColorRect = $Outline
@@ -32,7 +33,7 @@ func subscribe(person : Person):
 	_connection = person.connect("new_turn",self,"_on_person_new_turn")
 
 func populate_textures(person : Person):
-	portait.texture = person.character.animations.get_frame("Idle",0)
+	portrait.texture = person.character.animations.get_frame("Idle",0)
 	icon.texture = person.character.level_texture
 	label.text = person.character.name
 
@@ -48,7 +49,6 @@ func _on_person_unskip_turn():
 	body.color = new_turn_body_color
 
 func _on_person_new_turn():
-	end_turn.show()
 	outline.color = new_turn_outline_color
 	body.color = new_turn_body_color
 	attacked.modulate = Color.red
