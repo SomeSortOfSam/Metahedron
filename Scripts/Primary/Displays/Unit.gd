@@ -29,6 +29,10 @@ func _on_person_move(delta : Vector2, person, map):
 	if "map" in map && person.cell - delta == Vector2.ZERO:
 		position -= delta * cell_size
 	
+	var cell := parent_tilemap.world_to_map(parent_tilemap.to_local(_follower.global_position))
+	var tile_type := parent_tilemap.get_cellv(cell)
+	modulate.a = 0 if tile_type < 0 else 1
+	
 	var path := get_follow_path(person.cell - delta,person.cell,map)
 	_followe.curve = path_to_curve(path,cell_size)
 
