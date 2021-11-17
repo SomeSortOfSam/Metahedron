@@ -2,10 +2,13 @@ extends Control
 class_name MovementWindow, "res://Assets/Editor Icons/MovementWindow.png"
 ## Application window what lets units move. Main element of the game.
 
-onready var attack_button : TextureButton = $VSplitContainer/TopBar/Attack
 onready var close_button : TextureButton = $VSplitContainer/TopBar/Close
-onready var cursor : WindowCursor = $VSplitContainer/Body/Body
-onready var container : MapScaler = $VSplitContainer/Body/Body/TilemapContainer
+
+onready var attack_button : TextureButton = $VSplitContainer/TopBar/Attack
+onready var combat_menu : CombatMenu = $VSplitContainer/Body/CombatMenu
+
+onready var movement_cursor : WindowCursor = $VSplitContainer/Body/Movement
+onready var container : MapScaler = $VSplitContainer/Body/Movement/TilemapContainer
 
 onready var outline0 : ColorRect = $VSplitContainer/Body/Outline
 onready var outline1 : ColorRect = $VSplitContainer/TopBar/Outline
@@ -36,7 +39,7 @@ func center_around_tile(tile : Vector2):
 func set_map(new_map : ReferenceMap):
 	map = new_map
 	map.repopulate_displays()
-	cursor.map = new_map
+	movement_cursor.map = new_map
 	var _connection = map.connect("position_changed", container, "correct_transform")
 
 func subscribe(person):
@@ -46,8 +49,9 @@ func subscribe(person):
 	
 	if (player_accessible):
 		_connection = connect("requesting_close", person, "_on_window_requesting_close")
-		_connection = cursor.connect("position_accepted", self, "_on_cursor_position_accepted",[person])
+		_connection = movement_cursor.connect("position_accepted", self, "_on_cursor_position_accepted",[person])
 		_connection = person.connect("new_turn", self, "_on_person_new_turn")
+		combat_menu.subscribe(person)
 	else:
 		lock_window()
 	
@@ -69,17 +73,17 @@ static func get_window(cell : Vector2, parent_map, window_range : int) -> Moveme
 	return window
 
 func populate_map(parent_map, cell, window_range):
-	var new_map = ReferenceMap.new($VSplitContainer/Body/Body/TilemapContainer/TileMap,parent_map,cell,window_range)
-	new_map.outer_tile_map = $VSplitContainer/Body/Body/TilemapContainer/OuterMap
+	var new_map = ReferenceMap.new($VSplitContainer/Body/Movement/TilemapContainer/TileMap,parent_map,cell,window_range)
+	new_map.outer_tile_map = $VSplitContainer/Body/Movement/TilemapContainer/OuterMap
 	call_deferred("set_map",new_map)
 
 func lock_window():
 	close_button.set_disabled(true)
-	cursor.enable(false)
+	movement_cursor.enable(false)
 
 func _on_person_new_turn():
 	close_button.set_disabled(false)
-	cursor.enable(true)
+	movement_cursor.enable(true)
 
 func _on_person_move(delta : Vector2):
 	map.center_cell += delta
@@ -110,3 +114,14 @@ func _on_Window_focus_exited():
 	if (player_accessible):
 		outline0.color.v -= .05
 		outline1.color.v -= .05
+
+func _on_Attack_attack():
+	movement_cursor.hide()
+	combat_menu.show()
+
+func _on_Attack_back():
+	movement_cursor.show()
+	combat_menu.hide()
+
+func _on_CombatMenu_attack_selected(attack):
+	print(attack)

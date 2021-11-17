@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "TileMap",
 "class": "ArrowLines",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Cursors/ArrowLines.gd"
+"path": "res://Scripts/Primary/Interface/Cursors/ArrowLines.gd"
 }, {
 "base": "Resource",
 "class": "Attack",
@@ -24,6 +24,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Primary/Level/Resources/Character.gd"
 }, {
+"base": "Control",
+"class": "CombatMenu",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Interface/MovementWindow/CombatMenu/CombatMenu.gd"
+}, {
+"base": "Button",
+"class": "CombatMenuElement",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Interface/MovementWindow/CombatMenu/CobatMenuElement.gd"
+}, {
 "base": "Node",
 "class": "ConversionTests",
 "language": "GDScript",
@@ -32,7 +42,7 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "Cursor",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Cursors/Cursor.gd"
+"path": "res://Scripts/Primary/Interface/Cursors/Cursor.gd"
 }, {
 "base": "Resource",
 "class": "DecorationDefinition",
@@ -157,7 +167,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "WindowCursor",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Cursors/WindowCursor.gd"
+"path": "res://Scripts/Primary/Interface/Cursors/WindowCursor.gd"
 }, {
 "base": "Control",
 "class": "WindowMover",
@@ -168,6 +178,8 @@ _global_script_class_icons={
 "ArrowLines": "res://Assets/Editor Icons/Arrowlines.png",
 "Attack": "",
 "Character": "res://Assets/Editor Icons/Character.png",
+"CombatMenu": "",
+"CombatMenuElement": "",
 "ConversionTests": "",
 "Cursor": "res://Assets/Editor Icons/Cursor.png",
 "DecorationDefinition": "res://Assets/Editor Icons/DecorationDefinition.png",
@@ -195,7 +207,7 @@ _global_script_class_icons={
 "TurnManager": "",
 "Unit": "res://Assets/Editor Icons/Unit.png",
 "WindowCursor": "res://Assets/Editor Icons/WindowCursor.png",
-"WindowMover": ""
+"WindowMover": "res://Assets/Editor Icons/WindowMover.png"
 }
 
 [WAT]

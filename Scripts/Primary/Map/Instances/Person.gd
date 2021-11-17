@@ -5,6 +5,8 @@ var character : Character
 var cell : Vector2 setget set_cell
 var window : MovementWindow
 
+var attacks := []
+
 var is_evil := false
 
 var has_moved := false

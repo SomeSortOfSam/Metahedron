@@ -15,11 +15,11 @@ func set_buttons(a : bool):
 	if (a):
 		set_normal_texture(attack_button)
 		set_disabled_texture(attack_button_disabled)
-		emit_signal("attack")
+		emit_signal("back")
 	else:
 		set_normal_texture(back_button)
 		set_disabled_texture(back_button_disables)
-		emit_signal("back")
+		emit_signal("attack")
 	
 	attack = a
 

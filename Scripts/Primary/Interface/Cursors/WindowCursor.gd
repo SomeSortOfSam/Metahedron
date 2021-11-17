@@ -9,7 +9,6 @@ onready var display : Node2D = get_node(display_path)
 var map : Map setget set_map
 var enabled := true setget enable
 
-signal position_selected(cell)
 signal position_accepted(cell)
 
 func _gui_input(event):
