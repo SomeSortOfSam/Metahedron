@@ -57,7 +57,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "EnemyAI",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Interface/EnemyAI.gd"
+"path": "res://Scripts/Primary/Utilites/EnemyAI.gd"
 }, {
 "base": "Placeholder",
 "class": "EnemyPlaceholder",
@@ -92,7 +92,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "MovementWindow",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Interface/Movement Window.gd"
+"path": "res://Scripts/Primary/Interface/MovementWindow/Movement Window.gd"
 }, {
 "base": "Reference",
 "class": "Pathfinder",
@@ -117,12 +117,12 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "PlayerUnitGUI",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Interface/PlayerUnitGUI.gd"
+"path": "res://Scripts/Primary/Interface/Bootstrap/PlayerUnitGUI.gd"
 }, {
 "base": "Node",
 "class": "PrimaryLoopBootstrap",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Interface/PrimaryLoopBootstrap.gd"
+"path": "res://Scripts/Primary/Interface/Bootstrap/PrimaryLoopBootstrap.gd"
 }, {
 "base": "Map",
 "class": "ReferenceMap",
@@ -162,7 +162,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "WindowMover",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Interface/WindowMover.gd"
+"path": "res://Scripts/Primary/Interface/MovementWindow/WindowMover.gd"
 } ]
 _global_script_class_icons={
 "ArrowLines": "res://Assets/Editor Icons/Arrowlines.png",
@@ -195,7 +195,7 @@ _global_script_class_icons={
 "TurnManager": "",
 "Unit": "res://Assets/Editor Icons/Unit.png",
 "WindowCursor": "res://Assets/Editor Icons/WindowCursor.png",
-"WindowMover": "res://Assets/Editor Icons/WindowMover.png"
+"WindowMover": ""
 }
 
 [WAT]
