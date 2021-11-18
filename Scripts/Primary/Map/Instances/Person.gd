@@ -14,9 +14,13 @@ var has_attacked := false
 var has_skipped := false setget set_skipped
 
 signal move(cell_delta)
-signal attack(direction)
+
+signal attack_selected(attack)
+signal attack(direction, attack)
+
 signal close_window()
 signal open_window()
+
 signal skip_turn()
 signal unskip_turn()
 
