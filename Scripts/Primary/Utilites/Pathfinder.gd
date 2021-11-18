@@ -1,4 +1,5 @@
 class_name Pathfinder
+## Utility class to help units get from point a to point b
 
 static func is_occupied(map_point : Vector2, map) -> bool:
 	return map.people.has(map_point)

@@ -1,5 +1,6 @@
 extends Reference
 class_name TurnManager
+## Thing what handles the turn order
 
 var evil_turn := false
 var turns := 0 setget set_turns
