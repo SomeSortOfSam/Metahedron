@@ -109,11 +109,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Primary/Utilites/Pathfinder.gd"
 }, {
-"base": "Attack",
-"class": "PatternAttack",
-"language": "GDScript",
-"path": "res://Scripts/Primary/Level/Resources/Attacks/PatternAttack.gd"
-}, {
 "base": "Reference",
 "class": "Person",
 "language": "GDScript",
@@ -195,7 +190,6 @@ _global_script_class_icons={
 "MapSpaceConverter": "",
 "MovementWindow": "res://Assets/Editor Icons/MovementWindow.png",
 "Pathfinder": "",
-"PatternAttack": "",
 "Person": "res://Assets/Editor Icons/Person.png",
 "Placeholder": "res://Assets/Editor Icons/Placeholder.png",
 "PlayerUnitGUI": "",
