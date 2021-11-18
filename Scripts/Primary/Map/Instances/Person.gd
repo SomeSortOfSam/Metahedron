@@ -1,5 +1,6 @@
 extends Reference
 class_name Person, "res://Assets/Editor Icons/Person.png"
+## The where and what of a unit
 
 var character : Character
 var cell : Vector2 setget set_cell
@@ -30,7 +31,6 @@ func set_cell(new_cell : Vector2):
 	cell = new_cell
 	has_moved = true
 	emit_signal("move",new_cell - old_cell)
-	set_skipped(false)
 
 func reset_turn(evil_turn):
 	if evil_turn == is_evil:
@@ -51,13 +51,9 @@ func to_unit(map, icon) -> Unit:
 	unit.is_icon = icon
 	return unit
 
-func _on_path_accepted(path : PoolVector2Array):
-	if !has_attacked && !has_moved:
-		var offset = path[path.size() - 1]
-		self.cell += offset
-
 func _on_window_requesting_close():
 	emit_signal("close_window")
+	set_skipped(false)
 
 func open_window():
 	emit_signal("open_window")
