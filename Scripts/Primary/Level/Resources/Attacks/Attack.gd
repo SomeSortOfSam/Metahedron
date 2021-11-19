@@ -15,4 +15,4 @@ export var projectile : Texture
 export var custom_animation : String
 
 func attack(map : Map, center_cell : Vector2, direction : Vector2) -> Array:
-	return []
+	return [Vector2.ZERO]

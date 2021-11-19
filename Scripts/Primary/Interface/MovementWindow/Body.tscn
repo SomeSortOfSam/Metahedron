@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Menu/Textures/Background4.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Primary/Interface/MapScaler.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scripts/Primary/Interface/Cursors/WindowCursor.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Window Sprites/ArrowLines.tres" type="TileSet" id=7]
 [ext_resource path="res://Scripts/Primary/Interface/MovementWindow/Body.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/Primary/Interface/Cursors/AttackRenderer.gd" type="Script" id=9]
 
 [node name="Movement" type="Control"]
 show_behind_parent = true
@@ -60,6 +61,14 @@ tile_set = ExtResource( 5 )
 cell_size = Vector2( 16, 16 )
 cell_y_sort = true
 format = 1
+
+[node name="AttackRenderer" type="TileMap" parent="WindowCursor/TilemapContainer"]
+tile_set = ExtResource( 7 )
+cell_size = Vector2( 16, 16 )
+cell_tile_origin = 1
+cell_y_sort = true
+format = 1
+script = ExtResource( 9 )
 
 [node name="TileMap" type="TileMap" parent="WindowCursor/TilemapContainer"]
 tile_set = ExtResource( 5 )

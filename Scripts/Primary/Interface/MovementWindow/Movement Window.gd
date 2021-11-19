@@ -116,12 +116,11 @@ func _on_Window_focus_exited():
 		outline1.color.v -= .05
 
 func _on_Attack_attack():
-	movement_cursor.hide()
 	combat_menu.show()
 
 func _on_Attack_back():
-	movement_cursor.show()
 	combat_menu.hide()
 
 func _on_CombatMenu_attack_selected(attack):
-	print(attack)
+	combat_menu.hide()
+	_on_Window_focus_exited()
