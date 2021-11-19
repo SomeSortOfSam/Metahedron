@@ -51,7 +51,7 @@ func subscribe(person):
 		_connection = connect("requesting_close", person, "_on_window_requesting_close")
 		_connection = movement_cursor.connect("position_accepted", self, "_on_cursor_position_accepted",[person])
 		_connection = person.connect("new_turn", self, "_on_person_new_turn")
-		combat_menu.subscribe(person)
+		combat_menu.call_deferred("call_deferred","subscribe",person)
 	else:
 		lock_window()
 	

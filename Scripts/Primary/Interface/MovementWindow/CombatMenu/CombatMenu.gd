@@ -6,7 +6,7 @@ var elements := []
 signal attack_selected(attack)
 
 func _ready():
-	for child in get_children():
+	for child in get_child(0).get_children():
 		elements.append(child as CombatMenuElement)
 
 func subscribe(person):

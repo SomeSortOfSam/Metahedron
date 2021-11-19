@@ -170,13 +170,13 @@ _global_script_classes=[ {
 "path": "res://Scripts/Primary/Interface/MovementWindow/WindowMover.gd"
 } ]
 _global_script_class_icons={
-"ArrowLines": "res://Assets/Editor Icons/Arrowlines.png",
+"ArrowLines": "",
 "Attack": "",
 "Character": "res://Assets/Editor Icons/Character.png",
 "CombatMenu": "",
 "CombatMenuElement": "",
 "ConversionTests": "",
-"Cursor": "res://Assets/Editor Icons/Cursor.png",
+"Cursor": "",
 "DecorationDefinition": "res://Assets/Editor Icons/DecorationDefinition.png",
 "DecorationDisplay": "res://Assets/Editor Icons/DecorationDisplay.png",
 "DecorationInstance": "res://Assets/Editor Icons/DecorationInstance.png",
@@ -193,15 +193,15 @@ _global_script_class_icons={
 "Person": "res://Assets/Editor Icons/Person.png",
 "Placeholder": "res://Assets/Editor Icons/Placeholder.png",
 "PlayerUnitGUI": "",
-"PrimaryLoopBootstrap": "res://Assets/Editor Icons/PrimaryLoopBootstrap.png",
+"PrimaryLoopBootstrap": "",
 "ReferenceMap": "res://Assets/Editor Icons/ReferenceMap.png",
 "ScrollingBackround": "res://Assets/Editor Icons/ScrollingBackround.svg",
 "Settings": "",
 "TileMapUtilites": "",
 "TurnManager": "",
 "Unit": "res://Assets/Editor Icons/Unit.png",
-"WindowCursor": "res://Assets/Editor Icons/WindowCursor.png",
-"WindowMover": "res://Assets/Editor Icons/WindowMover.png"
+"WindowCursor": "",
+"WindowMover": ""
 }
 
 [WAT]

@@ -1,9 +1,9 @@
 extends Resource
 class_name Attack
 
-export var icon : Texture
-export var name : String
-export var description : String
+export var icon : Texture = load("res://Assets/Editor Icons/Map.png")
+export var name : String = "Sample Attack"
+export var description : String = "More defualt text!"
 
 export var friendlyFire : bool = false
 
