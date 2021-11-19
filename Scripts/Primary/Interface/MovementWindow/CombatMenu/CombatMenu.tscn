@@ -6,6 +6,7 @@
 [node name="CombatMenu" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 color = Color( 0.180392, 0.533333, 0.0156863, 1 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -26,21 +27,26 @@ __meta__ = {
 [node name="CobatMenuElement" parent="VBoxContainer" instance=ExtResource( 1 )]
 margin_right = 1014.0
 margin_bottom = 194.0
+mouse_filter = 1
 
 [node name="CobatMenuElement2" parent="VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 198.0
 margin_right = 1014.0
 margin_bottom = 392.0
+mouse_filter = 1
 
 [node name="CobatMenuElement3" parent="VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 396.0
 margin_right = 1014.0
 margin_bottom = 590.0
+mouse_filter = 1
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="attack_selected" from="VBoxContainer/CobatMenuElement" to="." method="_on_CobatMenuElement_attack_selected"]
 [connection signal="attack_selected" from="VBoxContainer/CobatMenuElement2" to="." method="_on_CobatMenuElement_attack_selected"]
 [connection signal="attack_selected" from="VBoxContainer/CobatMenuElement3" to="." method="_on_CobatMenuElement_attack_selected"]

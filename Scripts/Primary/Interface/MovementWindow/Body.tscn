@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Menu/Textures/Background4.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Primary/Interface/MapScaler.gd" type="Script" id=2]
@@ -7,18 +7,18 @@
 [ext_resource path="res://Assets/Levels/Tileset.tres" type="TileSet" id=5]
 [ext_resource path="res://Scripts/Primary/Interface/Cursors/WindowCursor.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Window Sprites/ArrowLines.tres" type="TileSet" id=7]
+[ext_resource path="res://Scripts/Primary/Interface/MovementWindow/Body.gd" type="Script" id=8]
 
-[node name="Body" type="Control"]
+[node name="Movement" type="Control"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = true
 mouse_filter = 1
-script = ExtResource( 6 )
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-display_path = NodePath("TilemapContainer/ArrowLines")
 
 [node name="ScrollingBackround" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -33,10 +33,20 @@ __meta__ = {
 }
 scroll_vector = Vector2( 0, -0.7 )
 
-[node name="TilemapContainer" type="YSort" parent="."]
+[node name="WindowCursor" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+display_path = NodePath("TilemapContainer/ArrowLines")
+
+[node name="TilemapContainer" type="YSort" parent="WindowCursor"]
 script = ExtResource( 2 )
 
-[node name="ArrowLines" type="TileMap" parent="TilemapContainer"]
+[node name="ArrowLines" type="TileMap" parent="WindowCursor/TilemapContainer"]
 tile_set = ExtResource( 7 )
 cell_size = Vector2( 16, 16 )
 cell_tile_origin = 1
@@ -44,17 +54,17 @@ cell_y_sort = true
 format = 1
 script = ExtResource( 3 )
 
-[node name="OuterMap" type="TileMap" parent="TilemapContainer"]
+[node name="OuterMap" type="TileMap" parent="WindowCursor/TilemapContainer"]
 modulate = Color( 0.54, 0.54, 0.54, 1 )
 tile_set = ExtResource( 5 )
 cell_size = Vector2( 16, 16 )
 cell_y_sort = true
 format = 1
 
-[node name="TileMap" type="TileMap" parent="TilemapContainer"]
+[node name="TileMap" type="TileMap" parent="WindowCursor/TilemapContainer"]
 tile_set = ExtResource( 5 )
 cell_size = Vector2( 16, 16 )
 cell_y_sort = true
 format = 1
 
-[connection signal="mouse_exited" from="." to="." method="_on_Body_mouse_exited"]
+[connection signal="mouse_exited" from="." to="WindowCursor" method="_on_Body_mouse_exited"]

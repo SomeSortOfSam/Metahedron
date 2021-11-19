@@ -7,8 +7,8 @@ onready var close_button : TextureButton = $VSplitContainer/TopBar/Close
 onready var attack_button : TextureButton = $VSplitContainer/TopBar/Attack
 onready var combat_menu : CombatMenu = $VSplitContainer/Body/CombatMenu
 
-onready var movement_cursor : WindowCursor = $VSplitContainer/Body/Movement
-onready var container : MapScaler = $VSplitContainer/Body/Movement/TilemapContainer
+onready var movement_cursor : WindowCursor = $VSplitContainer/Body/Movement/WindowCursor
+onready var container : MapScaler = $VSplitContainer/Body/Movement/WindowCursor/TilemapContainer
 
 onready var outline0 : ColorRect = $VSplitContainer/Body/Outline
 onready var outline1 : ColorRect = $VSplitContainer/TopBar/Outline
@@ -73,8 +73,8 @@ static func get_window(cell : Vector2, parent_map, window_range : int) -> Moveme
 	return window
 
 func populate_map(parent_map, cell, window_range):
-	var new_map = ReferenceMap.new($VSplitContainer/Body/Movement/TilemapContainer/TileMap,parent_map,cell,window_range)
-	new_map.outer_tile_map = $VSplitContainer/Body/Movement/TilemapContainer/OuterMap
+	var new_map = ReferenceMap.new($VSplitContainer/Body/Movement/WindowCursor/TilemapContainer/TileMap,parent_map,cell,window_range)
+	new_map.outer_tile_map = $VSplitContainer/Body/Movement/WindowCursor/TilemapContainer/OuterMap
 	call_deferred("set_map",new_map)
 
 func lock_window():
