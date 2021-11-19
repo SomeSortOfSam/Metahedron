@@ -28,3 +28,6 @@ func _ready():
 
 func _on_Attack_pressed():
 	set_buttons(!attack)
+
+func _on_CombatMenu_requesting_close():
+	set_buttons(true)

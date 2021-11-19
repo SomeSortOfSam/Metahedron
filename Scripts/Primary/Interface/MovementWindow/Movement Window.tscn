@@ -160,3 +160,4 @@ margin_bottom = -5.0
 [connection signal="pressed" from="VSplitContainer/TopBar/Attack" to="VSplitContainer/TopBar/Attack" method="_on_Attack_pressed"]
 [connection signal="pressed" from="VSplitContainer/TopBar/Close" to="." method="_on_Close_pressed"]
 [connection signal="attack_selected" from="VSplitContainer/Body/CombatMenu" to="." method="_on_CombatMenu_attack_selected"]
+[connection signal="requesting_close" from="VSplitContainer/Body/CombatMenu" to="VSplitContainer/TopBar/Attack" method="_on_CombatMenu_requesting_close"]

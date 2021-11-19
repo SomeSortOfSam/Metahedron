@@ -37,6 +37,11 @@ margin_top = 396.0
 margin_right = 1014.0
 margin_bottom = 590.0
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="attack_selected" from="VBoxContainer/CobatMenuElement" to="." method="_on_CobatMenuElement_attack_selected"]
 [connection signal="attack_selected" from="VBoxContainer/CobatMenuElement2" to="." method="_on_CobatMenuElement_attack_selected"]
 [connection signal="attack_selected" from="VBoxContainer/CobatMenuElement3" to="." method="_on_CobatMenuElement_attack_selected"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

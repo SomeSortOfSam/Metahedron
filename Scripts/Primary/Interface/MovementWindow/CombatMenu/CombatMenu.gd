@@ -1,9 +1,11 @@
 extends Control
 class_name CombatMenu
 
+onready var timer : Timer = $Timer
 var elements := []
 
 signal attack_selected(attack)
+signal requesting_close()
 
 func _ready():
 	for child in get_child(0).get_children():
@@ -17,3 +19,9 @@ func subscribe(person):
 
 func _on_CobatMenuElement_attack_selected(attack):
 	emit_signal("attack_selected",attack)
+
+func _on_mouse_exited():
+	timer.start()
+
+func _on_Timer_timeout():
+	emit_signal("requesting_close")
