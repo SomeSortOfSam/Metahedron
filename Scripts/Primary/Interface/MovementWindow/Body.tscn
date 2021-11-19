@@ -48,6 +48,7 @@ display_path = NodePath("TilemapContainer/ArrowLines")
 script = ExtResource( 2 )
 
 [node name="ArrowLines" type="TileMap" parent="WindowCursor/TilemapContainer"]
+modulate = Color( 0.921569, 0.858824, 0.294118, 1 )
 tile_set = ExtResource( 7 )
 cell_size = Vector2( 16, 16 )
 cell_tile_origin = 1
@@ -63,6 +64,7 @@ cell_y_sort = true
 format = 1
 
 [node name="AttackRenderer" type="TileMap" parent="WindowCursor/TilemapContainer"]
+modulate = Color( 1, 0.537255, 0, 1 )
 tile_set = ExtResource( 7 )
 cell_size = Vector2( 16, 16 )
 cell_tile_origin = 1
