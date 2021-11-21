@@ -39,7 +39,7 @@ region = Rect2( 0, 0, 35, 35 )
 atlas = ExtResource( 9 )
 region = Rect2( 35, 0, 35, 35 )
 
-[node name="Window" type="Control"]
+[node name="Window" type="VSplitContainer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -48,30 +48,22 @@ margin_left = -512.0
 margin_top = -300.0
 margin_right = 512.0
 margin_bottom = 300.0
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="VSplitContainer" type="VSplitContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
 split_offset = 32
 dragger_visibility = 2
+script = ExtResource( 2 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
-[node name="TopBar" type="Control" parent="VSplitContainer"]
+[node name="TopBar" type="Control" parent="."]
 margin_right = 1024.0
 margin_bottom = 32.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 script = ExtResource( 6 )
-window_path = NodePath("../..")
+window_path = NodePath("..")
 
-[node name="Outline" type="ColorRect" parent="VSplitContainer/TopBar"]
+[node name="Outline" type="ColorRect" parent="TopBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
@@ -80,7 +72,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Body" type="ColorRect" parent="VSplitContainer/TopBar"]
+[node name="Body" type="ColorRect" parent="TopBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
@@ -93,7 +85,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Attack" type="TextureButton" parent="VSplitContainer/TopBar"]
+[node name="Attack" type="TextureButton" parent="TopBar"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -112,7 +104,7 @@ attack_button_disabled = SubResource( 6 )
 back_button = SubResource( 7 )
 back_button_disables = SubResource( 8 )
 
-[node name="Close" type="TextureButton" parent="VSplitContainer/TopBar"]
+[node name="Close" type="TextureButton" parent="TopBar"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -125,12 +117,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Body" type="Control" parent="VSplitContainer"]
+[node name="Body" type="Control" parent="."]
 margin_top = 32.0
 margin_right = 1024.0
 margin_bottom = 600.0
 
-[node name="Outline" type="ColorRect" parent="VSplitContainer/Body"]
+[node name="Outline" type="ColorRect" parent="Body"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -140,27 +132,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Movement" parent="VSplitContainer/Body" instance=ExtResource( 1 )]
+[node name="Body" parent="Body" instance=ExtResource( 1 )]
 margin_left = 5.0
 margin_right = -5.0
 margin_bottom = -5.0
 
-[node name="CombatMenu" parent="VSplitContainer/Body" instance=ExtResource( 3 )]
+[node name="CombatMenu" parent="Body" instance=ExtResource( 3 )]
 visible = false
 margin_left = 5.0
 margin_right = -5.0
 margin_bottom = -5.0
 
-[connection signal="accepted_window_movement" from="VSplitContainer/TopBar" to="." method="_on_TopBar_accepted_window_movement"]
-[connection signal="mouse_entered" from="VSplitContainer/TopBar" to="VSplitContainer/TopBar" method="_on_TopBar_mouse_entered"]
-[connection signal="mouse_exited" from="VSplitContainer/TopBar" to="VSplitContainer/TopBar" method="_on_TopBar_mouse_exited"]
-[connection signal="attack" from="VSplitContainer/TopBar/Attack" to="." method="_on_Attack_attack" flags=3]
-[connection signal="back" from="VSplitContainer/TopBar/Attack" to="." method="_on_Attack_back" flags=3]
-[connection signal="back" from="VSplitContainer/TopBar/Attack" to="VSplitContainer/Body/Movement" method="_on_Attack_back" flags=3]
-[connection signal="pressed" from="VSplitContainer/TopBar/Attack" to="VSplitContainer/TopBar/Attack" method="_on_Attack_pressed"]
-[connection signal="pressed" from="VSplitContainer/TopBar/Close" to="." method="_on_Close_pressed"]
-[connection signal="mouse_entered" from="VSplitContainer/Body" to="." method="_on_Window_focus_entered"]
-[connection signal="mouse_exited" from="VSplitContainer/Body" to="." method="_on_Window_focus_exited"]
-[connection signal="attack_selected" from="VSplitContainer/Body/CombatMenu" to="." method="_on_CombatMenu_attack_selected"]
-[connection signal="attack_selected" from="VSplitContainer/Body/CombatMenu" to="VSplitContainer/Body/Movement" method="_on_CombatMenu_attack_selected"]
-[connection signal="requesting_close" from="VSplitContainer/Body/CombatMenu" to="VSplitContainer/TopBar/Attack" method="_on_CombatMenu_requesting_close"]
+[connection signal="accepted_window_movement" from="TopBar" to="." method="_on_TopBar_accepted_window_movement"]
+[connection signal="mouse_entered" from="TopBar" to="TopBar" method="_on_TopBar_mouse_entered"]
+[connection signal="mouse_exited" from="TopBar" to="TopBar" method="_on_TopBar_mouse_exited"]
+[connection signal="attack" from="TopBar/Attack" to="Body/CombatMenu" method="_on_Attack_attack"]
+[connection signal="back" from="TopBar/Attack" to="Body/Body" method="_on_Attack_back" flags=3]
+[connection signal="back" from="TopBar/Attack" to="Body/CombatMenu" method="_on_Attack_back"]
+[connection signal="pressed" from="TopBar/Attack" to="TopBar/Attack" method="_on_Attack_pressed"]
+[connection signal="pressed" from="TopBar/Close" to="." method="_on_Close_pressed"]
+[connection signal="mouse_entered" from="Body" to="." method="_on_Window_focus_entered"]
+[connection signal="mouse_exited" from="Body" to="." method="_on_Window_focus_exited"]
+[connection signal="attack_selected" from="Body/CombatMenu" to="." method="_on_CombatMenu_attack_selected"]
+[connection signal="attack_selected" from="Body/CombatMenu" to="Body/Body" method="_on_CombatMenu_attack_selected"]
+[connection signal="requesting_close" from="Body/CombatMenu" to="TopBar/Attack" method="_on_CombatMenu_requesting_close"]

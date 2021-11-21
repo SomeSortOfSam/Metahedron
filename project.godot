@@ -109,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Primary/Interface/MovementWindow/Movement Window.gd"
 }, {
+"base": "Control",
+"class": "MovementWindowBody",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Interface/MovementWindow/Body.gd"
+}, {
 "base": "Reference",
 "class": "Pathfinder",
 "language": "GDScript",
@@ -195,6 +200,7 @@ _global_script_class_icons={
 "MapScaler": "res://Assets/Editor Icons/MapScaler.png",
 "MapSpaceConverter": "",
 "MovementWindow": "res://Assets/Editor Icons/MovementWindow.png",
+"MovementWindowBody": "",
 "Pathfinder": "",
 "Person": "res://Assets/Editor Icons/Person.png",
 "Placeholder": "res://Assets/Editor Icons/Placeholder.png",

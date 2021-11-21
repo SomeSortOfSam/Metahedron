@@ -10,7 +10,7 @@
 [ext_resource path="res://Scripts/Primary/Interface/MovementWindow/Body.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/Primary/Interface/Cursors/AttackRenderer.gd" type="Script" id=9]
 
-[node name="Movement" type="Control"]
+[node name="Body" type="Control"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -79,3 +79,4 @@ cell_y_sort = true
 format = 1
 
 [connection signal="mouse_exited" from="." to="WindowCursor" method="_on_Body_mouse_exited"]
+[connection signal="position_accepted" from="WindowCursor" to="." method="_on_WindowCursor_position_accepted"]

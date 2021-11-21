@@ -8,11 +8,11 @@ var attack
 
 signal attack_selected(attack)
 
-func subscribe(attack : Attack):
+func subscribe(new_attack : Attack):
+	attack = new_attack
 	_icon.texture = attack.icon
 	_label.text = attack.name
 	_label.text += ": " + attack.description
-	self.attack = attack
 
 func _on_CobatMenuElement_pressed():
 	emit_signal("attack_selected",attack)

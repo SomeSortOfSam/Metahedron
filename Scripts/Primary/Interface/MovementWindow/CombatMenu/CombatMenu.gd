@@ -17,7 +17,14 @@ func subscribe(person):
 		elements[i].subscribe(attack)
 		i += 1
 
+func _on_Attack_attack():
+	show()
+
+func _on_Attack_back():
+	hide()
+
 func _on_CobatMenuElement_attack_selected(attack):
+	hide()
 	emit_signal("attack_selected",attack)
 
 func _on_visibility_changed():
