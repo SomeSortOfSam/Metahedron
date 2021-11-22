@@ -12,17 +12,32 @@ _global_script_classes=[ {
 "base": "TileMap",
 "class": "ArrowLines",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Cursors/ArrowLines.gd"
+"path": "res://Scripts/Primary/Interface/Cursors/ArrowLines.gd"
 }, {
 "base": "Resource",
 "class": "Attack",
 "language": "GDScript",
 "path": "res://Scripts/Primary/Level/Resources/Attacks/Attack.gd"
 }, {
+"base": "TileMap",
+"class": "AttackRenderer",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Interface/Cursors/AttackRenderer.gd"
+}, {
 "base": "Resource",
 "class": "Character",
 "language": "GDScript",
 "path": "res://Scripts/Primary/Level/Resources/Character.gd"
+}, {
+"base": "Control",
+"class": "CombatMenu",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Interface/MovementWindow/CombatMenu/CombatMenu.gd"
+}, {
+"base": "Button",
+"class": "CombatMenuElement",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Interface/MovementWindow/CombatMenu/CobatMenuElement.gd"
 }, {
 "base": "Node",
 "class": "ConversionTests",
@@ -32,7 +47,7 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "Cursor",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Cursors/Cursor.gd"
+"path": "res://Scripts/Primary/Interface/Cursors/Cursor.gd"
 }, {
 "base": "Resource",
 "class": "DecorationDefinition",
@@ -57,7 +72,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "EnemyAI",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Interface/EnemyAI.gd"
+"path": "res://Scripts/Primary/Utilites/EnemyAI.gd"
 }, {
 "base": "Placeholder",
 "class": "EnemyPlaceholder",
@@ -92,17 +107,17 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "MovementWindow",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Interface/Movement Window.gd"
+"path": "res://Scripts/Primary/Interface/MovementWindow/Movement Window.gd"
+}, {
+"base": "Control",
+"class": "MovementWindowBody",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Interface/MovementWindow/Body.gd"
 }, {
 "base": "Reference",
 "class": "Pathfinder",
 "language": "GDScript",
 "path": "res://Scripts/Primary/Utilites/Pathfinder.gd"
-}, {
-"base": "Attack",
-"class": "PatternAttack",
-"language": "GDScript",
-"path": "res://Scripts/Primary/Level/Resources/Attacks/PatternAttack.gd"
 }, {
 "base": "Reference",
 "class": "Person",
@@ -117,12 +132,12 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "PlayerUnitGUI",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Interface/PlayerUnitGUI.gd"
+"path": "res://Scripts/Primary/Interface/Bootstrap/PlayerUnitGUI.gd"
 }, {
 "base": "Node",
 "class": "PrimaryLoopBootstrap",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Interface/PrimaryLoopBootstrap.gd"
+"path": "res://Scripts/Primary/Interface/Bootstrap/PrimaryLoopBootstrap.gd"
 }, {
 "base": "Map",
 "class": "ReferenceMap",
@@ -157,17 +172,20 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "WindowCursor",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Cursors/WindowCursor.gd"
+"path": "res://Scripts/Primary/Interface/Cursors/WindowCursor.gd"
 }, {
 "base": "Control",
 "class": "WindowMover",
 "language": "GDScript",
-"path": "res://Scripts/Primary/Interface/WindowMover.gd"
+"path": "res://Scripts/Primary/Interface/MovementWindow/WindowMover.gd"
 } ]
 _global_script_class_icons={
 "ArrowLines": "",
 "Attack": "",
+"AttackRenderer": "",
 "Character": "res://Assets/Editor Icons/Character.png",
+"CombatMenu": "",
+"CombatMenuElement": "",
 "ConversionTests": "",
 "Cursor": "",
 "DecorationDefinition": "res://Assets/Editor Icons/DecorationDefinition.png",
@@ -182,8 +200,8 @@ _global_script_class_icons={
 "MapScaler": "res://Assets/Editor Icons/MapScaler.png",
 "MapSpaceConverter": "",
 "MovementWindow": "",
+"MovementWindowBody": "",
 "Pathfinder": "",
-"PatternAttack": "",
 "Person": "res://Assets/Editor Icons/Person.png",
 "Placeholder": "res://Assets/Editor Icons/Placeholder.png",
 "PlayerUnitGUI": "",
