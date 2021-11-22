@@ -19,7 +19,12 @@ func _gui_input(event):
 
 func handle_cell(cell : Vector2, acceptable : bool , event):
 	if display:
-		display.draw_display(cell, acceptable)
+		if display is AttackRenderer:
+			for otherDisplay in get_tree().get_nodes_in_group("displays"):
+				otherDisplay.attack = display.attack
+				otherDisplay.draw_display(cell, acceptable)
+		else:
+			display.draw_display(cell, acceptable)
 	if is_accepted(acceptable, event):
 		emit_signal("position_accepted", cell)
 
