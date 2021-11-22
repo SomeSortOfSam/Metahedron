@@ -32,7 +32,12 @@ func add_placeholder(placeholder : Placeholder,map):
 		add_person(placeholder, map)
 
 func add_person(placeholder : Placeholder, map : Map):
-	map.add_person(Person.new(placeholder.definition,placeholder is EnemyPlaceholder,MapSpaceConverter.local_to_map(placeholder.position,map)))
+	var cell = MapSpaceConverter.local_to_map(placeholder.position,map)
+	var person = Person.new(placeholder.definition,false,cell)
+	if placeholder is EnemyPlaceholder:
+		person.attacks = placeholder.attacks
+		person.is_evil = true
+	map.add_person(person)
 
 func add_decoration(placeholder : Placeholder, map : Map):
 	var decoration = DecorationInstance.new(placeholder.definition)

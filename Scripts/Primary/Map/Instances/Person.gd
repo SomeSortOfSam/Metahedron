@@ -6,6 +6,8 @@ var character : Character
 var cell : Vector2 setget set_cell
 var window : MovementWindow
 
+var attacks := [Attack.new(),Attack.new(),Attack.new()]
+
 var is_evil := false
 
 var has_moved := false
@@ -13,9 +15,13 @@ var has_attacked := false
 var has_skipped := false setget set_skipped
 
 signal move(cell_delta)
-signal attack(direction)
+
+signal attack_selected(attack)
+signal attack(direction, attack)
+
 signal close_window()
 signal open_window()
+
 signal skip_turn()
 signal unskip_turn()
 
@@ -54,7 +60,6 @@ func to_unit(map, icon) -> Unit:
 func _on_window_requesting_close():
 	emit_signal("close_window")
 	set_skipped(false)
-
 
 func open_window():
 	emit_signal("open_window")

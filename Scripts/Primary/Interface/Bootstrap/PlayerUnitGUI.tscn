@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Scripts/Primary/Interface/PlayerUnitGUI.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Primary/Interface/Bootstrap/PlayerUnitGUI.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Interface Sprites/end_turn_button.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Interface Sprites/Iconsheet.png" type="Texture" id=3]
 

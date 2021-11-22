@@ -27,7 +27,7 @@ func _on_Main_request_credits():
 	credits.show()
 
 func _on_Main_request_game():
-	var _scene = get_tree().change_scene("res://Scripts/Primary/Interface/Primary Loop Bootstrap.tscn")
+	var _scene = get_tree().change_scene("res://Scripts/Primary/Interface/Bootstrap/Primary Loop Bootstrap.tscn")
 
 func _on_Main_request_gut():
 	if gut && !gut.is_visible():

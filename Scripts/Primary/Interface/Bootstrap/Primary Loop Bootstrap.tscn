@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Primary/Interface/MapScaler.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/Primary/Interface/PrimaryLoopBootstrap.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Primary/Interface/Bootstrap/PrimaryLoopBootstrap.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Levels/Dusk Desert/TestLevel.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scripts/Primary/Cursors/WindowCursor.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Primary/Interface/Cursors/WindowCursor.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Levels/TileGlow.png" type="Texture" id=5]
-[ext_resource path="res://Scripts/Primary/Cursors/Cursor.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/Primary/Interface/PlayerUnitGUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/Primary/Interface/Cursors/Cursor.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Primary/Interface/Bootstrap/PlayerUnitGUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/Menu/ScrollingBackround.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Menu/Textures/Background4.png" type="Texture" id=9]
 

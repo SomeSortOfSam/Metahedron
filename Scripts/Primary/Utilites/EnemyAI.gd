@@ -11,7 +11,7 @@ func check_turn(evil_turn):
 		start_enemy_turn()
 
 func get_enemies() -> Dictionary:
-	var enemies : Dictionary
+	var enemies := {}
 	for cell in map.people:
 		if map.people[cell].is_evil:
 			enemies[cell] = map.people[cell]
