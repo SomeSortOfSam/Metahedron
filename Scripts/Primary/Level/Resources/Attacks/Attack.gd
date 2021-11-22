@@ -15,18 +15,44 @@ export var projectile : Texture
 export var custom_animation : String
 
 func attack(map : Map, center_cell : Vector2, direction : Vector2) -> PoolVector2Array:
-	var array := get_bitmask_delta_array()
-	array = change_deltas_to_direction(array,direction)
+	var bitmask_deltas := get_bitmask_delta_array()
+	bitmask_deltas = change_deltas_to_direction(bitmask_deltas,direction)
+	
+	var source_window
+	for cell in map.people:
+		var person = map.people[cell]
+		var window = person.window
+		if window.map.center_cell == center_cell:
+			source_window = window
+			break 
+
+	var out := PoolVector2Array([])
+	for cell in map.people:
+		var person = map.people[cell]
+		var window = person.window
+		out = add_windows_cells(out,window,source_window,bitmask_deltas)
 	
 	var i := 0
-	while i < array.size():
-		array[i] += center_cell
-		if !Pathfinder.is_walkable(array[i],map):
-			array.remove(i)
+	while i < out.size():
+		if !Pathfinder.is_walkable(out[i],map):
+			out.remove(i)
 			i -= 1
 		i += 1
 	
-	return array
+	return out
+
+func add_windows_cells(out : PoolVector2Array, window, source_window, bitmask_deltas : PoolVector2Array) -> PoolVector2Array:
+	var relative_center = get_realative_center(window,source_window)
+	for delta in bitmask_deltas:
+		out.append(delta + relative_center)
+	return out
+
+func get_realative_center(window, source_window) -> Vector2:
+	if window == source_window:
+		return source_window.map.center_cell
+	var out := MapSpaceConverter.map_to_global(source_window.map.center_cell,source_window.map)
+	out = MapSpaceConverter.global_to_map(out,window.map)
+	return out
 
 func get_bitmask_delta_array() -> PoolVector2Array:
 	var array := PoolVector2Array([])
