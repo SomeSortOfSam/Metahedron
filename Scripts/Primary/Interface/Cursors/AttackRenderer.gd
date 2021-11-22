@@ -4,6 +4,9 @@ class_name AttackRenderer
 var attack : Attack
 var map : ReferenceMap
 
+func _ready():
+	add_to_group("displays")
+
 func draw_display(_to : Vector2, acceptable : bool):
 	if acceptable and attack:
 		for cell in attack.attack(map, Vector2.ZERO, Vector2.ONE):
