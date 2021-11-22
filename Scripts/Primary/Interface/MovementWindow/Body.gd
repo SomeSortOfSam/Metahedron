@@ -43,6 +43,7 @@ func set_combat_enabled(new_combat_enabled : bool):
 
 func subscribe_map(map : Map):
 	cursor.map = map
+	combat_cursor._on_map_change(map)
 	var _connection = map.connect("position_changed", container, "correct_transform")
 
 func subscribe_person(person):
