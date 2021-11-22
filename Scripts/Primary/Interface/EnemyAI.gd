@@ -70,14 +70,7 @@ func determine_cell_score(cell : Vector2) -> int:
 	return score
 
 func get_all_cells_in_range(person : Person) -> Array:
-	var cells : Array
-	var directions = [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]
-	for direction in directions:
-		for x in 2:
-			cells.append(direction * x)
-	cells.append(Vector2.ZERO)
-	cells.append_array([Vector2.ONE, -Vector2.ONE])
-	return cells
+	return Pathfinder.get_walkable_tiles_in_range(person.window.map,[])
 
 func start_enemy_turn():
 	var enemies = get_enemies()
@@ -91,7 +84,7 @@ func start_enemy_turn():
 		var max_score_index := -1
 		
 		for target in target_cells:
-			cell_scores[current_cell_index] = determine_cell_score(target_cells[0])
+			cell_scores.append(determine_cell_score(target))
 			if cell_scores[current_cell_index] > cell_scores[max_score_index]:
 				max_score_index = current_cell_index
 			current_cell_index += 1
