@@ -1,4 +1,5 @@
 class_name MapSpaceConverter
+## Utility class to convert from map locations to others and back again
 
 static func map_to_tilemap(map_point : Vector2, map) -> Vector2:
 	if "map" in map:

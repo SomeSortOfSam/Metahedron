@@ -1,5 +1,6 @@
 extends Reference
 class_name DecorationInstance, "res://Assets/Editor Icons/DecorationInstance.png"
+## The where and what of a decoration
 
 var definition : DecorationDefinition
 var cell : Vector2
