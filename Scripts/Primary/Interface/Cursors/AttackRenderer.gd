@@ -13,7 +13,8 @@ func draw_display(to : Vector2, acceptable : bool):
 	
 	if acceptable and attack:
 		for cell in attack.attack(map.map, map.center_cell, get_closest_direction(to)):
-			set_cellv(MapSpaceConverter.internal_map_to_map(cell,map),0)
+			if Pathfinder.is_cell_in_range(map.center_cell,cell,map.tile_range):
+				set_cellv(MapSpaceConverter.internal_map_to_map(cell,map),0)
 		for display in get_tree().get_nodes_in_group("displays"):
 			display.attack = attack
 

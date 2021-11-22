@@ -58,6 +58,5 @@ func get_bitmask_delta_array() -> PoolVector2Array:
 func change_deltas_to_direction(delta_array : PoolVector2Array, direction : Vector2) -> PoolVector2Array:
 	var right := Vector2(-direction.y,direction.x)
 	for i in delta_array.size():
-		delta_array[i] = (delta_array[i].y * -direction) + (delta_array[i].x * right)
-	
+		delta_array[i] = ((delta_array[i].y + distance) * -direction) + (delta_array[i].x * right)
 	return delta_array
