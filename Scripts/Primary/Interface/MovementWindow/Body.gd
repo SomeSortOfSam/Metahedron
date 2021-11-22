@@ -26,6 +26,8 @@ func set_mode(new_mode):
 	if new_mode == Mode.COMBAT:
 		cursor.display = combat_cursor
 		set_combat_enabled(combat_enabled)
+		
+	cursor.display._on_map_change(cursor.map)
 
 func set_movement_enabled(new_movement_enabled : bool):
 	movement_enabled = new_movement_enabled

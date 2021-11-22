@@ -212,7 +212,7 @@ _global_script_class_icons={
 "TileMapUtilites": "",
 "TurnManager": "",
 "Unit": "res://Assets/Editor Icons/Unit.png",
-"WindowCursor": "res://Assets/Editor Icons/WindowCursor.png",
+"WindowCursor": "",
 "WindowMover": ""
 }
 
