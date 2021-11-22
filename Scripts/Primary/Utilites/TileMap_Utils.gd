@@ -1,7 +1,7 @@
 class_name TileMapUtilites
+## Utility functions for maps when the fact that its a map isn't important
 
 const NUM_BORDER_TILES := 3
-const DEFUALT_CELL_SIZE := 16
 
 static func get_centered_position(tile_map : TileMap ,rect_size : Vector2):
 	if tile_map:
@@ -23,19 +23,13 @@ static func scale_around_tile(tile_map : TileMap, new_scale : Vector2, cell : Ve
 static func get_border_amount(tile_map : TileMap):
 	return NUM_BORDER_TILES * tile_map.scale.x * tile_map.cell_size.x
 
-static func get_used_map_rect(tile_map : TileMap) -> Rect2:
-	return tile_map.get_used_rect()
-
 static func get_used_local_rect(tile_map : TileMap) -> Rect2:
 	var rect := get_used_local_rect_without_margin(tile_map)
 	rect = rect.grow(get_border_amount(tile_map))
 	return rect
 
-static func get_used_global_rect(tile_map : TileMap) -> Rect2:
-	return get_used_local_rect(tile_map) 
-
 static func get_used_local_rect_without_margin(tile_map : TileMap) -> Rect2:
-	var rect := get_used_map_rect(tile_map)
+	var rect := tile_map.get_used_rect()
 	rect.size *= tile_map.scale * tile_map.cell_size
 	rect.position = tile_map.position 
 	return rect
