@@ -7,6 +7,14 @@
 [ext_resource path="res://Assets/Window Sprites/WindowButtons.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/Primary/Interface/MovementWindow/CombatMenu/AttackButton.gd" type="Script" id=11]
 
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 70, 35, 35 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 9 )
+region = Rect2( 35, 70, 35, 35 )
+
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 9 )
 region = Rect2( 0, 70, 35, 35 )
@@ -17,25 +25,17 @@ region = Rect2( 35, 70, 35, 35 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 9 )
-region = Rect2( 0, 70, 35, 35 )
+region = Rect2( 0, 35, 35, 35 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 9 )
-region = Rect2( 35, 70, 35, 35 )
+region = Rect2( 35, 35, 35, 35 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 9 )
-region = Rect2( 0, 35, 35, 35 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 9 )
-region = Rect2( 35, 35, 35, 35 )
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 35, 35 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 9 )
 region = Rect2( 35, 0, 35, 35 )
 
@@ -92,17 +92,17 @@ anchor_bottom = 1.0
 margin_left = -70.0
 margin_right = -35.0
 mouse_default_cursor_shape = 2
-texture_normal = SubResource( 3 )
-texture_disabled = SubResource( 4 )
+texture_normal = SubResource( 1 )
+texture_disabled = SubResource( 2 )
 expand = true
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-attack_button = SubResource( 5 )
-attack_button_disabled = SubResource( 6 )
-back_button = SubResource( 7 )
-back_button_disables = SubResource( 8 )
+attack_button = SubResource( 3 )
+attack_button_disabled = SubResource( 4 )
+back_button = SubResource( 5 )
+back_button_disables = SubResource( 6 )
 
 [node name="Close" type="TextureButton" parent="TopBar"]
 anchor_left = 1.0
@@ -110,8 +110,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -35.0
 mouse_default_cursor_shape = 2
-texture_normal = SubResource( 1 )
-texture_disabled = SubResource( 2 )
+texture_normal = SubResource( 7 )
+texture_disabled = SubResource( 8 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -147,8 +147,8 @@ margin_bottom = -5.0
 [connection signal="mouse_entered" from="TopBar" to="TopBar" method="_on_TopBar_mouse_entered"]
 [connection signal="mouse_exited" from="TopBar" to="TopBar" method="_on_TopBar_mouse_exited"]
 [connection signal="attack" from="TopBar/Attack" to="Body/CombatMenu" method="_on_Attack_attack"]
-[connection signal="back" from="TopBar/Attack" to="Body/Body" method="_on_Attack_back" flags=3]
 [connection signal="back" from="TopBar/Attack" to="Body/CombatMenu" method="_on_Attack_back"]
+[connection signal="back" from="TopBar/Attack" to="Body/Body" method="_on_Attack_back" flags=3]
 [connection signal="pressed" from="TopBar/Attack" to="TopBar/Attack" method="_on_Attack_pressed"]
 [connection signal="pressed" from="TopBar/Close" to="." method="_on_Close_pressed"]
 [connection signal="mouse_entered" from="Body" to="." method="_on_Window_focus_entered"]

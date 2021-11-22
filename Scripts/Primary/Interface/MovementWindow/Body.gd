@@ -12,6 +12,7 @@ onready var container : MapScaler = $WindowCursor/TilemapContainer
 var mode = Mode.MOVEMENT setget set_mode
 var movement_enabled := true
 var combat_enabled := true
+onready var map : ReferenceMap
 
 signal accepted_new_tile(delta)
 signal accepted_attack_direction(direction)
@@ -38,6 +39,7 @@ func set_combat_enabled(new_combat_enabled : bool):
 	combat_enabled = new_combat_enabled
 	if new_combat_enabled && mode == Mode.COMBAT:
 		combat_cursor.show()
+		combat_cursor.set_center_cell(map)
 	else:
 		combat_cursor.hide()
 
