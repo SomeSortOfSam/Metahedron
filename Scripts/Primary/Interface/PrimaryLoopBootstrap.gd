@@ -10,6 +10,7 @@ onready var cursor = $VSplitContainer/Playspace/Body
 onready var map_scaler : MapScaler = $VSplitContainer/Playspace/Body/MapScaler
 
 var map : Map
+var enemy_ai : EnemyAI
 var turn_manager := TurnManager.new()
 
 func _ready():
@@ -31,7 +32,10 @@ func initialize_map(level_data : LevelData):
 	map = level_data.to_map(map_scaler.tile_map)
 	map.repopulate_displays()
 	turn_manager.subscribe(map)
+	$Label.text = str(turn_manager.turns)
+	var _connection = turn_manager.connect("new_turns", $Label, "set")
 	cursor.map = map
+	initialize_enemy_ai()
 	populate_turn_gui()
 
 # warning-ignore:shadowed_variable
@@ -59,3 +63,7 @@ func populate_turn_gui():
 			var unit_turn_gui = turn_gui.duplicate()
 			unit_turn_gui.call_deferred("subscribe",person)
 			turn_gui_holder.add_child(unit_turn_gui)
+
+func initialize_enemy_ai():
+	enemy_ai = EnemyAI.new(map)
+	var _connection = turn_manager.connect("turn_ended", enemy_ai, "check_turn")

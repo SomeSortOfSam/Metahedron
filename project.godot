@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/Primary/Cursors/ArrowLines.gd"
 }, {
 "base": "Resource",
+"class": "Attack",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Level/Resources/Attacks/Attack.gd"
+}, {
+"base": "Resource",
 "class": "Character",
 "language": "GDScript",
 "path": "res://Scripts/Primary/Level/Resources/Character.gd"
@@ -44,10 +49,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Primary/Map/Instances/DecorationInstance.gd"
 }, {
+"base": "Attack",
+"class": "DirectionalAttack",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Level/Resources/Attacks/DirectionalAttack.gd"
+}, {
+"base": "Node",
+"class": "EnemyAI",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Interface/EnemyAI.gd"
+}, {
 "base": "Placeholder",
 "class": "EnemyPlaceholder",
 "language": "GDScript",
 "path": "res://Scripts/Primary/Level/EnemyPlaceholder.gd"
+}, {
+"base": "Attack",
+"class": "HitscanAttack",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Level/Resources/Attacks/HitscanAttack.gd"
 }, {
 "base": "TileMap",
 "class": "LevelData",
@@ -78,6 +98,11 @@ _global_script_classes=[ {
 "class": "Pathfinder",
 "language": "GDScript",
 "path": "res://Scripts/Primary/Utilites/Pathfinder.gd"
+}, {
+"base": "Attack",
+"class": "PatternAttack",
+"language": "GDScript",
+"path": "res://Scripts/Primary/Level/Resources/Attacks/PatternAttack.gd"
 }, {
 "base": "Reference",
 "class": "Person",
@@ -141,19 +166,24 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ArrowLines": "",
+"Attack": "",
 "Character": "res://Assets/Editor Icons/Character.png",
 "ConversionTests": "",
 "Cursor": "",
 "DecorationDefinition": "res://Assets/Editor Icons/DecorationDefinition.png",
 "DecorationDisplay": "res://Assets/Editor Icons/DecorationDisplay.png",
 "DecorationInstance": "res://Assets/Editor Icons/DecorationInstance.png",
+"DirectionalAttack": "",
+"EnemyAI": "",
 "EnemyPlaceholder": "res://Assets/Editor Icons/EnemyPlaceholder.png",
+"HitscanAttack": "",
 "LevelData": "res://Assets/Editor Icons/LevelData.png",
 "Map": "res://Assets/Editor Icons/LevelData.png",
 "MapScaler": "res://Assets/Editor Icons/MapScaler.png",
 "MapSpaceConverter": "",
 "MovementWindow": "",
 "Pathfinder": "",
+"PatternAttack": "",
 "Person": "res://Assets/Editor Icons/Person.png",
 "Placeholder": "res://Assets/Editor Icons/Placeholder.png",
 "PlayerUnitGUI": "",

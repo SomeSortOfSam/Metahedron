@@ -55,6 +55,7 @@ func _on_window_requesting_close():
 	emit_signal("close_window")
 	set_skipped(false)
 
+
 func open_window():
 	emit_signal("open_window")
 	set_skipped(false)
