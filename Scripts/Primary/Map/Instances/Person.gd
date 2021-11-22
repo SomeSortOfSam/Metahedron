@@ -6,7 +6,7 @@ var character : Character
 var cell : Vector2 setget set_cell
 var window : MovementWindow
 
-var attacks := [Attack.new(),Attack.new(),Attack.new()]
+var attacks := [Attack.new(),DirectionalAttack.new(),HitscanAttack.new()]
 
 var is_evil := false
 

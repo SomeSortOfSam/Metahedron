@@ -27,10 +27,11 @@ func attack(map : Map, center_cell : Vector2, direction : Vector2) -> PoolVector
 			break 
 
 	var out := PoolVector2Array([])
+	var tile_size = bitmask.get_size() if bitmask else Vector2.ONE
 	for cell in map.people:
 		var person = map.people[cell]
 		var window = person.window
-		out = add_windows_cells(out,window,source_window,bitmask_deltas)
+		out = add_windows_cells(out,window,source_window,bitmask_deltas,direction,tile_size)
 	
 	var i := 0
 	while i < out.size():
@@ -41,7 +42,7 @@ func attack(map : Map, center_cell : Vector2, direction : Vector2) -> PoolVector
 	
 	return out
 
-func add_windows_cells(out : PoolVector2Array, window, source_window, bitmask_deltas : PoolVector2Array) -> PoolVector2Array:
+func add_windows_cells(out : PoolVector2Array, window, source_window, bitmask_deltas : PoolVector2Array, _direction : Vector2, _tile_size : Vector2) -> PoolVector2Array:
 	var relative_center = get_realative_center(window,source_window)
 	for delta in bitmask_deltas:
 		out.append(delta + relative_center)
