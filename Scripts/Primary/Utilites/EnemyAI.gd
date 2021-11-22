@@ -52,7 +52,6 @@ func get_num_friendlies_in_column(cell : Vector2) -> int:
 	for friendly_cell in friendlies:
 		if friendly_cell.x == cell.x:
 			count += 1
-		print(friendlies[friendly_cell].cell == friendly_cell)
 	return count
 
 #Returns the number of player controlled units in the same row as cell
@@ -92,5 +91,5 @@ func start_enemy_turn():
 		var target_cell = target_cells[max_score_index]
 		var delta_cell : Vector2 = target_cell - cell
 		enemy.cell += delta_cell
-		enemy.set_skipped(true)
+		enemy.emit_signal("end_turn")
 

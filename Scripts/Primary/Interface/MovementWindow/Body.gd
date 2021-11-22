@@ -67,7 +67,7 @@ func _on_WindowCursor_position_accepted(cell: Vector2):
 	if mode == Mode.COMBAT:
 		emit_signal("accepted_attack_direction",cell)
 	if mode == Mode.LOCKED:
-		assert(false,"Cursor accepted " +str(cell) + " on locked window")
+		assert(false,"Cursor accepted " + str(cell) + " on locked window")
 
 func _on_accepted_new_tile(delta : Vector2, person):
 	if !person.has_moved:

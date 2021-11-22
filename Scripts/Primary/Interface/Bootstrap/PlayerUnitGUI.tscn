@@ -33,8 +33,8 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-new_turn_outline_color = Color( 0.29, 0.29, 0.29, 1 )
-has_moved_outline_color = Color( 0.22, 0.22, 0.22, 1 )
+new_turn_outline_color = Color( 0.290196, 0.290196, 0.290196, 1 )
+has_moved_outline_color = Color( 0.219608, 0.219608, 0.219608, 1 )
 new_turn_body_color = Color( 0.596078, 0.596078, 0.596078, 1 )
 has_set_end_turn_body_color = Color( 0.52, 0.52, 0.52, 1 )
 has_attacked_body_color = Color( 0.41, 0.41, 0.41, 1 )
