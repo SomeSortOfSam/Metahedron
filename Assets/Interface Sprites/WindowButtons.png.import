@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Arrowlines.png-c22763e31f3099f64dcd4a5220af6668.stex"
+path="res://.import/WindowButtons.png-ea4f0b15b9240bbf6e79c652bc6f89eb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Window Sprites/Arrowlines.png"
-dest_files=[ "res://.import/Arrowlines.png-c22763e31f3099f64dcd4a5220af6668.stex" ]
+source_file="res://Assets/Interface Sprites/WindowButtons.png"
+dest_files=[ "res://.import/WindowButtons.png-ea4f0b15b9240bbf6e79c652bc6f89eb.stex" ]
 
 [params]
 
