@@ -39,7 +39,6 @@ func set_combat_enabled(new_combat_enabled : bool):
 	combat_enabled = new_combat_enabled
 	if new_combat_enabled && mode == Mode.COMBAT:
 		combat_cursor.show()
-		combat_cursor.set_center_cell(map)
 	else:
 		get_tree().call_group(AttackRenderer.GROUP_NAME, "clear")
 
