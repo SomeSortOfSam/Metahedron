@@ -18,14 +18,14 @@ signal accepted_attack_direction(direction)
 
 func set_mode(new_mode):
 	mode = new_mode
-	movement_cursor.hide()
-	combat_cursor.hide()
 	if new_mode == Mode.MOVEMENT:
 		cursor.display = movement_cursor
 		set_movement_enabled(movement_enabled)
 	if new_mode == Mode.COMBAT:
 		cursor.display = combat_cursor
 		set_combat_enabled(combat_enabled)
+		
+	cursor.display._on_map_change(cursor.map)
 
 func set_movement_enabled(new_movement_enabled : bool):
 	movement_enabled = new_movement_enabled
@@ -39,10 +39,11 @@ func set_combat_enabled(new_combat_enabled : bool):
 	if new_combat_enabled && mode == Mode.COMBAT:
 		combat_cursor.show()
 	else:
-		combat_cursor.hide()
+		get_tree().call_group(AttackRenderer.GROUP_NAME, "clear")
 
 func subscribe_map(map : Map):
 	cursor.map = map
+	combat_cursor._on_map_change(map)
 	var _connection = map.connect("position_changed", container, "correct_transform")
 
 func subscribe_person(person):

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WindowButtons.png-3bcd179686a03975f71ce87cd4581112.stex"
+path="res://.import/default.png-1f396974e1a51800f70dd1db8fbb05d4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Window Sprites/WindowButtons.png"
-dest_files=[ "res://.import/WindowButtons.png-3bcd179686a03975f71ce87cd4581112.stex" ]
+source_file="res://Assets/Attack Bitmaps/default.png"
+dest_files=[ "res://.import/default.png-1f396974e1a51800f70dd1db8fbb05d4.stex" ]
 
 [params]
 

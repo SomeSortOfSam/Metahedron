@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Menu/Textures/Background4.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Primary/Interface/MapScaler.gd" type="Script" id=2]
@@ -6,9 +6,26 @@
 [ext_resource path="res://Scripts/Menu/ScrollingBackround.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Levels/Tileset.tres" type="TileSet" id=5]
 [ext_resource path="res://Scripts/Primary/Interface/Cursors/WindowCursor.gd" type="Script" id=6]
-[ext_resource path="res://Assets/Window Sprites/ArrowLines.tres" type="TileSet" id=7]
+[ext_resource path="res://Assets/Interface Sprites/ArrowLines.tres" type="TileSet" id=7]
 [ext_resource path="res://Scripts/Primary/Interface/MovementWindow/Body.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/Primary/Interface/Cursors/AttackRenderer.gd" type="Script" id=9]
+[ext_resource path="res://Assets/Interface Sprites/TileGlow.png" type="Texture" id=10]
+
+[sub_resource type="TileSet" id=1]
+0/name = "TileGlow"
+0/texture = ExtResource( 10 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
 
 [node name="Body" type="Control"]
 show_behind_parent = true
@@ -65,7 +82,7 @@ format = 1
 
 [node name="AttackRenderer" type="TileMap" parent="WindowCursor/TilemapContainer"]
 modulate = Color( 1, 0.537255, 0, 1 )
-tile_set = ExtResource( 7 )
+tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 cell_tile_origin = 1
 cell_y_sort = true

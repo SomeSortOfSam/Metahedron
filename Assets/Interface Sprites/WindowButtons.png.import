@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TileGlow.png-cd0cf4d48344c601e06618275abe56d0.stex"
+path="res://.import/WindowButtons.png-ea4f0b15b9240bbf6e79c652bc6f89eb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Levels/TileGlow.png"
-dest_files=[ "res://.import/TileGlow.png-cd0cf4d48344c601e06618275abe56d0.stex" ]
+source_file="res://Assets/Interface Sprites/WindowButtons.png"
+dest_files=[ "res://.import/WindowButtons.png-ea4f0b15b9240bbf6e79c652bc6f89eb.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

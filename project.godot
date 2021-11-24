@@ -199,7 +199,7 @@ _global_script_class_icons={
 "Map": "res://Assets/Editor Icons/LevelData.png",
 "MapScaler": "res://Assets/Editor Icons/MapScaler.png",
 "MapSpaceConverter": "",
-"MovementWindow": "",
+"MovementWindow": "res://Assets/Editor Icons/MovementWindow.png",
 "MovementWindowBody": "",
 "Pathfinder": "",
 "Person": "res://Assets/Editor Icons/Person.png",

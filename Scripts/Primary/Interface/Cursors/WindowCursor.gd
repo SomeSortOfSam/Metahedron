@@ -20,8 +20,9 @@ func _gui_input(event):
 func handle_cell(cell : Vector2, acceptable : bool , event):
 	if display:
 		if display is AttackRenderer:
-			for otherDisplay in get_tree().get_nodes_in_group("displays"):
+			for otherDisplay in get_tree().get_nodes_in_group(AttackRenderer.GROUP_NAME):
 				otherDisplay.attack = display.attack
+				otherDisplay.attack_center = display.map.center_cell
 				otherDisplay.draw_display(cell, acceptable)
 		else:
 			display.draw_display(cell, acceptable)

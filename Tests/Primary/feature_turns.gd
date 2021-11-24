@@ -20,9 +20,9 @@ func test_eneimes_ignored(params = use_parameters([true,false])):
 	turn_manager._on_map_person_added(Person.new(Character.new(),!params))
 	watch_signals(turn_manager)
 	#Act
-	person.emit_signal("end_turn",0)
+	person.emit_signal("end_turn")
 	#Assert
-	assert_signal_not_emitted(turn_manager,"turn_ended")
+	assert_signal_emitted(turn_manager,"turn_ended")
 	
 func test_turn_sequence(params = use_parameters([true,false])):
 	#Arrange
