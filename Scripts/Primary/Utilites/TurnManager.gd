@@ -24,16 +24,9 @@ func _on_map_person_added(person : Person):
 	turns += 1 if person.is_evil == evil_turn else 0
 	var _connection
 
-	_connection = person.connect("attack",self,"_on_person_attack")
-	_connection = person.connect("skip_turn",self,"_on_person_end_turn")
-
-	_connection = person.connect("unskip_turn",self,"_on_person_unend_turn")
+	_connection = person.connect("end_turn",self,"_on_person_end_turn")
 	_connection = person.connect("new_turn", self, "_on_person_unend_turn")
-
 	_connection = connect("turn_ended", person, "reset_turn")
-
-func _on_person_attack(_direction):
-	self.turns -= 1
 
 func _on_person_end_turn():
 	self.turns -= 1
