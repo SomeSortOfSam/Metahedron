@@ -75,7 +75,7 @@ func _on_accepted_new_tile(delta : Vector2, person):
 		person.cell += delta
 	set_movement_enabled(false)
 
-func _on_accepted_attack_direction(direction : Vector2, person):
+func _on_accepted_attack_direction(_direction : Vector2, _person):
 	set_combat_enabled(false)
 
 func _on_CombatMenu_attack_selected(attack : Attack):
