@@ -18,7 +18,7 @@ func get_enemies() -> Dictionary:
 	return enemies
 
 func get_friendly_units() -> Dictionary:
-	var people : Dictionary
+	var people := {}
 	for cell in map.people:
 		if !map.people[cell].is_evil:
 			people[cell] = map.people[cell] 

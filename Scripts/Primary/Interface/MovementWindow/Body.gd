@@ -12,7 +12,6 @@ onready var container : MapScaler = $WindowCursor/TilemapContainer
 var mode = Mode.MOVEMENT setget set_mode
 var movement_enabled := true
 var combat_enabled := true
-onready var map : ReferenceMap
 
 signal accepted_new_tile(delta)
 signal accepted_attack_direction(direction)

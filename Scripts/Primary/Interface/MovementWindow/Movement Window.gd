@@ -21,7 +21,6 @@ signal requesting_close()
 func _ready():
 	hide()
 	resize()
-	body.map = map
 	var _connection = get_tree().connect("screen_resized",self,"resize")
 
 func resize():
