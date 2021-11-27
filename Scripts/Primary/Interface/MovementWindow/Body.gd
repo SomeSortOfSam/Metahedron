@@ -71,11 +71,11 @@ func _on_WindowCursor_position_accepted(cell: Vector2):
 		assert(false,"Cursor accepted " + str(cell) + " on locked window")
 
 func _on_accepted_new_tile(delta : Vector2, person):
-	if !person.has_moved:
-		person.cell += delta
+	person.cell += delta
 	set_movement_enabled(false)
 
-func _on_accepted_attack_direction(_direction : Vector2, _person):
+func _on_accepted_attack_direction(direction : Vector2, person):
+	person.attack(combat_cursor.attack,direction)
 	set_combat_enabled(false)
 
 func _on_CombatMenu_attack_selected(attack : Attack):
