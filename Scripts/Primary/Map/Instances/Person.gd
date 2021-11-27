@@ -29,11 +29,10 @@ func _init(new_character : Character, new_is_evil := false, new_cell := Vector2.
 	character = new_character
 	is_evil = new_is_evil
 	cell = new_cell
-	
 
 func set_cell(new_cell : Vector2):
 	if !has_moved:
-		var delta = cell - new_cell
+		var delta = new_cell - cell
 		cell = new_cell
 		has_moved = true
 		emit_signal("move",delta)
@@ -56,7 +55,7 @@ func calculate_damage(attack : Attack, direction : Vector2, source : Person, map
 		var damaged_cells := attack.attack(map,source.cell,direction)
 		for damaged_cell in damaged_cells:
 			if cell == damaged_cell:
-				set_health(health-1)
+				set_health(health - 1)
 
 func reset_turn(evil_turn):
 	if evil_turn == is_evil:
@@ -72,11 +71,11 @@ func initialize_window(map) -> MovementWindow:
 func open_window():
 	emit_signal("open_window")
 
-func to_unit(map, icon) -> Unit:
+func to_unit(map, is_icon : bool) -> Unit:
 	var unit : Unit = preload("res://Scripts/Primary/Displays/Unit.tscn").instance()
 	map.tile_map.add_child(unit)
 	unit.subscribe(self,map)
-	unit.is_icon = icon
+	unit.is_icon = is_icon
 	return unit
 
 func _on_window_requesting_close():
