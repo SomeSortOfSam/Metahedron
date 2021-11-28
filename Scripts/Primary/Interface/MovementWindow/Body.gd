@@ -18,15 +18,17 @@ signal accepted_attack_direction(direction)
 signal requesting_back()
 
 func set_mode(new_mode):
-	mode = new_mode
+	if mode != Mode.LOCKED:
+		mode = new_mode
+	cursor.display = null
 	if new_mode == Mode.MOVEMENT:
 		cursor.display = movement_cursor
 		set_movement_enabled(movement_enabled)
 	if new_mode == Mode.COMBAT:
 		cursor.display = combat_cursor
 		set_combat_enabled(combat_enabled)
-		
-	cursor.display._on_map_change(cursor.map)
+	if cursor.display:
+		cursor.display._on_map_change(cursor.map)
 
 func set_movement_enabled(new_movement_enabled : bool):
 	movement_enabled = new_movement_enabled

@@ -2,7 +2,7 @@ extends Reference
 class_name Settings
 
 export var volume := 1.0
-export var fullMap := false
+export var fullMap := true
 export var squareWindows := true
 
 func _init():

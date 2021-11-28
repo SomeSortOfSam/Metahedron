@@ -8,6 +8,7 @@ onready var attack_button : TextureButton = $TopBar/Attack
 onready var combat_menu : CombatMenu = $Body/CombatMenu
 
 onready var body : MovementWindowBody = $Body/Body
+onready var topbar : WindowMover = $TopBar
 
 onready var outline0 : ColorRect = $Body/Outline
 onready var outline1 : ColorRect = $TopBar/Outline
@@ -45,6 +46,7 @@ func subscribe(person):
 	if (player_accessible):
 		_connection = connect("requesting_close", person, "_on_window_requesting_close")
 		_connection = person.connect("new_turn", self, "_on_person_new_turn")
+		_connection = person.connect("attack", self, "_on_person_attack")
 		combat_menu.subscribe(person)
 	else:
 		lock_window()
@@ -69,14 +71,23 @@ static func get_window(cell : Vector2, parent_map, window_range : int) -> Moveme
 
 func lock_window():
 	close_button.set_disabled(true)
+	close_button.mouse_default_cursor_shape = Control.CURSOR_ARROW
+	attack_button.set_disabled(true)
+	attack_button.mouse_default_cursor_shape = Control.CURSOR_ARROW
+	topbar.lock()
 	body.lock()
 
 func _on_person_new_turn():
 	close_button.set_disabled(false)
+	attack_button.set_disabled(false)
 
 func _on_person_move(delta : Vector2):
 	map.center_cell += delta
 	close_button.set_disabled(true)
+
+func _on_person_attack(_direction,_attack):
+	close_button.set_disabled(true)
+	attack_button.set_disabled(true)
 
 func _on_Close_pressed():
 	emit_signal("requesting_close")
