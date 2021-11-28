@@ -40,7 +40,7 @@ func _on_person_move(_delta):
 	outline.color = has_moved_outline_color
 	moved.modulate = has_attacked_body_color
 
-func _on_person_attack():
+func _on_person_attack(_direction,_attack):
 	attacked.modulate = has_attacked_body_color
 
 func _on_person_end_turn():

@@ -51,7 +51,7 @@ func attack(attack : Attack, direction : Vector2):
 		emit_signal("attack",direction,attack)
 
 func calculate_damage(attack : Attack, direction : Vector2, source : Person, map):
-	if source.is_evil == is_evil || attack.friendlyFire:
+	if source.is_evil != is_evil || attack.friendlyFire:
 		var damaged_cells := attack.attack(map,source.cell,direction)
 		for damaged_cell in damaged_cells:
 			if cell == damaged_cell:

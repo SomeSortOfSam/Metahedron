@@ -23,11 +23,16 @@ func clamp(map_point : Vector2) -> Vector2:
 func add_person(person):
 	people[person.cell] = person
 	var _connection = person.connect("move",self,"_on_person_move",[person])
+	_connection = person.connect("attack", self, "_on_person_attack",[person])
 	emit_signal("person_added",person)
 
 func _on_person_move(cell_delta,person):
 	if people.erase(person.cell - cell_delta):
 		people[person.cell] = person
+
+func _on_person_attack(direction : Vector2, attack, source):
+	for person in people.values():
+		person.calculate_damage(attack,direction,source,self)
 
 func add_decoration(decoration):
 	decorations.append(decoration)
