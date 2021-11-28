@@ -27,17 +27,23 @@ func _gui_input(event):
 		handle_mouse_event(event)
 
 func correct_window_pos():
-	emit_signal("accepted_window_movement",clamp_delta(Vector2.ZERO,window.get_rect(),viewport_window.get_rect()))
+	emit_signal("accepted_window_movement",correct_delta(Vector2.ZERO))
 
 func handle_mouse_event(event : InputEventMouse):
 	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
 		self.is_dragging = event.pressed
 	if event is InputEventMouseMotion && is_dragging:
-		var window_rect := window.get_rect()
-		var viewport_rect := viewport_window.get_rect()
-		viewport_rect.position = Vector2.ZERO
-		
-		emit_signal("accepted_window_movement",clamp_delta(event.get_relative(),window_rect,viewport_rect))
+		emit_signal("accepted_window_movement",correct_delta(event.get_relative()))
+
+func correct_delta(delta) -> Vector2:
+	var window_rect := window.get_rect()
+	var viewport_rect := viewport_window.get_rect()
+	viewport_rect.position = Vector2.ZERO
+	for other_window in window.get_parent().get_children():
+		if other_window is MovementWindow && other_window != window && other_window.visible:
+			delta = disinclude_delta(delta,window_rect,other_window.get_rect())
+	delta = clamp_delta(delta,window_rect,viewport_rect)
+	return delta
 
 func lock():
 	locked = true
@@ -53,6 +59,27 @@ static func clamp_delta(delta : Vector2, window_rect : Rect2, viewport_rect : Re
 		delta.x -= (window_rect.position.x + window_rect.size.x)-(viewport_rect.position.x + viewport_rect.size.x)
 	if window_rect.position.y + window_rect.size.y > viewport_rect.position.y + viewport_rect.size.y:
 		delta.y -= (window_rect.position.y + window_rect.size.y)-(viewport_rect.position.y + viewport_rect.size.y)
+	return delta
+
+static func disinclude_delta(delta : Vector2, window_rect : Rect2, other_window_rect : Rect2) -> Vector2:
+	window_rect.position += delta
+	window_rect.position -= other_window_rect.position
+	other_window_rect.position = Vector2.ZERO
+
+	var clip_rect = window_rect.clip(other_window_rect)
+
+	if clip_rect.size.x > 0 && clip_rect.size.y > 0:
+		if clip_rect.size.x < clip_rect.size.y:
+			if clip_rect.position.x > 0:
+				delta.x += clip_rect.size.x
+			else:
+				delta.x -= clip_rect.size.x
+		else:
+			if clip_rect.position.y > 0:
+				delta.y += clip_rect.size.y
+			else:
+				delta.y -= clip_rect.size.y
+		
 	return delta
 
 func _on_TopBar_mouse_entered():

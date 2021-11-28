@@ -8,7 +8,7 @@ onready var attack_button : TextureButton = $TopBar/Attack
 onready var combat_menu : CombatMenu = $Body/CombatMenu
 
 onready var body : MovementWindowBody = $Body/Body
-onready var topbar : WindowMover = $TopBar
+onready var topbar = $TopBar
 
 onready var outline0 : ColorRect = $Body/Outline
 onready var outline1 : ColorRect = $TopBar/Outline
@@ -30,6 +30,7 @@ func resize():
 func center_around_tile(tile : Vector2):
 	rect_position = MapSpaceConverter.map_to_global(tile,map.map)
 	rect_position -= -rect_global_position + body.get_global_center()
+	topbar.correct_window_pos()
 
 func set_map(new_map : ReferenceMap):
 	map = new_map
@@ -98,6 +99,7 @@ func _on_person_close_window():
 func _on_person_open_window():
 	show()
 	call_deferred("call_deferred","center_around_tile",map.center_cell) #1 frame to render, 1 frame for rect_size to update
+
 
 func _on_TopBar_accepted_window_movement(delta):
 	if (player_accessible):
