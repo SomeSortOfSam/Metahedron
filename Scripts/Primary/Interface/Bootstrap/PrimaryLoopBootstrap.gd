@@ -8,6 +8,8 @@ onready var turn_gui_holder = $VSplitContainer/UnitGUI
 onready var music = $AudioStreamPlayer
 onready var cursor = $VSplitContainer/Playspace/Body
 onready var map_scaler : MapScaler = $VSplitContainer/Playspace/Body/MapScaler
+onready var end_screen = $EndScreen
+onready var end_screen_timer : Timer = $EndScreen/Timer
 
 var map : Map
 var enemy_ai : EnemyAI
@@ -32,8 +34,10 @@ func initialize_map(level_data : LevelData):
 	map = level_data.to_map(map_scaler.tile_map)
 	map.repopulate_displays()
 	turn_manager.subscribe(map)
-	$Label.text = str(turn_manager.turns)
-	var _connection = turn_manager.connect("new_turns", $Label, "set")
+	var _connection = turn_manager.connect("game_won",end_screen,"show")
+	_connection = turn_manager.connect("game_lost",end_screen,"show")
+	_connection = turn_manager.connect("game_won",end_screen_timer,"start")
+	_connection = turn_manager.connect("game_lost",end_screen_timer,"start")
 	cursor.map = map
 	initialize_enemy_ai()
 	populate_turn_gui()
@@ -66,4 +70,7 @@ func populate_turn_gui():
 
 func initialize_enemy_ai():
 	enemy_ai = EnemyAI.new(map)
-	var _connection = turn_manager.connect("turn_ended", enemy_ai, "check_turn")
+	var _connection = turn_manager.connect("new_turn", enemy_ai, "check_turn")
+
+func _on_Timer_timeout():
+	var _scene = get_tree().change_scene("res://Scripts/Menu/Menu.tscn")

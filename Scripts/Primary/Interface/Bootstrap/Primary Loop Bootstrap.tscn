@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Primary/Interface/MapScaler.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Primary/Interface/Bootstrap/PrimaryLoopBootstrap.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scripts/Primary/Interface/Bootstrap/PlayerUnitGUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/Menu/ScrollingBackround.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Menu/Textures/Background4.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Interface Sprites/ClubLogo.png" type="Texture" id=10]
 
 [node name="Primary Loop Bootstrap" type="Control"]
 anchor_right = 1.0
@@ -97,16 +98,28 @@ margin_bottom = 55.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
-[node name="Label" type="Label" parent="."]
-margin_right = 182.0
-margin_bottom = 133.0
-text = "1"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="EndScreen" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="EndScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="EndScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="Timer" type="Timer" parent="EndScreen"]
+wait_time = 5.0
+one_shot = true
 
 [connection signal="mouse_exited" from="VSplitContainer/Playspace/Body" to="VSplitContainer/Playspace/Body" method="_on_Body_mouse_exited"]
 [connection signal="position_accepted" from="VSplitContainer/Playspace/Body" to="." method="_on_Cursor_position_accepted"]
 [connection signal="timeout" from="VSplitContainer/Playspace/Body/MapScaler/TileMap/Cursor/Timer" to="VSplitContainer/Playspace/Body/MapScaler/TileMap/Cursor" method="_on_Timer_timeout"]
+[connection signal="timeout" from="EndScreen/Timer" to="." method="_on_Timer_timeout"]

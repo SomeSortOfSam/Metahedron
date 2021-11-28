@@ -43,7 +43,6 @@ func set_health(new_health : int):
 		emit_signal("hurt")
 	if health == 0:
 		emit_signal("died")
-		free()
 
 func attack(attack : Attack, direction : Vector2):
 	if !has_attacked:
@@ -57,11 +56,10 @@ func calculate_damage(attack : Attack, direction : Vector2, source : Person, map
 			if cell == damaged_cell:
 				set_health(health - 1)
 
-func reset_turn(evil_turn):
-	if evil_turn == is_evil:
-		has_moved = false
-		has_attacked = false
-		emit_signal("new_turn")
+func reset_turn():
+	has_moved = false
+	has_attacked = false
+	emit_signal("new_turn")
 
 func initialize_window(map) -> MovementWindow:
 	window = MovementWindow.get_window(cell,map,3)

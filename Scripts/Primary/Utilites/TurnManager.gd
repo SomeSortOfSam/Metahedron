@@ -5,31 +5,53 @@ class_name TurnManager
 var evil_turn := false
 var turns := 0 setget set_turns
 
-signal turn_ended(next_player)
-signal new_turns(text,new_turns)
+var map : Map
 
-func subscribe(map : Map):
+signal new_turn(evil_turn)
+
+signal game_won()
+signal game_lost()
+
+func subscribe(new_map : Map):
+	map = new_map
 	for person in map.people.values():
 		_on_map_person_added(person)
 	var _connection = map.connect("person_added",self,"_on_map_person_added")
 
 func set_turns(new_turns):
 	turns = new_turns
-	emit_signal("new_turns","text",str(new_turns))
 	if turns <= 0:
-		evil_turn = !evil_turn
-		emit_signal("turn_ended",evil_turn)
+		call_deferred("on_turn_ended")
+
+func on_turn_ended():
+	evil_turn = !evil_turn
+	for person in map.people.values():
+		if person.is_evil == evil_turn:
+			add_person_to_turn(person)
+	check_win()
+	emit_signal("new_turn", evil_turn)
+
+func add_person_to_turn(person : Person):
+	turns += 1
+	person.reset_turn()
+	var _connection = person.connect("end_turn", self, "_on_person_end_turn", [person], CONNECT_ONESHOT)
+	_connection = person.connect("died", self, "_on_person_end_turn", [person], CONNECT_ONESHOT)
+
+func check_win():
+	if turns == 0:
+		if evil_turn:
+			emit_signal("game_won")
+		else:
+			emit_signal("game_lost")
 
 func _on_map_person_added(person : Person):
-	turns += 1 if person.is_evil == evil_turn else 0
-	var _connection
+	if person.is_evil == evil_turn:
+		add_person_to_turn(person)
 
-	_connection = person.connect("end_turn",self,"_on_person_end_turn")
-	_connection = person.connect("new_turn", self, "_on_person_unend_turn")
-	_connection = connect("turn_ended", person, "reset_turn")
-
-func _on_person_end_turn():
+func _on_person_end_turn(person : Person):
 	self.turns -= 1
+	person.disconnect("died", self, "_on_person_end_turn")
 
-func _on_person_unend_turn():
-	self.turns += 1
+func _on_person_died(person : Person):
+	self.turns -= 1
+	person.disconnect("end_turn", self, "_on_person_end_turn")

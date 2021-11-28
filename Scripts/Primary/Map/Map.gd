@@ -24,6 +24,7 @@ func add_person(person):
 	people[person.cell] = person
 	var _connection = person.connect("move",self,"_on_person_move",[person])
 	_connection = person.connect("attack", self, "_on_person_attack",[person])
+	_connection = person.connect("died", self, "_on_person_died",[person])
 	emit_signal("person_added",person)
 
 func _on_person_move(cell_delta,person):
@@ -33,6 +34,9 @@ func _on_person_move(cell_delta,person):
 func _on_person_attack(direction : Vector2, attack, source):
 	for person in people.values():
 		person.calculate_damage(attack,direction,source,self)
+
+func _on_person_died(person):
+	var _deleted = people.erase(person.cell)
 
 func add_decoration(decoration):
 	decorations.append(decoration)
