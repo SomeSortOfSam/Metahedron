@@ -30,6 +30,7 @@ func subscribe(person : Person):
 	_connection = person.connect("end_turn",self,"_on_person_end_turn")
 	_connection = person.connect("attack",self,"_on_person_attack")
 	_connection = person.connect("new_turn",self,"_on_person_new_turn",[],CONNECT_DEFERRED)
+	_connection = person.connect("died", self, "_on_person_died")
 
 func populate_textures(person : Person):
 	portrait.texture = person.character.animations.get_frame("Idle",0)
@@ -40,7 +41,7 @@ func _on_person_move(_delta):
 	outline.color = has_moved_outline_color
 	moved.modulate = has_attacked_body_color
 
-func _on_person_attack():
+func _on_person_attack(_direction,_attack):
 	attacked.modulate = has_attacked_body_color
 
 func _on_person_end_turn():
@@ -51,6 +52,9 @@ func _on_person_new_turn():
 	body.color = new_turn_body_color
 	attacked.modulate = Color.red
 	moved.modulate = Color.yellow
+
+func _on_person_died():
+	queue_free()
 
 func _on_EndTurn_pressed():
 	emit_signal("request_end_turn")

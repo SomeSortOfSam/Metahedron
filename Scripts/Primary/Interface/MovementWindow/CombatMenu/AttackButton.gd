@@ -31,3 +31,6 @@ func _on_Attack_pressed():
 
 func _on_CombatMenu_requesting_close():
 	set_buttons(true)
+
+func _on_Body_requesting_back():
+	set_buttons(true)

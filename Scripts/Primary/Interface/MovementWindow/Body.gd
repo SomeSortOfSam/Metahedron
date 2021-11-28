@@ -15,6 +15,7 @@ var combat_enabled := true
 
 signal accepted_new_tile(delta)
 signal accepted_attack_direction(direction)
+signal requesting_back()
 
 func set_mode(new_mode):
 	mode = new_mode
@@ -47,7 +48,8 @@ func subscribe_map(map : Map):
 	var _connection = map.connect("position_changed", container, "correct_transform")
 
 func subscribe_person(person):
-	var _connection = connect("accepted_new_tile", self, "_on_accepted_new_tile",[person])
+	var _connection = connect("accepted_new_tile", self, "_on_accepted_new_tile", [person])
+	_connection = connect("accepted_attack_direction", self, "_on_accepted_attack_direction", [person])
 	_connection = person.connect("new_turn", self, "set_movement_enabled", [true])
 	_connection = person.connect("new_turn", self, "set_combat_enabled", [true])
 
@@ -66,17 +68,18 @@ func _on_WindowCursor_position_accepted(cell: Vector2):
 	if mode == Mode.MOVEMENT:
 		emit_signal("accepted_new_tile",cell)
 	if mode == Mode.COMBAT:
-		emit_signal("accepted_attack_direction",cell)
+		emit_signal("accepted_attack_direction",AttackRenderer.get_closest_direction(cell))
 	if mode == Mode.LOCKED:
 		assert(false,"Cursor accepted " + str(cell) + " on locked window")
 
 func _on_accepted_new_tile(delta : Vector2, person):
-	if !person.has_moved:
-		person.cell += delta
+	person.cell += delta
 	set_movement_enabled(false)
 
-func _on_accepted_attack_direction(_direction : Vector2, _person):
+func _on_accepted_attack_direction(direction : Vector2, person):
+	person.attack(combat_cursor.attack,direction)
 	set_combat_enabled(false)
+	emit_signal("requesting_back")
 
 func _on_CombatMenu_attack_selected(attack : Attack):
 	combat_cursor.attack = attack

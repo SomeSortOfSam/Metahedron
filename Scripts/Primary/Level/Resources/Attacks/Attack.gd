@@ -31,7 +31,8 @@ func attack(map : Map, center_cell : Vector2, direction : Vector2) -> PoolVector
 	for cell in map.people:
 		var person = map.people[cell]
 		var window = person.window
-		out = add_windows_cells(out,window,source_window,bitmask_deltas,direction,tile_size)
+		if window.visible:
+			out = add_windows_cells(out,window,source_window,bitmask_deltas,direction,tile_size)
 	
 	var i := 0
 	while i < out.size():
