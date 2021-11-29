@@ -11,7 +11,7 @@ signal attack_selected(attack)
 func subscribe(new_attack : Attack):
 	attack = new_attack
 	_icon.texture = attack.icon
-	_label.text = attack.name
+	_label.text = attack.name + "\n"
 	_label.text += ": " + attack.description
 
 func _on_CobatMenuElement_pressed():
