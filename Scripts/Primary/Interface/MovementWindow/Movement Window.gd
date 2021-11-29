@@ -9,6 +9,7 @@ onready var combat_menu : CombatMenu = $Body/CombatMenu
 
 onready var body : MovementWindowBody = $Body/Body
 onready var topbar = $TopBar
+onready var icon : TextureRect = $TopBar/Body/Icon
 
 onready var outline0 : ColorRect = $Body/Outline
 onready var outline1 : ColorRect = $TopBar/Outline
@@ -39,6 +40,7 @@ func set_map(new_map : ReferenceMap):
 
 func subscribe(person):
 	player_accessible = !person.is_evil
+	icon.texture = person.character.level_texture
 	
 	var _connection
 
@@ -99,7 +101,6 @@ func _on_person_close_window():
 func _on_person_open_window():
 	show()
 	call_deferred("call_deferred","center_around_tile",map.center_cell) #1 frame to render, 1 frame for rect_size to update
-
 
 func _on_TopBar_accepted_window_movement(delta):
 	if (player_accessible):

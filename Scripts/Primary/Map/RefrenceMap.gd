@@ -71,7 +71,8 @@ func add_person(person):
 func on_person_move(cell_delta,person):
 	if people.erase(MapSpaceConverter.internal_map_to_map(person.cell - cell_delta,self)):
 		people[MapSpaceConverter.internal_map_to_map(person.cell,self)] = person
-	if !Pathfinder.is_cell_in_range(center_cell,person.cell - cell_delta,tile_range) && Pathfinder.is_cell_in_range(center_cell,person.cell,tile_range):
+	if !Pathfinder.is_cell_in_range(center_cell,person.cell - cell_delta,tile_range) && \
+	Pathfinder.is_cell_in_range(center_cell,person.cell,tile_range):
 		var unit = person.to_unit(self, false)
 		unit.position -= cell_delta * tile_map.cell_size
 		unit._on_person_move(cell_delta, person, map)

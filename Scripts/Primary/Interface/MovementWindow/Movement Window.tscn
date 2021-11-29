@@ -79,11 +79,20 @@ margin_left = 5.0
 margin_top = 5.0
 margin_right = -5.0
 margin_bottom = -5.0
+rect_clip_content = true
 mouse_filter = 1
 color = Color( 0.596078, 0.596078, 0.596078, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Icon" type="TextureRect" parent="TopBar/Body"]
+modulate = Color( 0.8, 0.8, 0.8, 0.498039 )
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+expand = true
+stretch_mode = 6
 
 [node name="Attack" type="TextureButton" parent="TopBar"]
 anchor_left = 1.0

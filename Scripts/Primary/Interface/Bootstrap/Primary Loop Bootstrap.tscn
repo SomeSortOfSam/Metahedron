@@ -78,10 +78,6 @@ modulate = Color( 0.992157, 1, 0, 0 )
 texture = ExtResource( 5 )
 script = ExtResource( 6 )
 
-[node name="Timer" type="Timer" parent="VSplitContainer/Playspace/Body/MapScaler/TileMap/Cursor"]
-wait_time = 0.02
-one_shot = true
-
 [node name="UnitGUI" type="HBoxContainer" parent="VSplitContainer"]
 margin_top = 545.0
 margin_right = 1024.0
@@ -121,5 +117,4 @@ one_shot = true
 
 [connection signal="mouse_exited" from="VSplitContainer/Playspace/Body" to="VSplitContainer/Playspace/Body" method="_on_Body_mouse_exited"]
 [connection signal="position_accepted" from="VSplitContainer/Playspace/Body" to="." method="_on_Cursor_position_accepted"]
-[connection signal="timeout" from="VSplitContainer/Playspace/Body/MapScaler/TileMap/Cursor/Timer" to="VSplitContainer/Playspace/Body/MapScaler/TileMap/Cursor" method="_on_Timer_timeout"]
 [connection signal="timeout" from="EndScreen/Timer" to="." method="_on_Timer_timeout"]
