@@ -17,8 +17,9 @@ func add_windows_cells(out : PoolVector2Array, window, source_window, bitmask_de
 	while (!has_hit_character || piercing):
 		for delta in bitmask_deltas:
 			var cell = delta + relative_center
-			out.append(cell)
-			has_hit_character = has_hit_character && Pathfinder.is_occupied(cell,window.map.map)
+			if Pathfinder.is_cell_in_range(window.map.center_cell,cell,window.map.tile_range):
+				out.append(cell)
+				has_hit_character = has_hit_character && Pathfinder.is_occupied(cell,window.map.map)
 		relative_center += tile_size * direction
 		if !window.get_parent().get_global_rect().has_point(MapSpaceConverter.map_to_global(relative_center,window.map)):
 			if !wrap_around || has_hit_end:

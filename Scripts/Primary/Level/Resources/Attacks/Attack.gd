@@ -46,7 +46,9 @@ func attack(map : Map, center_cell : Vector2, direction : Vector2) -> PoolVector
 func add_windows_cells(out : PoolVector2Array, window, source_window, bitmask_deltas : PoolVector2Array, _direction : Vector2, _tile_size : Vector2) -> PoolVector2Array:
 	var relative_center = get_realative_center(window,source_window)
 	for delta in bitmask_deltas:
-		out.append(delta + relative_center)
+		var cell = delta + relative_center
+		if Pathfinder.is_cell_in_range(window.map.center_cell,cell,window.map.tile_range):
+			out.append(cell)
 	return out
 
 func get_realative_center(window, source_window) -> Vector2:
