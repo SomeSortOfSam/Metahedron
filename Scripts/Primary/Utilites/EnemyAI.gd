@@ -2,7 +2,6 @@ extends Reference
 class_name EnemyAI
 
 var map : Map
-var attacks := [Attack.new(),DirectionalAttack.new(),HitscanAttack.new()]
 
 func _init(new_map : Map):
 	map = new_map
@@ -25,24 +24,20 @@ func move_enemy(enemy : Person):
 
 func decide_attack(enemy : Person):
 	var closest_friendly := get_closest_friendly(enemy.cell, get_friendly_units())
-	if closest_friendly.x == enemy.cell.x || closest_friendly.y == enemy.cell.y:
-		if abs(closest_friendly.x - enemy.cell.x) > 1 || abs(closest_friendly.y - enemy.cell.y) > 1:
-			enemy.attack(attacks[2], get_direction_between_cells(enemy.cell, closest_friendly))
-		else:
-			enemy.attack(attacks[0], get_direction_between_cells(enemy.cell, closest_friendly))
-
-func get_direction_between_cells(cell_one : Vector2, cell_two : Vector2) -> Vector2:
-	if cell_one.x == cell_two.x:
-		if cell_one.y > cell_two.y:
-			return Vector2.DOWN
-		elif cell_one.y < cell_two.y:
-			return Vector2.UP
-	elif cell_one.y == cell_two.y:
-		if cell_one.x > cell_two.x:
-			return Vector2.LEFT
-		elif cell_one.x < cell_two.x:
-			return Vector2.RIGHT
-	return Vector2.ZERO
+	var best_attack : Attack = null
+	var best_attacked_amount := 0
+	var best_direction := Vector2.ZERO
+	for attack in enemy.attacks:
+		for direction in AttackRenderer.DIRECTIONS:
+			var attacked_amount := 0
+			for cell in attack.attack(map, enemy.cell, direction):
+				if Pathfinder.is_occupied(cell,map) && !map.people[cell].is_evil:
+					attacked_amount += 1
+			if attacked_amount > best_attacked_amount:
+				best_attack = attack
+				best_direction = direction
+	if best_attack:
+		enemy.attack(best_attack,best_direction)
 
 func get_enemies() -> Array:
 	var enemies := []
