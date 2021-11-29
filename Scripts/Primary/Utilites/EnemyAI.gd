@@ -13,8 +13,21 @@ func check_turn(evil_turn):
 func start_enemy_turn():
 	for enemy in get_enemies():
 		move_enemy(enemy)
+	var timer = Timer.new()
+	var _connection = timer.connect("timeout",self,"_on_move_phase_ended",[timer],CONNECT_ONESHOT)
+	map.tile_map.get_tree().current_scene.add_child(timer)
+	timer.start(1.5)
+
+func _on_move_phase_ended(timer : Timer):
+	for enemy in get_enemies():
 		decide_attack(enemy)
+	var _connection = timer.connect("timeout",self,"_on_attack_phase_ended",[timer],CONNECT_ONESHOT)
+	timer.start(1.5)
+
+func _on_attack_phase_ended(timer: Timer):
+	for enemy in get_enemies():
 		enemy.emit_signal("end_turn")
+	timer.queue_free()
 
 func move_enemy(enemy : Person):
 	var best_cell = get_best_cell(enemy)
@@ -23,7 +36,6 @@ func move_enemy(enemy : Person):
 		enemy.cell = best_cell
 
 func decide_attack(enemy : Person):
-	var closest_friendly := get_closest_friendly(enemy.cell, get_friendly_units())
 	var best_attack : Attack = null
 	var best_attacked_amount := 0
 	var best_direction := Vector2.ZERO
