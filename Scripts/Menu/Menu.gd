@@ -13,7 +13,7 @@ func _input(event):
 
 func back():
 	main.show()
-	if (!OS.is_debug_build()):
+	if (OS.is_debug_build()):
 		gut.hide()
 	settings.hide()
 	lore.hide()
