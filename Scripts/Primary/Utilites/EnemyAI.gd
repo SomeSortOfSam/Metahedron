@@ -2,6 +2,7 @@ extends Reference
 class_name EnemyAI
 
 var map : Map
+var attacks := [Attack.new(),DirectionalAttack.new(),HitscanAttack.new()]
 
 func _init(new_map : Map):
 	map = new_map
@@ -12,11 +13,36 @@ func check_turn(evil_turn):
 
 func start_enemy_turn():
 	for enemy in get_enemies():
-		var best_cell = get_best_cell(enemy)
-		if enemy.cell != best_cell:
-			enemy.open_window()
-			enemy.cell = best_cell
+		move_enemy(enemy)
+		decide_attack(enemy)
 		enemy.emit_signal("end_turn")
+
+func move_enemy(enemy : Person):
+	var best_cell = get_best_cell(enemy)
+	if enemy.cell != best_cell:
+		enemy.open_window()
+		enemy.cell = best_cell
+
+func decide_attack(enemy : Person):
+	var closest_friendly := get_closest_friendly(enemy.cell, get_friendly_units())
+	if closest_friendly.x == enemy.cell.x || closest_friendly.y == enemy.cell.y:
+		if abs(closest_friendly.x - enemy.cell.x) > 1 || abs(closest_friendly.y - enemy.cell.y) > 1:
+			enemy.attack(attacks[2], get_direction_between_cells(enemy.cell, closest_friendly))
+		else:
+			enemy.attack(attacks[0], get_direction_between_cells(enemy.cell, closest_friendly))
+
+func get_direction_between_cells(cell_one : Vector2, cell_two : Vector2) -> Vector2:
+	if cell_one.x == cell_two.x:
+		if cell_one.y > cell_two.y:
+			return Vector2.DOWN
+		elif cell_one.y < cell_two.y:
+			return Vector2.UP
+	elif cell_one.y == cell_two.y:
+		if cell_one.x > cell_two.x:
+			return Vector2.LEFT
+		elif cell_one.x < cell_two.x:
+			return Vector2.RIGHT
+	return Vector2.ZERO
 
 func get_enemies() -> Array:
 	var enemies := []
