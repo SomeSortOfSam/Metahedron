@@ -9,6 +9,7 @@ export var friendlyFire : bool = false
 
 export var bitmask : Texture
 export var distance : int
+export var damage := 1
 
 export var time_to_complete : float = 1
 export var projectile : Texture

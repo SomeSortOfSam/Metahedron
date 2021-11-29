@@ -57,7 +57,7 @@ func calculate_damage(attack : Attack, direction : Vector2, source : Person, map
 		var damaged_cells := attack.attack(map,source.cell,direction)
 		for damaged_cell in damaged_cells:
 			if cell == damaged_cell:
-				set_health(health - 1)
+				set_health(health - attack.damage)
 
 func reset_turn():
 	has_moved = false
