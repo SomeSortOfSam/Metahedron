@@ -8,6 +8,7 @@ onready var followe : Path2D = $Path2D
 onready var follower : PathFollow2D = $Path2D/Follower
 onready var icon : Sprite = $Node2D/Icon
 onready var sprite : AnimatedSprite = $Node2D/Sprite
+onready var emitter : CPUParticles2D = $Node2D/CPUParticles2D
 
 var definition : Character setget set_character
 var is_icon := false setget set_is_icon
@@ -120,6 +121,7 @@ func _on_person_attack(direction : Vector2, attack : Attack):
 
 func _on_person_hurt():
 	sprite.play("Hurt")
+	emitter.restart()
 	var _connection = sprite.connect("animation_finished", self, "end_follow_animation", [], CONNECT_ONESHOT)
 
 func _on_person_died():
