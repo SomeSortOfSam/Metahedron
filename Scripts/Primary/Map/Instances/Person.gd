@@ -14,6 +14,7 @@ var health := 3
 var window : MovementWindow
 
 signal move(cell_delta)
+signal move_animation(cell_delta)
 signal attack(direction, attack)
 
 signal hurt()
@@ -36,6 +37,7 @@ func set_cell(new_cell : Vector2):
 		cell = new_cell
 		has_moved = true
 		emit_signal("move",delta)
+		emit_signal("move_animation",delta)
 
 func set_health(new_health : int):
 	health = new_health

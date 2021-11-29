@@ -91,7 +91,7 @@ func subscribe(person,map):
 		cell = MapSpaceConverter.internal_map_to_map(cell,map)
 	position = MapSpaceConverter.map_to_local(cell,map)
 	parent_tilemap = map.tile_map
-	var _connection = person.connect("move", self, "_on_person_move",[person, map])
+	var _connection = person.connect("move_animation", self, "_on_person_move",[person, map])
 	_connection = person.connect("attack", self, "_on_person_attack")
 	_connection = person.connect("hurt", self, "_on_person_hurt")
 	_connection = person.connect("died", self, "_on_person_died")
@@ -100,7 +100,7 @@ func _on_person_move(delta : Vector2, person, map):
 	end_on_person_move()
 	
 	var cell_size = parent_tilemap.cell_size
-	if "map" in map && person.cell - delta == Vector2.ZERO:
+	if "map" in map && person.cell == map.center_cell:
 		position -= delta * cell_size
 	
 	var cell := parent_tilemap.world_to_map(parent_tilemap.to_local(follower.global_position))

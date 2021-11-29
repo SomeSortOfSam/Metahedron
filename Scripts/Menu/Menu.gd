@@ -13,7 +13,8 @@ func _input(event):
 
 func back():
 	main.show()
-	gut.hide()
+	if (!OS.is_debug_build()):
+		gut.hide()
 	settings.hide()
 	lore.hide()
 	credits.hide()
@@ -30,7 +31,7 @@ func _on_Main_request_game():
 	var _scene = get_tree().change_scene("res://Scripts/Primary/Interface/Bootstrap/Primary Loop Bootstrap.tscn")
 
 func _on_Main_request_gut():
-	if gut && !gut.is_visible():
+	if OS.is_debug_build() && gut && !gut.is_visible():
 		gut.maximize()
 		gut.set_visible(true)
 		gut.test_scripts()

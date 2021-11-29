@@ -42,9 +42,9 @@ func subscribe(person):
 	player_accessible = !person.is_evil
 	icon.texture = person.character.level_texture
 	
-	var _connection
-
 	body.subscribe_person(person)
+	
+	var _connection
 	
 	if (player_accessible):
 		_connection = connect("requesting_close", person, "_on_window_requesting_close")
@@ -56,7 +56,7 @@ func subscribe(person):
 	
 	_connection = person.connect("move", self, "_on_person_move")
 	_connection = person.connect("close_window", self, "_on_person_close_window")
-	_connection = person.connect("open_window", self, "_on_person_open_window")	
+	_connection = person.connect("open_window", self, "_on_person_open_window")
 
 static func get_small_window_size(veiwport_rect : Rect2) -> Vector2:
 	var third = veiwport_rect.size/3
