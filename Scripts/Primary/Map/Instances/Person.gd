@@ -3,7 +3,7 @@ class_name Person, "res://Assets/Editor Icons/Person.png"
 ## The where and what of a unit
 
 var character : Character
-var attacks := [Attack.new(),DirectionalAttack.new(),HitscanAttack.new()]
+var attacks := [load("res://Assets/Attacks/Scratch.tres"),DirectionalAttack.new(),HitscanAttack.new()]
 var is_evil := false
 
 var has_moved := false
