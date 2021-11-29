@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Primary/Displays/Unit.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Interface Sprites/HurtNumbers.png" type="Texture" id=2]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -9,6 +10,10 @@ animations = [ {
 "name": "Idle",
 "speed": 5.0
 } ]
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 8, 0, 8, 16 )
 
 [node name="Unit" type="YSort"]
 script = ExtResource( 1 )
@@ -32,3 +37,12 @@ remote_path = NodePath("../../../Node2D")
 frames = SubResource( 2 )
 animation = "Idle"
 playing = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Node2D"]
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+texture = SubResource( 3 )
+initial_velocity = 30.0
+scale_amount = 0.5
