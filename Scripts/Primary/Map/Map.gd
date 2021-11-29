@@ -32,6 +32,14 @@ func _on_person_move(cell_delta,person):
 		people[person.cell] = person
 
 func _on_person_attack(direction : Vector2, attack, source):
+	var timer : Timer
+	timer = Timer.new()
+	timer.set_one_shot(true)
+	var _connection = timer.connect("timeout", self, "calculate_damage", [direction, attack, source])
+	self.tile_map.get_tree().current_scene.add_child(timer)
+	timer.start(attack.time_to_complete)
+
+func calculate_damage(direction : Vector2, attack, source):
 	for person in people.values():
 		person.calculate_damage(attack,direction,source,self)
 
