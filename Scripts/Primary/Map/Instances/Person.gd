@@ -37,8 +37,9 @@ func set_cell(new_cell : Vector2):
 		has_moved = true
 		emit_signal("move",delta)
 
-func set_health(new_health : int):
+func set_health(new_health : int, attack : Attack):
 	health = new_health
+	
 	if health >= 0:
 		emit_signal("hurt")
 	if health == 0:
@@ -54,7 +55,7 @@ func calculate_damage(attack : Attack, direction : Vector2, source : Person, map
 		var damaged_cells := attack.attack(map,source.cell,direction)
 		for damaged_cell in damaged_cells:
 			if cell == damaged_cell:
-				set_health(health - 1)
+				set_health(health - 1, attack)
 
 func reset_turn():
 	has_moved = false
