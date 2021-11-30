@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Primary/Displays/Unit.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Interface Sprites/HurtNumbers.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Characters/Jean/8Ball.png" type="Texture" id=3]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -30,6 +31,10 @@ loop = false
 remote_path = NodePath("../../../Node2D")
 
 [node name="Node2D" type="Node2D" parent="."]
+
+[node name="Shadow" type="Sprite" parent="Node2D"]
+modulate = Color( 0, 0, 0, 0.219608 )
+texture = ExtResource( 3 )
 
 [node name="Icon" type="Sprite" parent="Node2D"]
 
