@@ -1,10 +1,11 @@
-[gd_resource type="Resource" load_steps=46 format=2]
+[gd_resource type="Resource" load_steps=47 format=2]
 
 [ext_resource path="res://Scripts/Primary/Level/Resources/Character.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Characters/Wilco/Radio.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Characters/Wilco/WilcoAttack.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Characters/Wilco/WilcoWalk.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Characters/Wilco/WilcoIdle.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Characters/Wilco/WilcoHurt.png" type="Texture" id=6]
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
@@ -169,15 +170,15 @@ animations = [ {
 "name": "Attack",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "Hurt",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 10.0
-}, {
-"frames": [  ],
-"loop": true,
-"name": "Hurt",
-"speed": 5.0
 }, {
 "frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ) ],
 "loop": true,

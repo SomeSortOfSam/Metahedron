@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jean_bonk_demo.png-a5006c1c502d0857eaf7c7a05964d99a.stex"
+path="res://.import/JeanHurt.png-1243e44e6ca5ddc2a5437c76163874f6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Jean/jean_bonk_demo.png"
-dest_files=[ "res://.import/jean_bonk_demo.png-a5006c1c502d0857eaf7c7a05964d99a.stex" ]
+source_file="res://Assets/Characters/Jean/JeanHurt.png"
+dest_files=[ "res://.import/JeanHurt.png-1243e44e6ca5ddc2a5437c76163874f6.stex" ]
 
 [params]
 
