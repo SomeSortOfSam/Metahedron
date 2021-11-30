@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ClubLogo.png-76900fc4c1c58285e34fed0518b61020.stex"
+path="res://.import/WilcoAttack.png-dc2f8c24ac14ae532e32920b2741ca3e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Interface Sprites/ClubLogo.png"
-dest_files=[ "res://.import/ClubLogo.png-76900fc4c1c58285e34fed0518b61020.stex" ]
+source_file="res://Assets/Characters/Wilco/WilcoAttack.png"
+dest_files=[ "res://.import/WilcoAttack.png-dc2f8c24ac14ae532e32920b2741ca3e.stex" ]
 
 [params]
 

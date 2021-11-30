@@ -15,4 +15,8 @@ export var animations_scale : Vector2 = Vector2.ONE
 
 func _init():
 	animations = SpriteFrames.new()
+	animations.remove_animation("default")
+	animations.add_animation("Walk")
 	animations.add_animation("Idle")
+	animations.add_animation("Attack")
+	animations.add_animation("Hurt")

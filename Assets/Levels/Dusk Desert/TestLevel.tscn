@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/Levels/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Scripts/Primary/Level/LevelData.gd" type="Script" id=2]
@@ -12,6 +12,43 @@
 [ext_resource path="res://Assets/Characters/Jean/8Ball.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Levels/Dusk Desert/Epiphreatic.mid.mp3" type="AudioStream" id=11]
 [ext_resource path="res://Assets/Levels/Dusk Desert/Decorations/Lowmap_Cacti.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Characters/Wilco/Wilco.tres" type="Resource" id=13]
+[ext_resource path="res://Scripts/Primary/Level/Resources/Attacks/Attack.gd" type="Script" id=14]
+[ext_resource path="res://Assets/Characters/Wilco/Radio.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Editor Icons/Map.png" type="Texture" id=16]
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 14 )
+icon = ExtResource( 16 )
+name = "Sample Attack"
+description = "More defualt text!"
+friendlyFire = false
+distance = 0
+damage = 1
+time_to_complete = 1.0
+custom_animation = ""
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 14 )
+icon = ExtResource( 16 )
+name = "Sample Attack"
+description = "More defualt text!"
+friendlyFire = false
+distance = 0
+damage = 1
+time_to_complete = 1.0
+custom_animation = ""
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 14 )
+icon = ExtResource( 16 )
+name = "Sample Attack"
+description = "More defualt text!"
+friendlyFire = false
+distance = 0
+damage = 1
+time_to_complete = 1.0
+custom_animation = ""
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 12 )
@@ -51,10 +88,10 @@ definition = ExtResource( 5 )
 
 [node name="Placeholder6" type="Sprite" parent="."]
 position = Vector2( 24, 56 )
-texture = ExtResource( 10 )
+texture = ExtResource( 15 )
 offset = Vector2( 0, -5 )
 script = ExtResource( 3 )
-definition = ExtResource( 5 )
+definition = ExtResource( 13 )
 
 [node name="EnemyPlaceholder" type="Sprite" parent="."]
 position = Vector2( 104, 24 )
@@ -62,6 +99,7 @@ texture = ExtResource( 10 )
 offset = Vector2( 0, -5 )
 script = ExtResource( 4 )
 definition = ExtResource( 5 )
+attacks = [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ]
 
 [node name="Placeholder2" type="Sprite" parent="."]
 position = Vector2( 8, 8 )
