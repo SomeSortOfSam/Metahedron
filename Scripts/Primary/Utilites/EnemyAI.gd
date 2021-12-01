@@ -11,31 +11,35 @@ func check_turn(evil_turn):
 		start_enemy_turn()
 
 func start_enemy_turn():
+	var moved := false
 	for enemy in get_enemies():
-		move_enemy(enemy)
+		moved = moved or move_enemy(enemy)
 	var timer = Timer.new()
 	var _connection = timer.connect("timeout",self,"_on_move_phase_ended",[timer],CONNECT_ONESHOT)
 	map.tile_map.get_tree().current_scene.add_child(timer)
-	timer.start(1.5)
+	timer.start(1.5 if moved else .2)
 
 func _on_move_phase_ended(timer : Timer):
+	var attacked := false
 	for enemy in get_enemies():
-		decide_attack(enemy)
+		attacked = attacked or decide_attack(enemy)
 	var _connection = timer.connect("timeout",self,"_on_attack_phase_ended",[timer],CONNECT_ONESHOT)
-	timer.start(1.5)
+	timer.start(1.5 if attacked else .2)
 
 func _on_attack_phase_ended(timer: Timer):
 	for enemy in get_enemies():
 		enemy.emit_signal("end_turn")
 	timer.queue_free()
 
-func move_enemy(enemy : Person):
+func move_enemy(enemy : Person) -> bool:
 	var best_cell = get_best_cell(enemy)
 	if enemy.cell != best_cell:
 		enemy.open_window()
 		enemy.cell = best_cell
+		return true
+	return false
 
-func decide_attack(enemy : Person):
+func decide_attack(enemy : Person) -> bool:
 	var best_attack : Attack = null
 	var best_attacked_amount := 0
 	var best_direction := Vector2.ZERO
@@ -48,8 +52,11 @@ func decide_attack(enemy : Person):
 			if attacked_amount > best_attacked_amount:
 				best_attack = attack
 				best_direction = direction
+				best_attacked_amount = attacked_amount
 	if best_attack:
 		enemy.attack(best_attack,best_direction)
+		return true
+	return false
 
 func get_enemies() -> Array:
 	var enemies := []
