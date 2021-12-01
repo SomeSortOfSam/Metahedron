@@ -20,11 +20,13 @@ func start_enemy_turn():
 	timer.start(1.5 if moved else .2)
 
 func _on_move_phase_ended(timer : Timer):
-	var attacked := false
+	var attacked_time := 0.0
 	for enemy in get_enemies():
-		attacked = attacked or decide_attack(enemy)
+		var attack := decide_attack(enemy)
+		if attack:
+			attacked_time += attack.time_to_complete
 	var _connection = timer.connect("timeout",self,"_on_attack_phase_ended",[timer],CONNECT_ONESHOT)
-	timer.start(1.5 if attacked else .2)
+	timer.start(.5 + attacked_time)
 
 func _on_attack_phase_ended(timer: Timer):
 	for enemy in get_enemies():
@@ -39,7 +41,7 @@ func move_enemy(enemy : Person) -> bool:
 		return true
 	return false
 
-func decide_attack(enemy : Person) -> bool:
+func decide_attack(enemy : Person) -> Attack:
 	var best_attack : Attack = null
 	var best_attacked_amount := 0
 	var best_direction := Vector2.ZERO
@@ -55,8 +57,7 @@ func decide_attack(enemy : Person) -> bool:
 				best_attacked_amount = attacked_amount
 	if best_attack:
 		enemy.attack(best_attack,best_direction)
-		return true
-	return false
+	return best_attack
 
 func get_enemies() -> Array:
 	var enemies := []

@@ -57,7 +57,7 @@ func get_realative_center(window, source_window) -> Vector2:
 		return source_window.map.center_cell
 	var out := MapSpaceConverter.map_to_global(source_window.map.center_cell,source_window.map)
 	out = MapSpaceConverter.global_to_map(out,window.map)
-	return out
+	return out + (window.map.center_cell - source_window.map.center_cell)
 
 func get_bitmask_delta_array() -> PoolVector2Array:
 	var out := PoolVector2Array([])
