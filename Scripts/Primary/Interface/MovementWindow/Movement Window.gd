@@ -55,6 +55,7 @@ func subscribe(person):
 		lock_window()
 	
 	_connection = person.connect("move", self, "_on_person_move")
+	_connection = person.connect("died", self, "_on_person_died")
 	_connection = person.connect("close_window", self, "_on_person_close_window")
 	_connection = person.connect("open_window", self, "_on_person_open_window")
 
@@ -91,6 +92,9 @@ func _on_person_move(delta : Vector2):
 func _on_person_attack(_direction,_attack):
 	close_button.set_disabled(true)
 	attack_button.set_disabled(true)
+
+func _on_person_died():
+	queue_free()
 
 func _on_Close_pressed():
 	emit_signal("requesting_close")
