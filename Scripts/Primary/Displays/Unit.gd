@@ -86,6 +86,8 @@ func path_to_curve(path : PoolVector2Array, cell_size : Vector2) -> Curve2D:
 
 func subscribe(person,map):
 	self.definition = person.character
+	if person.is_evil:
+		modulate = Color.red
 	var cell = person.cell
 	if "map" in map:
 		cell = MapSpaceConverter.internal_map_to_map(cell,map)

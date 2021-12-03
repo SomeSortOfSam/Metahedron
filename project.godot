@@ -180,7 +180,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Primary/Interface/MovementWindow/WindowMover.gd"
 } ]
 _global_script_class_icons={
-"ArrowLines": "",
+"ArrowLines": "res://Assets/Editor Icons/Arrowlines.png",
 "Attack": "",
 "AttackRenderer": "",
 "Character": "res://Assets/Editor Icons/Character.png",
