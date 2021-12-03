@@ -17,7 +17,7 @@ signal move(cell_delta)
 signal move_animation(cell_delta)
 signal attack(direction, attack)
 
-signal hurt()
+signal hurt(amount)
 signal died()
 
 signal close_window()
@@ -40,10 +40,11 @@ func set_cell(new_cell : Vector2):
 		emit_signal("move_animation",delta)
 
 func set_health(new_health : int):
+	var delta = new_health - health
 	health = new_health
 	
 	if health >= 0:
-		emit_signal("hurt")
+		emit_signal("hurt", -delta)
 	if health == 0:
 		emit_signal("died")
 

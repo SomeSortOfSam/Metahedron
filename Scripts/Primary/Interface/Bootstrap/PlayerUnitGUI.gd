@@ -59,7 +59,7 @@ func _on_person_new_turn(person : Person):
 	attacked.modulate = Color.red
 	moved.modulate = Color.yellow
 
-func _on_person_hurt(person : Person):
+func _on_person_hurt(_delta, person : Person):
 	portrait.texture = person.character.animations.get_frame("Hurt",0)
 	animator.play("Hurt")
 	body.set_margins_preset(PRESET_WIDE)
