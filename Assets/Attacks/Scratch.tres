@@ -7,8 +7,8 @@
 [resource]
 script = ExtResource( 1 )
 icon = ExtResource( 2 )
-name = "Scratch"
-description = "You never want to scratch the cue ball!"
+name = "Flailing"
+description = "Woops, didn't mean to hit you there"
 friendlyFire = true
 bitmask = ExtResource( 3 )
 distance = 0

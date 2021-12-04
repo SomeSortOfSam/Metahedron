@@ -13,6 +13,8 @@ export var animations : SpriteFrames
 export var animations_offset : Vector2
 export var animations_scale : Vector2 = Vector2.ONE
 
+export var attacks : Array
+
 func _init():
 	animations = SpriteFrames.new()
 	animations.remove_animation("default")

@@ -20,6 +20,10 @@ func _ready():
 	initialize_level(data)
 	data.queue_free()
 
+func _input(event):
+	if event is InputEventKey && event.scancode == KEY_ESCAPE:
+		var _scene = get_tree().change_scene("res://Scripts/Menu/Menu.tscn")
+
 func initialize_level(level_data : LevelData):
 	initialize_music(level_data)
 	initialize_map(level_data)

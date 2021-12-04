@@ -1,8 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://Assets/Interface Sprites/Iconsheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Primary/Interface/MovementWindow/CombatMenu/CobatMenuElement.gd" type="Script" id=2]
 
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 16, 16, 16 )
+
 [node name="CobatMenuElement" type="Button"]
+modulate = Color( 0.494118, 0.72549, 0.129412, 1 )
 margin_right = 1024.0
 margin_bottom = 600.0
 mouse_default_cursor_shape = 2
@@ -18,7 +24,6 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0.247059, 0.784314, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -30,8 +35,9 @@ margin_left = 5.0
 margin_top = 5.0
 margin_right = -5.0
 margin_bottom = -5.0
+rect_clip_content = true
 mouse_filter = 2
-color = Color( 0.181462, 0.535156, 0.0188141, 1 )
+color = Color( 0.654902, 0.603922, 0.721569, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -45,11 +51,12 @@ __meta__ = {
 }
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="Body/HBoxContainer"]
-margin_right = 505.0
+margin_right = 91.0
 margin_bottom = 590.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
 stretch_mode = 1
 alignment_horizontal = 0
 __meta__ = {
@@ -60,20 +67,18 @@ __meta__ = {
 margin_right = 590.0
 margin_bottom = 590.0
 mouse_filter = 2
-color = Color( 0.247059, 0.784314, 0, 1 )
 
 [node name="Body" type="ColorRect" parent="Body/HBoxContainer/AspectRatioContainer/Outline"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -5.0
 mouse_filter = 2
-color = Color( 0.180392, 0.533333, 0.0156863, 1 )
+color = Color( 0.654902, 0.603922, 0.721569, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="Body/HBoxContainer/AspectRatioContainer/Outline/Body"]
-modulate = Color( 0.247059, 0.784314, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -83,14 +88,78 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="Label" parent="Body/HBoxContainer"]
-margin_left = 509.0
+[node name="Name" type="Label" parent="Body/HBoxContainer/AspectRatioContainer/Outline"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 200.0
+text = "This is a name:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="Body/HBoxContainer"]
+margin_left = 95.0
 margin_right = 1014.0
 margin_bottom = 590.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_colors/font_color = Color( 0.247059, 0.784314, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="Label" parent="Body/HBoxContainer/Control"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Beeees"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="HBoxContainer" parent="Body/HBoxContainer/Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = 5.0
+margin_right = -5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Friendly" type="TextureRect" parent="Body/HBoxContainer/Control/Control"]
+visible = false
+margin_right = 29.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="Amount" type="Label" parent="Body/HBoxContainer/Control/Control"]
+margin_right = 95.0
+margin_bottom = 290.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "1"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="." to="." method="_on_CobatMenuElement_pressed"]

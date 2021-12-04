@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Primary/Level/Resources/Attacks/HitscanAttack.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Editor Icons/DecorationDefinition.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+icon = ExtResource( 2 )
+name = "Swinging Wide"
+description = "Fore! Thats a thing you say in pool, right?"
+friendlyFire = false
+distance = 0
+damage = 1
+time_to_complete = 1.0
+custom_animation = ""
+piercing = false
+wrap_around = true
