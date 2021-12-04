@@ -45,7 +45,7 @@ func decide_attack(enemy : Person) -> Attack:
 	var best_attack : Attack = null
 	var best_attacked_amount := 0
 	var best_direction := Vector2.ZERO
-	for attack in enemy.attacks:
+	for attack in enemy.character.attacks:
 		for direction in AttackRenderer.DIRECTIONS:
 			var attacked_amount := 0
 			for cell in attack.attack(map, enemy.cell, direction):

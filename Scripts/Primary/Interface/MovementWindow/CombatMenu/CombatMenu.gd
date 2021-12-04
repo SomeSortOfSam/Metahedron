@@ -13,7 +13,7 @@ func _ready():
 
 func subscribe(person):
 	var i := 0
-	for attack in person.attacks:
+	for attack in person.character.attacks:
 		elements[i].subscribe(attack)
 		i += 1
 

@@ -1,8 +1,11 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Characters/Jean/8Ball.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Characters/Jean/JeanFrames.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Scripts/Primary/Level/Resources/Character.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Attacks/Scratch.tres" type="Resource" id=4]
+[ext_resource path="res://Assets/Attacks/PotShot.tres" type="Resource" id=5]
+[ext_resource path="res://Assets/Attacks/SwingingWide.tres" type="Resource" id=6]
 
 [resource]
 script = ExtResource( 3 )
@@ -13,3 +16,4 @@ level_scale = Vector2( 1, 1 )
 animations = ExtResource( 2 )
 animations_offset = Vector2( 0, -22 )
 animations_scale = Vector2( 0.5, 0.5 )
+attacks = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ]
