@@ -12,7 +12,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
 region = Rect2( 8, 0, 8, 16 )
 
@@ -49,6 +49,6 @@ emitting = false
 amount = 1
 lifetime = 0.5
 one_shot = true
-texture = SubResource( 3 )
+texture = SubResource( 2 )
 initial_velocity = 30.0
 scale_amount = 0.5

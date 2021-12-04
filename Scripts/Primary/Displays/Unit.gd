@@ -121,8 +121,9 @@ func _on_person_attack(direction : Vector2, attack : Attack):
 	sprite.play(attack.custom_animation if sprite.frames.has_animation(attack.custom_animation) else "Attack")
 	var _connection = sprite.connect("animation_finished", self, "end_follow_animation", [], CONNECT_ONESHOT)
 
-func _on_person_hurt():
+func _on_person_hurt(delta):
 	sprite.play("Hurt")
+	emitter.texture.region = Rect2(delta*8,0,8,16)
 	emitter.restart()
 	var _connection = sprite.connect("animation_finished", self, "end_follow_animation", [], CONNECT_ONESHOT)
 
